@@ -25,7 +25,12 @@ export const ReportDisplay = props => {
                             <small>Status</small>
                         </div>
                         <div className="col-12">
-
+                            <button type="button" className="btn btn-report-card">
+                                <i className="fa fa-eye fa-lg"></i>
+                            </button>
+                            <button type="button" className="btn btn-report-card">
+                                <i className="fa fa-times fa-lg"></i>
+                            </button>
                         </div>
                     </div>
                 </div>
