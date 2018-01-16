@@ -3,6 +3,13 @@
 body {
     width: 100%;
     box-sizing: border-box;
+    background-color: #d5d5d5;
+}
+
+/* All buttons */
+
+.btn.focus, .btn:focus {
+    box-shadow: none;
 }
 
 /* Navbar */
@@ -32,8 +39,61 @@ nav {
     color: #9099a2;
 }
 
-/* All buttons */
+/* Report card */
 
-.btn.focus, .btn:focus {
-    box-shadow: none;
+.card {
+    background-color: whitesmoke;
+    -webkit-box-shadow: #9099a2 0px 0 10px;
+    -moz-box-shadow: #9099a2 0 0 10px;
+    box-shadow: #9099a2 0 0 10px;
 }
+
+.card small {
+    color: #6d7993;
+}
+
+.btn-report-card {
+    background-color: rgba(0, 0, 0, 0);
+    color: #6d7993;
+}
+
+.btn-report-card:hover {
+    -webkit-transform:scale(1.4);
+    -moz-transform:scale(1.4);
+    -ms-transform:scale(1.4);
+    -o-transform:scale(1.4);
+    transform:scale(1.4);
+}
+
+.btn-group-report-card {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+@media screen and (min-width: 576px) {
+    .side-line-sm {
+        border-right: 1px solid #d5d5d5;
+    }
+
+    .card-body {
+        padding-left: 4em;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .card-body {
+        padding-left: 5em;
+    }
+}
+
+@media screen and (min-width: 992px) {
+    .side-line-lg {
+        border-right: 1px solid #d5d5d5;
+    }
+
+    .card-body {
+        padding-left: 1em;
+    }
+}
+
