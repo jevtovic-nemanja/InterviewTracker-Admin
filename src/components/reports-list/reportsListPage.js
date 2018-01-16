@@ -73,6 +73,10 @@ class ReportsListPage extends React.Component {
         this.setState({ modal: false });
     }
 
+    deleteReport() {
+        
+    }
+
 
     render() {
         const { allReports, filteredReports, modal, detailedReport, error } = this.state;
