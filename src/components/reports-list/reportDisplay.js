@@ -27,7 +27,7 @@ export const ReportDisplay = props => {
                     </div>
                 </div>
                 <div className="btn-group-report-card">
-                    <button type="button" className="btn btn-report-card">
+                    <button type="button" className="btn btn-report-card" onClick={props.toggleModal}>
                         <i className="fa fa-eye fa-lg"></i>
                     </button>
                     <button type="button" className="btn btn-report-card">
