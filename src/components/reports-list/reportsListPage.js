@@ -38,9 +38,7 @@ class ReportsListPage extends React.Component {
     }
 
     handleError(error) {
-        error === "networkError"
-            ? this.setState({ error: "Looks like the server is not responding. Don't worry, we're looking into it!" })
-            : this.setState({ error: "Looks like there was some kind of error. Don't worry, we're looking into it!" });
+        this.setState({ error: "Looks like there was some kind of error. Don't worry, we're looking into it!" });
     }
 
     filterReports(searchItem) {
