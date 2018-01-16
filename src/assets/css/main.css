@@ -1,0 +1,39 @@
+/* Body sizing */
+
+body {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Navbar */
+
+nav {
+    background-color: #6d7993;
+    color: #d5d5d5;
+}
+
+.btn-nav-active {
+    background-color: #d5d5d5;
+    color: white;
+}
+
+.btn-nav-active:hover {
+    background-color: white;
+    color: #d5d5d5;
+}
+
+.btn-nav {
+    background-color: #9099a2;
+    color: whitesmoke;
+}
+
+.btn-nav:hover {
+    background-color: whitesmoke;
+    color: #9099a2;
+}
+
+/* All buttons */
+
+.btn.focus, .btn:focus {
+    box-shadow: none;
+}
