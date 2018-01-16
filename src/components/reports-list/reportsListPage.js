@@ -3,6 +3,7 @@ import React from "react";
 import { BASE_URL } from "../../constants";
 import { dataService } from "../services/dataService";
 
+import { ReportDisplay } from "./reportDisplay";
 
 class ReportsListPage extends React.Component {
     constructor(props) {
@@ -43,7 +44,7 @@ class ReportsListPage extends React.Component {
         return (
             <div className="container">
                 <div className="row">
-                
+                    {reports.map(report => <ReportDisplay key={report.id} report={report} />)}
                 </div>
             </div>
         );
