@@ -7,6 +7,7 @@ import { dataService } from "../services/dataService";
 
 import Search from "../common/search";
 import { ReportDisplay } from "./reportDisplay";
+import { ReportDetails } from "./reportDetails";
 
 class ReportsListPage extends React.Component {
     constructor(props) {
@@ -61,7 +62,7 @@ class ReportsListPage extends React.Component {
 
     openModal(id) {
         const { allReports } = this.state;
-        const report = allReports.filter(report => report.id === parseInt(id));
+        const report = allReports.filter(report => report.id === parseInt(id))[0];
         this.setState({
             modal: true,
             detailedReport: report
@@ -74,7 +75,7 @@ class ReportsListPage extends React.Component {
 
 
     render() {
-        const { allReports, filteredReports, modal, error } = this.state;
+        const { allReports, filteredReports, modal, detailedReport, error } = this.state;
 
         return (
             <div className="container">
@@ -90,8 +91,8 @@ class ReportsListPage extends React.Component {
                     </div>
                 </div>
 
-                <Modal open={modal} onClose={this.closeModal} >
-
+                <Modal open={modal} onClose={this.closeModal} little >
+                    <ReportDetails report={detailedReport} />
                 </Modal>
             </div>
 

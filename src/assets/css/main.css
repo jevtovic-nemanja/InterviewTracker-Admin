@@ -104,3 +104,12 @@ nav {
     }
 }
 
+/* Modal dialog */
+
+.bottom-line {
+    border-bottom: 1px solid #d5d5d5;
+}
+
+.modal-dialog p, .modal-title {
+    color: #6d7993;
+}
