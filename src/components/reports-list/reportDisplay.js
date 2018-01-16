@@ -1,7 +1,13 @@
 import React from "react";
 
 export const ReportDisplay = props => {
-    const { candidate, company, date, status } = props.report;
+    const { id, candidate, company, date, status } = props.report;
+    let buttonGroup = null;
+
+    function handleClick() {
+        const id = buttonGroup.id;
+        props.openModal(id);
+    }
 
     return (
         <div className="offset-1 col-10 offset-sm-0 col-sm-12 offset-md-1 col-md-10">
@@ -26,8 +32,8 @@ export const ReportDisplay = props => {
                         </div>
                     </div>
                 </div>
-                <div className="btn-group-report-card">
-                    <button type="button" className="btn btn-report-card">
+                <div className="btn-group-report-card" id={id} ref={div => buttonGroup = div}>
+                    <button type="button" className="btn btn-report-card" onClick={handleClick}>
                         <i className="fa fa-eye fa-lg"></i>
                     </button>
                     <button type="button" className="btn btn-report-card">
