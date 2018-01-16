@@ -1,5 +1,8 @@
 import React from "react";
 
+import { BASE_URL } from "../../constants";
+import { dataService } from "../services/dataService";
+
 
 class ReportsListPage extends React.Component {
     constructor(props) {
@@ -11,7 +14,8 @@ class ReportsListPage extends React.Component {
 
     initState() {
         return {
-
+            reports: [],
+            error: ""
         };
     }
 
@@ -19,11 +23,25 @@ class ReportsListPage extends React.Component {
 
     }
 
+    componentDidMount() {
+        this.loadData();
+    }
+
+    loadData() {
+        dataService.getReports(reports => this.setState({ reports: reports }), error => this.handleError(error));
+    }
+
+    handleError(error) {
+        error === "networkError"
+            ? this.setState({ error: "Looks like the server is not responding. Don't worry, we're looking into it!" })
+            : this.setState({ error: "Looks like there was some kind of error. Don't worry, we're looking into it!" });
+    }
 
     render() {
-        return (
-            <p>ReportsListPage</p>
+        const { reports, error } = this.state;
 
+        return (
+            <p>aaa</p>
         );
     }
 }
