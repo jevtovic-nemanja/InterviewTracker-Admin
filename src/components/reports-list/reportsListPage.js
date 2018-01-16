@@ -41,7 +41,9 @@ class ReportsListPage extends React.Component {
         const { reports, error } = this.state;
 
         return (
-            <p>aaa</p>
+            <div className="container">
+
+            </div>
         );
     }
 }
