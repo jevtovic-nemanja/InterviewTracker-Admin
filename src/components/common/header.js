@@ -6,7 +6,7 @@ export const Header = props => {
     let report = "btn-nav";
     let create = "btn-nav";
 
-    location.hash === "#/reports"
+    location.hash === "#/"
         ? report = "btn-nav-active"
         : create = "btn-nav-active";
 
@@ -19,10 +19,10 @@ export const Header = props => {
                 </div>
                 <div className="col-5 col-md-4">
                     <div className="btn-group float-right">
-                        <Link to="">
+                        <Link to="/">
                             <button className={`btn rounded-0 ${report}`}>Reports</button>
                         </Link>
-                        <Link to="">
+                        <Link to="/create-report">
                             <button className={`btn rounded-0 ${create}`}>Create Report</button>
                         </Link>
                     </div>
