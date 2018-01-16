@@ -1,3 +1,5 @@
+import moment from "moment";
+
 import { BASE_URL } from "../../constants";
 import { commService } from "./communicationService";
 import Report from "../entities/report";
@@ -13,7 +15,8 @@ class DataService {
     packReports(data) {
         let reports = data.map(item => {
             const { id, candidateName, companyName, interviewDate, phase, status, note } = item;
-            const reportObj = new Report(id, candidateName, companyName, interviewDate, phase, status, note);
+            const date = moment(interviewDate).format("DD.MM.YYYY");
+            const reportObj = new Report(id, candidateName, companyName, date, phase, status, note);
             return reportObj;
         });
         return reports;
