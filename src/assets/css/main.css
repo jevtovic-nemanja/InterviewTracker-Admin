@@ -3,6 +3,13 @@
 body {
     width: 100%;
     box-sizing: border-box;
+    background-color: #d5d5d5;
+}
+
+/* All buttons */
+
+.btn.focus, .btn:focus {
+    box-shadow: none;
 }
 
 /* Navbar */
@@ -32,8 +39,17 @@ nav {
     color: #9099a2;
 }
 
-/* All buttons */
+/* Report card */
 
-.btn.focus, .btn:focus {
-    box-shadow: none;
+.btn-report-card {
+    background-color: rgba(0, 0, 0, 0);
+    color: #96858f;
+}
+
+.btn-report-card:hover {
+    -webkit-transform:scale(1.4);
+    -moz-transform:scale(1.4);
+    -ms-transform:scale(1.4);
+    -o-transform:scale(1.4);
+    transform:scale(1.4);
 }
