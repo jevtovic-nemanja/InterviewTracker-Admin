@@ -3,6 +3,7 @@ import React from "react";
 import { BASE_URL } from "../../constants";
 import { dataService } from "../services/dataService";
 
+import Search from "../common/search";
 import { ReportDisplay } from "./reportDisplay";
 
 class ReportsListPage extends React.Component {
@@ -15,13 +16,14 @@ class ReportsListPage extends React.Component {
 
     initState() {
         return {
-            reports: [],
+            allReports: [],
+            filteredReports: [],
             error: ""
         };
     }
 
     bindEventHandlers() {
-
+        this.filterReports = this.filterReports.bind(this);
     }
 
     componentDidMount() {
@@ -29,22 +31,39 @@ class ReportsListPage extends React.Component {
     }
 
     loadData() {
-        dataService.getReports(reports => this.setState({ reports: reports }), error => this.handleError(error));
+        dataService.getReports(reports => this.setState({
+            allReports: reports,
+            filteredReports: reports
+        }), error => this.handleError(error));
     }
 
     handleError(error) {
-        error === "networkError"
-            ? this.setState({ error: "Looks like the server is not responding. Don't worry, we're looking into it!" })
-            : this.setState({ error: "Looks like there was some kind of error. Don't worry, we're looking into it!" });
+        this.setState({ error: "Looks like there was some kind of error. Don't worry, we're looking into it!" });
+    }
+
+    filterReports(searchItem) {
+        const { allReports } = this.state;
+        const filteredReports = allReports.filter(report => {
+            const candidate = report.candidate.toLowerCase();
+            const company = report.company.toLowerCase();
+            return candidate.includes(searchItem) || company.includes(searchItem);
+        });
+        filteredReports.length
+            ? this.setState({ filteredReports: filteredReports, error: "" })
+            : this.setState({ filteredReports: [], error: "No candidates or companies match the search criteria." });
     }
 
     render() {
-        const { reports, error } = this.state;
+        const { allReports, filteredReports, error } = this.state;
 
         return (
             <div className="container">
                 <div className="row mt-4">
-                    {reports.map(report => <ReportDisplay key={report.id} report={report} />)}
+                    <Search onSearch={this.filterReports} />
+                    {filteredReports.map(report => <ReportDisplay key={report.id} report={report} />)}
+                    <div className="col-12 mt-4">
+                        <h5 className="text-center">{error}</h5>
+                    </div>
                 </div>
             </div>
         );

@@ -3,15 +3,9 @@ class CommService {
 
     getData(url, callback, errorCallback) {
         fetch(url)
-            .then(response => {
-                if (response.ok) {
-                    return response.json();
-                } else {
-                    errorCallback("error");
-                }
-            })
+            .then(response => response.json())
             .then(data => callback(data))
-            .catch(error => errorCallback("networkError"));
+            .catch(error => errorCallback(error));
     }
 }
 
