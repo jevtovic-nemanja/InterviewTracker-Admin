@@ -1,6 +1,10 @@
 import React from "react";
 
+import { Switch, Route } from "react-router-dom";
+
 import { Header } from "./common/header";
+import ReportsListPage from "./reports-list/reportsListPage";
+import CreateReportPage from "./create-report/createReportPage";
 
 class App extends React.Component {
     constructor(props) {
@@ -8,7 +12,15 @@ class App extends React.Component {
     }
 
     render() {
-        return <Header />;
+        return (
+            <div className="w-100">
+                <Header />
+                <Switch>
+                    <Route exact path="/" component={ReportsListPage} />
+                    <Route path="/create-report" component={CreateReportPage} />
+                </Switch>
+            </div>
+        );
     }
 }
 
