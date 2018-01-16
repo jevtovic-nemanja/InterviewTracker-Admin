@@ -44,7 +44,15 @@ class ReportsListPage extends React.Component {
     }
 
     filterReports(searchItem) {
-
+        const { allReports } = this.state;
+        const filteredReports = allReports.filter(report => {
+            const candidate = report.candidate.toLowerCase();
+            const company = report.company.toLowerCase();
+            return candidate.includes(searchItem) || company.includes(searchItem);
+        });
+        filteredReports.length
+            ? this.setState({ filteredReports: filteredReports, error: "" })
+            : this.setState({ filteredReports: [], error: "No candidates or companies match the search criteria." });
     }
 
     render() {
@@ -55,6 +63,9 @@ class ReportsListPage extends React.Component {
                 <div className="row mt-4">
                     <Search onSearch={this.filterReports} />
                     {filteredReports.map(report => <ReportDisplay key={report.id} report={report} />)}
+                    <div className="col-12 mt-4">
+                        <h5 className="text-center">{error}</h5>
+                    </div>
                 </div>
             </div>
         );
