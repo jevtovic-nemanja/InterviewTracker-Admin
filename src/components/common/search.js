@@ -23,7 +23,10 @@ class Search extends React.Component {
         const inputString = event.target.value;
         const searchString = inputString.toLowerCase();
 
-        this.setState({ inputString: inputString, searchString: searchString });
+        this.setState({
+            inputString: inputString,
+            searchString: searchString
+        });
 
         this.props.onSearch(searchString);
     }

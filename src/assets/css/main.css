@@ -19,16 +19,6 @@ nav {
     color: #d5d5d5;
 }
 
-.btn-nav-active {
-    background-color: #d5d5d5;
-    color: white;
-}
-
-.btn-nav-active:hover {
-    background-color: white;
-    color: #d5d5d5;
-}
-
 .btn-nav {
     background-color: #9099a2;
     color: whitesmoke;
@@ -37,6 +27,16 @@ nav {
 .btn-nav:hover {
     background-color: whitesmoke;
     color: #9099a2;
+}
+
+.btn-nav-active {
+    background-color: #d5d5d5;
+    color: white;
+}
+
+.btn-nav-active:hover {
+    background-color: white;
+    color: #d5d5d5;
 }
 
 /* Report card */
@@ -70,6 +70,8 @@ nav {
     top: 0;
     right: 0;
 }
+
+/* Responsive report card */
 
 @media screen and (min-width: 576px) {
     .side-line-sm {
@@ -116,17 +118,6 @@ nav {
 
 /* Delete report modal dialog */
 
-.btn-close {
-    background-color: #9099a2;
-    color: whitesmoke;
-}
-
-.btn-close:hover {
-    background-color: whitesmoke;
-    color: #9099a2;
-    border: 1px solid #9099a2;
-}
-
 .btn-delete {
     background-color: #96858f;
     color: whitesmoke;
@@ -136,4 +127,15 @@ nav {
     background-color: whitesmoke;
     color: #96858f;
     border: 1px solid #96858f;
+}
+
+.btn-close {
+    background-color: #9099a2;
+    color: whitesmoke;
+}
+
+.btn-close:hover {
+    background-color: whitesmoke;
+    color: #9099a2;
+    border: 1px solid #9099a2;
 }

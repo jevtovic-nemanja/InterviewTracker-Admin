@@ -18,7 +18,7 @@ export const ReportDetails = props => {
                 </div>
                 <div className="col-12 col-sm-9">
                     <p className="mb-2">Notes</p>
-                    <p className="text-justify" style={{color: "black"}}>{note}</p>
+                    <p className="text-justify" style={{color: "black"}} >{note}</p>
                 </div>
             </div>
         </div>
