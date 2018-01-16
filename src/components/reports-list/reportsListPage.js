@@ -21,13 +21,15 @@ class ReportsListPage extends React.Component {
             allReports: [],
             filteredReports: [],
             modal: false,
+            detailedReport: {},
             error: ""
         };
     }
 
     bindEventHandlers() {
         this.filterReports = this.filterReports.bind(this);
-        this.toggleModal = this.toggleModal.bind(this);
+        this.openModal = this.openModal.bind(this);
+        this.closeModal = this.closeModal.bind(this);
     }
 
     componentDidMount() {
@@ -57,12 +59,19 @@ class ReportsListPage extends React.Component {
             : this.setState({ filteredReports: [], error: "No candidates or companies match the search criteria." });
     }
 
-    toggleModal() {
-        this.setState(prevState => {
-            prevState.modal = !prevState.modal;
-            return prevState;
+    openModal(id) {
+        const { allReports } = this.state;
+        const report = allReports.filter(report => report.id === parseInt(id));
+        this.setState({
+            modal: true,
+            detailedReport: report
         });
     }
+
+    closeModal() {
+        this.setState({ modal: false });
+    }
+
 
     render() {
         const { allReports, filteredReports, modal, error } = this.state;
@@ -73,7 +82,7 @@ class ReportsListPage extends React.Component {
                     <Search onSearch={this.filterReports} />
 
                     {filteredReports.map(report =>
-                        <ReportDisplay key={report.id} report={report} toggleModal={this.toggleModal} />
+                        <ReportDisplay key={report.id} report={report} openModal={this.openModal} />
                     )}
 
                     <div className="col-12 mt-4">
@@ -81,8 +90,8 @@ class ReportsListPage extends React.Component {
                     </div>
                 </div>
 
-                <Modal open={modal} onClose={this.toggleModal} >
-                    
+                <Modal open={modal} onClose={this.closeModal} >
+
                 </Modal>
             </div>
 
