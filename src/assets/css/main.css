@@ -41,10 +41,20 @@ nav {
 
 /* Report card */
 
+.card {
+    background-color: whitesmoke;
+    -webkit-box-shadow: #9099a2 0px 0 10px;
+    -moz-box-shadow: #9099a2 0 0 10px;
+    box-shadow: #9099a2 0 0 10px;
+}
+
+.card small {
+    color: #6d7993;
+}
+
 .btn-report-card {
     background-color: rgba(0, 0, 0, 0);
-    color: #96858f;
-    
+    color: #6d7993;
 }
 
 .btn-report-card:hover {
@@ -54,3 +64,36 @@ nav {
     -o-transform:scale(1.4);
     transform:scale(1.4);
 }
+
+.btn-group-report-card {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+@media screen and (min-width: 576px) {
+    .side-line-sm {
+        border-right: 1px solid #d5d5d5;
+    }
+
+    .card-body {
+        padding-left: 4em;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .card-body {
+        padding-left: 5em;
+    }
+}
+
+@media screen and (min-width: 992px) {
+    .side-line-lg {
+        border-right: 1px solid #d5d5d5;
+    }
+
+    .card-body {
+        padding-left: 1em;
+    }
+}
+

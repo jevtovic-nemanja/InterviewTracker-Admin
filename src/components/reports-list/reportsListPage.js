@@ -43,7 +43,7 @@ class ReportsListPage extends React.Component {
 
         return (
             <div className="container">
-                <div className="row">
+                <div className="row mt-4">
                     {reports.map(report => <ReportDisplay key={report.id} report={report} />)}
                 </div>
             </div>
