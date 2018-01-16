@@ -12,14 +12,24 @@ nav {
     color: #d5d5d5;
 }
 
-.btn-nav {
+.btn-nav-active {
     background-color: #d5d5d5;
     color: white;
 }
 
-.btn-nav-active {
+.btn-nav-active:hover {
+    background-color: white;
+    color: #d5d5d5;
+}
+
+.btn-nav {
     background-color: #9099a2;
     color: whitesmoke;
+}
+
+.btn-nav:hover {
+    background-color: whitesmoke;
+    color: #9099a2;
 }
 
 /* All buttons */

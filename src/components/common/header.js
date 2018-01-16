@@ -3,8 +3,8 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 export const Header = props => {
-    let report;
-    let create;
+    let report = "btn-nav";
+    let create = "btn-nav";
 
     location.hash === "#/reports"
         ? report = "btn-nav-active"
