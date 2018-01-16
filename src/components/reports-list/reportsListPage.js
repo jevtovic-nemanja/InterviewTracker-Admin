@@ -8,6 +8,7 @@ import { dataService } from "../services/dataService";
 import Search from "../common/search";
 import { ReportDisplay } from "./reportDisplay";
 import { ReportDetails } from "./reportDetails";
+import { DeleteReport } from "./deleteReport";
 
 class ReportsListPage extends React.Component {
     constructor(props) {
@@ -91,7 +92,10 @@ class ReportsListPage extends React.Component {
 
     deleteReport() {
         const id = this.state.deleteId;
-        dataService.deleteReport(id, response => this.loadData(), error => this.handleError(error));
+        dataService.deleteReport(id, response => {
+            this.closeDeleteModal();
+            this.loadData();
+        }, error => this.handleError(error));
     }
 
 
@@ -117,7 +121,7 @@ class ReportsListPage extends React.Component {
                 </Modal>
 
                 <Modal open={deleteModal} onClose={this.closeDeleteModal} little >
-                    
+                    <DeleteReport deleteReport={this.deleteReport} close={this.closeDeleteModal} />
                 </Modal>
             </div>
 
