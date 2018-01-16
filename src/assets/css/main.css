@@ -104,7 +104,7 @@ nav {
     }
 }
 
-/* Modal dialog */
+/* Report details modal dialog */
 
 .bottom-line {
     border-bottom: 1px solid #d5d5d5;
@@ -112,4 +112,28 @@ nav {
 
 .modal-dialog p, .modal-title {
     color: #6d7993;
+}
+
+/* Delete report modal dialog */
+
+.btn-close {
+    background-color: #9099a2;
+    color: whitesmoke;
+}
+
+.btn-close:hover {
+    background-color: whitesmoke;
+    color: #9099a2;
+    border: 1px solid #9099a2;
+}
+
+.btn-delete {
+    background-color: #96858f;
+    color: whitesmoke;
+}
+
+.btn-delete:hover {
+    background-color: whitesmoke;
+    color: #96858f;
+    border: 1px solid #96858f;
 }
