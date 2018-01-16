@@ -8,6 +8,7 @@ import { dataService } from "../services/dataService";
 import Search from "../common/search";
 import { ReportDisplay } from "./reportDisplay";
 import { ReportDetails } from "./reportDetails";
+import { DeleteReport } from "./deleteReport";
 
 class ReportsListPage extends React.Component {
     constructor(props) {
@@ -21,16 +22,21 @@ class ReportsListPage extends React.Component {
         return {
             allReports: [],
             filteredReports: [],
-            modal: false,
+            detailsModal: false,
             detailedReport: {},
+            deleteModal: false,
+            deleteId: "",
             error: ""
         };
     }
 
     bindEventHandlers() {
         this.filterReports = this.filterReports.bind(this);
-        this.openModal = this.openModal.bind(this);
-        this.closeModal = this.closeModal.bind(this);
+        this.openDetailsModal = this.openDetailsModal.bind(this);
+        this.closeDetailsModal = this.closeDetailsModal.bind(this);
+        this.openDeleteModal = this.openDeleteModal.bind(this);
+        this.closeDeleteModal = this.closeDeleteModal.bind(this);
+        this.deleteReport = this.deleteReport.bind(this);
     }
 
     componentDidMount() {
@@ -60,22 +66,41 @@ class ReportsListPage extends React.Component {
             : this.setState({ filteredReports: [], error: "No candidates or companies match the search criteria." });
     }
 
-    openModal(id) {
+    openDetailsModal(id) {
         const { allReports } = this.state;
         const report = allReports.filter(report => report.id === parseInt(id))[0];
         this.setState({
-            modal: true,
+            detailsModal: true,
             detailedReport: report
         });
     }
 
-    closeModal() {
-        this.setState({ modal: false });
+    closeDetailsModal() {
+        this.setState({ detailsModal: false });
+    }
+
+    openDeleteModal(id) {
+        this.setState({
+            deleteModal: true,
+            deleteId: id
+        });
+    }
+
+    closeDeleteModal() {
+        this.setState({ deleteModal: false });
+    }
+
+    deleteReport() {
+        const id = this.state.deleteId;
+        dataService.deleteReport(id, response => {
+            this.closeDeleteModal();
+            this.loadData();
+        }, error => this.handleError(error));
     }
 
 
     render() {
-        const { allReports, filteredReports, modal, detailedReport, error } = this.state;
+        const { allReports, filteredReports, detailsModal, detailedReport, deleteModal, error } = this.state;
 
         return (
             <div className="container">
@@ -83,7 +108,7 @@ class ReportsListPage extends React.Component {
                     <Search onSearch={this.filterReports} />
 
                     {filteredReports.map(report =>
-                        <ReportDisplay key={report.id} report={report} openModal={this.openModal} />
+                        <ReportDisplay key={report.id} report={report} openDetailsModal={this.openDetailsModal} deleteReport={this.openDeleteModal} />
                     )}
 
                     <div className="col-12 mt-4">
@@ -91,8 +116,12 @@ class ReportsListPage extends React.Component {
                     </div>
                 </div>
 
-                <Modal open={modal} onClose={this.closeModal} little >
+                <Modal open={detailsModal} onClose={this.closeDetailsModal} little >
                     <ReportDetails report={detailedReport} />
+                </Modal>
+
+                <Modal open={deleteModal} onClose={this.closeDeleteModal} little >
+                    <DeleteReport deleteReport={this.deleteReport} close={this.closeDeleteModal} />
                 </Modal>
             </div>
 

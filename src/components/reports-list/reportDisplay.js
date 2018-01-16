@@ -4,9 +4,14 @@ export const ReportDisplay = props => {
     const { id, candidate, company, date, status } = props.report;
     let buttonGroup = null;
 
-    function handleClick() {
+    function viewReportDetails() {
         const id = buttonGroup.id;
-        props.openModal(id);
+        props.openDetailsModal(id);
+    }
+
+    function deleteReport() {
+        const id = buttonGroup.id;
+        props.deleteReport(id);
     }
 
     return (
@@ -33,10 +38,10 @@ export const ReportDisplay = props => {
                     </div>
                 </div>
                 <div className="btn-group-report-card" id={id} ref={div => buttonGroup = div}>
-                    <button type="button" className="btn btn-report-card" onClick={handleClick}>
+                    <button type="button" className="btn btn-report-card" onClick={viewReportDetails}>
                         <i className="fa fa-eye fa-lg"></i>
                     </button>
-                    <button type="button" className="btn btn-report-card">
+                    <button type="button" className="btn btn-report-card" onClick={deleteReport}>
                         <i className="fa fa-times fa-lg"></i>
                     </button>
                 </div>

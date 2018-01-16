@@ -21,6 +21,11 @@ class DataService {
         });
         return reports;
     }
+
+    deleteReport(id, callback, errorCallback) {
+        const url = `${BASE_URL}/reports/${id}`;
+        commService.deleteData(url, response => callback(response), error => errorCallback(error));
+    }
 }
 
 export const dataService = new DataService();
