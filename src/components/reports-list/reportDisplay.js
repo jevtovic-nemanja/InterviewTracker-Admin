@@ -38,10 +38,10 @@ export const ReportDisplay = props => {
                     </div>
                 </div>
                 <div className="btn-group-report-card" id={id} ref={div => buttonGroup = div}>
-                    <button type="button" className="btn btn-report-card" onClick={viewReportDetails}>
+                    <button type="button" className="btn btn-report-card" onClick={viewReportDetails} >
                         <i className="fa fa-eye fa-lg"></i>
                     </button>
-                    <button type="button" className="btn btn-report-card" onClick={deleteReport}>
+                    <button type="button" className="btn btn-report-card" onClick={deleteReport} >
                         <i className="fa fa-times fa-lg"></i>
                     </button>
                 </div>

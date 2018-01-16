@@ -7,6 +7,11 @@ import Report from "../entities/report";
 class DataService {
     constructor() { }
 
+    deleteReport(id, callback, errorCallback) {
+        const url = `${BASE_URL}/reports/${id}`;
+        commService.deleteData(url, response => callback(response), error => errorCallback(error));
+    }
+
     getReports(callback, errorCallback) {
         const url = `${BASE_URL}/reports`;
         commService.getData(url, data => callback(this.packReports(data)), error => errorCallback(error));
@@ -20,11 +25,6 @@ class DataService {
             return reportObj;
         });
         return reports;
-    }
-
-    deleteReport(id, callback, errorCallback) {
-        const url = `${BASE_URL}/reports/${id}`;
-        commService.deleteData(url, response => callback(response), error => errorCallback(error));
     }
 }
 
