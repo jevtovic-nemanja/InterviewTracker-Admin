@@ -93,7 +93,14 @@ nav {
     }
 
     .card-body {
-        padding-left: 1em;
+        padding-left: 2.5em;
+        padding-right: 0;
+    }
+}
+
+@media screen and (min-width: 1200px) {
+    .card-body {
+        padding-left: 3em;
     }
 }
 

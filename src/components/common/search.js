@@ -32,7 +32,7 @@ class Search extends React.Component {
         const inputString = this.state.inputString;
 
         return (
-            <div className="input-group mt-1 mb-1">
+            <div className="input-group mt-1 offset-1 col-10 offset-sm-0 col-sm-7 offset-md-1 col-md-6 col-lg-5 mb-3">
                 <div className="input-group-prepend">
                     <span className="input-group-text">
                         <i className="fa fa-search"></i>
