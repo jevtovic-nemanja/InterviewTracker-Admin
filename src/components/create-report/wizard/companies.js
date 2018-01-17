@@ -4,7 +4,7 @@ import Search from "../../common/search";
 
 export const SelectCompany = props => {
     return (
-        <div className="row mt-4">
+        <div className={`${props.show} row mt-4`}>
             <div className="col-12 offset-lg-6 col-lg-6">
                 <Search onSearch={props.onSearch} />
             </div>

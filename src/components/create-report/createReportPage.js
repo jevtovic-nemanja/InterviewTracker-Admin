@@ -17,10 +17,13 @@ class CreateReportPage extends React.Component {
 
     initState() {
         return {
+            showCandidates: "",
             allCandidates: [],
             filteredCandidates: [],
+            showCompanies: "d-none",
             allCompanies: [],
             filteredCompanies: [],
+            showFillReport: "d-none",
             error: ""
         };
     }
@@ -85,10 +88,10 @@ class CreateReportPage extends React.Component {
             });
     }
 
-    
+
 
     render() {
-        const { filteredCandidates, filteredCompanies, error } = this.state;
+        const { showCandidates, filteredCandidates, showCompanies, filteredCompanies, showFillReport, error } = this.state;
 
         return (
             <div className="container">
@@ -99,9 +102,17 @@ class CreateReportPage extends React.Component {
                                 <Aside />
                             </aside>
                             <main className="col-12 col-md-8 col-xl-9">
-                                <SelectCandidate candidates={filteredCandidates} onSearch={this.filterCandidates} />
-                                <SelectCompany companies={filteredCompanies} onSearch={this.filterCompanies} />
-                                <FillReport />
+                                <SelectCandidate
+                                    candidates={filteredCandidates}
+                                    onSearch={this.filterCandidates}
+                                    show={showCandidates}
+                                />
+                                <SelectCompany
+                                    companies={filteredCompanies}
+                                    onSearch={this.filterCompanies}
+                                    show={showCompanies}
+                                />
+                                <FillReport show={showFillReport} />
                                 <div className="col-12 mt-4">
                                     <h5 className="text-center">{error}</h5>
                                 </div>
