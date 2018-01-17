@@ -17,6 +17,7 @@ class CreateReportPage extends React.Component {
 
     initState() {
         return {
+            phase: "3",
             showCandidates: "",
             allCandidates: [],
             filteredCandidates: [],
@@ -91,7 +92,7 @@ class CreateReportPage extends React.Component {
 
 
     render() {
-        const { showCandidates, filteredCandidates, showCompanies, filteredCompanies, showFillReport, error } = this.state;
+        const { phase, showCandidates, filteredCandidates, showCompanies, filteredCompanies, showFillReport, error } = this.state;
 
         return (
             <div className="container">
@@ -99,7 +100,7 @@ class CreateReportPage extends React.Component {
                     <div className="offset-1 col-10 offset-sm-0 col-sm-12 card mb-4">
                         <div className="row card-body">
                             <aside className="col-12 offset-sm-1 col-sm-10 offset-md-0 col-md-4 col-xl-3">
-                                <Aside />
+                                <Aside phase={phase} />
                             </aside>
                             <main className="col-12 col-md-8 col-xl-9">
                                 <SelectCandidate
