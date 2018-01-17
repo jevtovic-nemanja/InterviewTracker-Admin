@@ -44,7 +44,8 @@ export const Aside = props => {
                         <h4>Company Name</h4>
                     </div>
                 </div>
-                <button type="button" className="btn btn-next w-100 mt-5">Next</button>
+                <button type="button" className="btn btn-back w-100 mt-3 mb-2">Back</button>
+                <button type="button" className="btn btn-next w-100">Next</button>
             </div>
         </div>
     );
