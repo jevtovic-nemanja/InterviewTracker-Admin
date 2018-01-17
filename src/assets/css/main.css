@@ -212,3 +212,11 @@ nav {
 .candidate-img {
     min-width: 2.9em;
 }
+
+/* Responsive fill report */
+
+@media screen and (min-width: 768px) {
+    .fill-report {
+        padding-top: 1.25em;
+    }
+}
