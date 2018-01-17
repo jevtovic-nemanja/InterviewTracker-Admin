@@ -5,7 +5,7 @@ import { dataService } from "../services/dataService";
 import { Aside } from "../create-report/wizard/aside";
 import { SelectCandidate } from "../create-report/wizard/candidates";
 import { SelectCompany } from "../create-report/wizard/companies";
-import { FillReport } from "../create-report/wizard/fill-report";
+import FillReport from "../create-report/wizard/fill-report";
 
 class CreateReportPage extends React.Component {
     constructor(props) {
@@ -99,8 +99,8 @@ class CreateReportPage extends React.Component {
                                 <Aside />
                             </aside>
                             <main className="col-12 col-md-8 col-xl-9">
-                                <SelectCandidate candidates={filteredCandidates} onSearch={this.filterCandidates} />
-                                <SelectCompany companies={filteredCompanies} onSearch={this.filterCompanies} />
+                                {/* <SelectCandidate candidates={filteredCandidates} onSearch={this.filterCandidates} />
+                                <SelectCompany companies={filteredCompanies} onSearch={this.filterCompanies} /> */}
                                 <FillReport />
                                 <div className="col-12 mt-4">
                                     <h5 className="text-center">{error}</h5>
