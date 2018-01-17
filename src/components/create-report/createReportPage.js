@@ -17,7 +17,7 @@ class CreateReportPage extends React.Component {
 
     initState() {
         return {
-            phase: "3",
+            phase: "1",
             showCandidates: "",
             allCandidates: [],
             filteredCandidates: [],

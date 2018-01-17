@@ -188,11 +188,13 @@ nav {
     transform: none;
 }
 
-/* Wizard aside */
+/* Wizard */
 
-.wizard-aside {
-    border-right: 2px solid #6d7993;
+.wizard-separator {
+    border-left: 2px solid #6d7993;
 }
+
+/* Wizard aside */
 
 .wizard-aside h5, .wizard-aside p {
     color: #6d7993;
