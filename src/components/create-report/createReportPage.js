@@ -20,6 +20,7 @@ class CreateReportPage extends React.Component {
             candidates: [],
             filteredCandidates: [],
             companies: [],
+            filteredCompanies: [],
             error: ""
         };
     }
@@ -37,6 +38,11 @@ class CreateReportPage extends React.Component {
             candidates: candidates,
             filteredCandidates: candidates
         }), error => this.handleError(error));
+
+        dataService.getCompanies(companies => this.setState({
+            companies: companies,
+            filteredCompanies: companies
+        }), error => this.handleError(error));
     }
 
     handleError(error) {
@@ -44,6 +50,7 @@ class CreateReportPage extends React.Component {
     }
 
     render() {
+
         return (
             <div className="container">
                 <div className="row">
