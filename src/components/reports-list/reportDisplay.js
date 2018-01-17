@@ -16,7 +16,7 @@ export const ReportDisplay = props => {
 
     return (
         <div className="offset-1 col-10 offset-sm-0 col-sm-12 offset-md-1 col-md-10">
-            <div className="card position-relative mb-3">
+            <div className="card report-card position-relative mb-3">
                 <div className="card-body pt-4">
                     <div className="row">
                         <div className="col-12 col-sm-6 col-lg-4 side-line-sm">

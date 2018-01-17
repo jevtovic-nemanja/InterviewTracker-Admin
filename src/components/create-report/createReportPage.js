@@ -53,9 +53,9 @@ class CreateReportPage extends React.Component {
 
         return (
             <div className="container">
-                <div className="row">
-                    <div className="offset-1 col-10 offset-sm-0 col-sm-12 offset-md-1 col-md-10">
-                        <div className="row">
+                <div className="row mt-5">
+                    <div className="offset-1 col-10 offset-sm-0 col-sm-12 card">
+                        <div className="row card-body">
                             <aside className="col-4">
                                 <Aside />
                             </aside>
