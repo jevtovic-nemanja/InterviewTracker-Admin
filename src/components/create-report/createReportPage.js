@@ -49,6 +49,13 @@ class CreateReportPage extends React.Component {
         this.setState({ error: "Looks like there was some kind of error. Don't worry, we're looking into it!" });
     }
 
+    filter(searchThrough, searchItem) {
+        const filtered = searchThrough.filter(item => {
+            return item.name.toLowerCase().includes(searchItem);
+        });
+        return filtered;
+    }
+
     filterCandidates(searchItem) {
         const filteredCandidates = this.filter(this.state.allCandidates, searchItem);
 
@@ -63,12 +70,21 @@ class CreateReportPage extends React.Component {
             });
     }
 
-    filter(searchThrough, searchItem) {
-        const filtered = searchThrough.filter(item => {
-            return item.name.toLowerCase().includes(searchItem);
-        });
-        return filtered;
+    filterCompanies(searchItem) {
+        const filteredCompanies = this.filter(this.state.allCompanies, searchItem);
+
+        filteredCompanies.length
+            ? this.setState({
+                filteredCompanies: filteredCompanies,
+                error: ""
+            })
+            : this.setState({
+                filteredCompanies: [],
+                error: "No companies match the search criteria."
+            });
     }
+
+    
 
     render() {
         const { filteredCandidates, filteredCompanies, error } = this.state;
@@ -82,9 +98,9 @@ class CreateReportPage extends React.Component {
                                 <Aside />
                             </aside>
                             <main className="col-12 col-md-8 col-xl-9">
-                                <SelectCandidate candidates={filteredCandidates} onSearch={this.filterCandidates} />
-                                <SelectCompany />
-                                <FillReport />
+                                {/* <SelectCandidate candidates={filteredCandidates} onSearch={this.filterCandidates} /> */}
+                                <SelectCompany companies={filteredCompanies} onSearch={this.filterCompanies} />
+                                {/* <FillReport /> */}
                                 <div className="col-12 mt-4">
                                     <h5 className="text-center">{error}</h5>
                                 </div>
