@@ -222,3 +222,15 @@ nav {
         padding-top: 1.25em;
     }
 }
+
+/* Selected card */
+
+.selected {
+    background-color: #6d7993;
+    color: #d5d5d5;
+    -webkit-transform:scale(1.03);
+    -moz-transform:scale(1.03);
+    -ms-transform:scale(1.03);
+    -o-transform:scale(1.03);
+    transform:scale(1.03);
+}
