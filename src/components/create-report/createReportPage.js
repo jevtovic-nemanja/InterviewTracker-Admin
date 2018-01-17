@@ -27,6 +27,7 @@ class CreateReportPage extends React.Component {
 
     bindEventHandlers() {
         this.filterCandidates = this.filterCandidates.bind(this);
+        this.filterCompanies = this.filterCompanies.bind(this);
     }
 
     componentDidMount() {
