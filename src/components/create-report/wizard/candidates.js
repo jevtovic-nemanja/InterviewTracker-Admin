@@ -7,7 +7,7 @@ export const SelectCandidate = props => {
     return (
         <div className="row">
             <div className="col-12 offset-sm-1 col-sm-10 offset-lg-5 col-lg-6">
-                <Search />
+                <Search onSearch={props.onSearch} />
             </div>
 
             {props.candidates.map(candidate => {

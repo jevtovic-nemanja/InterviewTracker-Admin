@@ -17,16 +17,16 @@ class CreateReportPage extends React.Component {
 
     initState() {
         return {
-            candidates: [],
+            allCandidates: [],
             filteredCandidates: [],
-            companies: [],
+            allCompanies: [],
             filteredCompanies: [],
             error: ""
         };
     }
 
     bindEventHandlers() {
-
+        this.filterCandidates = this.filterCandidates.bind(this);
     }
 
     componentDidMount() {
@@ -35,12 +35,12 @@ class CreateReportPage extends React.Component {
 
     loadData() {
         dataService.getCandidates(candidates => this.setState({
-            candidates: candidates,
+            allCandidates: candidates,
             filteredCandidates: candidates
         }), error => this.handleError(error));
 
         dataService.getCompanies(companies => this.setState({
-            companies: companies,
+            allCompanies: companies,
             filteredCompanies: companies
         }), error => this.handleError(error));
     }
@@ -49,8 +49,29 @@ class CreateReportPage extends React.Component {
         this.setState({ error: "Looks like there was some kind of error. Don't worry, we're looking into it!" });
     }
 
+    filterCandidates(searchItem) {
+        const filteredCandidates = this.filter(this.state.allCandidates, searchItem);
+
+        filteredCandidates.length
+            ? this.setState({
+                filteredCandidates: filteredCandidates,
+                error: ""
+            })
+            : this.setState({
+                filteredCandidates: [],
+                error: "No candidates match the search criteria."
+            });
+    }
+
+    filter(searchThrough, searchItem) {
+        const filtered = searchThrough.filter(item => {
+            return item.name.toLowerCase().includes(searchItem);
+        });
+        return filtered;
+    }
+
     render() {
-        const { filteredCandidates } = this.state;
+        const { filteredCandidates, filteredCompanies, error } = this.state;
 
         return (
             <div className="container">
@@ -61,7 +82,7 @@ class CreateReportPage extends React.Component {
                                 <Aside />
                             </aside>
                             <main className="col-12 col-md-8">
-                                <SelectCandidate candidates={filteredCandidates} />
+                                <SelectCandidate candidates={filteredCandidates} onSearch={this.filterCandidates} />
                                 <SelectCompany />
                                 <FillReport />
                             </main>
