@@ -35,7 +35,7 @@ export const Aside = props => {
                     </h5>
                 </div>
                 <div>
-                    <div>
+                    <div className="pl-1">
                         <p className="mt-3 mb-1">Candidate:</p>
                         <h4>Candidate Name</h4>
                     </div>
@@ -44,6 +44,7 @@ export const Aside = props => {
                         <h4>Company Name</h4>
                     </div>
                 </div>
+                <button type="button" className="btn btn-next w-100 mt-5">Next</button>
             </div>
         </div>
     );

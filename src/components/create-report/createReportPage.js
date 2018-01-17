@@ -17,16 +17,16 @@ class CreateReportPage extends React.Component {
 
     initState() {
         return {
-            candidates: [],
+            allCandidates: [],
             filteredCandidates: [],
-            companies: [],
+            allCompanies: [],
             filteredCompanies: [],
             error: ""
         };
     }
 
     bindEventHandlers() {
-
+        this.filterCandidates = this.filterCandidates.bind(this);
     }
 
     componentDidMount() {
@@ -35,12 +35,12 @@ class CreateReportPage extends React.Component {
 
     loadData() {
         dataService.getCandidates(candidates => this.setState({
-            candidates: candidates,
+            allCandidates: candidates,
             filteredCandidates: candidates
         }), error => this.handleError(error));
 
         dataService.getCompanies(companies => this.setState({
-            companies: companies,
+            allCompanies: companies,
             filteredCompanies: companies
         }), error => this.handleError(error));
     }
@@ -49,20 +49,45 @@ class CreateReportPage extends React.Component {
         this.setState({ error: "Looks like there was some kind of error. Don't worry, we're looking into it!" });
     }
 
+    filterCandidates(searchItem) {
+        const filteredCandidates = this.filter(this.state.allCandidates, searchItem);
+
+        filteredCandidates.length
+            ? this.setState({
+                filteredCandidates: filteredCandidates,
+                error: ""
+            })
+            : this.setState({
+                filteredCandidates: [],
+                error: "No candidates match the search criteria."
+            });
+    }
+
+    filter(searchThrough, searchItem) {
+        const filtered = searchThrough.filter(item => {
+            return item.name.toLowerCase().includes(searchItem);
+        });
+        return filtered;
+    }
+
     render() {
+        const { filteredCandidates, filteredCompanies, error } = this.state;
 
         return (
             <div className="container">
-                <div className="row mt-5">
+                <div className="row mt-4">
                     <div className="offset-1 col-10 offset-sm-0 col-sm-12 card">
                         <div className="row card-body">
-                            <aside className="col-4">
+                            <aside className="col-12 offset-sm-1 col-sm-10 offset-md-0 col-md-4 col-xl-3">
                                 <Aside />
                             </aside>
-                            <main className="col-8">
-                                <SelectCandidate />
+                            <main className="col-12 col-md-8 col-xl-9">
+                                <SelectCandidate candidates={filteredCandidates} onSearch={this.filterCandidates} />
                                 <SelectCompany />
                                 <FillReport />
+                                <div className="col-12 mt-4">
+                                    <h5 className="text-center">{error}</h5>
+                                </div>
                             </main>
                         </div>
                     </div>

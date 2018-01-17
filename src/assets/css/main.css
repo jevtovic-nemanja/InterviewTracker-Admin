@@ -12,6 +12,13 @@ body {
     box-shadow: none;
 }
 
+/* All inputs */
+
+.form-control:focus {
+    box-shadow: none;
+    border-color: #6d7993;
+}
+
 /* Navbar */
 
 nav {
@@ -39,7 +46,7 @@ nav {
     color: #d5d5d5;
 }
 
-/* Report card */
+/* Cards */
 
 .card {
     background-color: whitesmoke;
@@ -48,7 +55,7 @@ nav {
     box-shadow: #9099a2 0 0 10px;
 }
 
-.report-card:hover {
+.report-card:hover, .candidate-card:hover {
     -webkit-transform:scale(1.03);
     -moz-transform:scale(1.03);
     -ms-transform:scale(1.03);
@@ -79,7 +86,12 @@ nav {
     right: 0;
 }
 
-/* Responsive report card */
+.candidate-card {
+    background-color: white;
+    color: #6d7993;
+}
+
+/* Responsive cards */
 
 @media screen and (min-width: 576px) {
     .side-line-sm {
@@ -105,6 +117,10 @@ nav {
     .report-card .card-body {
         padding-left: 1em;
         padding-right: 0;
+    }
+
+    .candidate-card {
+        padding: 1em !important;
     }
 }
 
@@ -148,6 +164,25 @@ nav {
     border: 1px solid #9099a2;
 }
 
+/* Wizard */
+
+.btn-next {
+    background-color: #6d7993;
+    color: whitesmoke;
+}
+
+.btn-next:hover {
+    -webkit-transform:scale(1.1);
+    -moz-transform:scale(1.1);
+    -ms-transform:scale(1.1);
+    -o-transform:scale(1.1);
+    transform:scale(1.1);
+}
+
+.disabled:hover {
+    transform: none;
+}
+
 /* Wizard aside */
 
 .wizard-aside {
@@ -165,4 +200,10 @@ nav {
 
 .bottom-line-aside {
     border-bottom: 2px solid #6d7993;
+}
+
+/* Wizard candidates */
+
+.candidate-img {
+    min-width: 2.9em;
 }

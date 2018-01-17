@@ -73,8 +73,14 @@ class ReportsListPage extends React.Component {
         });
 
         filteredReports.length
-            ? this.setState({ filteredReports: filteredReports, error: "" })
-            : this.setState({ filteredReports: [], error: "No candidates or companies match the search criteria." });
+            ? this.setState({
+                filteredReports: filteredReports,
+                error: ""
+            })
+            : this.setState({
+                filteredReports: [],
+                error: "No candidates or companies match the search criteria."
+            });
     }
 
     openDeleteModal(id) {
@@ -108,7 +114,9 @@ class ReportsListPage extends React.Component {
         return (
             <main className="container">
                 <div className="row mt-4">
-                    <Search onSearch={this.filterReports} />
+                    <div className="offset-1 col-10 offset-sm-0 col-sm-7 offset-md-1 col-md-6 col-lg-5">
+                        <Search onSearch={this.filterReports} />
+                    </div>
 
                     {filteredReports.map(report =>
                         <ReportDisplay key={report.id} report={report} openDetailsModal={this.openDetailsModal} deleteReport={this.openDeleteModal} />
