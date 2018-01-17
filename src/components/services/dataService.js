@@ -4,6 +4,7 @@ import { BASE_URL } from "../../constants";
 import { commService } from "./communicationService";
 import Report from "../entities/report";
 import Candidate from "../entities/candidate";
+import Company from "../entities/company";
 
 class DataService {
     constructor() { }
@@ -40,6 +41,20 @@ class DataService {
             return candidateObj;
         });
         return candidates;
+    }
+
+    getCompanies(callback, errorCallback) {
+        const url = `${BASE_URL}/companies`;
+        commService.getData(url, data => callback(this.packCompanies(data)), error => errorCallback(error));
+    }
+
+    packCompanies(data) {
+        let companies = data.map(item => {
+            const { id, name } = item;
+            const companyObj = new Company(id, name);
+            return companyObj;
+        });
+        return companies;
     }
 }
 
