@@ -54,14 +54,18 @@ class CreateReportPage extends React.Component {
         return (
             <div className="container">
                 <div className="row">
-                    <aside className="col-4">
-                        <Aside />
-                    </aside>
-                    <main className="col-8">
-                        <SelectCandidate />
-                        <SelectCompany />
-                        <FillReport />
-                    </main>
+                    <div className="offset-1 col-10 offset-sm-0 col-sm-12 offset-md-1 col-md-10">
+                        <div className="row">
+                            <aside className="col-4">
+                                <Aside />
+                            </aside>
+                            <main className="col-8">
+                                <SelectCandidate />
+                                <SelectCompany />
+                                <FillReport />
+                            </main>
+                        </div>
+                    </div>
                 </div>
             </div>
         );
