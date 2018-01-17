@@ -85,6 +85,9 @@ class CreateReportPage extends React.Component {
                                 <SelectCandidate candidates={filteredCandidates} onSearch={this.filterCandidates} />
                                 <SelectCompany />
                                 <FillReport />
+                                <div className="col-12 mt-4">
+                                    <h5 className="text-center">{error}</h5>
+                                </div>
                             </main>
                         </div>
                     </div>
