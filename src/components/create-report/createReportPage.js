@@ -99,9 +99,9 @@ class CreateReportPage extends React.Component {
                                 <Aside />
                             </aside>
                             <main className="col-12 col-md-8 col-xl-9">
-                                {/* <SelectCandidate candidates={filteredCandidates} onSearch={this.filterCandidates} /> */}
+                                <SelectCandidate candidates={filteredCandidates} onSearch={this.filterCandidates} />
                                 <SelectCompany companies={filteredCompanies} onSearch={this.filterCompanies} />
-                                {/* <FillReport /> */}
+                                <FillReport />
                                 <div className="col-12 mt-4">
                                     <h5 className="text-center">{error}</h5>
                                 </div>
