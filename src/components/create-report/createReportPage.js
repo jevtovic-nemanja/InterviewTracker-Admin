@@ -1,5 +1,7 @@
 import React from "react";
 
+import { dataService } from "../services/dataService";
+
 import { Aside } from "../create-report/wizard/aside";
 import { SelectCandidate } from "../create-report/wizard/candidates";
 import { SelectCompany } from "../create-report/wizard/companies";
@@ -15,7 +17,10 @@ class CreateReportPage extends React.Component {
 
     initState() {
         return {
-
+            candidates: [],
+            filteredCandidates: [],
+            companies: [],
+            error: ""
         };
     }
 
@@ -23,6 +28,20 @@ class CreateReportPage extends React.Component {
 
     }
 
+    componentDidMount() {
+        this.loadData();
+    }
+
+    loadData() {
+        dataService.getCandidates(candidates => this.setState({
+            candidates: candidates,
+            filteredCandidates: candidates
+        }), error => this.handleError(error));
+    }
+
+    handleError(error) {
+        this.setState({ error: "Looks like there was some kind of error. Don't worry, we're looking into it!" });
+    }
 
     render() {
         return (
