@@ -3,7 +3,7 @@ import React from "react";
 export const Aside = props => {
 
     return (
-        <div className="row wizard-aside">
+        <div className="row wizard-aside mb-3">
             <div className="col-12">
                 <div className="bottom-line-aside">
                     <h5 className="mt-3">

@@ -51,71 +51,59 @@ class FillReport extends React.Component {
         const today = moment(moment.now()).format("YYYY-MM-DD");
 
         return (
-            <form className="row">
-                <div className="col-12">
+            <form className="row fill-report">
+                <div className="col-12 offset-sm-1 col-sm-10 offset-md-0 col-md-12 col-lg-4">
                     <div className="form-group">
-                        <div className="input-group">
-                            <label>Interview Date:</label>
-                            <input
-                                type="date"
-                                className="form-control"
-                                max={today}
-                                value={date}
-                                onChange={this.handleDateChange}
-                            />
-                            <div className="input-group-append">
-                                <span className="input-group-text">
-                                    <i className="fa fa-calendar"></i>
-                                </span>
-                            </div>
-                        </div>
+                        <label>Interview Date:</label>
+                        <input
+                            type="date"
+                            className="form-control"
+                            max={today}
+                            value={date}
+                            onChange={this.handleDateChange}
+                        />
                     </div>
                 </div>
-                <div className="col-12">
+                <div className="col-12 offset-sm-1 col-sm-10 offset-md-0 col-md-6 col-lg-4">
                     <div className="form-group">
-                        <div className="input-group">
-                            <label>Phase:</label>
-                            <select
-                                className="form-control"
-                                value={phase}
-                                onChange={this.handlePhaseChange}
-                            >
-                                <option hidden>Select</option>
-                                <option>CV</option>
-                                <option>HR</option>
-                                <option>Technical</option>
-                                <option>Final</option>
-                            </select>
-                        </div>
+                        <label>Phase:</label>
+                        <select
+                            className="form-control"
+                            value={phase}
+                            onChange={this.handlePhaseChange}
+                        >
+                            <option hidden>Select</option>
+                            <option>CV</option>
+                            <option>HR</option>
+                            <option>Technical</option>
+                            <option>Final</option>
+                        </select>
                     </div>
                 </div>
-                <div className="col-12">
+                <div className="col-12 offset-sm-1 col-sm-10 offset-md-0 col-md-6 col-lg-4">
                     <div className="form-group">
-                        <div className="input-group">
-                            <label>Status:</label>
-                            <select
-                                className="form-control"
-                                value={status}
-                                onChange={this.handleStatusChange}
-                            >
-                                <option hidden>Select</option>
-                                <option>Passed</option>
-                                <option>Declined</option>
-                            </select>
-                        </div>
+                        <label>Status:</label>
+                        <select
+                            className="form-control"
+                            value={status}
+                            onChange={this.handleStatusChange}
+                        >
+                            <option hidden>Select</option>
+                            <option>Passed</option>
+                            <option>Declined</option>
+                        </select>
                     </div>
                 </div>
-                <div className="col-12">
+                <div className="col-12 offset-sm-1 col-sm-10 offset-md-0 col-md-12">
                     <div className="form-group">
-                        <div className="input-group">
-                            <label>Notes:</label>
-                            <textarea
-                                placeholder="Notes..."
-                                className="form-control"
-                                value={notes}
-                                onChange={this.handleNotesChange}
-                            />
-                        </div>
+                        <label>Notes:</label>
+                        <textarea
+                            placeholder="Notes..."
+                            rows="5"
+                            className="form-control"
+                            value={notes}
+                            onChange={this.handleNotesChange}
+                        />
                     </div>
                 </div>
             </form >
