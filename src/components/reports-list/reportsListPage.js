@@ -73,8 +73,14 @@ class ReportsListPage extends React.Component {
         });
 
         filteredReports.length
-            ? this.setState({ filteredReports: filteredReports, error: "" })
-            : this.setState({ filteredReports: [], error: "No candidates or companies match the search criteria." });
+            ? this.setState({
+                filteredReports: filteredReports,
+                error: ""
+            })
+            : this.setState({
+                filteredReports: [],
+                error: "No candidates or companies match the search criteria."
+            });
     }
 
     openDeleteModal(id) {
