@@ -48,6 +48,14 @@ nav {
     box-shadow: #9099a2 0 0 10px;
 }
 
+.card:hover {
+    -webkit-transform:scale(1.03);
+    -moz-transform:scale(1.03);
+    -ms-transform:scale(1.03);
+    -o-transform:scale(1.03);
+    transform:scale(1.03);
+}
+
 .card small {
     color: #6d7993;
 }
