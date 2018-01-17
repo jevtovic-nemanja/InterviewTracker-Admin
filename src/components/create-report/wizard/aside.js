@@ -83,11 +83,12 @@ export const Aside = props => {
                     </div>
                 </div>
                 <button type="button" className={`${showBack} btn btn-back w-100 mt-3 mb-2`}>Back</button>
-                <button type="button" className="btn btn-next w-100">{
-                    props.phase === "3"
-                        ? "Submit"
-                        : "Next"
-                }
+                <button type="button" className={`${props.next} btn btn-next w-100`}>
+                    {
+                        props.phase === "3"
+                            ? "Submit"
+                            : "Next"
+                    }
                 </button>
             </div>
         </div>

@@ -25,13 +25,18 @@ class CreateReportPage extends React.Component {
             allCompanies: [],
             filteredCompanies: [],
             showFillReport: "d-none",
-            error: ""
+            next: "disabled",
+            error: "",
+            report: {
+                candidateId: ""
+            }
         };
     }
 
     bindEventHandlers() {
         this.filterCandidates = this.filterCandidates.bind(this);
         this.filterCompanies = this.filterCompanies.bind(this);
+        this.onSelect = this.onSelect.bind(this);
     }
 
     componentDidMount() {
@@ -89,29 +94,36 @@ class CreateReportPage extends React.Component {
             });
     }
 
-
+    onSelect() {
+        this.setState(prevState => {
+            prevState.next = "";
+            
+            return prevState;
+        });
+    }
 
     render() {
-        const { phase, showCandidates, filteredCandidates, showCompanies, filteredCompanies, showFillReport, error } = this.state;
-
+        const { phase, showCandidates, filteredCandidates, showCompanies, filteredCompanies, showFillReport, next, error } = this.state;
+        
         return (
             <div className="container">
                 <div className="row mt-4">
                     <div className="offset-1 col-10 offset-sm-0 col-sm-12 card mb-4">
                         <div className="row card-body">
                             <aside className="col-12 offset-sm-1 col-sm-10 offset-md-0 col-md-4 col-xl-3">
-                                <Aside phase={phase} />
+                                <Aside phase={phase} next={next} />
                             </aside>
                             <main className="col-12 col-md-8 col-xl-9">
                                 <SelectCandidate
+                                    show={showCandidates}
                                     candidates={filteredCandidates}
                                     onSearch={this.filterCandidates}
-                                    show={showCandidates}
+                                    onSelect={this.onSelect}
                                 />
                                 <SelectCompany
+                                    show={showCompanies}
                                     companies={filteredCompanies}
                                     onSearch={this.filterCompanies}
-                                    show={showCompanies}
                                 />
                                 <FillReport show={showFillReport} />
                                 <div className="col-12 mt-4">
