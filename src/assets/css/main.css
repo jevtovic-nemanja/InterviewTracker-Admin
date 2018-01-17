@@ -166,17 +166,22 @@ nav {
 
 /* Wizard */
 
+.btn-back {
+    background-color: #96858f;
+    color: whitesmoke;
+}
+
 .btn-next {
     background-color: #6d7993;
     color: whitesmoke;
 }
 
-.btn-next:hover {
-    -webkit-transform:scale(1.1);
-    -moz-transform:scale(1.1);
-    -ms-transform:scale(1.1);
-    -o-transform:scale(1.1);
-    transform:scale(1.1);
+.btn-next:hover, .btn-back:hover {
+    -webkit-transform:scale(1.03);
+    -moz-transform:scale(1.03);
+    -ms-transform:scale(1.03);
+    -o-transform:scale(1.03);
+    transform:scale(1.03);
 }
 
 .disabled:hover {
