@@ -4,12 +4,12 @@ export const ReportDisplay = props => {
     const { id, candidate, company, date, status } = props.report;
     let buttonGroup = null;
 
-    function viewReportDetails() {
+    function viewReportDetails(event) {
         const id = buttonGroup.id;
         props.openDetailsModal(id);
     }
 
-    function deleteReport() {
+    function deleteReport(event) {
         const id = buttonGroup.id;
         props.deleteReport(id);
     }
