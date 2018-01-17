@@ -36,7 +36,7 @@ class DataService {
     packCandidates(data) {
         let candidates = data.map(item => {
             const { id, name, email, avatar} = item;
-            const candidateObj = new Candidate(id, name, email, date, avatar, status, note);
+            const candidateObj = new Candidate(id, name, email, avatar);
             return candidateObj;
         });
         return candidates;
