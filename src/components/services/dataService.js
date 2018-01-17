@@ -3,6 +3,7 @@ import moment from "moment";
 import { BASE_URL } from "../../constants";
 import { commService } from "./communicationService";
 import Report from "../entities/report";
+import Candidate from "../entities/candidate";
 
 class DataService {
     constructor() { }
@@ -25,6 +26,20 @@ class DataService {
             return reportObj;
         });
         return reports;
+    }
+
+    getCandidates(callback, errorCallback) {
+        const url = `${BASE_URL}/candidates`;
+        commService.getData(url, data => callback(this.packCandidates(data)), error => errorCallback(error));
+    }
+
+    packCandidates(data) {
+        let candidates = data.map(item => {
+            const { id, name, email, avatar} = item;
+            const candidateObj = new Candidate(id, name, email, date, avatar, status, note);
+            return candidateObj;
+        });
+        return candidates;
     }
 }
 
