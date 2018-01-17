@@ -106,7 +106,7 @@ class ReportsListPage extends React.Component {
         const { allReports, filteredReports, detailsModal, detailedReport, deleteModal, error } = this.state;
 
         return (
-            <div className="container">
+            <main className="container">
                 <div className="row mt-4">
                     <Search onSearch={this.filterReports} />
 
@@ -126,7 +126,7 @@ class ReportsListPage extends React.Component {
                 <Modal open={deleteModal} onClose={this.closeDeleteModal} little >
                     <DeleteReport deleteReport={this.deleteReport} close={this.closeDeleteModal} />
                 </Modal>
-            </div>
+            </main>
         );
     }
 }
