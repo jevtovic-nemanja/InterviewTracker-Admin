@@ -164,6 +164,25 @@ nav {
     border: 1px solid #9099a2;
 }
 
+/* Wizard */
+
+.btn-next {
+    background-color: #6d7993;
+    color: whitesmoke;
+}
+
+.btn-next:hover {
+    -webkit-transform:scale(1.1);
+    -moz-transform:scale(1.1);
+    -ms-transform:scale(1.1);
+    -o-transform:scale(1.1);
+    transform:scale(1.1);
+}
+
+.disabled:hover {
+    transform: none;
+}
+
 /* Wizard aside */
 
 .wizard-aside {
