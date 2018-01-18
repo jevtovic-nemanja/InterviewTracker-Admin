@@ -43,8 +43,9 @@ class FillReport extends React.Component {
         event.preventDefault();
 
         const { interviewDate, phase, status, note } = this.state;
+        const date = "" + new Date(interviewDate);
         const data = {
-            interviewDate: interviewDate,
+            interviewDate: date,
             phase: phase,
             status: status,
             note: note

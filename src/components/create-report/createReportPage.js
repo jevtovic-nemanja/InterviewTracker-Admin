@@ -116,7 +116,7 @@ class CreateReportPage extends React.Component {
         this.setState(prevState => {
             prevState.next = "";
             prevState.selectedElement = element;
-            prevState.report[type] = element.id;
+            prevState.report[type] = parseInt(element.id);
             return prevState;
         });
 
@@ -168,7 +168,9 @@ class CreateReportPage extends React.Component {
         }
     }
 
-    onSubmit(data) {
+    onSubmit(input) {
+        const data = this.state.report;
+        Object.assign(data, input);
         dataService.postReport(data, response => location.assign("#/"), error => this.handleError);
     }
 
@@ -177,7 +179,6 @@ class CreateReportPage extends React.Component {
         if (selectedElement) {
             selectedElement.firstChild.classList.add("selected");
         }
-        console.log(this.state);
 
         return (
             <div className="container">
