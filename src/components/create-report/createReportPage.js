@@ -118,11 +118,11 @@ class CreateReportPage extends React.Component {
             prevState.report[type] = element.id;
             return prevState;
         });
-        
+
         this.getNames(type, element.id);
     }
 
-    checkParentForId (type, element) {
+    checkParentForId(type, element) {
         const parent = element.parentElement;
         const id = parent.id;
         if (id) {
@@ -167,6 +167,10 @@ class CreateReportPage extends React.Component {
         }
     }
 
+    onSubmit(data) {
+        console.log(data);
+    }
+
     render() {
         const { phase, filteredCandidates, filteredCompanies, next, selectedElement, report, error } = this.state;
         if (selectedElement) {
@@ -200,7 +204,10 @@ class CreateReportPage extends React.Component {
                                     onSearch={this.filterCompanies}
                                     onSelect={this.onSelect}
                                 />
-                                <FillReport phase={phase} />
+                                <FillReport
+                                    phase={phase}
+                                    onSubmit={this.onSubmit}
+                                />
                                 <div className="col-12 mt-4">
                                     <h5 className="text-center">{error}</h5>
                                 </div>
