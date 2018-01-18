@@ -16,25 +16,25 @@ export const Aside = props => {
         candidate = "d-none";
         company = "d-none";
         selectCandidate = "font-weight-bold";
-        selectCompany = "text-muted";
-        fillReport = "text-muted";
+        selectCompany = "text-muted d-none d-md-inline-block";
+        fillReport = "text-muted d-none d-md-inline-block";
         showBack = "d-none";
         break;
     case 2:
         bottomLine = "bottom-line-aside";
         candidate = "";
         company = "d-none";
-        selectCandidate = "text-muted";
+        selectCandidate = "text-muted d-none d-md-inline-block";
         selectCompany = "font-weight-bold";
-        fillReport = "text-muted";
+        fillReport = "text-muted d-none d-md-inline-block";
         showBack = "";
         break;
     case 3:
         bottomLine = "bottom-line-aside";
         candidate = "";
         company = "";
-        selectCandidate = "text-muted";
-        selectCompany = "text-muted";
+        selectCandidate = "text-muted d-none d-md-inline-block";
+        selectCompany = "text-muted d-none d-md-inline-block";
         fillReport = "font-weight-bold";
         showBack = "";
         break;
