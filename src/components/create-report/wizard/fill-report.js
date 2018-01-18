@@ -21,7 +21,8 @@ class FillReport extends React.Component {
             status: "Select",
             statusError: "d-none",
             note: "",
-            noteError: "d-none"
+            noteError: "d-none",
+            trackedData: {}
         };
     }
 
@@ -29,6 +30,56 @@ class FillReport extends React.Component {
         this.handleDateChange = this.handleDateChange.bind(this);
         this.handleInputChange = this.handleInputChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
+    }
+
+    componentWillReceiveProps(nextProps) {
+        this.getTrackedData();
+        if (this.state.status === "Declined") {
+            this.setState({ status: "Select " });
+        }
+    }
+
+    getTrackedData() {
+        const candidateWithCompany = this.props.candidatesReports.filter(report => report.companyId === this.props.companyId);
+        const phases = candidateWithCompany.map(report => report.phase.toLowerCase());
+
+        let currentPhase = "";
+        
+        if (phases.includes("final")) {
+            currentPhase = "final";
+        } else if (phases.includes("tech")) {
+            currentPhase = "tech";
+        } else if (phases.includes("hr")) {
+            currentPhase = "hr";
+        } else if (phases.includes("cv")) {
+            currentPhase = "cv";
+        } else currentPhase = "none";
+        
+        const currentReport = candidateWithCompany.filter(report => report.phase.toLowerCase() === currentPhase);
+
+        let currentStatus = "";
+        let timeOfLastInterview = null;
+
+        if (currentReport.length) {
+            currentStatus = currentReport[0].status.toLowerCase();
+            timeOfLastInterview = currentReport[0].interviewDate;
+        }
+
+        if (currentStatus === "declined") {
+            this.setState({ status: "Declined" });
+        } 
+        
+        if (currentPhase === "final" && currentStatus === "passed") {
+            this.setState({ status: "Hired" });
+        }
+
+        this.setState({
+            trackedData: {
+                currentPhase: currentPhase,
+                currentStatus: currentStatus,
+                timeOfLastInterview: timeOfLastInterview
+            }
+        });
     }
 
     handleDateChange(date) {
@@ -105,9 +156,40 @@ class FillReport extends React.Component {
 
     render() {
         const show = this.props.phase === 3 ? "" : "d-none";
+        const { interviewDate, dateError, phase, phaseError, status, statusError, note, noteError, trackedData } = this.state;
 
-        const { interviewDate, dateError, phase, phaseError, status, statusError, note, noteError } = this.state;
         const today = moment();
+        const timeOfLastInterview = moment(trackedData.timeOfLastInterview);
+
+        let declined = "";
+
+        if (trackedData.currentStatus === "declined" || status === "Hired") {
+            declined = "disabled";
+        }
+
+        const declinedDatePicker = declined === "disabled"
+            ? true
+            : false;
+
+        let hideCv = "d-none";
+        let hideHr = "d-none";
+        let hideTech = "d-none";
+        let hideFinal = "d-none";
+
+        switch(trackedData.currentPhase) {
+        case "none":
+            hideCv = "";
+            break;
+        case "cv":
+            hideHr = "";
+            break;
+        case "hr":
+            hideTech = "";
+            break;
+        case "tech":
+            hideFinal = "";
+            break;
+        }
 
         return (
             <form className={`${show} row fill-report`}>
@@ -119,8 +201,10 @@ class FillReport extends React.Component {
                             placeholderText="Click to select a date"
                             selected={interviewDate}
                             maxDate={today}
+                            minDate={timeOfLastInterview}
                             onChange={this.handleDateChange}
                             className="pl-2 form-control"
+                            disabled={declinedDatePicker}
                         />
                         <div className={`${dateError} float-right pr-2`}>
                             <small className="red">Please select a date.</small>
@@ -135,12 +219,13 @@ class FillReport extends React.Component {
                             value={phase}
                             onChange={this.handleInputChange}
                             className="form-control"
+                            disabled={declined}
                         >
                             <option hidden>Select</option>
-                            <option>CV</option>
-                            <option>HR</option>
-                            <option>Technical</option>
-                            <option>Final</option>
+                            <option className={`${hideCv}`}>CV</option>
+                            <option className={`${hideHr}`}>HR</option>
+                            <option className={`${hideTech}`}>Tech</option>
+                            <option className={`${hideFinal}`}>Final</option>
                         </select>
                         <div className={`${phaseError} float-right pr-2`}>
                             <small className="red">Please select a phase.</small>
@@ -155,8 +240,10 @@ class FillReport extends React.Component {
                             value={status}
                             onChange={this.handleInputChange}
                             className="form-control"
+                            disabled={declined}
                         >
                             <option hidden>Select</option>
+                            <option hidden>Hired</option>
                             <option>Passed</option>
                             <option>Declined</option>
                         </select>
@@ -175,6 +262,7 @@ class FillReport extends React.Component {
                             value={note}
                             onChange={this.handleInputChange}
                             className="form-control"
+                            disabled={declined}
                         />
                         <div className={`${noteError} float-right pr-2`}>
                             <small className="red">Please enter notes.</small>

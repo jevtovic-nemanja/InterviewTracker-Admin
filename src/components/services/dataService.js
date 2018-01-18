@@ -62,6 +62,11 @@ class DataService {
         const url = `${BASE_URL}/reports/${id}`;
         commService.deleteData(url, response => callback(response), error => errorCallback(error));
     }
+
+    getCandidatesReports(id, callback, errorCallback) {
+        const url = `${BASE_URL}/reports?q=${id}`;
+        commService.getData(url, response => callback(response), error => errorCallback(error));
+    }
 }
 
 export const dataService = new DataService();

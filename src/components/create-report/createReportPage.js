@@ -30,6 +30,7 @@ class CreateReportPage extends React.Component {
                 companyId: "",
                 companyName: ""
             },
+            candidatesReports: [],
             error: ""
         };
     }
@@ -139,7 +140,7 @@ class CreateReportPage extends React.Component {
 
         if (type === "candidateId") {
             const selected = allCandidates.filter(candidate => candidate.candidateId === parseInt(id))[0];
-            
+
             this.setState(prevState => {
                 prevState.report.candidateName = selected.name;
             });
@@ -150,7 +151,16 @@ class CreateReportPage extends React.Component {
             this.setState(prevState => {
                 prevState.report.companyName = selected.name;
             });
+
+            this.getReportsInfo();
         }
+    }
+
+    getReportsInfo() {
+        const { candidateId, companyId } = this.state.report;
+
+        dataService.getCandidatesReports(candidateId, reports => this.setState({candidatesReports: reports}),
+            error => this.handleError(error));
     }
 
     onBack() {
@@ -183,7 +193,7 @@ class CreateReportPage extends React.Component {
     }
 
     render() {
-        const { filteredCandidates, filteredCompanies, phase, next, selectedElement, report, error } = this.state;
+        const { filteredCandidates, filteredCompanies, phase, next, selectedElement, report, candidatesReports, error } = this.state;
 
         if (selectedElement) {
             selectedElement.firstChild.classList.add("selected");
@@ -220,13 +230,15 @@ class CreateReportPage extends React.Component {
                                 />
                                 <FillReport
                                     phase={phase}
+                                    candidatesReports={candidatesReports}
+                                    companyId={report.companyId}
                                     onSubmit={this.onSubmit}
                                 />
                                 <div className="col-12 mt-4">
                                     <h5 className="text-center">{error}</h5>
                                 </div>
                             </main>
-                            
+
                         </div>
                     </div>
                 </div>
