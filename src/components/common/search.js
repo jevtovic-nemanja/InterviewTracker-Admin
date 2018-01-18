@@ -42,11 +42,11 @@ class Search extends React.Component {
                     </span>
                 </div>
                 <input
-                    className="form-control"
                     type="text"
                     value={inputString}
                     onChange={this.handleInput}
                     placeholder="Search..."
+                    className="form-control"
                 />
             </div>
         );

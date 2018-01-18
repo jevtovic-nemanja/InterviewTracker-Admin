@@ -8,7 +8,8 @@ body {
 
 /* All buttons */
 
-.btn.focus, .btn:focus {
+.btn.focus,
+.btn:focus {
     box-shadow: none;
 }
 
@@ -55,7 +56,8 @@ nav {
     box-shadow: #9099a2 0 0 10px;
 }
 
-.report-card:hover, .candidate-card:hover {
+.report-card:hover,
+.candidate-card:hover {
     -webkit-transform:scale(1.03);
     -moz-transform:scale(1.03);
     -ms-transform:scale(1.03);
@@ -63,7 +65,8 @@ nav {
     transform:scale(1.03);
 }
 
-.report-card small, .candidate-card small {
+.report-card small,
+.candidate-card small {
     color: #6d7993;
 }
 
@@ -136,8 +139,15 @@ nav {
     border-bottom: 1px solid #d5d5d5;
 }
 
-.modal-dialog p, .modal-title {
+.modal-dialog p,
+.modal-title {
     color: #6d7993;
+}
+
+@media screen and (min-width: 768px) {
+    .Modal-modal-0-1-3 {
+        min-width: 35em;
+    }
 }
 
 /* Delete report modal dialog */
@@ -171,12 +181,15 @@ nav {
     color: whitesmoke;
 }
 
-.btn-next, .btn-submit {
+.btn-next,
+.btn-submit {
     background-color: #6d7993;
     color: whitesmoke;
 }
 
-.btn-next:hover, .btn-back:hover, .btn-submit:hover {
+.btn-next:hover,
+.btn-back:hover,
+.btn-submit:hover {
     -webkit-transform:scale(1.03);
     -moz-transform:scale(1.03);
     -ms-transform:scale(1.03);
@@ -200,7 +213,8 @@ nav {
     }
 }
 
-.wizard-aside h5, .wizard-aside p {
+.wizard-aside h5,
+.wizard-aside p {
     color: #6d7993;
 }
 

@@ -17,13 +17,13 @@ class CreateReportPage extends React.Component {
 
     initState() {
         return {
-            phase: 1,
             allCandidates: [],
             filteredCandidates: [],
             allCompanies: [],
             filteredCompanies: [],
-            selectedElement: "",
+            phase: 1,
             next: "disabled",
+            selectedElement: "",
             report: {
                 candidateId: "",
                 candidateName: "",
@@ -37,9 +37,9 @@ class CreateReportPage extends React.Component {
     bindEventHandlers() {
         this.filterCandidates = this.filterCandidates.bind(this);
         this.filterCompanies = this.filterCompanies.bind(this);
-        this.onSelect = this.onSelect.bind(this);
-        this.onNext = this.onNext.bind(this);
         this.onBack = this.onBack.bind(this);
+        this.onNext = this.onNext.bind(this);
+        this.onSelect = this.onSelect.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
     }
 
@@ -106,6 +106,17 @@ class CreateReportPage extends React.Component {
         }
     }
 
+    checkParentForId(type, element) {
+        const parent = element.parentElement;
+        const id = parent.id;
+
+        if (id) {
+            this.implementSelect(type, parent);
+        } else {
+            this.checkParentForId(type, parent);
+        }
+    }
+
     implementSelect(type, element) {
         const { selectedElement } = this.state;
 
@@ -120,29 +131,26 @@ class CreateReportPage extends React.Component {
             return prevState;
         });
 
-        this.getNames(type, element.id);
+        this.getName(type, element.id);
     }
 
-    checkParentForId(type, element) {
-        const parent = element.parentElement;
-        const id = parent.id;
-        if (id) {
-            this.implementSelect(type, parent);
+    getName(type, id) {
+        const { allCandidates, allCompanies } = this.state;
+
+        if (type === "candidateId") {
+            const selected = allCandidates.filter(candidate => candidate.candidateId === parseInt(id))[0];
+            
+            this.setState(prevState => {
+                prevState.report.candidateName = selected.name;
+            });
+
         } else {
-            this.checkParentForId(type, parent);
-        }
-    }
+            const selected = allCompanies.filter(company => company.companyId === parseInt(id))[0];
 
-    onNext() {
-        const { phase, selectedElement } = this.state;
-        selectedElement.firstChild.classList.remove("selected");
-        const next = phase === 2 ? "d-none" : "disabled";
-        this.setState(prevState => {
-            prevState.next = next;
-            prevState.phase = prevState.phase + 1;
-            prevState.selectedElement = "";
-            return prevState;
-        });
+            this.setState(prevState => {
+                prevState.report.companyName = selected.name;
+            });
+        }
     }
 
     onBack() {
@@ -153,29 +161,30 @@ class CreateReportPage extends React.Component {
         });
     }
 
-    getNames(type, id) {
-        const { allCandidates, allCompanies } = this.state;
-        if (type === "candidateId") {
-            const selected = allCandidates.filter(candidate => candidate.candidateId === parseInt(id))[0];
-            this.setState(prevState => {
-                prevState.report.candidateName = selected.name;
-            });
-        } else {
-            const selected = allCompanies.filter(company => company.companyId === parseInt(id))[0];
-            this.setState(prevState => {
-                prevState.report.companyName = selected.name;
-            });
-        }
+    onNext() {
+        const { phase, selectedElement } = this.state;
+        selectedElement.firstChild.classList.remove("selected");
+
+        const next = phase === 2 ? "d-none" : "disabled";
+
+        this.setState(prevState => {
+            prevState.next = next;
+            prevState.phase = prevState.phase + 1;
+            prevState.selectedElement = "";
+            return prevState;
+        });
     }
 
     onSubmit(input) {
         const data = this.state.report;
         Object.assign(data, input);
+
         dataService.postReport(data, response => location.assign("#/"), error => this.handleError);
     }
 
     render() {
-        const { phase, filteredCandidates, filteredCompanies, next, selectedElement, report, error } = this.state;
+        const { filteredCandidates, filteredCompanies, phase, next, selectedElement, report, error } = this.state;
+
         if (selectedElement) {
             selectedElement.firstChild.classList.add("selected");
         }
@@ -185,15 +194,17 @@ class CreateReportPage extends React.Component {
                 <div className="row mt-4">
                     <div className="offset-1 col-10 offset-sm-0 col-sm-12 card mb-4">
                         <div className="row card-body">
+
                             <aside className="col-12 offset-sm-1 col-sm-10 offset-md-0 col-md-4 col-xl-3">
                                 <Aside
                                     phase={phase}
                                     next={next}
                                     info={report}
-                                    onNext={this.onNext}
                                     onBack={this.onBack}
+                                    onNext={this.onNext}
                                 />
                             </aside>
+
                             <main className="col-12 col-md-8 col-xl-9">
                                 <SelectCandidate
                                     phase={phase}
@@ -215,6 +226,7 @@ class CreateReportPage extends React.Component {
                                     <h5 className="text-center">{error}</h5>
                                 </div>
                             </main>
+                            
                         </div>
                     </div>
                 </div>

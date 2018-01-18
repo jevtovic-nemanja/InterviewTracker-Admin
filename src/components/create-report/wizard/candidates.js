@@ -3,13 +3,12 @@ import React from "react";
 import Search from "../../common/search";
 
 export const SelectCandidate = props => {
-    
+    const show = props.phase === 1 ? "" : "d-none";
+
     function handleClick(event) {
         const element = event.target;
         props.onSelect("candidateId", element);
     }
-
-    const show = props.phase === 1 ? "" : "d-none";
 
     return (
         <div className={`${show} row`}>
@@ -20,12 +19,20 @@ export const SelectCandidate = props => {
             {props.candidates.map(candidate => {
                 const { candidateId, name, email, avatar } = candidate;
                 return (
-                    <div onClick={handleClick} key={candidateId} id={candidateId} className="col-12 offset-sm-1 col-sm-10 offset-md-1 col-md-11 offset-xl-0 col-xl-6">
+                    <div
+                        key={candidateId}
+                        id={candidateId}
+                        onClick={handleClick}
+                        className="col-12 offset-sm-1 col-sm-10 offset-md-1 col-md-11 offset-xl-0 col-xl-6"
+                    >
                         <div className="card candidate-card mx-auto my-2 p-2">
                             <div className="row">
                                 <div className="col-3 text-center">
                                     <img
-                                        src={avatar ? avatar : "../../../assets/images/avatar.png"}
+                                        src={avatar
+                                            ? avatar
+                                            : "../../../assets/images/avatar.png"
+                                        }
                                         alt="Candidate picture"
                                         className="rounded-circle candidate-img w-50"
                                     />
@@ -39,6 +46,7 @@ export const SelectCandidate = props => {
                     </div>
                 );
             })}
+            
         </div>
     );
 };

@@ -37,11 +37,23 @@ export const ReportDisplay = props => {
                         </div>
                     </div>
                 </div>
-                <div className="btn-group-report-card" id={id} ref={div => buttonGroup = div}>
-                    <button type="button" className="btn btn-report-card" onClick={viewReportDetails} >
+                <div
+                    id={id}
+                    ref={div => buttonGroup = div}
+                    className="btn-group-report-card"
+                >
+                    <button
+                        type="button"
+                        onClick={viewReportDetails}
+                        className="btn btn-report-card"
+                    >
                         <i className="fa fa-eye fa-lg"></i>
                     </button>
-                    <button type="button" className="btn btn-report-card" onClick={deleteReport} >
+                    <button
+                        type="button"
+                        onClick={deleteReport}
+                        className="btn btn-report-card"
+                    >
                         <i className="fa fa-times fa-lg"></i>
                     </button>
                 </div>
