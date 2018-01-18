@@ -27,6 +27,7 @@ class CreateReportPage extends React.Component {
             showFillReport: "d-none",
             next: "disabled",
             error: "",
+            selectedElement: "",
             report: {
                 candidateId: ""
             }
@@ -94,17 +95,25 @@ class CreateReportPage extends React.Component {
             });
     }
 
-    onSelect() {
-        this.setState(prevState => {
-            prevState.next = "";
-            
-            return prevState;
+    onSelect(element) {
+        const { selectedElement } = this.state;
+        
+        if (selectedElement) {
+            selectedElement.firstChild.classList.remove("selected");
+        }
+
+        this.setState({
+            next: "",
+            selectedElement: element
         });
     }
 
     render() {
-        const { phase, showCandidates, filteredCandidates, showCompanies, filteredCompanies, showFillReport, next, error } = this.state;
-        
+        const { phase, showCandidates, filteredCandidates, showCompanies, filteredCompanies, showFillReport, next, selectedElement, error } = this.state;
+        if (selectedElement) {
+            selectedElement.firstChild.classList.add("selected");
+        }
+
         return (
             <div className="container">
                 <div className="row mt-4">
