@@ -12,57 +12,44 @@ class FillReport extends React.Component {
 
     initState() {
         return {
-            date: moment(moment.now()).format("YYYY-MM-DD"),
+            interviewDate: moment(moment.now()).format("YYYY-MM-DD"),
             phase: "Select",
             status: "Select",
-            notes: ""
+            note: ""
         };
     }
 
     bindEventHandlers() {
-        this.handleDateChange = this.handleDateChange.bind(this);
-        this.handlePhaseChange = this.handlePhaseChange.bind(this);
-        this.handleStatusChange = this.handleStatusChange.bind(this);
-        this.handleNotesChange = this.handleNotesChange.bind(this);
+        this.handleInputChange = this.handleInputChange.bind(this);
     }
 
-    handleDateChange(event) {
-        const pickedDate = event.target.value;
-        this.setState({ date: pickedDate });
-    }
-
-    handlePhaseChange(event) {
-        const pickedPhase = event.target.value;
-        this.setState({ phase: pickedPhase });
-    }
-
-    handleStatusChange(event) {
-        const pickedStatus = event.target.value;
-        this.setState({ status: pickedStatus });
-    }
-
-    handleNotesChange(event) {
-        const notes = event.target.value;
-        this.setState({ notes: notes });
+    handleInputChange(event) {
+        const name = event.target.name;
+        const value = event.target.value;
+        this.setState(prevState => {
+            prevState[name] = value;
+            return prevState;
+        });
     }
 
     render() {
         const show = this.props.phase === 3 ? "" : "d-none";
 
-        const { date, phase, status, notes } = this.state;
+        const { interviewDate, phase, status, note } = this.state;
         const today = moment(moment.now()).format("YYYY-MM-DD");
-
+        console.log(this.state);
         return (
             <form className={`${show} row fill-report`}>
                 <div className="col-12 offset-sm-1 col-sm-10 offset-md-0 col-md-12 col-lg-4">
                     <div className="form-group">
                         <label>Interview Date:</label>
                         <input
+                            name="interviewDate"
                             type="date"
                             className="form-control"
                             max={today}
-                            value={date}
-                            onChange={this.handleDateChange}
+                            value={interviewDate}
+                            onChange={this.handleInputChange}
                         />
                     </div>
                 </div>
@@ -70,9 +57,10 @@ class FillReport extends React.Component {
                     <div className="form-group">
                         <label>Phase:</label>
                         <select
+                            name="phase"
                             className="form-control"
                             value={phase}
-                            onChange={this.handlePhaseChange}
+                            onChange={this.handleInputChange}
                         >
                             <option hidden>Select</option>
                             <option>CV</option>
@@ -86,9 +74,10 @@ class FillReport extends React.Component {
                     <div className="form-group">
                         <label>Status:</label>
                         <select
+                            name="status"
                             className="form-control"
                             value={status}
-                            onChange={this.handleStatusChange}
+                            onChange={this.handleInputChange}
                         >
                             <option hidden>Select</option>
                             <option>Passed</option>
@@ -100,11 +89,12 @@ class FillReport extends React.Component {
                     <div className="form-group">
                         <label>Notes:</label>
                         <textarea
+                            name="note"
                             placeholder="Notes..."
                             rows="5"
                             className="form-control"
-                            value={notes}
-                            onChange={this.handleNotesChange}
+                            value={note}
+                            onChange={this.handleInputChange}
                         />
                     </div>
                 </div>
