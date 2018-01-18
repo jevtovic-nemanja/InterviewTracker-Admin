@@ -23,6 +23,7 @@ class CreateReportPage extends React.Component {
             allCompanies: [],
             filteredCompanies: [],
             next: "disabled",
+            submit: "d-none",
             error: "",
             selectedElement: "",
             report: {
@@ -133,10 +134,13 @@ class CreateReportPage extends React.Component {
     }
 
     onNext() {
-        const { selectedElement } = this.state;
+        const { phase, selectedElement } = this.state;
         selectedElement.firstChild.classList.remove("selected");
+        const next = phase === 2 ? "d-none" : "disabled";
+        const submit = phase === 2 ? "disabled" : "d-none";
         this.setState(prevState => {
-            prevState.next = "disabled";
+            prevState.next = next;
+            prevState.submit = submit;
             prevState.phase = prevState.phase + 1;
             prevState.selectedElement = "";
             return prevState;
@@ -146,6 +150,7 @@ class CreateReportPage extends React.Component {
     onBack() {
         this.setState(prevState => {
             prevState.phase = prevState.phase - 1;
+            prevState.next = "disabled";
             return prevState;
         });
     }
@@ -166,7 +171,7 @@ class CreateReportPage extends React.Component {
     }
 
     render() {
-        const { phase, filteredCandidates, filteredCompanies, next, selectedElement, report, error } = this.state;
+        const { phase, filteredCandidates, filteredCompanies, next, submit, selectedElement, report, error } = this.state;
         if (selectedElement) {
             selectedElement.firstChild.classList.add("selected");
         }
@@ -180,6 +185,7 @@ class CreateReportPage extends React.Component {
                                 <Aside
                                     phase={phase}
                                     next={next}
+                                    submit={submit}
                                     info={report}
                                     onNext={this.onNext}
                                     onBack={this.onBack}
