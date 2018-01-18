@@ -19,9 +19,9 @@ export const SelectCompany = props => {
                 <table className="table table-striped table-bordered table-hover">
                     <tbody>
                         {props.companies.map(company => {
-                            const { id, name } = company;
+                            const { companyId, name } = company;
                             return (
-                                <tr key={id} id={id} onClick={handleClick}>
+                                <tr key={companyId} id={companyId} onClick={handleClick}>
                                     <td>{name}</td>
                                 </tr>
                             );

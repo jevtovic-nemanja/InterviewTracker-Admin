@@ -26,7 +26,8 @@ class CreateReportPage extends React.Component {
             error: "",
             selectedElement: "",
             report: {
-                candidateId: ""
+                candidateId: "",
+                companyId: ""
             },
             asideInfo: {
                 candidate: "",
@@ -119,6 +120,8 @@ class CreateReportPage extends React.Component {
             prevState.report[type] = element.id;
             return prevState;
         });
+
+        this.sendInfoToAside(type, element.id);
     }
 
     checkParentForId (type, element) {
@@ -149,11 +152,27 @@ class CreateReportPage extends React.Component {
         });
     }
 
+    sendInfoToAside(type, id) {
+        const { allCandidates, allCompanies } = this.state;
+        if (type === "candidateId") {
+            const selected = allCandidates.filter(candidate => candidate.candidateId === parseInt(id))[0];
+            this.setState(prevState => {
+                prevState.asideInfo.candidate = selected.name;
+            });
+        } else {
+            const selected = allCompanies.filter(company => company.companyId === parseInt(id))[0];
+            this.setState(prevState => {
+                prevState.asideInfo.company = selected.name;
+            });
+        }
+    }
+
     render() {
         const { phase, filteredCandidates, filteredCompanies, next, selectedElement, asideInfo, error } = this.state;
         if (selectedElement) {
             selectedElement.firstChild.classList.add("selected");
         }
+        console.log(this.state);
 
         return (
             <div className="container">
