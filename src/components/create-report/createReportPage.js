@@ -169,7 +169,7 @@ class CreateReportPage extends React.Component {
     }
 
     onSubmit(data) {
-        
+        dataService.postReport(data, response => location.assign("#/"), error => this.handleError);
     }
 
     render() {
