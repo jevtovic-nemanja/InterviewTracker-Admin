@@ -27,11 +27,9 @@ class CreateReportPage extends React.Component {
             selectedElement: "",
             report: {
                 candidateId: "",
-                companyId: ""
-            },
-            asideInfo: {
-                candidate: "",
-                company: ""
+                candidateName: "",
+                companyId: "",
+                companyName: ""
             }
         };
     }
@@ -120,8 +118,8 @@ class CreateReportPage extends React.Component {
             prevState.report[type] = element.id;
             return prevState;
         });
-
-        this.sendInfoToAside(type, element.id);
+        
+        this.getNames(type, element.id);
     }
 
     checkParentForId (type, element) {
@@ -152,23 +150,23 @@ class CreateReportPage extends React.Component {
         });
     }
 
-    sendInfoToAside(type, id) {
+    getNames(type, id) {
         const { allCandidates, allCompanies } = this.state;
         if (type === "candidateId") {
             const selected = allCandidates.filter(candidate => candidate.candidateId === parseInt(id))[0];
             this.setState(prevState => {
-                prevState.asideInfo.candidate = selected.name;
+                prevState.report.candidateName = selected.name;
             });
         } else {
             const selected = allCompanies.filter(company => company.companyId === parseInt(id))[0];
             this.setState(prevState => {
-                prevState.asideInfo.company = selected.name;
+                prevState.report.companyName = selected.name;
             });
         }
     }
 
     render() {
-        const { phase, filteredCandidates, filteredCompanies, next, selectedElement, asideInfo, error } = this.state;
+        const { phase, filteredCandidates, filteredCompanies, next, selectedElement, report, error } = this.state;
         if (selectedElement) {
             selectedElement.firstChild.classList.add("selected");
         }
@@ -182,7 +180,7 @@ class CreateReportPage extends React.Component {
                                 <Aside
                                     phase={phase}
                                     next={next}
-                                    info={asideInfo}
+                                    info={report}
                                     onNext={this.onNext}
                                     onBack={this.onBack}
                                 />
