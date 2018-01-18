@@ -56,6 +56,11 @@ class DataService {
         });
         return companies;
     }
+
+    postReport(data, callback, errorCallback) {
+        const url = `${BASE_URL}/reports`;
+        commService.postData(url, data, response => callback(response), error => errorCallback(error));
+    }
 }
 
 export const dataService = new DataService();
