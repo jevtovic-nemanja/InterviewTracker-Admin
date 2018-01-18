@@ -84,8 +84,17 @@ export const Aside = props => {
                         <h4>{companyName}</h4>
                     </div>
                 </div>
-                <button type="button" className={`${showBack} btn btn-back w-100 mt-3 mb-2`} onClick={props.onBack}>Back</button>
-                <button type="button" className={`${props.next} btn btn-next w-100`} onClick={props.onNext} disabled={props.next}>Next</button>
+                <button
+                    type="button"
+                    onClick={props.onBack}
+                    className={`${showBack} btn btn-back w-100 mt-3 mb-2`}
+                >Back</button>
+                <button
+                    type="button"
+                    disabled={props.next}
+                    onClick={props.onNext}
+                    className={`${props.next} btn btn-next w-100`}
+                >Next</button>
             </div>
         </div>
     );
