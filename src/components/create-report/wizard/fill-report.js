@@ -1,6 +1,8 @@
 import React from "react";
 
 import moment from "moment";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 class FillReport extends React.Component {
     constructor(props) {
@@ -12,7 +14,7 @@ class FillReport extends React.Component {
 
     initState() {
         return {
-            interviewDate: moment(moment.now()).format("YYYY-MM-DD"),
+            interviewDate: null,
             phase: "Select",
             phaseError: "d-none",
             status: "Select",
@@ -24,6 +26,7 @@ class FillReport extends React.Component {
 
     bindEventHandlers() {
         this.handleInputChange = this.handleInputChange.bind(this);
+        this.handleDateChange = this.handleDateChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
     }
 
@@ -37,6 +40,10 @@ class FillReport extends React.Component {
             prevState.noteError = "d-none";
             return prevState;
         });
+    }
+
+    handleDateChange(date) {
+        this.setState({ interviewDate: date });
     }
 
     onSubmit(event) {
@@ -83,20 +90,20 @@ class FillReport extends React.Component {
         const show = this.props.phase === 3 ? "" : "d-none";
 
         const { interviewDate, phase, phaseError, status, statusError, note, noteError, submit } = this.state;
-        const today = moment(moment.now()).format("YYYY-MM-DD");
+        const today = moment();
 
         return (
             <form className={`${show} row fill-report`}>
                 <div className="col-12 offset-sm-1 col-sm-10 offset-md-0 col-md-12 col-lg-4">
                     <div className="form-group">
-                        <label>Interview Date:</label>
-                        <input
-                            name="interviewDate"
-                            type="date"
-                            className="form-control"
-                            max={today}
-                            value={interviewDate}
-                            onChange={this.handleInputChange}
+                        <label>Date:</label>
+                        <DatePicker
+                            selected={interviewDate}
+                            onChange={this.handleDateChange}
+                            maxDate={today}
+                            dateFormat="DD.MM.YYYY"
+                            className="pl-2 form-control"
+                            placeholderText="Click to select a date"
                         />
                     </div>
                 </div>
