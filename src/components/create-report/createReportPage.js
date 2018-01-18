@@ -172,7 +172,6 @@ class CreateReportPage extends React.Component {
         if (selectedElement) {
             selectedElement.firstChild.classList.add("selected");
         }
-        console.log(this.state);
 
         return (
             <div className="container">

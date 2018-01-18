@@ -41,7 +41,7 @@ export const Aside = props => {
     }
 
     return (
-        <div className="row wizard-aside mb-3">
+        <div className="row wizard-aside h-100 mb-3">
             <div className="col-12">
                 <div className={bottomLine}>
                     <h5 className={`${selectCandidate} mt-3`}>

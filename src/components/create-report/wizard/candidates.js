@@ -12,7 +12,7 @@ export const SelectCandidate = props => {
     const show = props.phase === 1 ? "" : "d-none";
 
     return (
-        <div className={`${show} row wizard-separator`}>
+        <div className={`${show} row`}>
             <div className="col-12 offset-sm-1 col-sm-10 col-md-11 offset-lg-6 col-lg-6 offset-xl-6 col-xl-6">
                 <Search onSearch={props.onSearch} />
             </div>

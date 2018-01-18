@@ -11,7 +11,7 @@ export const SelectCompany = props => {
     }
 
     return (
-        <div className={`${show} row wizard-separator mt-4`}>
+        <div className={`${show} row mt-4`}>
             <div className="col-12 offset-lg-6 col-lg-6">
                 <Search onSearch={props.onSearch} />
             </div>
