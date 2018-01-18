@@ -11,7 +11,7 @@ export const Aside = props => {
     let enableNext;
 
     switch (props.phase) {
-    case "1":
+    case 1:
         bottomLine = "";
         candidate = "d-none";
         company = "d-none";
@@ -20,7 +20,7 @@ export const Aside = props => {
         fillReport = "text-muted";
         showBack = "d-none";
         break;
-    case "2":
+    case 2:
         bottomLine = "bottom-line-aside";
         candidate = "";
         company = "d-none";
@@ -29,7 +29,7 @@ export const Aside = props => {
         fillReport = "text-muted";
         showBack = "";
         break;
-    case "3":
+    case 3:
         bottomLine = "bottom-line-aside";
         candidate = "";
         company = "";
@@ -75,17 +75,17 @@ export const Aside = props => {
                 <div>
                     <div className={`${candidate} pl-1`}>
                         <p className="mt-3 mb-1">Candidate:</p>
-                        <h4>Candidate Name</h4>
+                        <h4>{}</h4>
                     </div>
                     <div className={`${company} pl-1`}>
                         <p className="mb-1">Company:</p>
-                        <h4>Company Name</h4>
+                        <h4>{}</h4>
                     </div>
                 </div>
-                <button type="button" className={`${showBack} btn btn-back w-100 mt-3 mb-2`}>Back</button>
-                <button type="button" className={`${props.next} btn btn-next w-100`}>
+                <button type="button" className={`${showBack} btn btn-back w-100 mt-3 mb-2`} onClick={props.onBack}>Back</button>
+                <button type="button" className={`${props.next} btn btn-next w-100`} onClick={props.onNext} disabled={props.next}>
                     {
-                        props.phase === "3"
+                        props.phase === 3
                             ? "Submit"
                             : "Next"
                     }

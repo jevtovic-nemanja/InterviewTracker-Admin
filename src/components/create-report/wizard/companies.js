@@ -3,8 +3,10 @@ import React from "react";
 import Search from "../../common/search";
 
 export const SelectCompany = props => {
+    const show = props.phase === 2 ? "" : "d-none";
+
     return (
-        <div className={`${props.show} row wizard-separator mt-4`}>
+        <div className={`${show} row wizard-separator mt-4`}>
             <div className="col-12 offset-lg-6 col-lg-6">
                 <Search onSearch={props.onSearch} />
             </div>
