@@ -18,6 +18,7 @@ export const SelectCompany = props => {
             <div className="col-12 mt-2">
                 <table className="table table-striped table-bordered table-hover">
                     <tbody>
+
                         {props.companies.map(company => {
                             const { companyId, name } = company;
                             return (
@@ -26,6 +27,7 @@ export const SelectCompany = props => {
                                 </tr>
                             );
                         })}
+                        
                     </tbody>
                 </table>
             </div>

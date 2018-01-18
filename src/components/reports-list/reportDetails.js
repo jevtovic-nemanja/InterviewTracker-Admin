@@ -2,6 +2,7 @@ import React from "react";
 
 export const ReportDetails = props => {
     const { candidate, company, date, phase, status, note } = props.report;
+    
     return (
         <div>
             <h5 className="pb-3 bottom-line modal-title">{candidate}</h5>
@@ -18,7 +19,7 @@ export const ReportDetails = props => {
                 </div>
                 <div className="col-12 col-md-8">
                     <p className="mb-2">Notes</p>
-                    <p className="text-justify" style={{color: "black"}} >{note}</p>
+                    <p className="text-justify" style={{ color: "black" }} >{note}</p>
                 </div>
             </div>
         </div>

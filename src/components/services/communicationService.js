@@ -10,6 +10,7 @@ class CommService {
 
     deleteData(url, callback, errorCallback) {
         const init = { method: "DELETE" };
+
         fetch(url, init)
             .then(response => callback(response))
             .catch(error => errorCallback(error));
@@ -23,6 +24,7 @@ class CommService {
                 "Content-Type": "application/json"
             })
         };
+        
         fetch(url, init)
             .then(response => callback(response))
             .catch(error => errorCallback(error));

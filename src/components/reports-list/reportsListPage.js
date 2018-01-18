@@ -119,7 +119,12 @@ class ReportsListPage extends React.Component {
                     </div>
 
                     {filteredReports.map(report =>
-                        <ReportDisplay key={report.id} report={report} openDetailsModal={this.openDetailsModal} deleteReport={this.openDeleteModal} />
+                        <ReportDisplay
+                            key={report.id}
+                            report={report}
+                            deleteReport={this.openDeleteModal}
+                            openDetailsModal={this.openDetailsModal}
+                        />
                     )}
 
                     <div className="col-12 mt-4">

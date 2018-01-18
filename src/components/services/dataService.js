@@ -2,17 +2,13 @@ import moment from "moment";
 
 import { BASE_URL } from "../../constants";
 import { commService } from "./communicationService";
+
 import Report from "../entities/report";
 import Candidate from "../entities/candidate";
 import Company from "../entities/company";
 
 class DataService {
     constructor() { }
-
-    deleteReport(id, callback, errorCallback) {
-        const url = `${BASE_URL}/reports/${id}`;
-        commService.deleteData(url, response => callback(response), error => errorCallback(error));
-    }
 
     getReports(callback, errorCallback) {
         const url = `${BASE_URL}/reports`;
@@ -36,7 +32,7 @@ class DataService {
 
     packCandidates(data) {
         let candidates = data.map(item => {
-            const { id, name, email, avatar} = item;
+            const { id, name, email, avatar } = item;
             const candidateObj = new Candidate(id, name, email, avatar);
             return candidateObj;
         });
@@ -60,6 +56,11 @@ class DataService {
     postReport(data, callback, errorCallback) {
         const url = `${BASE_URL}/reports`;
         commService.postData(url, data, response => callback(response), error => errorCallback(error));
+    }
+
+    deleteReport(id, callback, errorCallback) {
+        const url = `${BASE_URL}/reports/${id}`;
+        commService.deleteData(url, response => callback(response), error => errorCallback(error));
     }
 }
 

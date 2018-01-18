@@ -20,10 +20,10 @@ export const Header = props => {
                 <div className="col-5 col-md-4">
                     <div className="btn-group float-right">
                         <Link to="/">
-                            <button className={`btn rounded-0 ${report}`}>Reports</button>
+                            <button className={`${report} btn rounded-0`}>Reports</button>
                         </Link>
                         <Link to="/create-report">
-                            <button className={`btn rounded-0 ${create}`}>Create Report</button>
+                            <button className={`${create} btn rounded-0`}>Create Report</button>
                         </Link>
                     </div>
                 </div>

@@ -10,4 +10,4 @@ ReactDOM.render(
         <App />
     </HashRouter>,
     document.querySelector(".app")
-);
+); 
