@@ -14,6 +14,16 @@ class CommService {
             .then(response => callback(response))
             .catch(error => errorCallback(error));
     }
+
+    postData(url, data, callback, errorCallback) {
+        const init = {
+            method: "POST",
+            body: JSON.stringify(data)
+        };
+        fetch(url, init)
+            .then(response => callback(response))
+            .catch(error => errorCallback(error));
+    }
 }
 
 export const commService = new CommService();
