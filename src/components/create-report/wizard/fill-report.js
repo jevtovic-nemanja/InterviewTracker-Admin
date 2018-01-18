@@ -14,14 +14,17 @@ class FillReport extends React.Component {
         return {
             interviewDate: moment(moment.now()).format("YYYY-MM-DD"),
             phase: "Select",
+            phaseError: "d-none",
             status: "Select",
+            statusError: "d-none",
             note: "",
-            submit: "disabled"
+            noteError: "d-none"
         };
     }
 
     bindEventHandlers() {
         this.handleInputChange = this.handleInputChange.bind(this);
+        this.onSubmit = this.onSubmit.bind(this);
     }
 
     handleInputChange(event) {
@@ -29,16 +32,58 @@ class FillReport extends React.Component {
         const value = event.target.value;
         this.setState(prevState => {
             prevState[name] = value;
+            prevState.phaseError = "d-none";
+            prevState.statusError = "d-none";
+            prevState.noteError = "d-none";
             return prevState;
         });
+    }
+
+    onSubmit(event) {
+        event.preventDefault();
+
+        const { interviewDate, phase, status, note } = this.state;
+        const data = {
+            interviewDate: interviewDate,
+            phase: phase,
+            status: status,
+            note: note
+        };
+
+        const isValid = this.validateInput();
+
+        if (isValid) {
+            this.props.onSubmit(data);
+        }
+    }
+
+    validateInput() {
+        const { phase, status, note } = this.state;
+
+        let isValid = true;
+
+        if (phase === "Select") {
+            this.setState({ phaseError: "" });
+            isValid = false;
+        }
+        if (status === "Select") {
+            this.setState({ statusError: "" });
+            isValid = false;
+        }
+        if (!note) {
+            this.setState({ noteError: "" });
+            isValid = false;
+        }
+
+        return isValid;
     }
 
     render() {
         const show = this.props.phase === 3 ? "" : "d-none";
 
-        const { interviewDate, phase, status, note, submit } = this.state;
+        const { interviewDate, phase, phaseError, status, statusError, note, noteError, submit } = this.state;
         const today = moment(moment.now()).format("YYYY-MM-DD");
-        console.log(this.state);
+
         return (
             <form className={`${show} row fill-report`}>
                 <div className="col-12 offset-sm-1 col-sm-10 offset-md-0 col-md-12 col-lg-4">
@@ -69,6 +114,9 @@ class FillReport extends React.Component {
                             <option>Technical</option>
                             <option>Final</option>
                         </select>
+                        <div className={`${phaseError} float-right pr-2`}>
+                            <small className="red">Please select a phase.</small>
+                        </div>
                     </div>
                 </div>
                 <div className="col-12 offset-sm-1 col-sm-10 offset-md-0 col-md-6 col-lg-4">
@@ -84,6 +132,9 @@ class FillReport extends React.Component {
                             <option>Passed</option>
                             <option>Declined</option>
                         </select>
+                        <div className={`${statusError} float-right pr-2`}>
+                            <small className="red">Please select a status.</small>
+                        </div>
                     </div>
                 </div>
                 <div className="col-12 offset-sm-1 col-sm-10 offset-md-0 col-md-12">
@@ -97,10 +148,13 @@ class FillReport extends React.Component {
                             value={note}
                             onChange={this.handleInputChange}
                         />
+                        <div className={`${noteError} float-right pr-2`}>
+                            <small className="red">Please enter notes.</small>
+                        </div>
                     </div>
                 </div>
                 <div className="col-12 offset-sm-1 col-sm-10 offset-md-8 col-md-4 offset-lg-9 col-lg-3 offset-xl-10 col-xl-2">
-                    <button type="button" className={`btn btn-submit w-100 ${submit}`} disabled={submit} onClick={this.onSubmit}>Submit</button>
+                    <button type="button" className="btn btn-submit w-100" onClick={this.onSubmit}>Submit</button>
                 </div>
             </form >
         );

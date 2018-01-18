@@ -63,7 +63,7 @@ nav {
     transform:scale(1.03);
 }
 
-.card small {
+.report-card small, .candidate-card small {
     color: #6d7993;
 }
 
@@ -249,4 +249,10 @@ td.selected {
     -ms-transform:scale(1.01);
     -o-transform:scale(1.01);
     transform:scale(1.01);
+}
+
+/* Form validation */
+
+.red {
+    color: crimson;
 }
