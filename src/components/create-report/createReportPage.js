@@ -30,7 +30,13 @@ class CreateReportPage extends React.Component {
                 companyId: "",
                 companyName: ""
             },
-            candidatesReports: [],
+            candidateReports: [],
+            trackedData: {
+                currentPhase: "",
+                currentStatus: "",
+                timeOfLastInterview: null,
+                hiringStatus: ""
+            },
             error: ""
         };
     }
@@ -151,16 +157,7 @@ class CreateReportPage extends React.Component {
             this.setState(prevState => {
                 prevState.report.companyName = selected.name;
             });
-
-            this.getReportsInfo();
         }
-    }
-
-    getReportsInfo() {
-        const { candidateId, companyId } = this.state.report;
-
-        dataService.getCandidatesReports(candidateId, reports => this.setState({candidatesReports: reports}),
-            error => this.handleError(error));
     }
 
     onBack() {
@@ -177,6 +174,14 @@ class CreateReportPage extends React.Component {
 
         const next = phase === 2 ? "d-none" : "disabled";
 
+        if (phase === 1) {
+            this.getCandidateReports();
+        }
+
+        if (phase === 2) {
+            this.getTrackedData();
+        }
+
         this.setState(prevState => {
             prevState.next = next;
             prevState.phase = prevState.phase + 1;
@@ -192,8 +197,70 @@ class CreateReportPage extends React.Component {
         dataService.postReport(data, response => location.assign("#/"), error => this.handleError);
     }
 
+    getCandidateReports() {
+        const { candidateId } = this.state.report;
+
+        dataService.getCandidatesReports(candidateId, reports => this.setState({ candidateReports: reports }),
+            error => this.handleError(error));
+    }
+
+    getTrackedData() {
+        const { candidateReports } = this.state;
+        const { companyId } = this.state.report;
+
+        const candidateWithCompany = candidateReports.filter(report => report.companyId === companyId);
+
+        if (candidateWithCompany.length) {
+            const phases = candidateWithCompany.map(report => report.phase);
+
+            let currentPhase = "";
+
+            if (phases.includes("final")) {
+                currentPhase = "final";
+            } else if (phases.includes("tech")) {
+                currentPhase = "tech";
+            } else if (phases.includes("hr")) {
+                currentPhase = "hr";
+            } else if (phases.includes("cv")) {
+                currentPhase = "cv";
+            } else currentPhase = "none";
+
+            const currentReport = candidateWithCompany.filter(report => report.phase === currentPhase).shift();
+
+            const currentStatus = currentReport.status;
+            const timeOfLastInterview = currentReport.interviewDate;
+
+            let hiringStatus = "";
+
+            if (currentStatus === "declined") {
+                hiringStatus = "Declined";
+            } else if (currentPhase === "final" && currentStatus === "passed") {
+                hiringStatus = "Hired";
+            } else hiringStatus = "Select";
+
+            this.setState({
+                trackedData: {
+                    currentPhase: currentPhase,
+                    currentStatus: currentStatus,
+                    timeOfLastInterview: timeOfLastInterview,
+                    hiringStatus: hiringStatus
+                }
+            });
+        } else {
+            this.setState({
+                trackedData: {
+                    currentPhase: "none",
+                    currentStatus: "",
+                    timeOfLastInterview: null,
+                    hiringStatus: "Select"
+                }
+            });
+        }
+
+    }
+
     render() {
-        const { filteredCandidates, filteredCompanies, phase, next, selectedElement, report, candidatesReports, error } = this.state;
+        const { filteredCandidates, filteredCompanies, phase, next, selectedElement, report, trackedData, error } = this.state;
 
         if (selectedElement) {
             selectedElement.firstChild.classList.add("selected");
@@ -230,8 +297,7 @@ class CreateReportPage extends React.Component {
                                 />
                                 <FillReport
                                     phase={phase}
-                                    candidatesReports={candidatesReports}
-                                    companyId={report.companyId}
+                                    trackedData={trackedData}
                                     onSubmit={this.onSubmit}
                                 />
                                 <div className="col-12 mt-4">

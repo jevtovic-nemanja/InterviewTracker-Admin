@@ -21,8 +21,7 @@ class FillReport extends React.Component {
             status: "Select",
             statusError: "d-none",
             note: "",
-            noteError: "d-none",
-            trackedData: {}
+            noteError: "d-none"
         };
     }
 
@@ -30,56 +29,6 @@ class FillReport extends React.Component {
         this.handleDateChange = this.handleDateChange.bind(this);
         this.handleInputChange = this.handleInputChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
-    }
-
-    componentWillReceiveProps(nextProps) {
-        this.getTrackedData();
-        if (this.state.status === "Declined") {
-            this.setState({ status: "Select " });
-        }
-    }
-
-    getTrackedData() {
-        const candidateWithCompany = this.props.candidatesReports.filter(report => report.companyId === this.props.companyId);
-        const phases = candidateWithCompany.map(report => report.phase.toLowerCase());
-
-        let currentPhase = "";
-        
-        if (phases.includes("final")) {
-            currentPhase = "final";
-        } else if (phases.includes("tech")) {
-            currentPhase = "tech";
-        } else if (phases.includes("hr")) {
-            currentPhase = "hr";
-        } else if (phases.includes("cv")) {
-            currentPhase = "cv";
-        } else currentPhase = "none";
-        
-        const currentReport = candidateWithCompany.filter(report => report.phase.toLowerCase() === currentPhase);
-
-        let currentStatus = "";
-        let timeOfLastInterview = null;
-
-        if (currentReport.length) {
-            currentStatus = currentReport[0].status.toLowerCase();
-            timeOfLastInterview = currentReport[0].interviewDate;
-        }
-
-        if (currentStatus === "declined") {
-            this.setState({ status: "Declined" });
-        } 
-        
-        if (currentPhase === "final" && currentStatus === "passed") {
-            this.setState({ status: "Hired" });
-        }
-
-        this.setState({
-            trackedData: {
-                currentPhase: currentPhase,
-                currentStatus: currentStatus,
-                timeOfLastInterview: timeOfLastInterview
-            }
-        });
     }
 
     handleDateChange(date) {
@@ -114,8 +63,8 @@ class FillReport extends React.Component {
 
         const data = {
             interviewDate: date,
-            phase: phase,
-            status: status,
+            phase: phase.toLowerCase(),
+            status: status.toLowerCase(),
             note: note
         };
 
@@ -156,40 +105,24 @@ class FillReport extends React.Component {
 
     render() {
         const show = this.props.phase === 3 ? "" : "d-none";
-        const { interviewDate, dateError, phase, phaseError, status, statusError, note, noteError, trackedData } = this.state;
+        const { interviewDate, dateError, phase, phaseError, status, statusError, note, noteError } = this.state;
 
+        const { timeOfLastInterview, currentPhase, currentStatus, hiringStatus } = this.props.trackedData;
         const today = moment();
-        const timeOfLastInterview = moment(trackedData.timeOfLastInterview);
+        const lastInterview = moment(timeOfLastInterview);
 
-        let declined = "";
+        let declined = currentStatus === "declined" ? "disabled" : "";
 
-        if (trackedData.currentStatus === "declined" || status === "Hired") {
+        if (hiringStatus === "Hired") {
             declined = "disabled";
         }
 
-        const declinedDatePicker = declined === "disabled"
-            ? true
-            : false;
+        const declinedDatePicker = declined ? true : false;
 
-        let hideCv = "d-none";
-        let hideHr = "d-none";
-        let hideTech = "d-none";
-        let hideFinal = "d-none";
-
-        switch(trackedData.currentPhase) {
-        case "none":
-            hideCv = "";
-            break;
-        case "cv":
-            hideHr = "";
-            break;
-        case "hr":
-            hideTech = "";
-            break;
-        case "tech":
-            hideFinal = "";
-            break;
-        }
+        const cv = currentPhase === "none" ? "" : "d-none";
+        const hr = currentPhase === "cv" ? "" : "d-none";
+        const tech = currentPhase === "hr" ? "" : "d-none";
+        const final = currentPhase === "tech" ? "" : "d-none";
 
         return (
             <form className={`${show} row fill-report`}>
@@ -201,7 +134,7 @@ class FillReport extends React.Component {
                             placeholderText="Click to select a date"
                             selected={interviewDate}
                             maxDate={today}
-                            minDate={timeOfLastInterview}
+                            minDate={lastInterview}
                             onChange={this.handleDateChange}
                             className="pl-2 form-control"
                             disabled={declinedDatePicker}
@@ -222,10 +155,10 @@ class FillReport extends React.Component {
                             disabled={declined}
                         >
                             <option hidden>Select</option>
-                            <option className={`${hideCv}`}>CV</option>
-                            <option className={`${hideHr}`}>HR</option>
-                            <option className={`${hideTech}`}>Tech</option>
-                            <option className={`${hideFinal}`}>Final</option>
+                            <option className={`${cv}`}>CV</option>
+                            <option className={`${hr}`}>HR</option>
+                            <option className={`${tech}`}>Tech</option>
+                            <option className={`${final}`}>Final</option>
                         </select>
                         <div className={`${phaseError} float-right pr-2`}>
                             <small className="red">Please select a phase.</small>
@@ -242,8 +175,7 @@ class FillReport extends React.Component {
                             className="form-control"
                             disabled={declined}
                         >
-                            <option hidden>Select</option>
-                            <option hidden>Hired</option>
+                            <option hidden>{hiringStatus}</option>
                             <option>Passed</option>
                             <option>Declined</option>
                         </select>
@@ -272,8 +204,9 @@ class FillReport extends React.Component {
                 <div className="col-12 offset-sm-1 col-sm-10 offset-md-8 col-md-4 offset-lg-9 col-lg-3 offset-xl-10 col-xl-2">
                     <button
                         type="button"
+                        disabled={declined}
                         onClick={this.onSubmit}
-                        className="btn btn-submit w-100"
+                        className={`btn btn-submit w-100 ${declined}`}
                     >Submit</button>
                 </div>
             </form >
