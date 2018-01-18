@@ -1,11 +1,11 @@
 class Company {
-    constructor(id, name) {
-        this._id = id;
+    constructor(companyId, name) {
+        this._companyId = companyId;
         this._name = name;
     }
 
-    get id() {
-        return this._id;
+    get companyId() {
+        return this._companyId;
     }
 
     get name() {

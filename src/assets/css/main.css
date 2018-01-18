@@ -190,8 +190,14 @@ nav {
 
 /* Wizard aside */
 
-.wizard-aside {
-    border-right: 2px solid #6d7993;
+@media screen and (min-width: 768px) {
+    .wizard-aside {
+        border-right: 2px solid #6d7993;
+    }
+
+    .wizard-aside h5 {
+        font-size: 1.2em;
+    }
 }
 
 .wizard-aside h5, .wizard-aside p {
@@ -219,4 +225,16 @@ nav {
     .fill-report {
         padding-top: 1.25em;
     }
+}
+
+/* Selected card */
+
+.selected {
+    background-color: #6d7993;
+    color: whitesmoke;
+    -webkit-transform:scale(1.03);
+    -moz-transform:scale(1.03);
+    -ms-transform:scale(1.03);
+    -o-transform:scale(1.03);
+    transform:scale(1.03);
 }

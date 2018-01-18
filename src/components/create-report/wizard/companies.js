@@ -3,8 +3,15 @@ import React from "react";
 import Search from "../../common/search";
 
 export const SelectCompany = props => {
+    const show = props.phase === 2 ? "" : "d-none";
+
+    function handleClick(event) {
+        const element = event.target;
+        props.onSelect("companyId", element);
+    }
+
     return (
-        <div className="row mt-4">
+        <div className={`${show} row mt-4`}>
             <div className="col-12 offset-lg-6 col-lg-6">
                 <Search onSearch={props.onSearch} />
             </div>
@@ -12,9 +19,9 @@ export const SelectCompany = props => {
                 <table className="table table-striped table-bordered table-hover">
                     <tbody>
                         {props.companies.map(company => {
-                            const { id, name } = company;
+                            const { companyId, name } = company;
                             return (
-                                <tr key={id}>
+                                <tr key={companyId} id={companyId} onClick={handleClick}>
                                     <td>{name}</td>
                                 </tr>
                             );

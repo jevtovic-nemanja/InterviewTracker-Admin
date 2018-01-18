@@ -47,11 +47,13 @@ class FillReport extends React.Component {
     }
 
     render() {
+        const show = this.props.phase === 3 ? "" : "d-none";
+
         const { date, phase, status, notes } = this.state;
         const today = moment(moment.now()).format("YYYY-MM-DD");
 
         return (
-            <form className="row fill-report">
+            <form className={`${show} row fill-report`}>
                 <div className="col-12 offset-sm-1 col-sm-10 offset-md-0 col-md-12 col-lg-4">
                     <div className="form-group">
                         <label>Interview Date:</label>

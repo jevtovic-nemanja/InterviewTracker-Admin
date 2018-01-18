@@ -17,17 +17,31 @@ class CreateReportPage extends React.Component {
 
     initState() {
         return {
+            phase: 1,
             allCandidates: [],
             filteredCandidates: [],
             allCompanies: [],
             filteredCompanies: [],
-            error: ""
+            next: "disabled",
+            error: "",
+            selectedElement: "",
+            report: {
+                candidateId: "",
+                companyId: ""
+            },
+            asideInfo: {
+                candidate: "",
+                company: ""
+            }
         };
     }
 
     bindEventHandlers() {
         this.filterCandidates = this.filterCandidates.bind(this);
         this.filterCompanies = this.filterCompanies.bind(this);
+        this.onSelect = this.onSelect.bind(this);
+        this.onNext = this.onNext.bind(this);
+        this.onBack = this.onBack.bind(this);
     }
 
     componentDidMount() {
@@ -85,10 +99,79 @@ class CreateReportPage extends React.Component {
             });
     }
 
-    
+    onSelect(type, element) {
+        if (element.id) {
+            this.implementSelect(type, element);
+        } else {
+            this.checkParentForId(type, element);
+        }
+    }
+
+    implementSelect(type, element) {
+        const { selectedElement } = this.state;
+
+        if (selectedElement) {
+            selectedElement.firstChild.classList.remove("selected");
+        }
+
+        this.setState(prevState => {
+            prevState.next = "";
+            prevState.selectedElement = element;
+            prevState.report[type] = element.id;
+            return prevState;
+        });
+
+        this.sendInfoToAside(type, element.id);
+    }
+
+    checkParentForId (type, element) {
+        const parent = element.parentElement;
+        const id = parent.id;
+        if (id) {
+            this.implementSelect(type, parent);
+        } else {
+            this.checkParentForId(type, parent);
+        }
+    }
+
+    onNext() {
+        const { selectedElement } = this.state;
+        selectedElement.firstChild.classList.remove("selected");
+        this.setState(prevState => {
+            prevState.next = "disabled";
+            prevState.phase = prevState.phase + 1;
+            prevState.selectedElement = "";
+            return prevState;
+        });
+    }
+
+    onBack() {
+        this.setState(prevState => {
+            prevState.phase = prevState.phase - 1;
+            return prevState;
+        });
+    }
+
+    sendInfoToAside(type, id) {
+        const { allCandidates, allCompanies } = this.state;
+        if (type === "candidateId") {
+            const selected = allCandidates.filter(candidate => candidate.candidateId === parseInt(id))[0];
+            this.setState(prevState => {
+                prevState.asideInfo.candidate = selected.name;
+            });
+        } else {
+            const selected = allCompanies.filter(company => company.companyId === parseInt(id))[0];
+            this.setState(prevState => {
+                prevState.asideInfo.company = selected.name;
+            });
+        }
+    }
 
     render() {
-        const { filteredCandidates, filteredCompanies, error } = this.state;
+        const { phase, filteredCandidates, filteredCompanies, next, selectedElement, asideInfo, error } = this.state;
+        if (selectedElement) {
+            selectedElement.firstChild.classList.add("selected");
+        }
 
         return (
             <div className="container">
@@ -96,12 +179,28 @@ class CreateReportPage extends React.Component {
                     <div className="offset-1 col-10 offset-sm-0 col-sm-12 card mb-4">
                         <div className="row card-body">
                             <aside className="col-12 offset-sm-1 col-sm-10 offset-md-0 col-md-4 col-xl-3">
-                                <Aside />
+                                <Aside
+                                    phase={phase}
+                                    next={next}
+                                    info={asideInfo}
+                                    onNext={this.onNext}
+                                    onBack={this.onBack}
+                                />
                             </aside>
                             <main className="col-12 col-md-8 col-xl-9">
-                                <SelectCandidate candidates={filteredCandidates} onSearch={this.filterCandidates} />
-                                <SelectCompany companies={filteredCompanies} onSearch={this.filterCompanies} />
-                                <FillReport />
+                                <SelectCandidate
+                                    phase={phase}
+                                    candidates={filteredCandidates}
+                                    onSearch={this.filterCandidates}
+                                    onSelect={this.onSelect}
+                                />
+                                <SelectCompany
+                                    phase={phase}
+                                    companies={filteredCompanies}
+                                    onSearch={this.filterCompanies}
+                                    onSelect={this.onSelect}
+                                />
+                                <FillReport phase={phase} />
                                 <div className="col-12 mt-4">
                                     <h5 className="text-center">{error}</h5>
                                 </div>
