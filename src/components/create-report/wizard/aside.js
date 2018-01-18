@@ -1,46 +1,18 @@
 import React from "react";
 
 export const Aside = props => {
-    let bottomLine;
-    let candidate;
-    let company;
-    let selectCandidate;
-    let selectCompany;
-    let fillReport;
-    let showBack;
-    let enableNext;
-
-    switch (props.phase) {
-    case 1:
-        bottomLine = "";
-        candidate = "d-none";
-        company = "d-none";
-        selectCandidate = "font-weight-bold";
-        selectCompany = "text-muted d-none d-md-inline-block";
-        fillReport = "text-muted d-none d-md-inline-block";
-        showBack = "d-none";
-        break;
-    case 2:
-        bottomLine = "bottom-line-aside";
-        candidate = "";
-        company = "d-none";
-        selectCandidate = "text-muted d-none d-md-inline-block";
-        selectCompany = "font-weight-bold";
-        fillReport = "text-muted d-none d-md-inline-block";
-        showBack = "";
-        break;
-    case 3:
-        bottomLine = "bottom-line-aside";
-        candidate = "";
-        company = "";
-        selectCandidate = "text-muted d-none d-md-inline-block";
-        selectCompany = "text-muted d-none d-md-inline-block";
-        fillReport = "font-weight-bold";
-        showBack = "";
-        break;
-    }
-
     const { candidateName, companyName } = props.info;
+    const { phase } = props;
+
+    const bottomLine = phase === 1 ? "" : "bottom-line-aside";
+    const candidate = phase === 1 ? "d-none" : "";
+    const company = phase === 3 ? "" : "d-none";
+
+    const selectCandidate = phase === 1 ? "font-weight-bold" : "text-muted d-none d-md-inline-block";
+    const selectCompany = phase === 2 ? "font-weight-bold" : "text-muted d-none d-md-inline-block";
+    const selectCandidate = phase === 3 ? "font-weight-bold" : "text-muted d-none d-md-inline-block";
+
+    const showBack = phase === 1 ? "d-none" : "";
 
     return (
         <div className="row wizard-aside h-100 mb-3">
