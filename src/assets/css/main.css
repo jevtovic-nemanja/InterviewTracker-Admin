@@ -238,3 +238,16 @@ nav {
     -o-transform:scale(1.03);
     transform:scale(1.03);
 }
+
+/* Selected table cell */
+
+td.selected {
+    background-color: #6d7993;
+    color: whitesmoke;
+    -webkit-transform:scale(1.01);
+    -moz-transform:scale(1.01);
+    -ms-transform:scale(1.01);
+    -o-transform:scale(1.01);
+    transform:scale(1.01);
+}
+}
