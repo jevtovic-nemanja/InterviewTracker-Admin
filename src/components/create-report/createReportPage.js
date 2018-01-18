@@ -40,6 +40,7 @@ class CreateReportPage extends React.Component {
         this.onSelect = this.onSelect.bind(this);
         this.onNext = this.onNext.bind(this);
         this.onBack = this.onBack.bind(this);
+        this.onSubmit = this.onSubmit.bind(this);
     }
 
     componentDidMount() {
@@ -168,7 +169,7 @@ class CreateReportPage extends React.Component {
     }
 
     onSubmit(data) {
-        console.log(data);
+        
     }
 
     render() {
@@ -176,6 +177,7 @@ class CreateReportPage extends React.Component {
         if (selectedElement) {
             selectedElement.firstChild.classList.add("selected");
         }
+        console.log(this.state);
 
         return (
             <div className="container">
