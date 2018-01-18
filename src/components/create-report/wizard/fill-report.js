@@ -15,6 +15,7 @@ class FillReport extends React.Component {
     initState() {
         return {
             interviewDate: null,
+            dateError: "d-none",
             phase: "Select",
             phaseError: "d-none",
             status: "Select",
@@ -35,6 +36,7 @@ class FillReport extends React.Component {
         const value = event.target.value;
         this.setState(prevState => {
             prevState[name] = value;
+            prevState.dateError = "d-none";
             prevState.phaseError = "d-none";
             prevState.statusError = "d-none";
             prevState.noteError = "d-none";
@@ -43,7 +45,13 @@ class FillReport extends React.Component {
     }
 
     handleDateChange(date) {
-        this.setState({ interviewDate: date });
+        this.setState({
+            interviewDate: date,
+            dateError: "d-none",
+            phaseError: "d-none",
+            statusError: "d-none",
+            noteError: "d-none"
+        });
     }
 
     onSubmit(event) {
@@ -66,10 +74,14 @@ class FillReport extends React.Component {
     }
 
     validateInput() {
-        const { phase, status, note } = this.state;
+        const { interviewDate, phase, status, note } = this.state;
 
         let isValid = true;
 
+        if(!interviewDate) {
+            this.setState({ dateError: "" });
+            isValid = false;
+        }
         if (phase === "Select") {
             this.setState({ phaseError: "" });
             isValid = false;
@@ -89,7 +101,7 @@ class FillReport extends React.Component {
     render() {
         const show = this.props.phase === 3 ? "" : "d-none";
 
-        const { interviewDate, phase, phaseError, status, statusError, note, noteError, submit } = this.state;
+        const { interviewDate, dateError, phase, phaseError, status, statusError, note, noteError, submit } = this.state;
         const today = moment();
 
         return (
@@ -105,6 +117,9 @@ class FillReport extends React.Component {
                             className="pl-2 form-control"
                             placeholderText="Click to select a date"
                         />
+                        <div className={`${dateError} float-right pr-2`}>
+                            <small className="red">Please select a date.</small>
+                        </div>
                     </div>
                 </div>
                 <div className="col-12 offset-sm-1 col-sm-10 offset-md-0 col-md-6 col-lg-4">
