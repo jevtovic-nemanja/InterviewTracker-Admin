@@ -86,7 +86,6 @@ export const Aside = props => {
                 </div>
                 <button type="button" className={`${showBack} btn btn-back w-100 mt-3 mb-2`} onClick={props.onBack}>Back</button>
                 <button type="button" className={`${props.next} btn btn-next w-100`} onClick={props.onNext} disabled={props.next}>Next</button>
-                <button type="button" className={`${props.submit} btn btn-next w-100`} onClick={props.onSubmit} disabled={props.submit}>Submit</button>
             </div>
         </div>
     );

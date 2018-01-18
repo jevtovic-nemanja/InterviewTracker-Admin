@@ -24,7 +24,6 @@ class CreateReportPage extends React.Component {
             filteredCompanies: [],
             selectedElement: "",
             next: "disabled",
-            submit: "d-none",
             report: {
                 candidateId: "",
                 candidateName: "",
@@ -41,7 +40,6 @@ class CreateReportPage extends React.Component {
         this.onSelect = this.onSelect.bind(this);
         this.onNext = this.onNext.bind(this);
         this.onBack = this.onBack.bind(this);
-        this.onSubmit = this.onSubmit.bind(this);
     }
 
     componentDidMount() {
@@ -138,10 +136,8 @@ class CreateReportPage extends React.Component {
         const { phase, selectedElement } = this.state;
         selectedElement.firstChild.classList.remove("selected");
         const next = phase === 2 ? "d-none" : "disabled";
-        const submit = phase === 2 ? "disabled" : "d-none";
         this.setState(prevState => {
             prevState.next = next;
-            prevState.submit = submit;
             prevState.phase = prevState.phase + 1;
             prevState.selectedElement = "";
             return prevState;
@@ -171,14 +167,8 @@ class CreateReportPage extends React.Component {
         }
     }
 
-    onSubmit(event) {
-        event.preventDefault();
-
-        
-    }
-
     render() {
-        const { phase, filteredCandidates, filteredCompanies, next, submit, selectedElement, report, error } = this.state;
+        const { phase, filteredCandidates, filteredCompanies, next, selectedElement, report, error } = this.state;
         if (selectedElement) {
             selectedElement.firstChild.classList.add("selected");
         }
@@ -192,11 +182,9 @@ class CreateReportPage extends React.Component {
                                 <Aside
                                     phase={phase}
                                     next={next}
-                                    submit={submit}
                                     info={report}
                                     onNext={this.onNext}
                                     onBack={this.onBack}
-                                    onSubmit={this.submit}
                                 />
                             </aside>
                             <main className="col-12 col-md-8 col-xl-9">
