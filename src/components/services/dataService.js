@@ -20,7 +20,7 @@ class DataService {
     }
 
     packReports(data) {
-        let reports = data.map(item => {
+        let reports = data.reverse().map(item => {
             const { id, candidateName, companyName, interviewDate, phase, status, note } = item;
             const date = moment(interviewDate).format("DD.MM.YYYY");
             const reportObj = new Report(id, candidateName, companyName, date, phase, status, note);
@@ -55,6 +55,11 @@ class DataService {
             return companyObj;
         });
         return companies;
+    }
+
+    postReport(data, callback, errorCallback) {
+        const url = `${BASE_URL}/reports`;
+        commService.postData(url, data, response => callback(response), error => errorCallback(error));
     }
 }
 

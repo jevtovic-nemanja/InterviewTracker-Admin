@@ -12,44 +12,77 @@ class FillReport extends React.Component {
 
     initState() {
         return {
-            date: moment(moment.now()).format("YYYY-MM-DD"),
+            interviewDate: moment(moment.now()).format("YYYY-MM-DD"),
             phase: "Select",
+            phaseError: "d-none",
             status: "Select",
-            notes: ""
+            statusError: "d-none",
+            note: "",
+            noteError: "d-none"
         };
     }
 
     bindEventHandlers() {
-        this.handleDateChange = this.handleDateChange.bind(this);
-        this.handlePhaseChange = this.handlePhaseChange.bind(this);
-        this.handleStatusChange = this.handleStatusChange.bind(this);
-        this.handleNotesChange = this.handleNotesChange.bind(this);
+        this.handleInputChange = this.handleInputChange.bind(this);
+        this.onSubmit = this.onSubmit.bind(this);
     }
 
-    handleDateChange(event) {
-        const pickedDate = event.target.value;
-        this.setState({ date: pickedDate });
+    handleInputChange(event) {
+        const name = event.target.name;
+        const value = event.target.value;
+        this.setState(prevState => {
+            prevState[name] = value;
+            prevState.phaseError = "d-none";
+            prevState.statusError = "d-none";
+            prevState.noteError = "d-none";
+            return prevState;
+        });
     }
 
-    handlePhaseChange(event) {
-        const pickedPhase = event.target.value;
-        this.setState({ phase: pickedPhase });
+    onSubmit(event) {
+        event.preventDefault();
+
+        const { interviewDate, phase, status, note } = this.state;
+        const date = "" + new Date(interviewDate);
+        const data = {
+            interviewDate: date,
+            phase: phase,
+            status: status,
+            note: note
+        };
+
+        const isValid = this.validateInput();
+
+        if (isValid) {
+            this.props.onSubmit(data);
+        }
     }
 
-    handleStatusChange(event) {
-        const pickedStatus = event.target.value;
-        this.setState({ status: pickedStatus });
-    }
+    validateInput() {
+        const { phase, status, note } = this.state;
 
-    handleNotesChange(event) {
-        const notes = event.target.value;
-        this.setState({ notes: notes });
+        let isValid = true;
+
+        if (phase === "Select") {
+            this.setState({ phaseError: "" });
+            isValid = false;
+        }
+        if (status === "Select") {
+            this.setState({ statusError: "" });
+            isValid = false;
+        }
+        if (!note) {
+            this.setState({ noteError: "" });
+            isValid = false;
+        }
+
+        return isValid;
     }
 
     render() {
         const show = this.props.phase === 3 ? "" : "d-none";
 
-        const { date, phase, status, notes } = this.state;
+        const { interviewDate, phase, phaseError, status, statusError, note, noteError, submit } = this.state;
         const today = moment(moment.now()).format("YYYY-MM-DD");
 
         return (
@@ -58,11 +91,12 @@ class FillReport extends React.Component {
                     <div className="form-group">
                         <label>Interview Date:</label>
                         <input
+                            name="interviewDate"
                             type="date"
                             className="form-control"
                             max={today}
-                            value={date}
-                            onChange={this.handleDateChange}
+                            value={interviewDate}
+                            onChange={this.handleInputChange}
                         />
                     </div>
                 </div>
@@ -70,9 +104,10 @@ class FillReport extends React.Component {
                     <div className="form-group">
                         <label>Phase:</label>
                         <select
+                            name="phase"
                             className="form-control"
                             value={phase}
-                            onChange={this.handlePhaseChange}
+                            onChange={this.handleInputChange}
                         >
                             <option hidden>Select</option>
                             <option>CV</option>
@@ -80,33 +115,47 @@ class FillReport extends React.Component {
                             <option>Technical</option>
                             <option>Final</option>
                         </select>
+                        <div className={`${phaseError} float-right pr-2`}>
+                            <small className="red">Please select a phase.</small>
+                        </div>
                     </div>
                 </div>
                 <div className="col-12 offset-sm-1 col-sm-10 offset-md-0 col-md-6 col-lg-4">
                     <div className="form-group">
                         <label>Status:</label>
                         <select
+                            name="status"
                             className="form-control"
                             value={status}
-                            onChange={this.handleStatusChange}
+                            onChange={this.handleInputChange}
                         >
                             <option hidden>Select</option>
                             <option>Passed</option>
                             <option>Declined</option>
                         </select>
+                        <div className={`${statusError} float-right pr-2`}>
+                            <small className="red">Please select a status.</small>
+                        </div>
                     </div>
                 </div>
                 <div className="col-12 offset-sm-1 col-sm-10 offset-md-0 col-md-12">
                     <div className="form-group">
                         <label>Notes:</label>
                         <textarea
+                            name="note"
                             placeholder="Notes..."
                             rows="5"
                             className="form-control"
-                            value={notes}
-                            onChange={this.handleNotesChange}
+                            value={note}
+                            onChange={this.handleInputChange}
                         />
+                        <div className={`${noteError} float-right pr-2`}>
+                            <small className="red">Please enter notes.</small>
+                        </div>
                     </div>
+                </div>
+                <div className="col-12 offset-sm-1 col-sm-10 offset-md-8 col-md-4 offset-lg-9 col-lg-3 offset-xl-10 col-xl-2">
+                    <button type="button" className="btn btn-submit w-100" onClick={this.onSubmit}>Submit</button>
                 </div>
             </form >
         );

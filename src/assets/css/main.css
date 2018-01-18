@@ -63,7 +63,7 @@ nav {
     transform:scale(1.03);
 }
 
-.card small {
+.report-card small, .candidate-card small {
     color: #6d7993;
 }
 
@@ -171,12 +171,12 @@ nav {
     color: whitesmoke;
 }
 
-.btn-next {
+.btn-next, .btn-submit {
     background-color: #6d7993;
     color: whitesmoke;
 }
 
-.btn-next:hover, .btn-back:hover {
+.btn-next:hover, .btn-back:hover, .btn-submit:hover {
     -webkit-transform:scale(1.03);
     -moz-transform:scale(1.03);
     -ms-transform:scale(1.03);
@@ -237,4 +237,22 @@ nav {
     -ms-transform:scale(1.03);
     -o-transform:scale(1.03);
     transform:scale(1.03);
+}
+
+/* Selected table cell */
+
+td.selected {
+    background-color: #6d7993;
+    color: whitesmoke;
+    -webkit-transform:scale(1.01);
+    -moz-transform:scale(1.01);
+    -ms-transform:scale(1.01);
+    -o-transform:scale(1.01);
+    transform:scale(1.01);
+}
+
+/* Form validation */
+
+.red {
+    color: crimson;
 }

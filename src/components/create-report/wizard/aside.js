@@ -40,6 +40,8 @@ export const Aside = props => {
         break;
     }
 
+    const { candidateName, companyName } = props.info;
+
     return (
         <div className="row wizard-aside h-100 mb-3">
             <div className="col-12">
@@ -75,21 +77,15 @@ export const Aside = props => {
                 <div>
                     <div className={`${candidate} pl-1`}>
                         <p className="mt-3 mb-1">Candidate:</p>
-                        <h4>{props.info.candidate}</h4>
+                        <h4>{candidateName}</h4>
                     </div>
                     <div className={`${company} pl-1`}>
                         <p className="mb-1">Company:</p>
-                        <h4>{props.info.company}</h4>
+                        <h4>{companyName}</h4>
                     </div>
                 </div>
                 <button type="button" className={`${showBack} btn btn-back w-100 mt-3 mb-2`} onClick={props.onBack}>Back</button>
-                <button type="button" className={`${props.next} btn btn-next w-100`} onClick={props.onNext} disabled={props.next}>
-                    {
-                        props.phase === 3
-                            ? "Submit"
-                            : "Next"
-                    }
-                </button>
+                <button type="button" className={`${props.next} btn btn-next w-100`} onClick={props.onNext} disabled={props.next}>Next</button>
             </div>
         </div>
     );
