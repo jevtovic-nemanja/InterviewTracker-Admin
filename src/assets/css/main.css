@@ -256,3 +256,10 @@ td.selected {
 .red {
     color: crimson;
 }
+
+/* Date picker */
+
+.react-datepicker-wrapper,
+.react-datepicker__input-container {
+    width: 100%;
+}

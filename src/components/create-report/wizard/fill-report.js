@@ -95,14 +95,17 @@ class FillReport extends React.Component {
         return (
             <form className={`${show} row fill-report`}>
                 <div className="col-12 offset-sm-1 col-sm-10 offset-md-0 col-md-12 col-lg-4">
-                    <DatePicker
-                        selected={interviewDate}
-                        onChange={this.handleDateChange}
-                        maxDate={today}
-                        dateFormat="DD.MM.YYYY"
-                        className="pl-2"
-                        placeholderText="Click to select a date"
-                    />
+                    <div className="form-group">
+                        <label>Date:</label>
+                        <DatePicker
+                            selected={interviewDate}
+                            onChange={this.handleDateChange}
+                            maxDate={today}
+                            dateFormat="DD.MM.YYYY"
+                            className="pl-2 form-control"
+                            placeholderText="Click to select a date"
+                        />
+                    </div>
                 </div>
                 <div className="col-12 offset-sm-1 col-sm-10 offset-md-0 col-md-6 col-lg-4">
                     <div className="form-group">
