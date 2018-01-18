@@ -22,16 +22,16 @@ class CreateReportPage extends React.Component {
             filteredCandidates: [],
             allCompanies: [],
             filteredCompanies: [],
+            selectedElement: "",
             next: "disabled",
             submit: "d-none",
-            error: "",
-            selectedElement: "",
             report: {
                 candidateId: "",
                 candidateName: "",
                 companyId: "",
                 companyName: ""
-            }
+            },
+            error: ""
         };
     }
 
@@ -41,6 +41,7 @@ class CreateReportPage extends React.Component {
         this.onSelect = this.onSelect.bind(this);
         this.onNext = this.onNext.bind(this);
         this.onBack = this.onBack.bind(this);
+        this.onSubmit = this.onSubmit.bind(this);
     }
 
     componentDidMount() {
@@ -170,6 +171,12 @@ class CreateReportPage extends React.Component {
         }
     }
 
+    onSubmit(event) {
+        event.preventDefault();
+
+        
+    }
+
     render() {
         const { phase, filteredCandidates, filteredCompanies, next, submit, selectedElement, report, error } = this.state;
         if (selectedElement) {
@@ -189,6 +196,7 @@ class CreateReportPage extends React.Component {
                                     info={report}
                                     onNext={this.onNext}
                                     onBack={this.onBack}
+                                    onSubmit={this.submit}
                                 />
                             </aside>
                             <main className="col-12 col-md-8 col-xl-9">
