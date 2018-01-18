@@ -98,7 +98,15 @@ class CreateReportPage extends React.Component {
             });
     }
 
-    onSelect(element) {
+    onSelect(type, element) {
+        if (element.id) {
+            this.implementSelect(type, element);
+        } else {
+            this.checkParentForId(type, element);
+        }
+    }
+
+    implementSelect(type, element) {
         const { selectedElement } = this.state;
 
         if (selectedElement) {
@@ -108,9 +116,19 @@ class CreateReportPage extends React.Component {
         this.setState(prevState => {
             prevState.next = "";
             prevState.selectedElement = element;
-            prevState.report.candidateId = element.id;
+            prevState.report[type] = element.id;
             return prevState;
         });
+    }
+
+    checkParentForId (type, element) {
+        const parent = element.parentElement;
+        const id = parent.id;
+        if (id) {
+            this.implementSelect(type, parent);
+        } else {
+            this.checkParentForId(type, parent);
+        }
     }
 
     onNext() {
@@ -136,7 +154,6 @@ class CreateReportPage extends React.Component {
         if (selectedElement) {
             selectedElement.firstChild.classList.add("selected");
         }
-        console.log(this.state);
 
         return (
             <div className="container">
@@ -163,6 +180,7 @@ class CreateReportPage extends React.Component {
                                     phase={phase}
                                     companies={filteredCompanies}
                                     onSearch={this.filterCompanies}
+                                    onSelect={this.onSelect}
                                 />
                                 <FillReport phase={phase} />
                                 <div className="col-12 mt-4">

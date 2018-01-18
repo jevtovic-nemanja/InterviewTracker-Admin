@@ -6,17 +6,7 @@ export const SelectCandidate = props => {
     
     function handleClick(event) {
         const element = event.target;
-        element.id ? props.onSelect(element) : checkParentForId(element);
-    }
-
-    function checkParentForId (element) {
-        const parent = element.parentElement;
-        const id = parent.id;
-        if (id) {
-            props.onSelect(parent);
-        } else {
-            checkParentForId(parent);
-        }
+        props.onSelect("candidateId", element);
     }
 
     const show = props.phase === 1 ? "" : "d-none";
