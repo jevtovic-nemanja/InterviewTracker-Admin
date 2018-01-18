@@ -171,12 +171,12 @@ nav {
     color: whitesmoke;
 }
 
-.btn-next {
+.btn-next, .btn-submit {
     background-color: #6d7993;
     color: whitesmoke;
 }
 
-.btn-next:hover, .btn-back:hover {
+.btn-next:hover, .btn-back:hover, .btn-submit:hover {
     -webkit-transform:scale(1.03);
     -moz-transform:scale(1.03);
     -ms-transform:scale(1.03);
@@ -249,5 +249,4 @@ td.selected {
     -ms-transform:scale(1.01);
     -o-transform:scale(1.01);
     transform:scale(1.01);
-}
 }

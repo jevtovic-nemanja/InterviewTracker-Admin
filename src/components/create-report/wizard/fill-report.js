@@ -15,7 +15,8 @@ class FillReport extends React.Component {
             interviewDate: moment(moment.now()).format("YYYY-MM-DD"),
             phase: "Select",
             status: "Select",
-            note: ""
+            note: "",
+            submit: "disabled"
         };
     }
 
@@ -35,7 +36,7 @@ class FillReport extends React.Component {
     render() {
         const show = this.props.phase === 3 ? "" : "d-none";
 
-        const { interviewDate, phase, status, note } = this.state;
+        const { interviewDate, phase, status, note, submit } = this.state;
         const today = moment(moment.now()).format("YYYY-MM-DD");
         console.log(this.state);
         return (
@@ -97,6 +98,9 @@ class FillReport extends React.Component {
                             onChange={this.handleInputChange}
                         />
                     </div>
+                </div>
+                <div className="col-12 offset-sm-1 col-sm-10 offset-md-8 col-md-4 offset-lg-9 col-lg-3 offset-xl-10 col-xl-2">
+                    <button type="button" className={`btn btn-submit w-100 ${submit}`} disabled={submit} onClick={this.onSubmit}>Submit</button>
                 </div>
             </form >
         );
