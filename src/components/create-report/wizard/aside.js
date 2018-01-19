@@ -10,7 +10,7 @@ export const Aside = props => {
 
     const selectCandidate = phase === 1 ? "font-weight-bold" : "text-muted d-none d-md-inline-block";
     const selectCompany = phase === 2 ? "font-weight-bold" : "text-muted d-none d-md-inline-block";
-    const selectCandidate = phase === 3 ? "font-weight-bold" : "text-muted d-none d-md-inline-block";
+    const fillReport = phase === 3 ? "font-weight-bold" : "text-muted d-none d-md-inline-block";
 
     const showBack = phase === 1 ? "d-none" : "";
 
