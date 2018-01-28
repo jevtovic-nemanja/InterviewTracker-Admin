@@ -96,7 +96,7 @@ class ReportsListPage extends React.Component {
 
     openDetailsModal(id) {
         const { allReports } = this.state;
-        const report = allReports.filter(report => report.id === parseInt(id))[0];
+        const report = allReports.filter(report => report.id === parseInt(id)).shift();
 
         this.setState({
             detailsModal: true,

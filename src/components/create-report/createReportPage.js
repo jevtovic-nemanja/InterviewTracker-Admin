@@ -145,14 +145,14 @@ class CreateReportPage extends React.Component {
         const { allCandidates, allCompanies } = this.state;
 
         if (type === "candidateId") {
-            const selected = allCandidates.filter(candidate => candidate.candidateId === parseInt(id))[0];
+            const selected = allCandidates.filter(candidate => candidate.candidateId === parseInt(id)).shift();
 
             this.setState(prevState => {
                 prevState.report.candidateName = selected.name;
             });
 
         } else {
-            const selected = allCompanies.filter(company => company.companyId === parseInt(id))[0];
+            const selected = allCompanies.filter(company => company.companyId === parseInt(id)).shift();
 
             this.setState(prevState => {
                 prevState.report.companyName = selected.name;
