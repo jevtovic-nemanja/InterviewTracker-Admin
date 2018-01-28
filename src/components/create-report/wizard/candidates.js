@@ -2,22 +2,21 @@ import React from "react";
 
 import Search from "../../common/search";
 
-export const SelectCandidate = props => {
-    const show = props.phase === 1 ? "" : "d-none";
+export const SelectCandidate = ({ phase, candidates, onSearch, onSelect }) => {
+    const show = phase === 1 ? "" : "d-none";
 
     function handleClick(event) {
         const element = event.target;
-        props.onSelect("candidateId", element);
+        onSelect("candidateId", element);
     }
 
     return (
         <div className={`${show} row`}>
             <div className="col-12 offset-sm-1 col-sm-10 col-md-11 offset-lg-6 col-lg-6 offset-xl-6 col-xl-6">
-                <Search onSearch={props.onSearch} />
+                <Search onSearch={onSearch} />
             </div>
 
-            {props.candidates.map(candidate => {
-                const { candidateId, name, email, avatar } = candidate;
+            {candidates.map(({ candidateId, name, email, avatar }) => {
                 return (
                     <div
                         key={candidateId}
@@ -46,7 +45,7 @@ export const SelectCandidate = props => {
                     </div>
                 );
             })}
-            
+
         </div>
     );
 };

@@ -1,17 +1,17 @@
 import React from "react";
 
-export const ReportDisplay = props => {
-    const { id, candidate, company, date, status } = props.report;
+export const ReportDisplay = ({ report, deleteReport, openDetailsModal }) => {
+    const { id, candidate, company, date, status } = report;
     let buttonGroup = null;
 
     function viewReportDetails(event) {
         const id = buttonGroup.id;
-        props.openDetailsModal(id);
+        openDetailsModal(id);
     }
 
     function deleteReport(event) {
         const id = buttonGroup.id;
-        props.deleteReport(id);
+        deleteReport(id);
     }
 
     return (

@@ -1,8 +1,7 @@
 import React from "react";
 
-export const Aside = props => {
-    const { candidateName, companyName } = props.info;
-    const { phase } = props;
+export const Aside = ({ phase, info, next, onBack, onNext }) => {
+    const { candidateName, companyName } = info;
 
     const bottomLine = phase === 1 ? "" : "bottom-line-aside";
     const candidate = phase === 1 ? "d-none" : "";
@@ -58,14 +57,14 @@ export const Aside = props => {
                 </div>
                 <button
                     type="button"
-                    onClick={props.onBack}
+                    onClick={onBack}
                     className={`${showBack} btn btn-back w-100 mt-3 mb-2`}
                 >Back</button>
                 <button
                     type="button"
-                    disabled={props.next}
-                    onClick={props.onNext}
-                    className={`${props.next} btn btn-next w-100`}
+                    disabled={next}
+                    onClick={onNext}
+                    className={`${next} btn btn-next w-100`}
                 >Next</button>
             </div>
         </div>

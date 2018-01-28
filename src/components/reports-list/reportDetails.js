@@ -1,8 +1,8 @@
 import React from "react";
 
-export const ReportDetails = props => {
-    const { candidate, company, date, phase, status, note } = props.report;
-    
+export const ReportDetails = ({ report }) => {
+    const { candidate, company, date, phase, status, note } = report;
+
     return (
         <div>
             <h5 className="pb-3 bottom-line modal-title">{candidate}</h5>
