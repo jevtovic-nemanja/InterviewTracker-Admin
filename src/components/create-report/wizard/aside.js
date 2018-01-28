@@ -1,9 +1,10 @@
 import React from "react";
 
-export const Aside = ({ phase, info, next, onBack, onNext }) => {
+export const Aside = ({ phase, info }) => {
     const { candidateName, companyName } = info;
 
-    const bottomLine = phase === 1 ? "" : "bottom-line-aside";
+    const marginBottom = phase === 1 ? "mb-3" : "";
+
     const candidate = phase === 1 ? "d-none" : "";
     const company = phase === 3 ? "" : "d-none";
 
@@ -11,13 +12,11 @@ export const Aside = ({ phase, info, next, onBack, onNext }) => {
     const selectCompany = phase === 2 ? "font-weight-bold" : "text-muted d-none d-md-inline-block";
     const fillReport = phase === 3 ? "font-weight-bold" : "text-muted d-none d-md-inline-block";
 
-    const showBack = phase === 1 ? "d-none" : "";
-
     return (
-        <div className="row wizard-aside h-100 mb-3">
+        <div className={`row wizard-aside h-100 ${marginBottom}`}>
             <div className="col-12">
-                <div className={bottomLine}>
-                    <h5 className={`${selectCandidate} mt-3`}>
+                <div className="bottom-line-aside">
+                    <h5 className={`${selectCandidate} mt-2`}>
                         <small className={`${selectCandidate} fa-stack`}>
                             <span className="fa fa-circle-thin fa-stack-2x"></span>
                             <strong className="fa-stack-1x">1</strong>
@@ -55,17 +54,6 @@ export const Aside = ({ phase, info, next, onBack, onNext }) => {
                         <h4>{companyName}</h4>
                     </div>
                 </div>
-                <button
-                    type="button"
-                    onClick={onBack}
-                    className={`${showBack} btn btn-back w-100 mt-3 mb-2`}
-                >Back</button>
-                <button
-                    type="button"
-                    disabled={next}
-                    onClick={onNext}
-                    className={`${next} btn btn-next w-100`}
-                >Next</button>
             </div>
         </div>
     );

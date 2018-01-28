@@ -275,29 +275,33 @@ class CreateReportPage extends React.Component {
                             <aside className="col-12 offset-sm-1 col-sm-10 offset-md-0 col-md-4 col-xl-3">
                                 <Aside
                                     phase={phase}
-                                    next={next}
                                     info={report}
-                                    onBack={this.onBack}
-                                    onNext={this.onNext}
                                 />
                             </aside>
 
                             <main className="col-12 col-md-8 col-xl-9">
                                 <SelectCandidate
                                     phase={phase}
+                                    next={next}
                                     candidates={filteredCandidates}
                                     onSearch={this.filterCandidates}
                                     onSelect={this.onSelect}
+                                    onBack={this.onBack}
+                                    onNext={this.onNext}
                                 />
                                 <SelectCompany
                                     phase={phase}
+                                    next={next}
                                     companies={filteredCompanies}
                                     onSearch={this.filterCompanies}
                                     onSelect={this.onSelect}
+                                    onBack={this.onBack}
+                                    onNext={this.onNext}
                                 />
                                 <FillReport
                                     phase={phase}
                                     trackedData={trackedData}
+                                    onBack={this.onBack}
                                     onSubmit={this.onSubmit}
                                 />
                                 <div className="col-12 mt-4">

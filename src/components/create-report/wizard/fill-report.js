@@ -126,7 +126,15 @@ class FillReport extends React.Component {
 
         return (
             <form className={`${show} row fill-report`}>
-                <div className="col-12 offset-sm-1 col-sm-10 offset-md-0 col-md-12 col-lg-4">
+                <div className="col-12 offset-sm-1 col-sm-10 d-md-none">
+                    <button
+                        type="button"
+                        onClick={this.props.onBack}
+                        className="btn btn-back w-100 mb-2"
+                    >Back</button>
+                </div>
+
+                <div className="col-12 offset-sm-1 col-sm-10 offset-md-0 col-md-12 col-lg-4 mt-1">
                     <div className="form-group">
                         <label>Date:</label>
                         <DatePicker
@@ -201,12 +209,19 @@ class FillReport extends React.Component {
                         </div>
                     </div>
                 </div>
-                <div className="col-12 offset-sm-1 col-sm-10 offset-md-8 col-md-4 offset-lg-9 col-lg-3 offset-xl-10 col-xl-2">
+                <div className="d-none d-md-block col-md-4 col-lg-3">
+                    <button
+                        type="button"
+                        onClick={this.props.onBack}
+                        className="btn btn-back w-100 mb-2"
+                    >Back</button>
+                </div>
+                <div className="col-12 offset-sm-1 col-sm-10 offset-md-4 col-md-4 offset-lg-6 col-lg-3">
                     <button
                         type="button"
                         disabled={declined}
                         onClick={this.onSubmit}
-                        className={`btn btn-submit w-100 ${declined}`}
+                        className={`btn btn-submit w-100 mt-1 ${declined}`}
                     >Submit</button>
                 </div>
             </form >

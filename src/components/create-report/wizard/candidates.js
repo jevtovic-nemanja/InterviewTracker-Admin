@@ -2,7 +2,7 @@ import React from "react";
 
 import Search from "../../common/search";
 
-export const SelectCandidate = ({ phase, candidates, onSearch, onSelect }) => {
+export const SelectCandidate = ({ phase, candidates, onSearch, onSelect, next, onNext }) => {
     const show = phase === 1 ? "" : "d-none";
 
     function handleClick(event) {
@@ -12,8 +12,16 @@ export const SelectCandidate = ({ phase, candidates, onSearch, onSelect }) => {
 
     return (
         <div className={`${show} row`}>
-            <div className="col-12 offset-sm-1 col-sm-10 col-md-11 offset-lg-6 col-lg-6 offset-xl-6 col-xl-6">
+            <div className="col-8 offset-sm-1 col-sm-7 col-md-8 offset-xl-0 col-xl-9">
                 <Search onSearch={onSearch} />
+            </div>
+            <div className="col-4 col-sm-3 mt-1">
+                <button
+                    type="button"
+                    disabled={next}
+                    onClick={onNext}
+                    className={`${next} btn btn-next w-100`}
+                >Next</button>
             </div>
 
             {candidates.map(({ candidateId, name, email, avatar }) => {
