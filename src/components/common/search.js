@@ -10,8 +10,7 @@ class Search extends React.Component {
 
     initState() {
         return {
-            inputString: "",
-            searchString: ""
+            inputString: ""
         };
     }
 
@@ -24,8 +23,7 @@ class Search extends React.Component {
         const searchString = inputString.toLowerCase();
 
         this.setState({
-            inputString: inputString,
-            searchString: searchString
+            inputString: inputString
         });
 
         this.props.onSearch(searchString);
