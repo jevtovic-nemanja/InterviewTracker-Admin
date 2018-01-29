@@ -280,6 +280,7 @@ class CreateReportPage extends React.Component {
                             </aside>
 
                             <main className="col-12 col-md-8 col-xl-9">
+                            
                                 <SelectCandidate
                                     phase={phase}
                                     next={next}
@@ -289,6 +290,7 @@ class CreateReportPage extends React.Component {
                                     onBack={this.onBack}
                                     onNext={this.onNext}
                                 />
+
                                 <SelectCompany
                                     phase={phase}
                                     next={next}
@@ -298,15 +300,18 @@ class CreateReportPage extends React.Component {
                                     onBack={this.onBack}
                                     onNext={this.onNext}
                                 />
+
                                 <FillReport
                                     phase={phase}
                                     trackedData={trackedData}
                                     onBack={this.onBack}
                                     onSubmit={this.onSubmit}
                                 />
+
                                 <div className="col-12 mt-4">
                                     <h5 className="text-center">{error}</h5>
                                 </div>
+
                             </main>
 
                         </div>

@@ -12,9 +12,11 @@ export const SelectCandidate = ({ phase, candidates, onSearch, onSelect, next, o
 
     return (
         <div className={`${show} row`}>
+
             <div className="col-8 offset-sm-1 col-sm-7 col-md-8 offset-xl-0 col-xl-9">
                 <Search onSearch={onSearch} />
             </div>
+            
             <div className="col-4 col-sm-3 mt-1">
                 <button
                     type="button"

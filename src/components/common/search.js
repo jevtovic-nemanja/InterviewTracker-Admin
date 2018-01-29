@@ -41,6 +41,7 @@ class Search extends React.Component {
                         <i className="fa fa-search"></i>
                     </span>
                 </div>
+
                 <input
                     type="text"
                     value={inputString}
@@ -48,6 +49,7 @@ class Search extends React.Component {
                     placeholder="Search..."
                     className="form-control"
                 />
+                
             </div>
         );
     }

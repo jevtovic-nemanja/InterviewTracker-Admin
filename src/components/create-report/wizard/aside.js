@@ -16,6 +16,7 @@ export const Aside = ({ phase, info }) => {
         <div className={`row wizard-aside h-100 ${marginBottom}`}>
             <div className="col-12">
                 <div className="bottom-line-aside">
+
                     <h5 className={`${selectCandidate} mt-2`}>
                         <small className={`${selectCandidate} fa-stack`}>
                             <span className="fa fa-circle-thin fa-stack-2x"></span>
@@ -25,6 +26,7 @@ export const Aside = ({ phase, info }) => {
                             Select Candidate
                         </span>
                     </h5>
+
                     <h5 className={`${selectCompany} mt-3`}>
                         <small className={`${selectCompany} fa-stack`}>
                             <span className="fa fa-circle-thin fa-stack-2x"></span>
@@ -34,6 +36,7 @@ export const Aside = ({ phase, info }) => {
                             Select Company
                         </span>
                     </h5>
+
                     <h5 className={`${fillReport} mt-3 mb-4`}>
                         <small className={`${fillReport} fa-stack`}>
                             <span className="fa fa-circle-thin fa-stack-2x"></span>
@@ -43,17 +46,21 @@ export const Aside = ({ phase, info }) => {
                             Fill Report Detail
                         </span>
                     </h5>
+
                 </div>
+
                 <div>
                     <div className={`${candidate} pl-1`}>
                         <p className="mt-3 mb-1">Candidate:</p>
                         <h4>{candidateName}</h4>
                     </div>
+
                     <div className={`${company} pl-1`}>
                         <p className="mb-1">Company:</p>
                         <h4>{companyName}</h4>
                     </div>
                 </div>
+                
             </div>
         </div>
     );

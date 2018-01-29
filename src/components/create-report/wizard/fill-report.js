@@ -126,6 +126,7 @@ class FillReport extends React.Component {
 
         return (
             <form className={`${show} row fill-report`}>
+
                 <div className="col-12 offset-sm-1 col-sm-10 d-md-none">
                     <button
                         type="button"
@@ -147,11 +148,13 @@ class FillReport extends React.Component {
                             className="pl-2 form-control"
                             disabled={declinedDatePicker}
                         />
+
                         <div className={`${dateError} float-right pr-2`}>
                             <small className="red">Please select a date.</small>
                         </div>
                     </div>
                 </div>
+
                 <div className="col-12 offset-sm-1 col-sm-10 offset-md-0 col-md-6 col-lg-4">
                     <div className="form-group">
                         <label>Phase:</label>
@@ -168,11 +171,13 @@ class FillReport extends React.Component {
                             <option className={`${tech}`}>Tech</option>
                             <option className={`${final}`}>Final</option>
                         </select>
+
                         <div className={`${phaseError} float-right pr-2`}>
                             <small className="red">Please select a phase.</small>
                         </div>
                     </div>
                 </div>
+
                 <div className="col-12 offset-sm-1 col-sm-10 offset-md-0 col-md-6 col-lg-4">
                     <div className="form-group">
                         <label>Status:</label>
@@ -187,11 +192,13 @@ class FillReport extends React.Component {
                             <option>Passed</option>
                             <option>Declined</option>
                         </select>
+
                         <div className={`${statusError} float-right pr-2`}>
                             <small className="red">Please select a status.</small>
                         </div>
                     </div>
                 </div>
+
                 <div className="col-12 offset-sm-1 col-sm-10 offset-md-0 col-md-12">
                     <div className="form-group">
                         <label>Notes:</label>
@@ -204,11 +211,13 @@ class FillReport extends React.Component {
                             className="form-control"
                             disabled={declined}
                         />
+
                         <div className={`${noteError} float-right pr-2`}>
                             <small className="red">Please enter notes.</small>
                         </div>
                     </div>
                 </div>
+
                 <div className="d-none d-md-block col-md-4 col-lg-3">
                     <button
                         type="button"
@@ -216,6 +225,7 @@ class FillReport extends React.Component {
                         className="btn btn-back w-100 mb-2"
                     >Back</button>
                 </div>
+
                 <div className="col-12 offset-sm-1 col-sm-10 offset-md-4 col-md-4 offset-lg-6 col-lg-3">
                     <button
                         type="button"
@@ -224,6 +234,7 @@ class FillReport extends React.Component {
                         className={`btn btn-submit w-100 mt-1 ${declined}`}
                     >Submit</button>
                 </div>
+                
             </form >
         );
     }

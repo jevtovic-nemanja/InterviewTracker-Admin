@@ -114,6 +114,7 @@ class ReportsListPage extends React.Component {
         return (
             <main className="container">
                 <div className="row mt-4">
+
                     <div className="offset-1 col-10 offset-sm-0 col-sm-7 offset-md-1 col-md-6 col-lg-5">
                         <Search onSearch={this.filterReports} />
                     </div>
@@ -130,6 +131,7 @@ class ReportsListPage extends React.Component {
                     <div className="col-12 mt-4">
                         <h5 className="text-center">{error}</h5>
                     </div>
+
                 </div>
 
                 <Modal open={detailsModal} onClose={this.closeDetailsModal} little >
@@ -138,7 +140,7 @@ class ReportsListPage extends React.Component {
 
                 <Modal open={deleteModal} onClose={this.closeDeleteModal} little >
                     <DeleteReport deleteReport={this.deleteReport} close={this.closeDeleteModal} />
-                </Modal>
+                </Modal>    
             </main>
         );
     }
