@@ -70,39 +70,30 @@ class CreateReportPage extends React.Component {
         this.setState({ error: "Looks like there was some kind of error. Don't worry, we're looking into it!" });
     }
 
-    filter(searchThrough, searchItem) {
-        const filtered = searchThrough.filter(item => {
+    filter(data, searchItem, assignTo, errorMessage) {
+        const filteredItems = data.filter(item => {
             return item.name.toLowerCase().includes(searchItem);
         });
-        return filtered;
+
+        filteredItems.length
+            ? this.setState(prevState => {
+                prevState[assignTo] = filteredItems;
+                prevState.error = "";
+                return prevState;
+            })
+            : this.setState(prevState => {
+                prevState[assignTo] = [];
+                prevState.error = errorMessage;
+                return prevState;
+            });
     }
 
     filterCandidates(searchItem) {
-        const filteredCandidates = this.filter(this.state.allCandidates, searchItem);
-
-        filteredCandidates.length
-            ? this.setState({
-                filteredCandidates: filteredCandidates,
-                error: ""
-            })
-            : this.setState({
-                filteredCandidates: [],
-                error: "No candidates match the search criteria."
-            });
+        this.filter(this.state.allCandidates, searchItem, "filteredCandidates", "No candidates match the search criteria.");
     }
 
     filterCompanies(searchItem) {
-        const filteredCompanies = this.filter(this.state.allCompanies, searchItem);
-
-        filteredCompanies.length
-            ? this.setState({
-                filteredCompanies: filteredCompanies,
-                error: ""
-            })
-            : this.setState({
-                filteredCompanies: [],
-                error: "No companies match the search criteria."
-            });
+        this.filter(this.state.allCompanies, searchItem, "filteredCompanies", "No companies match the search criteria.");
     }
 
     onSelect(idType, id) {
