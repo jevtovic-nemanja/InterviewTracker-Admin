@@ -108,10 +108,6 @@ class CreateReportPage extends React.Component {
     onSelect(idType, id) {
         const { selectedElementId } = this.state;
 
-        if (selectedElementId) {
-            document.getElementById(selectedElementId).firstChild.classList.remove("selected");
-        }
-
         this.setState(prevState => {
             prevState.next = "";
             prevState.selectedElementId = id;
@@ -151,7 +147,6 @@ class CreateReportPage extends React.Component {
 
     onNext() {
         const { phase, selectedElementId } = this.state;
-        document.getElementById(selectedElementId).firstChild.classList.remove("selected");
 
         const next = phase === 2 ? "d-none" : "disabled";
 
@@ -249,6 +244,7 @@ class CreateReportPage extends React.Component {
                 candidates={filteredCandidates}
                 onSearch={this.filterCandidates}
                 onSelect={this.onSelect}
+                selectedId={selectedElementId}
                 onBack={this.onBack}
                 onNext={this.onNext}
             />;
@@ -258,6 +254,7 @@ class CreateReportPage extends React.Component {
                 companies={filteredCompanies}
                 onSearch={this.filterCompanies}
                 onSelect={this.onSelect}
+                selectedId={selectedElementId}
                 onBack={this.onBack}
                 onNext={this.onNext}
             />;
@@ -272,10 +269,6 @@ class CreateReportPage extends React.Component {
 
     render() {
         const { filteredCandidates, filteredCompanies, phase, next, selectedElementId, report, trackedData, error } = this.state;
-
-        if (selectedElementId) {
-            document.getElementById(selectedElementId).firstChild.classList.add("selected");
-        }
 
         return (
             <div className="container">

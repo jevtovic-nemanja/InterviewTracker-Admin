@@ -2,7 +2,7 @@ import React from "react";
 
 import Search from "../../common/search";
 
-export const SelectCompany = ({ companies, onSearch, onSelect, next, onBack, onNext }) => {
+export const SelectCompany = ({ companies, onSearch, onSelect, selectedId, next, onBack, onNext }) => {
 
     return (
         <div className="row mt-2">
@@ -39,13 +39,15 @@ export const SelectCompany = ({ companies, onSearch, onSelect, next, onBack, onN
                     <tbody>
 
                         {companies.map(({ companyId, name }) => {
+                            const selected = selectedId === companyId ? "selected" : "";
+
                             return (
                                 <tr
                                     key={companyId}
                                     id={companyId}
                                     onClick={() => onSelect("companyId", companyId)}
                                 >
-                                    <td>{name}</td>
+                                    <td className={`${selected}`}>{name}</td>
                                 </tr>
                             );
                         })}

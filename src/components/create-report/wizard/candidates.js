@@ -2,7 +2,7 @@ import React from "react";
 
 import Search from "../../common/search";
 
-export const SelectCandidate = ({ candidates, onSearch, onSelect, next, onNext }) => {
+export const SelectCandidate = ({ candidates, onSearch, onSelect, selectedId, next, onNext }) => {
 
     return (
         <div className="row">
@@ -21,6 +21,8 @@ export const SelectCandidate = ({ candidates, onSearch, onSelect, next, onNext }
             </div>
 
             {candidates.map(({ candidateId, name, email, avatar }) => {
+                const selected = selectedId === candidateId ? "selected" : "";
+
                 return (
                     <div
                         key={candidateId}
@@ -28,7 +30,7 @@ export const SelectCandidate = ({ candidates, onSearch, onSelect, next, onNext }
                         onClick={() => onSelect("candidateId", candidateId)}
                         className="col-12 offset-sm-1 col-sm-10 offset-md-1 col-md-11 offset-xl-0 col-xl-6"
                     >
-                        <div className="card candidate-card mx-auto my-2 p-2">
+                        <div className={`card candidate-card mx-auto my-2 p-2 ${selected}`}>
                             <div className="row">
                                 <div className="col-3 text-center">
                                     <img
