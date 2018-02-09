@@ -157,13 +157,6 @@ class CreateReportPage extends React.Component {
         });
     }
 
-    onSubmit(input) {
-        const data = this.state.report;
-        Object.assign(data, input);
-
-        dataService.postReport(data, response => location.assign("#/"), error => this.handleError);
-    }
-
     getCandidateReports() {
         const { candidateId } = this.state.report;
 
@@ -210,8 +203,15 @@ class CreateReportPage extends React.Component {
 
     }
 
+    onSubmit(input) {
+        const data = this.state.report;
+        Object.assign(data, input);
+
+        dataService.postReport(data, response => location.assign("#/"), error => this.handleError);
+    }
+
     switchComponents() {
-        const { filteredCandidates, filteredCompanies, phase, next, selectedElementId, report, trackedData, error } = this.state;
+        const { filteredCandidates, filteredCompanies, next, selectedElementId, trackedData } = this.state;
 
         if (phase === 1) {
             return <SelectCandidate
