@@ -185,6 +185,7 @@ class CreateReportPage extends React.Component {
                     hiringStatus: hiringStatus
                 }
             });
+
         } else {
             this.setState({
                 trackedData: {
@@ -195,7 +196,6 @@ class CreateReportPage extends React.Component {
                 }
             });
         }
-
     }
 
     onSubmit(input) {
@@ -239,7 +239,7 @@ class CreateReportPage extends React.Component {
 
     render() {
         const { filteredCandidates, filteredCompanies, phase, next, selectedElementId, report, trackedData, error } = this.state;
-        
+
         return (
             <div className="container">
                 <div className="row mt-4">
