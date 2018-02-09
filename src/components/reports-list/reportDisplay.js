@@ -9,7 +9,7 @@ export const ReportDisplay = ({ report, deleteReport, openDetailsModal }) => {
         openDetailsModal(id);
     }
 
-    function deleteReport(event) {
+    function handleDeleteReport(event) {
         const id = buttonGroup.id;
         deleteReport(id);
     }
@@ -57,7 +57,7 @@ export const ReportDisplay = ({ report, deleteReport, openDetailsModal }) => {
 
                     <button
                         type="button"
-                        onClick={deleteReport}
+                        onClick={handleDeleteReport}
                         className="btn btn-report-card"
                     >
                         <i className="fa fa-times fa-lg"></i>
