@@ -4,11 +4,6 @@ import Search from "../../common/search";
 
 export const SelectCompany = ({ companies, onSearch, onSelect, next, onBack, onNext }) => {
 
-    function handleClick(event) {
-        const element = event.target;
-        onSelect("companyId", element);
-    }
-
     return (
         <div className="row mt-2">
 
@@ -45,7 +40,11 @@ export const SelectCompany = ({ companies, onSearch, onSelect, next, onBack, onN
 
                         {companies.map(({ companyId, name }) => {
                             return (
-                                <tr key={companyId} id={companyId} onClick={handleClick}>
+                                <tr
+                                    key={companyId}
+                                    id={companyId}
+                                    onClick={() => onSelect("companyId", companyId)}
+                                >
                                     <td>{name}</td>
                                 </tr>
                             );

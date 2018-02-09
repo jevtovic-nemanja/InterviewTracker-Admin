@@ -23,7 +23,7 @@ class CreateReportPage extends React.Component {
             filteredCompanies: [],
             phase: 1,
             next: "disabled",
-            selectedElement: "",
+            selectedElementId: "",
             report: {
                 candidateId: "",
                 candidateName: "",
@@ -105,40 +105,21 @@ class CreateReportPage extends React.Component {
             });
     }
 
-    onSelect(type, element) {
-        if (element.id) {
-            this.implementSelect(type, element);
-        } else {
-            this.checkParentForId(type, element);
-        }
-    }
+    onSelect(idType, id) {
+        const { selectedElementId } = this.state;
 
-    checkParentForId(type, element) {
-        const parent = element.parentElement;
-        const id = parent.id;
-
-        if (id) {
-            this.implementSelect(type, parent);
-        } else {
-            this.checkParentForId(type, parent);
-        }
-    }
-
-    implementSelect(type, element) {
-        const { selectedElement } = this.state;
-
-        if (selectedElement) {
-            selectedElement.firstChild.classList.remove("selected");
+        if (selectedElementId) {
+            document.getElementById(selectedElementId).firstChild.classList.remove("selected");
         }
 
         this.setState(prevState => {
             prevState.next = "";
-            prevState.selectedElement = element;
-            prevState.report[type] = parseInt(element.id);
+            prevState.selectedElementId = id;
+            prevState.report[idType] = parseInt(id);
             return prevState;
         });
 
-        this.getName(type, element.id);
+        this.getName(idType, id);
     }
 
     getName(type, id) {
@@ -169,8 +150,8 @@ class CreateReportPage extends React.Component {
     }
 
     onNext() {
-        const { phase, selectedElement } = this.state;
-        selectedElement.firstChild.classList.remove("selected");
+        const { phase, selectedElementId } = this.state;
+        document.getElementById(selectedElementId).firstChild.classList.remove("selected");
 
         const next = phase === 2 ? "d-none" : "disabled";
 
@@ -185,7 +166,7 @@ class CreateReportPage extends React.Component {
         this.setState(prevState => {
             prevState.next = next;
             prevState.phase = prevState.phase + 1;
-            prevState.selectedElement = "";
+            prevState.selectedElementId = "";
             return prevState;
         });
     }
@@ -260,7 +241,7 @@ class CreateReportPage extends React.Component {
     }
 
     switchComponents() {
-        const { filteredCandidates, filteredCompanies, phase, next, selectedElement, report, trackedData, error } = this.state;
+        const { filteredCandidates, filteredCompanies, phase, next, selectedElementId, report, trackedData, error } = this.state;
 
         if (phase === 1) {
             return <SelectCandidate
@@ -290,10 +271,10 @@ class CreateReportPage extends React.Component {
     }
 
     render() {
-        const { filteredCandidates, filteredCompanies, phase, next, selectedElement, report, trackedData, error } = this.state;
+        const { filteredCandidates, filteredCompanies, phase, next, selectedElementId, report, trackedData, error } = this.state;
 
-        if (selectedElement) {
-            selectedElement.firstChild.classList.add("selected");
+        if (selectedElementId) {
+            document.getElementById(selectedElementId).firstChild.classList.add("selected");
         }
 
         return (

@@ -4,18 +4,13 @@ import Search from "../../common/search";
 
 export const SelectCandidate = ({ candidates, onSearch, onSelect, next, onNext }) => {
 
-    function handleClick(event) {
-        const element = event.target;
-        onSelect("candidateId", element);
-    }
-
     return (
         <div className="row">
 
             <div className="col-8 offset-sm-1 col-sm-7 col-md-8 offset-xl-0 col-xl-9">
                 <Search onSearch={onSearch} />
             </div>
-            
+
             <div className="col-4 col-sm-3 mt-1">
                 <button
                     type="button"
@@ -30,7 +25,7 @@ export const SelectCandidate = ({ candidates, onSearch, onSelect, next, onNext }
                     <div
                         key={candidateId}
                         id={candidateId}
-                        onClick={handleClick}
+                        onClick={() => onSelect("candidateId", candidateId)}
                         className="col-12 offset-sm-1 col-sm-10 offset-md-1 col-md-11 offset-xl-0 col-xl-6"
                     >
                         <div className="card candidate-card mx-auto my-2 p-2">
