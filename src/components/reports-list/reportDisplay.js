@@ -2,17 +2,6 @@ import React from "react";
 
 export const ReportDisplay = ({ report, deleteReport, openDetailsModal }) => {
     const { id, candidate, company, date, status } = report;
-    let buttonGroup = null;
-
-    function viewReportDetails(event) {
-        const id = buttonGroup.id;
-        openDetailsModal(id);
-    }
-
-    function handleDeleteReport(event) {
-        const id = buttonGroup.id;
-        deleteReport(id);
-    }
 
     return (
         <div className="offset-1 col-10 offset-sm-0 col-sm-12 offset-md-1 col-md-10">
@@ -42,14 +31,10 @@ export const ReportDisplay = ({ report, deleteReport, openDetailsModal }) => {
                     </div>
                 </div>
 
-                <div
-                    id={id}
-                    ref={div => buttonGroup = div}
-                    className="btn-group-report-card"
-                >
+                <div className="btn-group-report-card">
                     <button
                         type="button"
-                        onClick={viewReportDetails}
+                        onClick={() => openDetailsModal(id)}
                         className="btn btn-report-card"
                     >
                         <i className="fa fa-eye fa-lg"></i>
@@ -57,13 +42,13 @@ export const ReportDisplay = ({ report, deleteReport, openDetailsModal }) => {
 
                     <button
                         type="button"
-                        onClick={handleDeleteReport}
+                        onClick={() => deleteReport(id)}
                         className="btn btn-report-card"
                     >
                         <i className="fa fa-times fa-lg"></i>
                     </button>
                 </div>
-                
+
             </div>
         </div>
     );
