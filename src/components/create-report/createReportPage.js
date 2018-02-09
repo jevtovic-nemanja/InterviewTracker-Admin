@@ -162,6 +162,8 @@ class CreateReportPage extends React.Component {
             prevState.next = next;
             prevState.phase = prevState.phase + 1;
             prevState.selectedElementId = "";
+            prevState.filteredCandidates = prevState.allCandidates;
+            prevState.filteredCompanies = prevState.allCompanies;
             return prevState;
         });
     }
