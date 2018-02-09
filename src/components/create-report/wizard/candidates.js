@@ -2,8 +2,7 @@ import React from "react";
 
 import Search from "../../common/search";
 
-export const SelectCandidate = ({ phase, candidates, onSearch, onSelect, next, onNext }) => {
-    const show = phase === 1 ? "" : "d-none";
+export const SelectCandidate = ({ candidates, onSearch, onSelect, next, onNext }) => {
 
     function handleClick(event) {
         const element = event.target;
@@ -11,7 +10,7 @@ export const SelectCandidate = ({ phase, candidates, onSearch, onSelect, next, o
     }
 
     return (
-        <div className={`${show} row`}>
+        <div className="row">
 
             <div className="col-8 offset-sm-1 col-sm-7 col-md-8 offset-xl-0 col-xl-9">
                 <Search onSearch={onSearch} />

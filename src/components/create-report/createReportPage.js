@@ -259,6 +259,36 @@ class CreateReportPage extends React.Component {
 
     }
 
+    switchComponents() {
+        const { filteredCandidates, filteredCompanies, phase, next, selectedElement, report, trackedData, error } = this.state;
+
+        if (phase === 1) {
+            return <SelectCandidate
+                next={next}
+                candidates={filteredCandidates}
+                onSearch={this.filterCandidates}
+                onSelect={this.onSelect}
+                onBack={this.onBack}
+                onNext={this.onNext}
+            />;
+        } else if (phase === 2) {
+            return <SelectCompany
+                next={next}
+                companies={filteredCompanies}
+                onSearch={this.filterCompanies}
+                onSelect={this.onSelect}
+                onBack={this.onBack}
+                onNext={this.onNext}
+            />;
+        } else {
+            return <FillReport
+                trackedData={trackedData}
+                onBack={this.onBack}
+                onSubmit={this.onSubmit}
+            />;
+        }
+    }
+
     render() {
         const { filteredCandidates, filteredCompanies, phase, next, selectedElement, report, trackedData, error } = this.state;
 
@@ -280,33 +310,7 @@ class CreateReportPage extends React.Component {
                             </aside>
 
                             <main className="col-12 col-md-8 col-xl-9">
-                            
-                                <SelectCandidate
-                                    phase={phase}
-                                    next={next}
-                                    candidates={filteredCandidates}
-                                    onSearch={this.filterCandidates}
-                                    onSelect={this.onSelect}
-                                    onBack={this.onBack}
-                                    onNext={this.onNext}
-                                />
-
-                                <SelectCompany
-                                    phase={phase}
-                                    next={next}
-                                    companies={filteredCompanies}
-                                    onSearch={this.filterCompanies}
-                                    onSelect={this.onSelect}
-                                    onBack={this.onBack}
-                                    onNext={this.onNext}
-                                />
-
-                                <FillReport
-                                    phase={phase}
-                                    trackedData={trackedData}
-                                    onBack={this.onBack}
-                                    onSubmit={this.onSubmit}
-                                />
+                                {this.switchComponents()}
 
                                 <div className="col-12 mt-4">
                                     <h5 className="text-center">{error}</h5>

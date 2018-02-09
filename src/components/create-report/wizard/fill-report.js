@@ -104,7 +104,6 @@ class FillReport extends React.Component {
     }
 
     render() {
-        const show = this.props.phase === 3 ? "" : "d-none";
         const { interviewDate, dateError, phase, phaseError, status, statusError, note, noteError } = this.state;
 
         const { timeOfLastInterview, currentPhase, currentStatus, hiringStatus } = this.props.trackedData;
@@ -125,7 +124,7 @@ class FillReport extends React.Component {
         const final = currentPhase === "tech" ? "" : "d-none";
 
         return (
-            <form className={`${show} row fill-report`}>
+            <form className="row fill-report">
 
                 <div className="col-12 offset-sm-1 col-sm-10 d-md-none">
                     <button
