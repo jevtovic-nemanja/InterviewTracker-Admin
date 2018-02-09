@@ -97,8 +97,6 @@ class CreateReportPage extends React.Component {
     }
 
     onSelect(idType, id) {
-        const { selectedElementId } = this.state;
-
         this.setState(prevState => {
             prevState.next = "";
             prevState.selectedElementId = id;
@@ -109,10 +107,10 @@ class CreateReportPage extends React.Component {
         this.getName(idType, id);
     }
 
-    getName(type, id) {
+    getName(idType, id) {
         const { allCandidates, allCompanies } = this.state;
 
-        if (type === "candidateId") {
+        if (idType === "candidateId") {
             const selected = allCandidates.filter(candidate => candidate.candidateId === parseInt(id)).shift();
 
             this.setState(prevState => {
@@ -137,7 +135,7 @@ class CreateReportPage extends React.Component {
     }
 
     onNext() {
-        const { phase, selectedElementId } = this.state;
+        const { phase } = this.state;
 
         const next = phase === 2 ? "d-none" : "disabled";
 
