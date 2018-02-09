@@ -110,20 +110,15 @@ class CreateReportPage extends React.Component {
     getName(idType, id) {
         const { allCandidates, allCompanies } = this.state;
 
-        if (idType === "candidateId") {
-            const selected = allCandidates.filter(candidate => candidate.candidateId === parseInt(id)).shift();
+        const searchThrough = idType === "candidateId" ? allCandidates : allCompanies;
+        const nameType = idType === "candidateId" ? "candidateName" : "companyName";
 
-            this.setState(prevState => {
-                prevState.report.candidateName = selected.name;
-            });
+        const selected = searchThrough.filter(item => item[idType] === parseInt(id)).shift();
 
-        } else {
-            const selected = allCompanies.filter(company => company.companyId === parseInt(id)).shift();
-
-            this.setState(prevState => {
-                prevState.report.companyName = selected.name;
-            });
-        }
+        this.setState(prevState => {
+            prevState.report[nameType] = selected.name;
+            return prevState;
+        });
     }
 
     onBack() {
@@ -211,7 +206,7 @@ class CreateReportPage extends React.Component {
     }
 
     switchComponents() {
-        const { filteredCandidates, filteredCompanies, next, selectedElementId, trackedData } = this.state;
+        const { phase, filteredCandidates, filteredCompanies, next, selectedElementId, trackedData } = this.state;
 
         if (phase === 1) {
             return <SelectCandidate
@@ -244,7 +239,7 @@ class CreateReportPage extends React.Component {
 
     render() {
         const { filteredCandidates, filteredCompanies, phase, next, selectedElementId, report, trackedData, error } = this.state;
-
+        
         return (
             <div className="container">
                 <div className="row mt-4">
