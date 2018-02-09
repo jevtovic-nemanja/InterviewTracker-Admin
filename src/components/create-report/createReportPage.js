@@ -178,38 +178,22 @@ class CreateReportPage extends React.Component {
         const candidateWithCompany = candidateReports.filter(report => report.companyId === companyId);
 
         if (candidateWithCompany.length) {
-            const phases = candidateWithCompany.map(report => report.phase);
+            const currentReport = candidateWithCompany.pop();
+            const { phase, status, interviewDate } = currentReport;
 
-            let currentPhase = "";
+            let hiringStatus = "Select";
 
-            if (phases.includes("final")) {
-                currentPhase = "final";
-            } else if (phases.includes("tech")) {
-                currentPhase = "tech";
-            } else if (phases.includes("hr")) {
-                currentPhase = "hr";
-            } else if (phases.includes("cv")) {
-                currentPhase = "cv";
-            } else currentPhase = "none";
-
-            const currentReport = candidateWithCompany.filter(report => report.phase === currentPhase).shift();
-
-            const currentStatus = currentReport.status;
-            const timeOfLastInterview = currentReport.interviewDate;
-
-            let hiringStatus = "";
-
-            if (currentStatus === "declined") {
+            if (status === "declined") {
                 hiringStatus = "Declined";
-            } else if (currentPhase === "final" && currentStatus === "passed") {
+            } else if (phase === "final" && status === "passed") {
                 hiringStatus = "Hired";
-            } else hiringStatus = "Select";
+            }
 
             this.setState({
                 trackedData: {
-                    currentPhase: currentPhase,
-                    currentStatus: currentStatus,
-                    timeOfLastInterview: timeOfLastInterview,
+                    currentPhase: phase,
+                    currentStatus: status,
+                    timeOfLastInterview: interviewDate,
                     hiringStatus: hiringStatus
                 }
             });
