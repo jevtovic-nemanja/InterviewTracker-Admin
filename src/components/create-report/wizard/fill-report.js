@@ -110,12 +110,7 @@ class FillReport extends React.Component {
         const today = moment();
         const lastInterview = moment(timeOfLastInterview);
 
-        let declined = currentStatus === "declined" ? "disabled" : "";
-
-        if (hiringStatus === "Hired") {
-            declined = "disabled";
-        }
-
+        const declined = (currentStatus === "declined" || hiringStatus === "Hired") ? "disabled" : "";
         const declinedDatePicker = declined ? true : false;
 
         const cv = currentPhase === "none" ? "" : "d-none";
