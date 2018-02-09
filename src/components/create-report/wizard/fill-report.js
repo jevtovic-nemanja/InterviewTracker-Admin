@@ -4,6 +4,8 @@ import moment from "moment";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
+import { capitalizeString } from "../../../utils/capitalizeString";
+
 class FillReport extends React.Component {
     constructor(props) {
         super(props);
@@ -113,10 +115,8 @@ class FillReport extends React.Component {
         const declined = (currentStatus === "declined" || hiringStatus === "Hired") ? "disabled" : "";
         const declinedDatePicker = declined ? true : false;
 
-        const cv = currentPhase === "none" ? "" : "d-none";
-        const hr = currentPhase === "cv" ? "" : "d-none";
-        const tech = currentPhase === "hr" ? "" : "d-none";
-        const final = currentPhase === "tech" ? "" : "d-none";
+        const phases = ["none", "cv", "hr", "tech", "final", "hired"];
+        const nextPhase = capitalizeString(phases[phases.indexOf(currentPhase) + 1]);
 
         return (
             <form className="row fill-report">
@@ -160,10 +160,7 @@ class FillReport extends React.Component {
                             disabled={declined}
                         >
                             <option hidden>Select</option>
-                            <option className={`${cv}`}>CV</option>
-                            <option className={`${hr}`}>HR</option>
-                            <option className={`${tech}`}>Tech</option>
-                            <option className={`${final}`}>Final</option>
+                            <option>{nextPhase}</option>
                         </select>
 
                         <div className={`${phaseError} float-right pr-2`}>
