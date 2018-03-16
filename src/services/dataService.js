@@ -1,6 +1,6 @@
 import moment from "moment";
 
-import { BASE_URL } from "../../constants";
+import { BASE_URL } from "../constants";
 import { commService } from "./communicationService";
 
 import Report from "../entities/report";

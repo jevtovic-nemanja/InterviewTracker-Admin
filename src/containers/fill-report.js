@@ -4,7 +4,7 @@ import moment from "moment";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
-import { capitalizeString } from "../../../utils/capitalizeString";
+import { capitalizeString } from "../utils/capitalizeString";
 
 class FillReport extends React.Component {
     constructor(props) {

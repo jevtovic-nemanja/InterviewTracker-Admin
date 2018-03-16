@@ -1,6 +1,6 @@
 import React from "react";
 
-import Search from "../../common/search";
+import Search from "../common/search";
 
 export const SelectCandidate = ({ candidates, onSearch, onSelect, selectedId, next, onNext }) => {
 

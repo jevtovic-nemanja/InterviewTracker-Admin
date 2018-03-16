@@ -2,13 +2,13 @@ import React from "react";
 
 import Modal from "react-responsive-modal";
 
-import { BASE_URL } from "../../constants";
+import { BASE_URL } from "../constants";
 import { dataService } from "../services/dataService";
 
-import Search from "../common/search";
-import { ReportDisplay } from "./reportDisplay";
-import { ReportDetails } from "./reportDetails";
-import { DeleteReport } from "./deleteReport";
+import Search from "../components/common/search";
+import { ReportDisplay } from "../components/reports-list/reportDisplay";
+import { ReportDetails } from "../components/reports-list/reportDetails";
+import { DeleteReport } from "../components/reports-list/deleteReport";
 
 class ReportsListPage extends React.Component {
     constructor(props) {

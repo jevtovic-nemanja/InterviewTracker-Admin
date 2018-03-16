@@ -2,10 +2,10 @@ import React from "react";
 
 import { dataService } from "../services/dataService";
 
-import { Aside } from "../create-report/wizard/aside";
-import { SelectCandidate } from "../create-report/wizard/candidates";
-import { SelectCompany } from "../create-report/wizard/companies";
-import FillReport from "../create-report/wizard/fill-report";
+import { Aside } from "../components/create-report/aside";
+import { SelectCandidate } from "../components/create-report/candidates";
+import { SelectCompany } from "../components/create-report/companies";
+import FillReport from "./fill-report";
 
 class CreateReportPage extends React.Component {
     constructor(props) {

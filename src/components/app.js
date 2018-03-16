@@ -3,8 +3,8 @@ import React from "react";
 import { Switch, Route } from "react-router-dom";
 
 import { Header } from "./common/header";
-import ReportsListPage from "./reports-list/reportsListPage";
-import CreateReportPage from "./create-report/createReportPage";
+import ReportsListPage from "../containers/reportsListPage";
+import CreateReportPage from "../containers/createReportPage";
 
 class App extends React.Component {
     constructor(props) {
