@@ -7,7 +7,7 @@ import { ReportDisplay } from "./reportDisplay";
 import { ReportDetails } from "./reportDetails";
 import { DeleteReport } from "./deleteReport";
 
-export const ReportsList = ({ loading, reports, error }) => {
+export const ReportsList = ({ loading, reports, error, detailsModal, detailedReport, openDetailsModal, closeDetailsModal }) => {
 
     if (loading) {
         return (
@@ -51,18 +51,18 @@ export const ReportsList = ({ loading, reports, error }) => {
                     <ReportDisplay
                         key={report.id}
                         report={report}
-                    // deleteReport={this.openDeleteModal}
-                    // openDetailsModal={this.openDetailsModal}
+                        // deleteReport={this.openDeleteModal}
+                        openDetailsModal={openDetailsModal}
                     />
                 )}
 
             </div>
 
-            {/* <Modal open={detailsModal} onClose={this.closeDetailsModal} little >
+            <Modal open={detailsModal} onClose={closeDetailsModal} little >
                 <ReportDetails report={detailedReport} />
             </Modal>
 
-            <Modal open={deleteModal} onClose={this.closeDeleteModal} little >
+            {/* <Modal open={deleteModal} onClose={this.closeDeleteModal} little >
                 <DeleteReport deleteReport={this.deleteReport} close={this.closeDeleteModal} />
             </Modal> */}
         </main>

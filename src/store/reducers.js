@@ -50,3 +50,23 @@ export function searchItem(state = "", action) {
         return state;
     }
 }
+
+export function detailsModal(state = false, action) {
+    switch (action.type) {
+    case actionTypes.OPEN_DETAILS_MODAL:
+        return true;
+    case actionTypes.CLOSE_DETAILS_MODAL:
+        return false;
+    default:
+        return state;
+    }
+}
+
+export function detailedReport(state = {}, action) {
+    switch (action.type) {
+    case actionTypes.OPEN_DETAILS_MODAL:
+        return action.detailedReport;
+    default:
+        return state;
+    }
+}

@@ -36,3 +36,16 @@ export function noFilterResults() {
         error: "No candidates or companies match the search criteria."
     };
 }
+
+export function openDetailsModal(detailedReport) {
+    return {
+        type: actionTypes.OPEN_DETAILS_MODAL,
+        detailedReport
+    };
+}
+
+export function closeDetailsModal() {
+    return {
+        type: actionTypes.CLOSE_DETAILS_MODAL
+    };
+}

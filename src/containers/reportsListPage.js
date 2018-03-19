@@ -1,6 +1,7 @@
 import React from "react";
 
 import { ReportsList } from "../components/reports-list/reportsList";
+import { openDetailsModal, closeDetailsModal } from "../store/actions";
 
 import { connect } from "react-redux";
 
@@ -16,11 +17,14 @@ const filterReports = (reports, searchItem) => {
 const mapStateToProps = state => ({
     loading: state.loading,
     reports: filterReports(state.reports, state.searchItem),
-    error: state.error
+    error: state.error,
+    detailsModal: state.detailsModal,
+    detailedReport: state.detailedReport
 });
 
 const mapDispatchToProps = dispatch => ({
-
+    openDetailsModal: report => dispatch(openDetailsModal(report)),
+    closeDetailsModal: () => dispatch(closeDetailsModal())
 });
 
-export default connect(mapStateToProps)(ReportsList);
+export default connect(mapStateToProps, mapDispatchToProps)(ReportsList);
