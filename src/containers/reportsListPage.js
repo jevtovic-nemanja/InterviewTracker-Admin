@@ -2,7 +2,6 @@ import React from "react";
 
 import { ReportsList } from "../components/reports-list/reportsList";
 
-import { startFetchReports, filterReportsSuccess, filterReportsFail } from "../store/actions";
 import { connect } from "react-redux";
 
 const filterReports = (reports, searchItem) => {

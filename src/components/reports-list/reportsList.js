@@ -32,7 +32,7 @@ export const ReportsList = ({ loading, reports, error }) => {
                         <Search />
                     </div>
                     <div className="col-12 mt-4">
-                        <h5 className="text-center">No candidates or companies match the search criteria.</h5>
+                        <h5 className="text-center">{error}</h5>
                     </div>
                 </div>
             </main>

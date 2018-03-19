@@ -1,6 +1,6 @@
 import { BASE_URL } from "../constants";
 import { actionTypes } from "../store/actionTypes";
-import { fetchReportsSuccess, fetchReportsFail } from "../store/actions";
+import { fetchReportsSuccess, fetchReportsFail, noFilterResults } from "../store/actions";
 
 import { dataService } from "../services/dataService";
 
@@ -25,9 +25,18 @@ function* onFetchReports() {
     }
 }
 
+function* watchNoFilterResults() {
+    yield takeLatest(actionTypes.NO_FILTER_RESULTS, onNoFilterResults);
+}
+
+function* onNoFilterResults() {
+    yield put(noFilterResults());
+}
+
 export default function* rootSaga() {
     yield all([
         watchFetchReports(),
-        onFetchReports()
+        onFetchReports(),
+        onNoFilterResults()
     ]);
 }

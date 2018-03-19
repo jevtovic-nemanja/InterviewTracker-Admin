@@ -29,3 +29,10 @@ export function receiveInputChange(inputItem) {
         inputItem
     };
 }
+
+export function noFilterResults() {
+    return {
+        type: actionTypes.NO_FILTER_RESULTS,
+        error: "No candidates or companies match the search criteria."
+    };
+}

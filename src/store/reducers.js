@@ -35,8 +35,7 @@ export function filteredReports(state = [], action) {
 export function error(state = "", action) {
     switch (action.type) {
     case actionTypes.FETCH_REPORTS_FAIL:
-    case actionTypes.FILTER_REPORTS_SUCCESS:
-    case actionTypes.FILTER_REPORTS_FAIL:
+    case actionTypes.NO_FILTER_RESULTS:
         return action.error;
     default:
         return state;
