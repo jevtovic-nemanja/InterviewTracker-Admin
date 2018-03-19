@@ -23,18 +23,9 @@ export function fetchReportsFail(error) {
     };
 }
 
-export function filterReportsSuccess(filteredReports) {
+export function receiveInputChange(inputItem) {
     return {
-        type: actionTypes.FILTER_REPORTS_SUCCESS,
-        filteredReports,
-        error: ""
-    };
-}
-
-export function filterReportsFail(filteredReports) {
-    return {
-        type: actionTypes.FILTER_REPORTS_FAIL,
-        filteredReports,
-        error: "No candidates or companies match the search criteria."
+        type: actionTypes.RECEIVE_INPUT_CHANGE,
+        inputItem
     };
 }

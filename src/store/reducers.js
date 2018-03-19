@@ -42,3 +42,12 @@ export function error(state = "", action) {
         return state;
     }
 }
+
+export function searchItem(state = "", action) {
+    switch (action.type) {
+    case actionTypes.RECEIVE_INPUT_CHANGE:
+        return action.inputItem;
+    default:
+        return state;
+    }
+}
