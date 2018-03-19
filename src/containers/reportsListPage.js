@@ -10,6 +10,9 @@ import { ReportDisplay } from "../components/reports-list/reportDisplay";
 import { ReportDetails } from "../components/reports-list/reportDetails";
 import { DeleteReport } from "../components/reports-list/deleteReport";
 
+import { startFetchReports, filterReportsSuccess, filterReportsFail } from "../store/actions";
+import { connect } from "react-redux";
+
 class ReportsListPage extends React.Component {
     constructor(props) {
         super(props);
@@ -40,18 +43,7 @@ class ReportsListPage extends React.Component {
     }
 
     componentDidMount() {
-        this.loadData();
-    }
-
-    loadData() {
-        dataService.getReports(reports => this.setState({
-            allReports: reports,
-            filteredReports: reports
-        }), error => this.handleError(error));
-    }
-
-    handleError(error) {
-        this.setState({ error: "Looks like there was some kind of error. Don't worry, we're looking into it!" });
+        this.props.loadReports();
     }
 
     deleteReport() {
@@ -64,23 +56,17 @@ class ReportsListPage extends React.Component {
     }
 
     filterReports(searchItem) {
-        const { allReports } = this.state;
-
-        const filteredReports = allReports.filter(report => {
+        const { reports } = this.props;
+        
+        const filteredReports = reports.filter(report => {
             const candidate = report.candidate.toLowerCase();
             const company = report.company.toLowerCase();
             return candidate.includes(searchItem) || company.includes(searchItem);
         });
 
         filteredReports.length
-            ? this.setState({
-                filteredReports: filteredReports,
-                error: ""
-            })
-            : this.setState({
-                filteredReports: [],
-                error: "No candidates or companies match the search criteria."
-            });
+            ? this.props.filterReportsSuccess(filteredReports)
+            : this.props.filterReportsFail(filteredReports);
     }
 
     openDeleteModal(id) {
@@ -109,7 +95,21 @@ class ReportsListPage extends React.Component {
     }
 
     render() {
-        const { allReports, filteredReports, detailsModal, detailedReport, deleteModal, error } = this.state;
+        const { detailsModal, detailedReport, deleteModal } = this.state;
+        const { filteredReports, error, loading } = this.props;
+
+        if (loading) {
+            return (
+                <div>
+                    <div className="offset-1 col-10 offset-sm-0 col-sm-7 offset-md-1 col-md-6 col-lg-5">
+                        <Search onSearch={this.filterReports} />
+                    </div>
+                    <div className="col-12 mt-4">
+                        <h5 className="text-center">Loading...</h5>
+                    </div>
+                </div>
+            );
+        }
 
         return (
             <main className="container">
@@ -140,10 +140,23 @@ class ReportsListPage extends React.Component {
 
                 <Modal open={deleteModal} onClose={this.closeDeleteModal} little >
                     <DeleteReport deleteReport={this.deleteReport} close={this.closeDeleteModal} />
-                </Modal>    
+                </Modal>
             </main>
         );
     }
 }
 
-export default ReportsListPage;
+const mapStateToProps = state => ({
+    loading: state.loading,
+    reports: state.reports,
+    filteredReports: state.filteredReports,
+    error: state.error
+});
+
+const mapDispatchToProps = dispatch => ({
+    loadReports: () => dispatch(startFetchReports()),
+    filterReportsSuccess: filteredReports => dispatch(filterReportsSuccess(filteredReports)),
+    filterReportsFail: filteredReports => dispatch(filterReportsFail(filteredReports))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(ReportsListPage);

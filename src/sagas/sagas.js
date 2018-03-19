@@ -1,11 +1,14 @@
 import { BASE_URL } from "../constants";
-import { START_FETCH_REPORTS, fetchReportsSuccess, fetchReportsFail } from "../store/actions";
+import { actionTypes } from "../store/actionTypes";
+import { fetchReportsSuccess, fetchReportsFail } from "../store/actions";
+
+import { dataService } from "../services/dataService";
 
 import { all, call, put, takeLatest } from "redux-saga/effects";
 
 
 function* watchFetchReports() {
-    yield takeLatest(START_FETCH_REPORTS, onFetchReports);
+    yield takeLatest(actionTypes.START_FETCH_REPORTS, onFetchReports);
 }
 
 function* onFetchReports() {
@@ -13,13 +16,13 @@ function* onFetchReports() {
 
     try {
         const data = yield call(fetch, url);
-        const reports = data.json();
+        const reports = yield data.json();
+        const packedReports = dataService.packReports(reports);
+        yield put(fetchReportsSuccess(packedReports));
     } catch (e) {
         yield put(fetchReportsFail(e));
         return;
     }
-
-    yield put(fetchReportsSuccess(reports));
 }
 
 export default function* rootSaga() {
