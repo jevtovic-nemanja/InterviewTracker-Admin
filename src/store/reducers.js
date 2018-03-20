@@ -84,3 +84,20 @@ export function deleteReportId(state = "", action) {
         return state;
     }
 }
+
+export function createReportPhase(state = 1, action) {
+    switch (action.type) {
+    default:
+        return state;
+    }
+}
+
+export function newReportData(state = {
+    candidateName: "",
+    companyName: ""
+}, action) {
+    switch (action.type) {
+    default:
+        return state;
+    }
+}

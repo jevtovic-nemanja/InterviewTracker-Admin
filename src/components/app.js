@@ -4,7 +4,7 @@ import { Switch, Route } from "react-router-dom";
 
 import { Header } from "./common/header";
 import ReportsListPage from "../containers/reportsListPage";
-import CreateReportPage from "../containers/createReportPage";
+import { CreateReportPage } from "../containers/createReportPage";
 
 class App extends React.Component {
     constructor(props) {
