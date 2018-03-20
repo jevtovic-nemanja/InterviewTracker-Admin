@@ -1,8 +1,8 @@
 import React from "react";
 
-import Search from "../common/search";
+import Search from "../../containers/searchContainer";
 
-export const SelectCompany = ({ companies, onSearch, onSelect, selectedId, next, onBack, onNext }) => {
+export const SelectCompany = ({ companies, message, selectedElementId, next, onSelect, onNext, onBack }) => {
 
     return (
         <div className="row mt-2">
@@ -31,31 +31,53 @@ export const SelectCompany = ({ companies, onSearch, onSelect, selectedId, next,
             </div>
 
             <div className="col-12 offset-sm-1 col-sm-10 offset-md-0 col-md-12">
-                <Search onSearch={onSearch} />
+                <Search />
             </div>
 
             <div className="col-12 offset-sm-1 col-sm-10 offset-md-0 col-md-12 mt-2">
+                {
+                    companies.length
+                        ? companies.map(company => {
+
+                            if (company.message) {
+                                return (
+                                    <div className="col-12 mt-4" key={company.id}>
+                                        <h5 className="text-center">{company.message}</h5>
+                                    </div>
+                                );
+                            }
+                        })
+
+                        : <div className="col-12 mt-4">
+                            <h5 className="text-center">{message}</h5>
+                        </div>
+                }
+
                 <table className="table table-striped table-bordered table-hover">
                     <tbody>
 
-                        {companies.map(({ companyId, name }) => {
-                            const selected = selectedId === companyId ? "selected" : "";
+                        {
+                            companies.map(company => {
+                                const { companyId, name } = company;
+                                const selected = selectedElementId === companyId ? "selected" : "";
 
-                            return (
-                                <tr
-                                    key={companyId}
-                                    id={companyId}
-                                    onClick={() => onSelect("companyId", companyId)}
-                                >
-                                    <td className={`${selected}`}>{name}</td>
-                                </tr>
-                            );
-                        })}
+                                if (!company.message) {
+                                    return (
+                                        <tr
+                                            key={companyId}
+                                            id={companyId}
+                                            onClick={() => onSelect(companies, companyId)}
+                                        >
+                                            <td className={`${selected}`}>{name}</td>
+                                        </tr>
+                                    );
+                                }
+                            })
+                        }
 
                     </tbody>
                 </table>
             </div>
-
-        </div>
+        </div >
     );
 };

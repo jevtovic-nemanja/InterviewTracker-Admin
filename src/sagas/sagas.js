@@ -1,6 +1,6 @@
 import { BASE_URL } from "../constants";
 import { actionTypes } from "../store/actionTypes";
-import { fetchReportsSuccess, fetchReportsFail, deleteReportSuccess, deleteReportFail, startFetchReports } from "../store/actions";
+import { fetchReportsSuccess, fetchReportsFail, deleteReportSuccess, deleteReportFail, startFetchReports, fetchCandidatesSuccess, fetchCandidatesFail, fetchCompaniesSuccess, fetchCompaniesFail } from "../store/actions";
 
 import { dataService } from "../services/dataService";
 
@@ -46,9 +46,47 @@ function* onDeleteReport() {
     }
 }
 
+function* watchFetchCandidates() {
+    yield takeLatest(actionTypes.START_FETCH_CANDIDATES, onFetchCandidates);
+}
+
+function* onFetchCandidates() {
+    const url = `${BASE_URL}/candidates`;
+
+    try {
+        const data = yield call(fetch, url);
+        const candidates = yield data.json();
+        const packedCandidates = dataService.packCandidates(candidates);
+        yield put(fetchCandidatesSuccess(packedCandidates));
+    } catch (e) {
+        yield put(fetchCandidatesFail());
+        return;
+    }
+}
+
+function* watchFetchCompanies() {
+    yield takeLatest(actionTypes.START_FETCH_COMPANIES, onFetchCompanies);
+}
+
+function* onFetchCompanies() {
+    const url = `${BASE_URL}/companies`;
+
+    try {
+        const data = yield call(fetch, url);
+        const companies = yield data.json();
+        const packedCompanies = dataService.packCompanies(companies);
+        yield put(fetchCompaniesSuccess(packedCompanies));
+    } catch (e) {
+        yield put(fetchCompaniesFail());
+        return;
+    }
+}
+
 export default function* rootSaga() {
     yield all([
         watchFetchReports(),
-        watchDeleteReport()
+        watchDeleteReport(),
+        watchFetchCandidates(),
+        watchFetchCompanies()
     ]);
 }

@@ -1,9 +1,9 @@
 import React from "react";
+import { connect } from "react-redux";
 
 import { ReportsList } from "../components/reports-list/reportsList";
 import { startFetchReports, noFilterResults, openDetailsModal, closeDetailsModal, openDeleteModal, closeDeleteModal, startDeleteReport } from "../store/actions";
 
-import { connect } from "react-redux";
 
 const filterReports = (reports, searchItem) => {
     if (reports.length) {

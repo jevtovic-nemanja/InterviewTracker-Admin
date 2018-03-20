@@ -2,9 +2,11 @@ import React from "react";
 
 import { Switch, Route } from "react-router-dom";
 
-import AsideComponent from "./asideContainer";
+import AsideComponent from "../../containers/asideContainer";
+import Candidates from "../../containers/candidatesContainer";
+import Companies from "../../containers/companiesContainer";
 
-export const CreateReportPage = () => {
+export const CreateReportPage = ({ match }) => {
     return (
         <div className="container">
             <div className="row mt-4">
@@ -15,18 +17,13 @@ export const CreateReportPage = () => {
                             <AsideComponent />
                         </aside>
 
-                        {/* <main className="col-12 col-md-8 col-xl-9">
+                        <main className="col-12 col-md-8 col-xl-9">
                             <Switch>
-                                <Route path="/" component={ReportsListPage} />
-                                <Route path="/" component={CreateReportPage} />
-                                <Route path="/" component={CreateReportPage} />
+                                <Route exact path="/create-report/" component={Candidates} />
+                                <Route path="/create-report/2" component={Companies} />
+                                {/* <Route path="/" component={CreateReportPage} /> */}
                             </Switch>
-
-                            <div className="col-12 mt-4">
-                                <h5 className="text-center">{error}</h5>
-                            </div>
-
-                        </main> */}
+                        </main>
 
                     </div>
                 </div>

@@ -24,7 +24,7 @@ export const Header = props => {
                         <Link to="/">
                             <button className={`${report} btn rounded-0`}>Reports</button>
                         </Link>
-                        <Link to="/create-report">
+                        <Link to="/create-report/">
                             <button className={`${create} btn rounded-0`}>Create Report</button>
                         </Link>
                     </div>

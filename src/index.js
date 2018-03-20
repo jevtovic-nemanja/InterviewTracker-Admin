@@ -10,7 +10,7 @@ import * as reducers from "./store/reducers";
 import createSagaMiddleware from "redux-saga";
 import rootSaga from "./sagas/sagas";
 
-import { startFetchReports } from "./store/actions";
+import { startFetchReports, startFetchCandidates, startFetchCompanies } from "./store/actions";
 
 import logger from "redux-logger";
 
@@ -34,3 +34,5 @@ render(
 );
 
 store.dispatch(startFetchReports());
+store.dispatch(startFetchCandidates());
+store.dispatch(startFetchCompanies());

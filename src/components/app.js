@@ -4,7 +4,7 @@ import { Switch, Route } from "react-router-dom";
 
 import { Header } from "./common/header";
 import ReportsListPage from "../containers/reportsListPage";
-import { CreateReportPage } from "../containers/createReportPage";
+import { CreateReportPage } from "../components/create-report/createReport";
 
 class App extends React.Component {
     constructor(props) {
@@ -17,7 +17,7 @@ class App extends React.Component {
                 <Header />
                 <Switch>
                     <Route exact path="/" component={ReportsListPage} />
-                    <Route path="/create-report" component={CreateReportPage} />
+                    <Route path="/create-report/" component={CreateReportPage} />
                 </Switch>
             </div>
         );
