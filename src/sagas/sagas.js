@@ -1,10 +1,12 @@
 import { BASE_URL } from "../constants";
 import { actionTypes } from "../store/actionTypes";
-import { fetchReportsSuccess, fetchReportsFail, noFilterResults } from "../store/actions";
+import { fetchReportsSuccess, fetchReportsFail, deleteReportSuccess, deleteReportFail, startFetchReports } from "../store/actions";
 
 import { dataService } from "../services/dataService";
 
-import { all, call, put, takeLatest } from "redux-saga/effects";
+import { all, call, put, select, takeEvery, takeLatest } from "redux-saga/effects";
+
+import { getDeleteReportId } from "./selectors";
 
 
 function* watchFetchReports() {
@@ -20,23 +22,33 @@ function* onFetchReports() {
         const packedReports = dataService.packReports(reports);
         yield put(fetchReportsSuccess(packedReports));
     } catch (e) {
-        yield put(fetchReportsFail(e));
+        yield put(fetchReportsFail());
         return;
     }
 }
 
-function* watchNoFilterResults() {
-    yield takeLatest(actionTypes.NO_FILTER_RESULTS, onNoFilterResults);
+function* watchDeleteReport() {
+    yield takeEvery(actionTypes.START_DELETE_REPORT, onDeleteReport);
 }
 
-function* onNoFilterResults() {
-    yield put(noFilterResults());
+function* onDeleteReport() {
+    const id = yield select(getDeleteReportId);
+    const url = `${BASE_URL}/reports/${id}`;
+    const init = { method: "DELETE" };
+
+    try {
+        const response = yield call(fetch, url, init);
+        yield put(deleteReportSuccess());
+        yield put(startFetchReports());
+    } catch (e) {
+        yield put(deleteReportFail());
+        return;
+    }
 }
 
 export default function* rootSaga() {
     yield all([
         watchFetchReports(),
-        onFetchReports(),
-        onNoFilterResults()
+        watchDeleteReport()
     ]);
 }

@@ -3,7 +3,8 @@ import { actionTypes } from "./actionTypes";
 export function startFetchReports() {
     return {
         type: actionTypes.START_FETCH_REPORTS,
-        loading: true
+        loading: true,
+        message: "Loading..."
     };
 }
 
@@ -11,15 +12,16 @@ export function fetchReportsSuccess(reports) {
     return {
         type: actionTypes.FETCH_REPORTS_SUCCESS,
         loading: false,
-        reports
+        reports,
+        message: ""
     };
 }
 
-export function fetchReportsFail(error) {
+export function fetchReportsFail() {
     return {
         type: actionTypes.FETCH_REPORTS_FAIL,
         loading: false,
-        error: "Looks like there was some kind of error. Don't worry, we're looking into it!"
+        message: "Looks like there was some kind of error. Don't worry, we're looking into it!"
     };
 }
 
@@ -27,13 +29,6 @@ export function receiveInputChange(inputItem) {
     return {
         type: actionTypes.RECEIVE_INPUT_CHANGE,
         inputItem
-    };
-}
-
-export function noFilterResults() {
-    return {
-        type: actionTypes.NO_FILTER_RESULTS,
-        error: "No candidates or companies match the search criteria."
     };
 }
 
@@ -47,5 +42,40 @@ export function openDetailsModal(detailedReport) {
 export function closeDetailsModal() {
     return {
         type: actionTypes.CLOSE_DETAILS_MODAL
+    };
+}
+
+export function openDeleteModal(deleteReportId) {
+    return {
+        type: actionTypes.OPEN_DELETE_MODAL,
+        deleteReportId
+    };
+}
+
+export function closeDeleteModal() {
+    return {
+        type: actionTypes.CLOSE_DELETE_MODAL,
+        message: ""
+    };
+}
+
+export function startDeleteReport() {
+    return {
+        type: actionTypes.START_DELETE_REPORT,
+        message: ""
+    };
+}
+
+export function deleteReportSuccess() {
+    return {
+        type: actionTypes.DELETE_REPORT_SUCCESS,
+        message: ""
+    };
+}
+
+export function deleteReportFail() {
+    return {
+        type: actionTypes.DELETE_REPORT_FAIL,
+        message: "Looks like there was some kind of error. Don't worry, we're looking into it!"
     };
 }

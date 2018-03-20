@@ -1,6 +1,6 @@
 import React from "react";
 
-export const ReportDisplay = ({ report, deleteReport, openDetailsModal }) => {
+export const ReportDisplay = ({ report, openDeleteModal, openDetailsModal }) => {
     const { id, candidate, company, date, status } = report;
 
     return (
@@ -42,7 +42,7 @@ export const ReportDisplay = ({ report, deleteReport, openDetailsModal }) => {
 
                     <button
                         type="button"
-                        onClick={() => deleteReport(id)}
+                        onClick={() => openDeleteModal(id)}
                         className="btn btn-report-card"
                     >
                         <i className="fa fa-times fa-lg"></i>

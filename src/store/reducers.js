@@ -20,23 +20,16 @@ export function reports(state = [], action) {
     }
 }
 
-export function filteredReports(state = [], action) {
+export function message(state = "", action) {
     switch (action.type) {
+    case actionTypes.START_FETCH_REPORTS:
     case actionTypes.FETCH_REPORTS_SUCCESS:
-        return action.reports;
-    case actionTypes.FILTER_REPORTS_SUCCESS:
-    case actionTypes.FILTER_REPORTS_FAIL:
-        return action.filteredReports;
-    default:
-        return state;
-    }
-}
-
-export function error(state = "", action) {
-    switch (action.type) {
     case actionTypes.FETCH_REPORTS_FAIL:
-    case actionTypes.NO_FILTER_RESULTS:
-        return action.error;
+    case actionTypes.START_DELETE_REPORT:
+    case actionTypes.DELETE_REPORT_FAIL:
+    case actionTypes.DELETE_REPORT_SUCCESS:
+    case actionTypes.CLOSE_DELETE_MODAL:
+        return action.message;
     default:
         return state;
     }
@@ -66,6 +59,27 @@ export function detailedReport(state = {}, action) {
     switch (action.type) {
     case actionTypes.OPEN_DETAILS_MODAL:
         return action.detailedReport;
+    default:
+        return state;
+    }
+}
+
+export function deleteModal(state = false, action) {
+    switch (action.type) {
+    case actionTypes.OPEN_DELETE_MODAL:
+        return true;
+    case actionTypes.CLOSE_DELETE_MODAL:
+    case actionTypes.DELETE_REPORT_SUCCESS:
+        return false;
+    default:
+        return state;
+    }
+}
+
+export function deleteReportId(state = "", action) {
+    switch (action.type) {
+    case actionTypes.OPEN_DELETE_MODAL:
+        return action.deleteReportId;
     default:
         return state;
     }

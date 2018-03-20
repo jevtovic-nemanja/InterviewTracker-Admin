@@ -10,13 +10,17 @@ import * as reducers from "./store/reducers";
 import createSagaMiddleware from "redux-saga";
 import rootSaga from "./sagas/sagas";
 
+import { startFetchReports } from "./store/actions";
+
+import logger from "redux-logger";
+
 import App from "./components/app";
 
 const rootReducer = combineReducers(reducers);
 
 const sagaMiddleware = createSagaMiddleware();
 
-const store = createStore(rootReducer, applyMiddleware(sagaMiddleware));
+const store = createStore(rootReducer, applyMiddleware(sagaMiddleware, logger));
 
 sagaMiddleware.run(rootSaga);
 
@@ -28,3 +32,5 @@ render(
     </Provider>,
     document.querySelector(".app")
 );
+
+store.dispatch(startFetchReports());
