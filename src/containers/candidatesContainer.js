@@ -22,7 +22,7 @@ const getSelectedCandidate = (candidates, selectedCandidateId) => {
 };
 
 const mapStateToProps = state => ({
-    candidates: filterCandidates(state.candidates, state.searchItem),
+    candidates: filterCandidates(state.data.candidates, state.searchItem),
     message: state.message,
     selectedElementId: state.selectedElementId,
     next: state.enableNextPhase

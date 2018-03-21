@@ -1,23 +1,23 @@
 import { actionTypes } from "./actionTypes";
 
-export function startFetchReports() {
+export function startFetchData() {
     return {
-        type: actionTypes.START_FETCH_REPORTS,
+        type: actionTypes.START_FETCH_DATA,
         message: "Loading..."
     };
 }
 
-export function fetchReportsSuccess(reports) {
+export function fetchDataSuccess(data) {
     return {
-        type: actionTypes.FETCH_REPORTS_SUCCESS,
-        reports,
+        type: actionTypes.FETCH_DATA_SUCCESS,
+        data,
         message: ""
     };
 }
 
-export function fetchReportsFail() {
+export function fetchDataFail() {
     return {
-        type: actionTypes.FETCH_REPORTS_FAIL,
+        type: actionTypes.FETCH_DATA_FAIL,
         message: "Looks like there was some kind of error. Don't worry, we're looking into it!"
     };
 }
@@ -59,7 +59,7 @@ export function closeDeleteModal() {
 export function startDeleteReport() {
     return {
         type: actionTypes.START_DELETE_REPORT,
-        message: ""
+        message: "Loading..."
     };
 }
 
@@ -73,50 +73,6 @@ export function deleteReportSuccess() {
 export function deleteReportFail() {
     return {
         type: actionTypes.DELETE_REPORT_FAIL,
-        message: "Looks like there was some kind of error. Don't worry, we're looking into it!"
-    };
-}
-
-export function startFetchCandidates() {
-    return {
-        type: actionTypes.START_FETCH_CANDIDATES,
-        message: "Loading..."
-    };
-}
-
-export function fetchCandidatesSuccess(candidates) {
-    return {
-        type: actionTypes.FETCH_CANDIDATES_SUCCESS,
-        candidates,
-        message: ""
-    };
-}
-
-export function fetchCandidatesFail() {
-    return {
-        type: actionTypes.FETCH_CANDIDATES_FAIL,
-        message: "Looks like there was some kind of error. Don't worry, we're looking into it!"
-    };
-}
-
-export function startFetchCompanies() {
-    return {
-        type: actionTypes.START_FETCH_COMPANIES,
-        message: "Loading..."
-    };
-}
-
-export function fetchCompaniesSuccess(companies) {
-    return {
-        type: actionTypes.FETCH_COMPANIES_SUCCESS,
-        companies,
-        message: ""
-    };
-}
-
-export function fetchCompaniesFail() {
-    return {
-        type: actionTypes.FETCH_COMPANIES_FAIL,
         message: "Looks like there was some kind of error. Don't worry, we're looking into it!"
     };
 }
@@ -137,13 +93,15 @@ export function enableNextPhase() {
 
 export function incrementPhase() {
     return {
-        type: actionTypes.INCREMENT_PHASE
+        type: actionTypes.INCREMENT_PHASE,
+        next: "disabled"
     };
 }
 
 export function decrementPhase() {
     return {
-        type: actionTypes.DECREMENT_PHASE
+        type: actionTypes.DECREMENT_PHASE,
+        next: ""
     };
 }
 
@@ -158,5 +116,62 @@ export function newReportCompany(newReportCompany) {
     return {
         type: actionTypes.NEW_REPORT_COMPANY,
         newReportCompany
+    };
+}
+
+export function receiveDateChange(date) {
+    return {
+        type: actionTypes.RECEIVE_DATE_CHANGE,
+        date
+    };
+}
+
+export function receiveNewReportFormInput(input) {
+    return {
+        type: actionTypes.RECEIVE_NEW_REPORT_FORM_INPUT,
+        input
+    };
+}
+
+export function startSubmitReport() {
+    return {
+        type: actionTypes.START_SUBMIT_REPORT
+    };
+}
+
+export function submitReportSuccess() {
+    location.hash = "#/";
+    return {
+        type: actionTypes.SUBMIT_REPORT_SUCCESS,
+        message: ""
+    };
+}
+
+export function submitReportFail() {
+    return {
+        type: actionTypes.SUBMIT_REPORT_FAIL,
+        message: "Looks like there was some kind of error. Don't worry, we're looking into it!"
+    };
+}
+
+export function newReportFormError(errors) {
+    return {
+        type: actionTypes.NEW_REPORT_FORM_ERROR,
+        errors
+    };
+}
+
+export function openSubmitModal() {
+    return {
+        type: actionTypes.OPEN_SUBMIT_MODAL,
+        submitModal: true
+    };
+}
+
+export function closeSubmitModal() {
+    return {
+        type: actionTypes.CLOSE_SUBMIT_MODAL,
+        submitModal: false,
+        message: ""
     };
 }

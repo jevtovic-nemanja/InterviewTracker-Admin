@@ -22,7 +22,7 @@ const getSelectedCompany = (companies, selectedCompanyId) => {
 };
 
 const mapStateToProps = state => ({
-    companies: filterCompanies(state.companies, state.searchItem),
+    companies: filterCompanies(state.data.companies, state.searchItem),
     message: state.message,
     selectedElementId: state.selectedElementId,
     next: state.enableNextPhase

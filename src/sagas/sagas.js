@@ -1,30 +1,40 @@
 import { BASE_URL } from "../constants";
 import { actionTypes } from "../store/actionTypes";
-import { fetchReportsSuccess, fetchReportsFail, deleteReportSuccess, deleteReportFail, startFetchReports, fetchCandidatesSuccess, fetchCandidatesFail, fetchCompaniesSuccess, fetchCompaniesFail } from "../store/actions";
+import { startFetchData, fetchDataSuccess, fetchDataFail, deleteReportSuccess, deleteReportFail, submitReportSuccess, submitReportFail, openSubmitModal } from "../store/actions";
 
-import { dataService } from "../services/dataService";
+import { packer } from "../services/dataService";
 
 import { all, call, put, select, takeEvery, takeLatest } from "redux-saga/effects";
 
-import { getDeleteReportId } from "./selectors";
+import { getDeleteReportId, getDataForSubmission } from "./selectors";
 
 
-function* watchFetchReports() {
-    yield takeLatest(actionTypes.START_FETCH_REPORTS, onFetchReports);
+function* watchFetchData() {
+    yield takeLatest(actionTypes.START_FETCH_DATA, onFetchData);
 }
 
-function* onFetchReports() {
-    const url = `${BASE_URL}/reports`;
+function* onFetchData() {
+    const urls = {
+        reports: `${BASE_URL}/reports`,
+        candidates: `${BASE_URL}/candidates`,
+        companies: `${BASE_URL}/companies`
+    };
 
-    try {
-        const data = yield call(fetch, url);
-        const reports = yield data.json();
-        const packedReports = dataService.packReports(reports);
-        yield put(fetchReportsSuccess(packedReports));
-    } catch (e) {
-        yield put(fetchReportsFail());
-        return;
+    const allData = {};
+
+    for (const prop in urls) {
+        try {
+            const data = yield call(fetch, urls[prop]);
+            const parsedData = yield data.json();
+            const packedData = packer(prop, parsedData);
+            allData[prop] = packedData;
+        } catch (e) {
+            yield put(fetchDataFail());
+            return;
+        }
     }
+
+    yield put(fetchDataSuccess(allData));
 }
 
 function* watchDeleteReport() {
@@ -39,54 +49,43 @@ function* onDeleteReport() {
     try {
         const response = yield call(fetch, url, init);
         yield put(deleteReportSuccess());
-        yield put(startFetchReports());
+        yield put(startFetchData());
     } catch (e) {
         yield put(deleteReportFail());
         return;
     }
 }
 
-function* watchFetchCandidates() {
-    yield takeLatest(actionTypes.START_FETCH_CANDIDATES, onFetchCandidates);
+function* watchSubmitReport() {
+    yield takeLatest(actionTypes.START_SUBMIT_REPORT, onSubmitReport);
 }
 
-function* onFetchCandidates() {
-    const url = `${BASE_URL}/candidates`;
+function* onSubmitReport() {
+    const data = yield select(getDataForSubmission);
+    const url = `${BASE_URL}/reports`;
+    const init = {
+        method: "POST",
+        body: JSON.stringify(data),
+        headers: new Headers({
+            "Content-Type": "application/json"
+        })
+    };
 
     try {
-        const data = yield call(fetch, url);
-        const candidates = yield data.json();
-        const packedCandidates = dataService.packCandidates(candidates);
-        yield put(fetchCandidatesSuccess(packedCandidates));
+        const response = yield call(fetch, url, init);
+        yield put(submitReportSuccess());
+        yield put(startFetchData());
     } catch (e) {
-        yield put(fetchCandidatesFail());
-        return;
-    }
-}
-
-function* watchFetchCompanies() {
-    yield takeLatest(actionTypes.START_FETCH_COMPANIES, onFetchCompanies);
-}
-
-function* onFetchCompanies() {
-    const url = `${BASE_URL}/companies`;
-
-    try {
-        const data = yield call(fetch, url);
-        const companies = yield data.json();
-        const packedCompanies = dataService.packCompanies(companies);
-        yield put(fetchCompaniesSuccess(packedCompanies));
-    } catch (e) {
-        yield put(fetchCompaniesFail());
+        yield put(submitReportFail());
+        yield put(openSubmitModal());
         return;
     }
 }
 
 export default function* rootSaga() {
     yield all([
-        watchFetchReports(),
+        watchFetchData(),
         watchDeleteReport(),
-        watchFetchCandidates(),
-        watchFetchCompanies()
+        watchSubmitReport()
     ]);
 }

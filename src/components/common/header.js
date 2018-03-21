@@ -2,7 +2,7 @@ import React from "react";
 
 import { Link } from "react-router-dom";
 
-export const Header = props => {
+export const Header = () => {
     let report = "btn-nav";
     let create = "btn-nav";
 

@@ -1,9 +1,15 @@
 import { actionTypes } from "./actionTypes";
 
-export function reports(state = [], action) {
+const dataInitState = {
+    reports: [],
+    candidates: [],
+    companies: []
+};
+
+export function data(state = dataInitState, action) {
     switch (action.type) {
-    case actionTypes.FETCH_REPORTS_SUCCESS:
-        return action.reports;
+    case actionTypes.FETCH_DATA_SUCCESS:
+        return action.data;
     default:
         return state;
     }
@@ -11,16 +17,15 @@ export function reports(state = [], action) {
 
 export function message(state = "", action) {
     switch (action.type) {
-    case actionTypes.START_FETCH_REPORTS:
-    case actionTypes.FETCH_REPORTS_SUCCESS:
-    case actionTypes.FETCH_REPORTS_FAIL:
+    case actionTypes.START_FETCH_DATA:
+    case actionTypes.FETCH_DATA_SUCCESS:
+    case actionTypes.FETCH_DATA_FAIL:
     case actionTypes.START_DELETE_REPORT:
     case actionTypes.DELETE_REPORT_FAIL:
     case actionTypes.DELETE_REPORT_SUCCESS:
     case actionTypes.CLOSE_DELETE_MODAL:
-    case actionTypes.START_FETCH_CANDIDATES:
-    case actionTypes.FETCH_CANDIDATES_SUCCESS:
-    case actionTypes.FETCH_CANDIDATES_FAIL:
+    case actionTypes.SUBMIT_REPORT_SUCCESS:
+    case actionTypes.SUBMIT_REPORT_FAIL:
         return action.message;
     default:
         return state;
@@ -83,15 +88,19 @@ export function createReportPhase(state = 1, action) {
         return state + 1;
     case actionTypes.DECREMENT_PHASE:
         return state - 1;
+    case actionTypes.SUBMIT_REPORT_SUCCESS:
+        return 1;
     default:
         return state;
     }
 }
 
-export function newReportData(state = {
+const newReportDataInitState = {
     candidateName: "",
     companyName: ""
-}, action) {
+};
+
+export function newReportData(state = newReportDataInitState, action) {
     switch (action.type) {
     case actionTypes.NEW_REPORT_CANDIDATE:
         return {
@@ -105,15 +114,8 @@ export function newReportData(state = {
             companyId: action.newReportCompany.companyId,
             companyName: action.newReportCompany.name
         };
-    default:
-        return state;
-    }
-}
-
-export function candidates(state = [], action) {
-    switch (action.type) {
-    case actionTypes.FETCH_CANDIDATES_SUCCESS:
-        return action.candidates;
+    case actionTypes.SUBMIT_REPORT_SUCCESS:
+        return newReportDataInitState;
     default:
         return state;
     }
@@ -131,16 +133,63 @@ export function selectedElementId(state = "", action) {
 export function enableNextPhase(state = "disabled", action) {
     switch (action.type) {
     case actionTypes.ENABLE_NEXT_PHASE:
+    case actionTypes.INCREMENT_PHASE:
+    case actionTypes.DECREMENT_PHASE:
         return action.next;
     default:
         return state;
     }
 }
 
-export function companies(state = [], action) {
+const newReportFormDataInitState = {
+    interviewDate: null,
+    dateError: "d-none",
+    phase: "Select",
+    phaseError: "d-none",
+    status: "Select",
+    statusError: "d-none",
+    note: "",
+    noteError: "d-none"
+};
+
+export function newReportFormData(state = newReportFormDataInitState, action) {
     switch (action.type) {
-    case actionTypes.FETCH_COMPANIES_SUCCESS:
-        return action.companies;
+    case actionTypes.RECEIVE_DATE_CHANGE:
+        return {
+            ...state,
+            interviewDate: action.date,
+            dateError: "d-none",
+            phaseError: "d-none",
+            statusError: "d-none",
+            noteError: "d-none"
+        };
+    case actionTypes.RECEIVE_NEW_REPORT_FORM_INPUT:
+        return {
+            ...state,
+            [action.input.name]: action.input.value,
+            dateError: "d-none",
+            phaseError: "d-none",
+            statusError: "d-none",
+            noteError: "d-none"
+        };
+    case actionTypes.NEW_REPORT_FORM_ERROR:
+        return {
+            ...state,
+            ...action.errors
+        };
+    case actionTypes.SUBMIT_REPORT_SUCCESS:
+        return newReportFormDataInitState;
+    default:
+        return state;
+    }
+}
+
+export function submitModal(state = false, action) {
+    switch (action.type) {
+    case actionTypes.OPEN_SUBMIT_MODAL:
+        return true;
+    case actionTypes.CLOSE_SUBMIT_MODAL:
+        return false;
     default:
         return state;
     }

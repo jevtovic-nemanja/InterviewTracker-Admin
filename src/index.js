@@ -10,7 +10,7 @@ import * as reducers from "./store/reducers";
 import createSagaMiddleware from "redux-saga";
 import rootSaga from "./sagas/sagas";
 
-import { startFetchReports, startFetchCandidates, startFetchCompanies } from "./store/actions";
+import { startFetchData } from "./store/actions";
 
 import logger from "redux-logger";
 
@@ -24,6 +24,7 @@ const store = createStore(rootReducer, applyMiddleware(sagaMiddleware, logger));
 
 sagaMiddleware.run(rootSaga);
 
+
 render(
     <Provider store={store}>
         <HashRouter>
@@ -33,6 +34,4 @@ render(
     document.querySelector(".app")
 );
 
-store.dispatch(startFetchReports());
-store.dispatch(startFetchCandidates());
-store.dispatch(startFetchCompanies());
+store.dispatch(startFetchData());
