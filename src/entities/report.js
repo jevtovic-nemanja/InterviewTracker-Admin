@@ -1,8 +1,10 @@
 class Report {
-    constructor(id, candidate, company, date, phase, status, note) {
+    constructor(id, candidateId, candidateName, companyId, companyName, date, phase, status, note) {
         this._id = id;
-        this._candidate = candidate;
-        this._company = company;
+        this._candidateId = candidateId;
+        this._candidateName = candidateName;
+        this._companyId = companyId;
+        this._companyName = companyName;
         this._date = date;
         this._phase = phase;
         this._status = status;
@@ -13,12 +15,20 @@ class Report {
         return this._id;
     }
 
-    get candidate() {
-        return this._candidate;
+    get candidateId() {
+        return this._candidateId;
+    }
+    
+    get candidateName() {
+        return this._candidateName;
     }
 
-    get company() {
-        return this._company;
+    get companyId() {
+        return this._companyId;
+    }
+
+    get companyName() {
+        return this._companyName;
     }
 
     get date() {

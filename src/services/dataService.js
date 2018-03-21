@@ -17,9 +17,9 @@ class DataService {
 
     packReports(data) {
         let reports = data.reverse().map(item => {
-            const { id, candidateName, companyName, interviewDate, phase, status, note } = item;
+            const { id, candidateId, candidateName, companyId, companyName, interviewDate, phase, status, note } = item;
             const date = moment(interviewDate).format("DD.MM.YYYY");
-            const reportObj = new Report(id, candidateName, companyName, date, phase, status, note);
+            const reportObj = new Report(id, candidateId, candidateName, companyId, companyName, date, phase, status, note);
             return reportObj;
         });
         return reports;

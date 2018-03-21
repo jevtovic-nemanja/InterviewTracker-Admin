@@ -5,6 +5,7 @@ import { Switch, Route } from "react-router-dom";
 import AsideComponent from "../../containers/asideContainer";
 import Candidates from "../../containers/candidatesContainer";
 import Companies from "../../containers/companiesContainer";
+import NewReportForm from "../../containers/newReport";
 
 export const CreateReportPage = ({ match }) => {
     return (
@@ -21,7 +22,7 @@ export const CreateReportPage = ({ match }) => {
                             <Switch>
                                 <Route exact path="/create-report/" component={Candidates} />
                                 <Route path="/create-report/2" component={Companies} />
-                                {/* <Route path="/" component={CreateReportPage} /> */}
+                                <Route path="/create-report/3" component={NewReportForm} />
                             </Switch>
                         </main>
 

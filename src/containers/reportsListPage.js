@@ -8,8 +8,8 @@ import { startFetchReports, noFilterResults, openDetailsModal, closeDetailsModal
 const filterReports = (reports, searchItem) => {
     if (reports.length) {
         const filteredReports = reports.filter(report => {
-            const candidate = report.candidate.toLowerCase();
-            const company = report.company.toLowerCase();
+            const candidate = report.candidateName.toLowerCase();
+            const company = report.companyName.toLowerCase();
             return candidate.includes(searchItem) || company.includes(searchItem);
         });
         return filteredReports.length

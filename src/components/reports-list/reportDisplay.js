@@ -1,7 +1,7 @@
 import React from "react";
 
 export const ReportDisplay = ({ report, openDeleteModal, openDetailsModal }) => {
-    const { id, candidate, company, date, status } = report;
+    const { id, candidateName, companyName, date, status } = report;
 
     return (
         <div className="offset-1 col-10 offset-sm-0 col-sm-12 offset-md-1 col-md-10">
@@ -10,12 +10,12 @@ export const ReportDisplay = ({ report, openDeleteModal, openDetailsModal }) => 
                 <div className="card-body pt-4">
                     <div className="row">
                         <div className="col-12 col-sm-6 col-lg-4 side-line-sm">
-                            <h5 className="mb-0 mt-2">{company}</h5>
+                            <h5 className="mb-0 mt-2">{companyName}</h5>
                             <small>Company</small>
                         </div>
 
                         <div className="col-12 col-sm-6 col-lg-3 side-line-lg">
-                            <h5 className="mb-0 mt-2">{candidate}</h5>
+                            <h5 className="mb-0 mt-2">{candidateName}</h5>
                             <small>Candidate</small>
                         </div>
 
