@@ -2,7 +2,7 @@ import React from "react";
 
 import { Switch, Route } from "react-router-dom";
 
-import { Header } from "./common/header";
+import Header from "../containers/headerContainer";
 import ReportsListPage from "../containers/reportsListPage";
 import { CreateReportPage } from "../components/create-report/createReport";
 

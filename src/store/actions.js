@@ -140,7 +140,6 @@ export function startSubmitReport() {
 }
 
 export function submitReportSuccess() {
-    location.hash = "#/";
     return {
         type: actionTypes.SUBMIT_REPORT_SUCCESS,
         message: ""
@@ -173,5 +172,22 @@ export function closeSubmitModal() {
         type: actionTypes.CLOSE_SUBMIT_MODAL,
         submitModal: false,
         message: ""
+    };
+}
+
+export function goToReportsList() {
+    location.hash = "#";
+    return {
+        type: actionTypes.GO_TO_REPORTS_LIST,
+        createReportPhase: 1,
+        next: "disabled",
+        selectedElementId: ""
+    };
+}
+
+export function goToCreateReport() {
+    location.hash === "#/create-report";
+    return {
+        type: actionTypes.GO_TO_CREATE_REPORT
     };
 }

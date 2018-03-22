@@ -1,6 +1,6 @@
 import { BASE_URL } from "../constants";
 import { actionTypes } from "../store/actionTypes";
-import { startFetchData, fetchDataSuccess, fetchDataFail, deleteReportSuccess, deleteReportFail, submitReportSuccess, submitReportFail, openSubmitModal } from "../store/actions";
+import { startFetchData, fetchDataSuccess, fetchDataFail, deleteReportSuccess, deleteReportFail, submitReportSuccess, submitReportFail, openSubmitModal, goToReportsList } from "../store/actions";
 
 import { packer } from "../services/dataService";
 
@@ -74,6 +74,7 @@ function* onSubmitReport() {
     try {
         const response = yield call(fetch, url, init);
         yield put(submitReportSuccess());
+        yield put(goToReportsList());
         yield put(startFetchData());
     } catch (e) {
         yield put(submitReportFail());

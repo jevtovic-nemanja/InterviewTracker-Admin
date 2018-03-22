@@ -90,6 +90,8 @@ export function createReportPhase(state = 1, action) {
         return state - 1;
     case actionTypes.SUBMIT_REPORT_SUCCESS:
         return 1;
+    case actionTypes.GO_TO_REPORTS_LIST:
+        return action.createReportPhase;
     default:
         return state;
     }
@@ -115,6 +117,7 @@ export function newReportData(state = newReportDataInitState, action) {
             companyName: action.newReportCompany.name
         };
     case actionTypes.SUBMIT_REPORT_SUCCESS:
+    case actionTypes.GO_TO_REPORTS_LIST:
         return newReportDataInitState;
     default:
         return state;
@@ -124,6 +127,7 @@ export function newReportData(state = newReportDataInitState, action) {
 export function selectedElementId(state = "", action) {
     switch (action.type) {
     case actionTypes.SELECT_ELEMENT:
+    case actionTypes.GO_TO_REPORTS_LIST:
         return action.selectedElementId;
     default:
         return state;
@@ -135,6 +139,7 @@ export function enableNextPhase(state = "disabled", action) {
     case actionTypes.ENABLE_NEXT_PHASE:
     case actionTypes.INCREMENT_PHASE:
     case actionTypes.DECREMENT_PHASE:
+    case actionTypes.GO_TO_REPORTS_LIST:
         return action.next;
     default:
         return state;
@@ -178,6 +183,7 @@ export function newReportFormData(state = newReportFormDataInitState, action) {
             ...action.errors
         };
     case actionTypes.SUBMIT_REPORT_SUCCESS:
+    case actionTypes.GO_TO_REPORTS_LIST:
         return newReportFormDataInitState;
     default:
         return state;
