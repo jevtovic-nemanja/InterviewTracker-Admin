@@ -1,6 +1,6 @@
 import { BASE_URL } from "../constants";
-import { actionTypes } from "../store/actionTypes";
-import { startFetchData, fetchDataSuccess, fetchDataFail, deleteReportSuccess, deleteReportFail, submitReportSuccess, submitReportFail, openSubmitModal, goToReportsList } from "../store/actions";
+import { actionTypes } from "./actionTypes";
+import { startFetchData, fetchDataSuccess, fetchDataFail, deleteReportSuccess, deleteReportFail, submitReportSuccess, submitReportFail, openSubmitModal, goToReportsList } from "./actions";
 
 import { packer } from "../services/dataService";
 

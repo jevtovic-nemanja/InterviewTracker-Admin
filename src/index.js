@@ -8,13 +8,13 @@ import { Provider } from "react-redux";
 import * as reducers from "./store/reducers";
 
 import createSagaMiddleware from "redux-saga";
-import rootSaga from "./sagas/sagas";
+import rootSaga from "./store/sagas";
 
 import { startFetchData } from "./store/actions";
 
 import logger from "redux-logger";
 
-import App from "./components/app";
+import App from "./app";
 
 const rootReducer = combineReducers(reducers);
 
