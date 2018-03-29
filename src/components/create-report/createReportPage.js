@@ -11,11 +11,9 @@ class CreateReportPage extends React.Component {
     constructor(props) {
         super(props);
         this.state = this.initState();
-
-        this.bindEventHandlers();
     }
 
-    initState() {
+    initState = () => {
         return {
             allCandidates: [],
             filteredCandidates: [],
@@ -40,21 +38,12 @@ class CreateReportPage extends React.Component {
             error: ""
         };
     }
-
-    bindEventHandlers() {
-        this.filterCandidates = this.filterCandidates.bind(this);
-        this.filterCompanies = this.filterCompanies.bind(this);
-        this.onBack = this.onBack.bind(this);
-        this.onNext = this.onNext.bind(this);
-        this.onSelect = this.onSelect.bind(this);
-        this.onSubmit = this.onSubmit.bind(this);
-    }
-
-    componentDidMount() {
+    
+    componentDidMount = () => {
         this.loadData();
     }
 
-    loadData() {
+    loadData = () => {
         dataService.getCandidates(candidates => this.setState({
             allCandidates: candidates,
             filteredCandidates: candidates
@@ -66,11 +55,11 @@ class CreateReportPage extends React.Component {
         }), error => this.handleError(error));
     }
 
-    handleError(error) {
+    handleError = error => {
         this.setState({ error: "Looks like there was some kind of error. Don't worry, we're looking into it!" });
     }
 
-    filter(data, searchItem, assignTo, errorMessage) {
+    filter = (data, searchItem, assignTo, errorMessage) => {
         const filteredItems = data.filter(item => {
             return item.name.toLowerCase().includes(searchItem);
         });
@@ -88,15 +77,15 @@ class CreateReportPage extends React.Component {
             });
     }
 
-    filterCandidates(searchItem) {
+    filterCandidates = searchItem => {
         this.filter(this.state.allCandidates, searchItem, "filteredCandidates", "No candidates match the search criteria.");
     }
 
-    filterCompanies(searchItem) {
+    filterCompanies = searchItem => {
         this.filter(this.state.allCompanies, searchItem, "filteredCompanies", "No companies match the search criteria.");
     }
 
-    onSelect(idType, id) {
+    onSelect = (idType, id) => {
         this.setState(prevState => {
             prevState.next = "";
             prevState.selectedElementId = id;
@@ -107,7 +96,7 @@ class CreateReportPage extends React.Component {
         this.getName(idType, id);
     }
 
-    getName(idType, id) {
+    getName = (idType, id) => {
         const { allCandidates, allCompanies } = this.state;
 
         const searchThrough = idType === "candidateId" ? allCandidates : allCompanies;
@@ -121,7 +110,7 @@ class CreateReportPage extends React.Component {
         });
     }
 
-    onBack() {
+    onBack = () => {
         this.setState(prevState => {
             prevState.phase = prevState.phase - 1;
             prevState.next = "disabled";
@@ -129,7 +118,7 @@ class CreateReportPage extends React.Component {
         });
     }
 
-    onNext() {
+    onNext = () => {
         const { phase } = this.state;
 
         const next = phase === 2 ? "d-none" : "disabled";
@@ -152,14 +141,14 @@ class CreateReportPage extends React.Component {
         });
     }
 
-    getCandidateReports() {
+    getCandidateReports = () => {
         const { candidateId } = this.state.report;
 
         dataService.getCandidatesReports(candidateId, reports => this.setState({ candidateReports: reports }),
             error => this.handleError(error));
     }
 
-    getTrackedData() {
+    getTrackedData = () => {
         const { candidateReports } = this.state;
         const { companyId } = this.state.report;
 
@@ -198,14 +187,14 @@ class CreateReportPage extends React.Component {
         }
     }
 
-    onSubmit(input) {
+    onSubmit = input => {
         const data = this.state.report;
         Object.assign(data, input);
 
         dataService.postReport(data, response => location.assign("#/"), error => this.handleError);
     }
 
-    switchComponents() {
+    switchComponents = () => {
         const { phase, filteredCandidates, filteredCompanies, next, selectedElementId, trackedData } = this.state;
 
         if (phase === 1) {
@@ -237,7 +226,7 @@ class CreateReportPage extends React.Component {
         }
     }
 
-    render() {
+    render = () => {
         const { filteredCandidates, filteredCompanies, phase, next, selectedElementId, report, trackedData, error } = this.state;
 
         return (

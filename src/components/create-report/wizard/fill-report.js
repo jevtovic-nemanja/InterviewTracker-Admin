@@ -10,11 +10,9 @@ class FillReport extends React.Component {
     constructor(props) {
         super(props);
         this.state = this.initState();
-
-        this.bindEventHandlers();
     }
 
-    initState() {
+    initState = () => {
         return {
             interviewDate: null,
             dateError: "d-none",
@@ -27,13 +25,7 @@ class FillReport extends React.Component {
         };
     }
 
-    bindEventHandlers() {
-        this.handleDateChange = this.handleDateChange.bind(this);
-        this.handleInputChange = this.handleInputChange.bind(this);
-        this.onSubmit = this.onSubmit.bind(this);
-    }
-
-    handleDateChange(date) {
+    handleDateChange = date => {
         this.setState({
             interviewDate: date,
             dateError: "d-none",
@@ -43,7 +35,7 @@ class FillReport extends React.Component {
         });
     }
 
-    handleInputChange(event) {
+    handleInputChange = event => {
         const name = event.target.name;
         const value = event.target.value;
 
@@ -57,7 +49,7 @@ class FillReport extends React.Component {
         });
     }
 
-    onSubmit(event) {
+    onSubmit = event => {
         event.preventDefault();
 
         const { interviewDate, phase, status, note } = this.state;
@@ -77,7 +69,7 @@ class FillReport extends React.Component {
         }
     }
 
-    validateInput() {
+    validateInput = () => {
         const { interviewDate, phase, status, note } = this.state;
 
         let isValid = true;
@@ -105,7 +97,7 @@ class FillReport extends React.Component {
         return isValid;
     }
 
-    render() {
+    render = () => {
         const { interviewDate, dateError, phase, phaseError, status, statusError, note, noteError } = this.state;
 
         const { timeOfLastInterview, currentPhase, currentStatus, hiringStatus } = this.props.trackedData;

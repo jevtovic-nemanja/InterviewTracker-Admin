@@ -1,14 +1,14 @@
 class CommService {
     constructor() { }
 
-    getData(url, callback, errorCallback) {
+    getData = (url, callback, errorCallback) => {
         fetch(url)
             .then(response => response.json())
             .then(data => callback(data))
             .catch(error => errorCallback(error));
     }
 
-    deleteData(url, callback, errorCallback) {
+    deleteData = (url, callback, errorCallback) => {
         const init = { method: "DELETE" };
 
         fetch(url, init)
@@ -16,7 +16,7 @@ class CommService {
             .catch(error => errorCallback(error));
     }
 
-    postData(url, data, callback, errorCallback) {
+    postData = (url, data, callback, errorCallback) => {
         const init = {
             method: "POST",
             body: JSON.stringify(data),

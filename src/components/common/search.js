@@ -4,21 +4,15 @@ class Search extends React.Component {
     constructor(props) {
         super(props);
         this.state = this.initState();
-
-        this.bindEventHandlers();
     }
 
-    initState() {
+    initState = () => {
         return {
             inputString: ""
         };
     }
 
-    bindEventHandlers() {
-        this.handleInput = this.handleInput.bind(this);
-    }
-
-    handleInput(event) {
+    handleInput = event => {
         const inputString = event.target.value;
         const searchString = inputString.toLowerCase();
 
@@ -29,7 +23,7 @@ class Search extends React.Component {
         this.props.onSearch(searchString);
     }
 
-    render() {
+    render = () => {
         const inputString = this.state.inputString;
 
         return (

@@ -14,11 +14,9 @@ class ReportsListPage extends React.Component {
     constructor(props) {
         super(props);
         this.state = this.initState();
-
-        this.bindEventHandlers();
     }
 
-    initState() {
+    initState = () => {
         return {
             allReports: [],
             filteredReports: [],
@@ -30,31 +28,22 @@ class ReportsListPage extends React.Component {
         };
     }
 
-    bindEventHandlers() {
-        this.closeDeleteModal = this.closeDeleteModal.bind(this);
-        this.closeDetailsModal = this.closeDetailsModal.bind(this);
-        this.deleteReport = this.deleteReport.bind(this);
-        this.filterReports = this.filterReports.bind(this);
-        this.openDetailsModal = this.openDetailsModal.bind(this);
-        this.openDeleteModal = this.openDeleteModal.bind(this);
-    }
-
-    componentDidMount() {
+    componentDidMount = () => {
         this.loadData();
     }
 
-    loadData() {
+    loadData = () => {
         dataService.getReports(reports => this.setState({
             allReports: reports,
             filteredReports: reports
         }), error => this.handleError(error));
     }
 
-    handleError(error) {
+    handleError = error => {
         this.setState({ error: "Looks like there was some kind of error. Don't worry, we're looking into it!" });
     }
 
-    deleteReport() {
+    deleteReport = () => {
         const id = this.state.deleteId;
 
         dataService.deleteReport(id, response => {
@@ -63,7 +52,7 @@ class ReportsListPage extends React.Component {
         }, error => this.handleError(error));
     }
 
-    filterReports(searchItem) {
+    filterReports = searchItem => {
         const { allReports } = this.state;
 
         const filteredReports = allReports.filter(report => {
@@ -83,18 +72,18 @@ class ReportsListPage extends React.Component {
             });
     }
 
-    openDeleteModal(id) {
+    openDeleteModal = id => {
         this.setState({
             deleteModal: true,
             deleteId: id
         });
     }
 
-    closeDeleteModal() {
+    closeDeleteModal = () => {
         this.setState({ deleteModal: false });
     }
 
-    openDetailsModal(id) {
+    openDetailsModal = id => {
         const { allReports } = this.state;
         const report = allReports.filter(report => report.id === parseInt(id)).shift();
 
@@ -104,11 +93,11 @@ class ReportsListPage extends React.Component {
         });
     }
 
-    closeDetailsModal() {
+    closeDetailsModal = () => {
         this.setState({ detailsModal: false });
     }
 
-    render() {
+    render = () => {
         const { allReports, filteredReports, detailsModal, detailedReport, deleteModal, error } = this.state;
 
         return (
