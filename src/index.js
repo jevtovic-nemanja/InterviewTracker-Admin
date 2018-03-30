@@ -3,7 +3,7 @@ import { render } from "react-dom";
 import { HashRouter } from "react-router-dom";
 import "babel-polyfill";
 
-import { createStore, combineReducers, applyMiddleware } from "redux";
+import { createStore, combineReducers, applyMiddleware, compose } from "redux";
 import { Provider } from "react-redux";
 import * as reducers from "./store/reducers";
 
@@ -20,7 +20,11 @@ const rootReducer = combineReducers(reducers);
 
 const sagaMiddleware = createSagaMiddleware();
 
-const store = createStore(rootReducer, applyMiddleware(sagaMiddleware, logger));
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
+const store = createStore(rootReducer, composeEnhancers(
+    applyMiddleware(sagaMiddleware, logger)
+));
 
 sagaMiddleware.run(rootSaga);
 
