@@ -1,4 +1,5 @@
 import React from "react";
+import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 
 import { ReportsList } from "../components/reports-list/reportsList";
@@ -31,12 +32,12 @@ const mapStateToProps = state => ({
     deleteReportId: state.deleteReportId
 });
 
-const mapDispatchToProps = dispatch => ({
-    openDetailsModal: report => dispatch(openDetailsModal(report)),
-    closeDetailsModal: () => dispatch(closeDetailsModal()),
-    openDeleteModal: id => dispatch(openDeleteModal(id)),
-    closeDeleteModal: () => dispatch(closeDeleteModal()),
-    deleteReport: () => dispatch(startDeleteReport())
-});
+const mapDispatchToProps = dispatch => bindActionCreators({
+    openDetailsModal: report => openDetailsModal(report),
+    closeDetailsModal,
+    openDeleteModal: id => openDeleteModal(id),
+    closeDeleteModal,
+    startDeleteReport
+}, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(ReportsList);

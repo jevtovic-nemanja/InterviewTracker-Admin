@@ -7,7 +7,7 @@ import { ReportDisplay } from "./reportDisplay";
 import { ReportDetails } from "./reportDetails";
 import { DeleteReport } from "./deleteReport";
 
-export const ReportsList = ({ loading, reports, message, detailsModal, detailedReport, deleteModal, deleteReportId, noFilterResults, openDetailsModal, closeDetailsModal, openDeleteModal, closeDeleteModal, deleteReport }) => {
+export const ReportsList = ({ loading, reports, message, detailsModal, detailedReport, deleteModal, deleteReportId, noFilterResults, openDetailsModal, closeDetailsModal, openDeleteModal, closeDeleteModal, startDeleteReport }) => {
 
     return (
         <main className="container">
@@ -48,7 +48,7 @@ export const ReportsList = ({ loading, reports, message, detailsModal, detailedR
             </Modal>
 
             <Modal open={deleteModal} onClose={closeDeleteModal} little >
-                <DeleteReport deleteReport={() => deleteReport()} close={closeDeleteModal} message={message} />
+                <DeleteReport deleteReport={() => startDeleteReport()} close={closeDeleteModal} message={message} />
             </Modal>
         </main>
     );
