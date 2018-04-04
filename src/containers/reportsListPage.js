@@ -2,8 +2,8 @@ import React from "react";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 
-import { ReportsList } from "../components/reports-list/reportsList";
-import { startFetchReports, noFilterResults, openDetailsModal, closeDetailsModal, openDeleteModal, closeDeleteModal, startDeleteReport } from "../store/actions";
+import ReportsList from "../components/reports-list/reportsList";
+import { startFetchData, openDetailsModal, closeDetailsModal, openDeleteModal, closeDeleteModal, startDeleteReport } from "../store/actions";
 
 
 const filterReports = (reports, searchItem) => {
@@ -33,6 +33,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({
+    startFetchData,
     openDetailsModal: report => openDetailsModal(report),
     closeDetailsModal,
     openDeleteModal: id => openDeleteModal(id),

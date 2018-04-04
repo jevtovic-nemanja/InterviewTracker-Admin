@@ -37,5 +37,3 @@ render(
     </Provider>,
     document.querySelector(".app")
 );
-
-store.dispatch(startFetchData());
