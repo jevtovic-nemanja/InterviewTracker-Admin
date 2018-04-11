@@ -4,7 +4,7 @@ import { startFetchData, fetchDataSuccess, fetchDataFail, deleteReportSuccess, d
 
 import { packer } from "../utils/packer";
 
-import { all, call, put, select, takeEvery, takeLatest } from "redux-saga/effects";
+import { all, call, put, select, takeLatest } from "redux-saga/effects";
 
 import { getDeleteReportId, getDataForSubmission } from "./selectors";
 
@@ -38,7 +38,7 @@ const onFetchData = function* (action) {
 };
 
 const watchDeleteReport = function* () {
-    yield takeEvery(actionTypes.START_DELETE_REPORT, onDeleteReport);
+    yield takeLatest(actionTypes.START_DELETE_REPORT, onDeleteReport);
 };
 
 const onDeleteReport = function* (action) {
