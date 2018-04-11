@@ -1,181 +1,181 @@
 import { actionTypes } from "./actionTypes";
 
-export function startFetchData() {
+export const startFetchData = () => {
     return {
         type: actionTypes.START_FETCH_DATA,
         message: "Loading..."
     };
-}
+};
 
-export function fetchDataSuccess(data) {
+export const fetchDataSuccess = data => {
     return {
         type: actionTypes.FETCH_DATA_SUCCESS,
         data,
         message: ""
     };
-}
+};
 
-export function fetchDataFail() {
+export const fetchDataFail = () => {
     return {
         type: actionTypes.FETCH_DATA_FAIL,
         message: "Looks like there was some kind of error. Don't worry, we're looking into it!"
     };
-}
+};
 
-export function receiveInputChange(inputItem) {
+export const receiveInputChange = inputItem => {
     return {
         type: actionTypes.RECEIVE_INPUT_CHANGE,
         inputItem
     };
-}
+};
 
-export function openDetailsModal(detailedReport) {
+export const openDetailsModal = detailedReport => {
     return {
         type: actionTypes.OPEN_DETAILS_MODAL,
         detailedReport
     };
-}
+};
 
-export function closeDetailsModal() {
+export const closeDetailsModal = () => {
     return {
         type: actionTypes.CLOSE_DETAILS_MODAL
     };
-}
+};
 
-export function openDeleteModal(deleteReportId) {
+export const openDeleteModal = deleteReportId => {
     return {
         type: actionTypes.OPEN_DELETE_MODAL,
         deleteReportId
     };
-}
+};
 
-export function closeDeleteModal() {
+export const closeDeleteModal = () => {
     return {
         type: actionTypes.CLOSE_DELETE_MODAL,
         message: ""
     };
-}
+};
 
-export function startDeleteReport() {
+export const startDeleteReport = () => {
     return {
         type: actionTypes.START_DELETE_REPORT,
         message: "Loading..."
     };
-}
+};
 
-export function deleteReportSuccess() {
+export const deleteReportSuccess = () => {
     return {
         type: actionTypes.DELETE_REPORT_SUCCESS,
         message: ""
     };
-}
+};
 
-export function deleteReportFail() {
+export const deleteReportFail = () => {
     return {
         type: actionTypes.DELETE_REPORT_FAIL,
         message: "Looks like there was some kind of error. Don't worry, we're looking into it!"
     };
-}
+};
 
-export function selectElement(selectedElementId) {
+export const selectElement = selectedElementId => {
     return {
         type: actionTypes.SELECT_ELEMENT,
         selectedElementId
     };
-}
+};
 
-export function enableNextPhase() {
+export const enableNextPhase = () => {
     return {
         type: actionTypes.ENABLE_NEXT_PHASE,
         next: ""
     };
-}
+};
 
-export function incrementPhase() {
+export const incrementPhase = () => {
     return {
         type: actionTypes.INCREMENT_PHASE,
         next: "disabled"
     };
-}
+};
 
-export function decrementPhase() {
+export const decrementPhase = () => {
     return {
         type: actionTypes.DECREMENT_PHASE,
         next: ""
     };
-}
+};
 
-export function newReportCandidate(newReportCandidate) {
+export const newReportCandidate = newReportCandidate => {
     return {
         type: actionTypes.NEW_REPORT_CANDIDATE,
         newReportCandidate
     };
-}
+};
 
-export function newReportCompany(newReportCompany) {
+export const newReportCompany = newReportCompany => {
     return {
         type: actionTypes.NEW_REPORT_COMPANY,
         newReportCompany
     };
-}
+};
 
-export function receiveDateChange(date) {
+export const receiveDateChange = date => {
     return {
         type: actionTypes.RECEIVE_DATE_CHANGE,
         date
     };
-}
+};
 
-export function receiveNewReportFormInput(input) {
+export const receiveNewReportFormInput = input => {
     return {
         type: actionTypes.RECEIVE_NEW_REPORT_FORM_INPUT,
         input
     };
-}
+};
 
-export function startSubmitReport() {
+export const startSubmitReport = () => {
     return {
         type: actionTypes.START_SUBMIT_REPORT
     };
-}
+};
 
-export function submitReportSuccess() {
+export const submitReportSuccess = () => {
     return {
         type: actionTypes.SUBMIT_REPORT_SUCCESS,
         message: ""
     };
-}
+};
 
-export function submitReportFail() {
+export const submitReportFail = () => {
     return {
         type: actionTypes.SUBMIT_REPORT_FAIL,
         message: "Looks like there was some kind of error. Don't worry, we're looking into it!"
     };
-}
+};
 
-export function newReportFormError(errors) {
+export const newReportFormError = errors => {
     return {
         type: actionTypes.NEW_REPORT_FORM_ERROR,
         errors
     };
-}
+};
 
-export function openSubmitModal() {
+export const openSubmitModal = () => {
     return {
         type: actionTypes.OPEN_SUBMIT_MODAL,
         submitModal: true
     };
-}
+};
 
-export function closeSubmitModal() {
+export const closeSubmitModal = () => {
     return {
         type: actionTypes.CLOSE_SUBMIT_MODAL,
         submitModal: false,
         message: ""
     };
-}
+};
 
-export function goToReportsList() {
+export const goToReportsList = () => {
     location.hash = "#";
     return {
         type: actionTypes.GO_TO_REPORTS_LIST,
@@ -183,11 +183,11 @@ export function goToReportsList() {
         next: "disabled",
         selectedElementId: ""
     };
-}
+};
 
-export function goToCreateReport() {
+export const goToCreateReport = () => {
     location.hash === "#/create-report";
     return {
         type: actionTypes.GO_TO_CREATE_REPORT
     };
-}
+};

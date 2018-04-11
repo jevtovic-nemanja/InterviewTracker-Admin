@@ -9,11 +9,11 @@ import { all, call, put, select, takeEvery, takeLatest } from "redux-saga/effect
 import { getDeleteReportId, getDataForSubmission } from "./selectors";
 
 
-function* watchFetchData() {
+const watchFetchData = function* () {
     yield takeLatest(actionTypes.START_FETCH_DATA, onFetchData);
-}
+};
 
-function* onFetchData() {
+const onFetchData = function* () {
     const urls = {
         reports: `${BASE_URL}/reports`,
         candidates: `${BASE_URL}/candidates`,
@@ -35,13 +35,13 @@ function* onFetchData() {
     }
 
     yield put(fetchDataSuccess(allData));
-}
+};
 
-function* watchDeleteReport() {
+const watchDeleteReport = function* () {
     yield takeEvery(actionTypes.START_DELETE_REPORT, onDeleteReport);
-}
+};
 
-function* onDeleteReport() {
+const onDeleteReport = function* () {
     const id = yield select(getDeleteReportId);
     const url = `${BASE_URL}/reports/${id}`;
     const init = { method: "DELETE" };
@@ -54,13 +54,13 @@ function* onDeleteReport() {
         yield put(deleteReportFail());
         return;
     }
-}
+};
 
-function* watchSubmitReport() {
+const watchSubmitReport = function* () {
     yield takeLatest(actionTypes.START_SUBMIT_REPORT, onSubmitReport);
-}
+};
 
-function* onSubmitReport() {
+const onSubmitReport = function* () {
     const data = yield select(getDataForSubmission);
     const url = `${BASE_URL}/reports`;
     const init = {
@@ -81,7 +81,7 @@ function* onSubmitReport() {
         yield put(openSubmitModal());
         return;
     }
-}
+};
 
 export default function* rootSaga() {
     yield all([
