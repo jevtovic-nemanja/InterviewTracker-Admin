@@ -13,7 +13,7 @@ const watchFetchData = function* () {
     yield takeLatest(actionTypes.START_FETCH_DATA, onFetchData);
 };
 
-const onFetchData = function* () {
+const onFetchData = function* (action) {
     const urls = {
         reports: `${BASE_URL}/reports`,
         candidates: `${BASE_URL}/candidates`,
@@ -41,7 +41,7 @@ const watchDeleteReport = function* () {
     yield takeEvery(actionTypes.START_DELETE_REPORT, onDeleteReport);
 };
 
-const onDeleteReport = function* () {
+const onDeleteReport = function* (action) {
     const id = yield select(getDeleteReportId);
     const url = `${BASE_URL}/reports/${id}`;
     const init = { method: "DELETE" };
@@ -60,7 +60,7 @@ const watchSubmitReport = function* () {
     yield takeLatest(actionTypes.START_SUBMIT_REPORT, onSubmitReport);
 };
 
-const onSubmitReport = function* () {
+const onSubmitReport = function* (action) {
     const data = yield select(getDataForSubmission);
     const url = `${BASE_URL}/reports`;
     const init = {
