@@ -83,10 +83,10 @@ const onSubmitReport = function* (action) {
     }
 };
 
-export default function* rootSaga() {
+export const rootSaga = function* () {
     yield all([
         watchFetchData(),
         watchDeleteReport(),
         watchSubmitReport()
     ]);
-}
+};
