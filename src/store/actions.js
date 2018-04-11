@@ -29,19 +29,6 @@ export const receiveInputChange = inputItem => {
     };
 };
 
-export const openDetailsModal = detailedReport => {
-    return {
-        type: actionTypes.OPEN_DETAILS_MODAL,
-        detailedReport
-    };
-};
-
-export const closeDetailsModal = () => {
-    return {
-        type: actionTypes.CLOSE_DETAILS_MODAL
-    };
-};
-
 export const openDeleteModal = deleteReportId => {
     return {
         type: actionTypes.OPEN_DELETE_MODAL,

@@ -10,14 +10,35 @@ import { DeleteReport } from "./deleteReport";
 class ReportsList extends React.Component {
     constructor(props) {
         super(props);
+        this.state = this.initState();
     }
 
-    componentDidMount() {
+    initState = () => ({
+        detailsModal: false,
+        detailedReport: {}
+    })
+
+    componentDidMount = () => {
         this.props.startFetchData();
     }
 
-    render() {
-        const { loading, reports, message, detailsModal, detailedReport, deleteModal, deleteReportId, openDetailsModal, closeDetailsModal, openDeleteModal, closeDeleteModal, startDeleteReport } = this.props;
+    openDetailsModal = report => {
+        this.setState({
+            detailsModal: true,
+            detailedReport: report
+        });
+    }
+
+    closeDetailsModal = () => {
+        this.setState({
+            detailsModal: false,
+            detailedReport: {}
+        });
+    }
+
+    render = () => {
+        const { loading, reports, message, deleteModal, deleteReportId, openDeleteModal, closeDeleteModal, startDeleteReport } = this.props;
+        const { detailsModal, detailedReport } = this.state;
 
         return (
             <main className="container">
@@ -41,7 +62,7 @@ class ReportsList extends React.Component {
                                         key={report.id}
                                         report={report}
                                         openDeleteModal={openDeleteModal}
-                                        openDetailsModal={openDetailsModal}
+                                        openDetailsModal={this.openDetailsModal}
                                     />;
                                 }
                             })
@@ -53,7 +74,7 @@ class ReportsList extends React.Component {
 
                 </div>
 
-                <Modal open={detailsModal} onClose={closeDetailsModal} little >
+                <Modal open={detailsModal} onClose={this.closeDetailsModal} little >
                     <ReportDetails report={detailedReport} />
                 </Modal>
 
