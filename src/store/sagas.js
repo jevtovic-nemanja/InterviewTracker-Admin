@@ -2,7 +2,7 @@ import { BASE_URL } from "../constants";
 import { actionTypes } from "./actionTypes";
 import { startFetchData, fetchDataSuccess, fetchDataFail, deleteReportSuccess, deleteReportFail, submitReportSuccess, submitReportFail, openSubmitModal, goToReportsList } from "./actions";
 
-import { packer } from "../services/dataService";
+import { packer } from "../utils/packer";
 
 import { all, call, put, select, takeEvery, takeLatest } from "redux-saga/effects";
 
