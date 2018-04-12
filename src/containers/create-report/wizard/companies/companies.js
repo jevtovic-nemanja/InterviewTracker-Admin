@@ -1,8 +1,16 @@
 import React from "react";
+
 import { connect } from "react-redux";
 
-import { SelectCompany } from "../components/create-report/companies";
-import { selectElement, enableNextPhase, incrementPhase, decrementPhase, newReportCompany } from "../store/actions";
+import { SelectCompany } from "../../../../components/create-report/wizard/selectCompany/selectCompany";
+
+import {
+    selectElement,
+    enableNextPhase,
+    incrementPhase,
+    decrementPhase,
+    newReportCompany
+} from "../../../../store/actions/actions";
 
 const filterCompanies = (companies, searchItem) => {
     if (companies.length) {

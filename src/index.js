@@ -5,12 +5,12 @@ import "babel-polyfill";
 
 import { createStore, combineReducers, applyMiddleware, compose } from "redux";
 import { Provider } from "react-redux";
-import * as reducers from "./store/reducers";
+import * as reducers from "./store/reducers/reducers";
 
 import createSagaMiddleware from "redux-saga";
-import { rootSaga } from "./store/sagas";
+import { rootSaga } from "./store/sagas/sagas";
 
-import { startFetchData } from "./store/actions";
+import { startFetchData } from "./store/actions/actions";
 
 import logger from "redux-logger";
 

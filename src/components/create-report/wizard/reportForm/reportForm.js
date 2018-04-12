@@ -1,12 +1,14 @@
 import React from "react";
-import moment from "moment";
+
+import Modal from "react-responsive-modal";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import Modal from "react-responsive-modal";
 
-import { capitalizeString } from "../../utils/capitalizeString";
+import moment from "moment";
 
-class FillReport extends React.Component {
+import { capitalizeString } from "../../../../utils/capitalizeString";
+
+class ReportForm extends React.Component {
     constructor(props) {
         super(props);
         this.state = this.initState();
@@ -248,4 +250,4 @@ class FillReport extends React.Component {
     }
 }
 
-export default FillReport;
+export default ReportForm;

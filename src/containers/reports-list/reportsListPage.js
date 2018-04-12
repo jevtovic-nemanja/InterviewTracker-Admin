@@ -1,9 +1,15 @@
 import React from "react";
+
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 
-import ReportsList from "../components/reports-list/reportsList";
-import { startFetchData, startDeleteReport, closeMessageModal } from "../store/actions";
+import ReportsList from "../../components/reports-list/reportsList";
+
+import {
+    startFetchData,
+    startDeleteReport,
+    closeMessageModal
+} from "../../store/actions/actions";
 
 
 const filterReports = (reports, searchItem) => {

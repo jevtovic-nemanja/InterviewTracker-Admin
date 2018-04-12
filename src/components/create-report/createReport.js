@@ -2,12 +2,12 @@ import React from "react";
 
 import { Switch, Route } from "react-router-dom";
 
-import AsideComponent from "../../containers/asideContainer";
-import Candidates from "../../containers/candidatesContainer";
-import Companies from "../../containers/companiesContainer";
-import NewReportForm from "../../containers/newReport";
+import Aside from "../../containers/create-report/wizard/aside/aside";
+import Candidates from "../../containers/create-report/wizard/candidates/candidates";
+import Companies from "../../containers/create-report/wizard/companies/companies";
+import NewReport from "../../containers/create-report/wizard/newReport/newReport";
 
-export const CreateReportPage = ({ match }) => {
+export const CreateReportPage = () => {
     return (
         <div className="container">
             <div className="row mt-4">
@@ -15,14 +15,14 @@ export const CreateReportPage = ({ match }) => {
                     <div className="row card-body">
 
                         <aside className="col-12 offset-sm-1 col-sm-10 offset-md-0 col-md-4 col-xl-3">
-                            <AsideComponent />
+                            <Aside />
                         </aside>
 
                         <main className="col-12 col-md-8 col-xl-9">
                             <Switch>
                                 <Route exact path="/create-report/" component={Candidates} />
                                 <Route path="/create-report/2" component={Companies} />
-                                <Route path="/create-report/3" component={NewReportForm} />
+                                <Route path="/create-report/3" component={NewReport} />
                             </Switch>
                         </main>
 

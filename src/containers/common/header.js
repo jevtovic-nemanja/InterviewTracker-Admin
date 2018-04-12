@@ -1,13 +1,15 @@
 import React from "react";
+
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 
-import { Header } from "../components/common/header";
-import { goToReportsList, goToCreateReport } from "../store/actions";
+import { Navbar } from "../../components/common/navbar";
+
+import { goToReportsList, goToCreateReport } from "../../store/actions/actions";
 
 const mapDispatchToProps = dispatch => bindActionCreators({
     goToReportsList,
     goToCreateReport
 }, dispatch);
 
-export default connect(null, mapDispatchToProps)(Header);
+export default connect(null, mapDispatchToProps)(Navbar);

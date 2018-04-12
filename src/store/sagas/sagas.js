@@ -1,8 +1,19 @@
-import { BASE_URL } from "../constants";
-import { actionTypes } from "./actionTypes";
-import { startFetchData, fetchDataSuccess, fetchDataFail, deleteReportSuccess, deleteReportFail, submitReportSuccess, submitReportFail, openMessageModal, goToReportsList } from "./actions";
+import { BASE_URL } from "../../constants";
+import { actionTypes } from "../actions/actionTypes";
 
-import { packer } from "../utils/packer";
+import {
+    startFetchData,
+    fetchDataSuccess,
+    fetchDataFail,
+    deleteReportSuccess,
+    deleteReportFail,
+    submitReportSuccess,
+    submitReportFail,
+    openMessageModal,
+    goToReportsList
+} from "../actions/actions";
+
+import { packer } from "../../utils/packer";
 
 import { all, call, put, select, takeLatest } from "redux-saga/effects";
 

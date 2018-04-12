@@ -1,7 +1,8 @@
 import React from "react";
+
 import { connect } from "react-redux";
 
-import { Aside } from "../components/create-report/aside";
+import { Sidebar } from "../../../../components/create-report/wizard/sidebar/sidebar";
 
 const mapStateToProps = state => {
     return {
@@ -10,4 +11,4 @@ const mapStateToProps = state => {
     };
 };
 
-export default connect(mapStateToProps)(Aside);
+export default connect(mapStateToProps)(Sidebar);

@@ -1,8 +1,14 @@
 import React from "react";
+
 import { connect } from "react-redux";
 
-import FillReport from "../components/create-report/fillReport";
-import { startSubmitReport, decrementPhase, closeMessageModal } from "../store/actions";
+import ReportForm from "../../../../components/create-report/wizard/reportForm/reportForm";
+
+import {
+    startSubmitReport,
+    decrementPhase,
+    closeMessageModal
+} from "../../../../store/actions/actions";
 
 const getTrackedData = (reports, newReportData) => {
     const candidatesReportsWithCompany = reports.filter(report => report.candidateId === newReportData.candidateId && report.companyId === newReportData.companyId);
@@ -52,4 +58,4 @@ const mapDispatchToProps = dispatch => ({
     closeMessageModal: () => dispatch(closeMessageModal())
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(FillReport);
+export default connect(mapStateToProps, mapDispatchToProps)(ReportForm);
