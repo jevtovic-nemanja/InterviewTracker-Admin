@@ -3,9 +3,14 @@ import { render } from "react-dom";
 import { HashRouter } from "react-router-dom";
 import "babel-polyfill";
 
-import { createStore, combineReducers, applyMiddleware, compose } from "redux";
+import {
+    createStore,
+    applyMiddleware,
+    compose
+} from "redux";
+
 import { Provider } from "react-redux";
-import * as reducers from "./store/reducers/reducers";
+import { rootReducer } from "./store/reducers/index";
 
 import createSagaMiddleware from "redux-saga";
 import { rootSaga } from "./store/sagas/index";
@@ -15,8 +20,6 @@ import { startFetchData } from "./store/actions/actions";
 import logger from "redux-logger";
 
 import App from "./app";
-
-const rootReducer = combineReducers(reducers);
 
 const sagaMiddleware = createSagaMiddleware();
 
