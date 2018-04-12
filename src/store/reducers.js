@@ -106,50 +106,6 @@ export function enableNextPhase(state = "disabled", action) {
     }
 }
 
-const newReportFormDataInitState = {
-    interviewDate: null,
-    dateError: "d-none",
-    phase: "Select",
-    phaseError: "d-none",
-    status: "Select",
-    statusError: "d-none",
-    note: "",
-    noteError: "d-none"
-};
-
-export function newReportFormData(state = newReportFormDataInitState, action) {
-    switch (action.type) {
-    case actionTypes.RECEIVE_DATE_CHANGE:
-        return {
-            ...state,
-            interviewDate: action.date,
-            dateError: "d-none",
-            phaseError: "d-none",
-            statusError: "d-none",
-            noteError: "d-none"
-        };
-    case actionTypes.RECEIVE_NEW_REPORT_FORM_INPUT:
-        return {
-            ...state,
-            [action.input.name]: action.input.value,
-            dateError: "d-none",
-            phaseError: "d-none",
-            statusError: "d-none",
-            noteError: "d-none"
-        };
-    case actionTypes.NEW_REPORT_FORM_ERROR:
-        return {
-            ...state,
-            ...action.errors
-        };
-    case actionTypes.SUBMIT_REPORT_SUCCESS:
-    case actionTypes.GO_TO_REPORTS_LIST:
-        return newReportFormDataInitState;
-    default:
-        return state;
-    }
-}
-
 export function messageModal(state = false, action) {
     switch (action.type) {
     case actionTypes.OPEN_MESSAGE_MODAL:

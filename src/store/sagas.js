@@ -6,9 +6,6 @@ import { packer } from "../utils/packer";
 
 import { all, call, put, select, takeLatest } from "redux-saga/effects";
 
-import { getDataForSubmission } from "./selectors";
-
-
 const watchFetchData = function* () {
     yield takeLatest(actionTypes.START_FETCH_DATA, onFetchData);
 };
@@ -62,7 +59,7 @@ const watchSubmitReport = function* () {
 };
 
 const onSubmitReport = function* (action) {
-    const data = yield select(getDataForSubmission);
+    const data = action.formData;
     const url = `${BASE_URL}/reports`;
     const init = {
         method: "POST",
@@ -76,7 +73,6 @@ const onSubmitReport = function* (action) {
         const response = yield call(fetch, url, init);
         yield put(submitReportSuccess());
         yield put(goToReportsList());
-        yield put(startFetchData());
     } catch (e) {
         yield put(submitReportFail());
         yield put(openMessageModal());

@@ -68,7 +68,7 @@ class ReportsList extends React.Component {
     }
 
     render = () => {
-        const { loading, reports, message, open, closeMessageModal } = this.props;
+        const { loading, reports, message, open } = this.props;
         const { detailsModal, detailedReport, deleteModal, deleteReportId } = this.state;
 
         return (

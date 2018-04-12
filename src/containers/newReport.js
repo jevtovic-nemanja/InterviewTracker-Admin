@@ -1,8 +1,8 @@
 import React from "react";
 import { connect } from "react-redux";
 
-import { FillReport } from "../components/create-report/fillReport";
-import { receiveDateChange, receiveNewReportFormInput, startSubmitReport, newReportFormError, decrementPhase, closeMessageModal } from "../store/actions";
+import FillReport from "../components/create-report/fillReport";
+import { startSubmitReport, decrementPhase, closeMessageModal } from "../store/actions";
 
 const getTrackedData = (reports, newReportData) => {
     const candidatesReportsWithCompany = reports.filter(report => report.candidateId === newReportData.candidateId && report.companyId === newReportData.companyId);
@@ -13,13 +13,14 @@ const getTrackedData = (reports, newReportData) => {
 
         let hiringStatus;
 
-        status === "Declined"
+        status === "declined"
             ? hiringStatus = "Declined"
-            : phase === "Final" && status === "Passed"
+            : phase === "final" && status === "passed"
                 ? hiringStatus = "Hired"
                 : hiringStatus = "Select";
 
         return {
+            ...newReportData,
             currentPhase: phase,
             currentStatus: status,
             timeOfLastInterview: date,
@@ -27,6 +28,7 @@ const getTrackedData = (reports, newReportData) => {
         };
     } else {
         return {
+            ...newReportData,
             currentPhase: "none",
             currentStatus: "",
             timeOfLastInterview: null,
@@ -35,63 +37,8 @@ const getTrackedData = (reports, newReportData) => {
     }
 };
 
-const packFormInputChange = event => {
-    const name = event.target.name;
-    const value = event.target.value;
-
-    return {
-        name,
-        value
-    };
-};
-
-const validateInput = input => {
-    const { interviewDate, phase, status, note } = input;
-
-    let isValid = true;
-    let errors = {};
-
-    if (!interviewDate) {
-        errors = {...errors, dateError: "" };
-        isValid = false;
-    }
-
-    if (phase === "Select") {
-        errors = {...errors, phaseError: "" };
-        isValid = false;
-    }
-
-    if (status === "Select") {
-        errors = {...errors, statusError: "" };
-        isValid = false;
-    }
-
-    if (!note) {
-        errors = {...errors, noteError: "" };
-        isValid = false;
-    }
-
-    return {
-        isValid,
-        errors
-    };
-};
-
-const packDataForSubmission = data => {
-    const { interviewDate, phase, status, note } = data;
-    const date = "" + new Date(interviewDate);
-
-    return {
-        interviewDate: date,
-        phase: phase.toLowerCase(),
-        status: status.toLowerCase(),
-        note: note
-    };
-};
-
 const mapStateToProps = state => ({
     trackedData: getTrackedData(state.data.reports, state.newReportData),
-    newReportFormData: state.newReportFormData,
     message: state.message,
     open: state.messageModal
 });
@@ -101,15 +48,8 @@ const mapDispatchToProps = dispatch => ({
         dispatch(decrementPhase());
         location.hash = "#/create-report/2";
     },
-    handleDateChange: date => dispatch(receiveDateChange(date)),
-    handleFormInputChange: event => dispatch(receiveNewReportFormInput(packFormInputChange(event))),
-    validateInput: formData => {
-        const validationResults = validateInput(formData);
-        validationResults.isValid
-            ? dispatch(startSubmitReport())
-            : dispatch(newReportFormError(validationResults.errors));
-    },
-    close: () => dispatch(closeMessageModal())
+    startSubmitReport: data => dispatch(startSubmitReport(data)),
+    closeMessageModal: () => dispatch(closeMessageModal())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(FillReport);

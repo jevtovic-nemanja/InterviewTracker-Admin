@@ -93,23 +93,10 @@ export const newReportCompany = newReportCompany => {
     };
 };
 
-export const receiveDateChange = date => {
+export const startSubmitReport = formData => {
     return {
-        type: actionTypes.RECEIVE_DATE_CHANGE,
-        date
-    };
-};
-
-export const receiveNewReportFormInput = input => {
-    return {
-        type: actionTypes.RECEIVE_NEW_REPORT_FORM_INPUT,
-        input
-    };
-};
-
-export const startSubmitReport = () => {
-    return {
-        type: actionTypes.START_SUBMIT_REPORT
+        type: actionTypes.START_SUBMIT_REPORT,
+        formData
     };
 };
 
@@ -124,13 +111,6 @@ export const submitReportFail = () => {
     return {
         type: actionTypes.SUBMIT_REPORT_FAIL,
         message: "Looks like there was some kind of error. Don't worry, we're looking into it!"
-    };
-};
-
-export const newReportFormError = errors => {
-    return {
-        type: actionTypes.NEW_REPORT_FORM_ERROR,
-        errors
     };
 };
 
