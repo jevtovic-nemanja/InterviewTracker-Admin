@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 
 import { FillReport } from "../components/create-report/fillReport";
-import { receiveDateChange, receiveNewReportFormInput, startSubmitReport, newReportFormError, decrementPhase, closeSubmitModal, openSubmitModal } from "../store/actions";
+import { receiveDateChange, receiveNewReportFormInput, startSubmitReport, newReportFormError, decrementPhase, closeMessageModal } from "../store/actions";
 
 const getTrackedData = (reports, newReportData) => {
     const candidatesReportsWithCompany = reports.filter(report => report.candidateId === newReportData.candidateId && report.companyId === newReportData.companyId);
@@ -93,7 +93,7 @@ const mapStateToProps = state => ({
     trackedData: getTrackedData(state.data.reports, state.newReportData),
     newReportFormData: state.newReportFormData,
     message: state.message,
-    open: state.submitModal
+    open: state.messageModal
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -109,7 +109,7 @@ const mapDispatchToProps = dispatch => ({
             ? dispatch(startSubmitReport())
             : dispatch(newReportFormError(validationResults.errors));
     },
-    close: () => dispatch(closeSubmitModal())
+    close: () => dispatch(closeMessageModal())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(FillReport);

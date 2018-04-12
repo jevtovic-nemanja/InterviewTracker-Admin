@@ -29,24 +29,11 @@ export const receiveInputChange = inputItem => {
     };
 };
 
-export const openDeleteModal = deleteReportId => {
-    return {
-        type: actionTypes.OPEN_DELETE_MODAL,
-        deleteReportId
-    };
-};
-
-export const closeDeleteModal = () => {
-    return {
-        type: actionTypes.CLOSE_DELETE_MODAL,
-        message: ""
-    };
-};
-
-export const startDeleteReport = () => {
+export const startDeleteReport = id => {
     return {
         type: actionTypes.START_DELETE_REPORT,
-        message: "Loading..."
+        message: "Loading...",
+        id
     };
 };
 
@@ -147,17 +134,17 @@ export const newReportFormError = errors => {
     };
 };
 
-export const openSubmitModal = () => {
+export const openMessageModal = () => {
     return {
-        type: actionTypes.OPEN_SUBMIT_MODAL,
-        submitModal: true
+        type: actionTypes.OPEN_MESSAGE_MODAL,
+        messageModal: true
     };
 };
 
-export const closeSubmitModal = () => {
+export const closeMessageModal = () => {
     return {
-        type: actionTypes.CLOSE_SUBMIT_MODAL,
-        submitModal: false,
+        type: actionTypes.CLOSE_MESSAGE_MODAL,
+        messageModal: false,
         message: ""
     };
 };

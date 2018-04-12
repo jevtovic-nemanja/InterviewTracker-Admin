@@ -3,7 +3,7 @@ import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 
 import ReportsList from "../components/reports-list/reportsList";
-import { startFetchData, openDeleteModal, closeDeleteModal, startDeleteReport } from "../store/actions";
+import { startFetchData, startDeleteReport, closeMessageModal } from "../store/actions";
 
 
 const filterReports = (reports, searchItem) => {
@@ -26,15 +26,13 @@ const mapStateToProps = state => ({
     loading: state.loading,
     reports: filterReports(state.data.reports, state.searchItem),
     message: state.message,
-    deleteModal: state.deleteModal,
-    deleteReportId: state.deleteReportId
+    open: state.messageModal
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({
     startFetchData,
-    openDeleteModal: id => openDeleteModal(id),
-    closeDeleteModal,
-    startDeleteReport
+    startDeleteReport: id => startDeleteReport(id),
+    closeMessageModal
 }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(ReportsList);

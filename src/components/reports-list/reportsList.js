@@ -15,7 +15,9 @@ class ReportsList extends React.Component {
 
     initState = () => ({
         detailsModal: false,
-        detailedReport: {}
+        detailedReport: {},
+        deleteModal: false,
+        deleteReportId: ""
     })
 
     componentDidMount = () => {
@@ -36,9 +38,38 @@ class ReportsList extends React.Component {
         });
     }
 
+    openDeleteModal = id => {
+        this.setState({
+            deleteModal: true,
+            deleteReportId: id
+        });
+    }
+
+    closeDeleteModal = () => {
+        this.setState({
+            deleteModal: false,
+            deleteReportId: ""
+        });
+    }
+
+    deleteReport = () => {
+        const { deleteReportId } = this.state;
+
+        this.props.startDeleteReport(deleteReportId);
+        this.closeDeleteModal();
+    }
+
+    closeMessageModal = () => {
+        const { open, closeMessageModal } = this.props;
+        
+        if (open) {
+            closeMessageModal();
+        }
+    }
+
     render = () => {
-        const { loading, reports, message, deleteModal, deleteReportId, openDeleteModal, closeDeleteModal, startDeleteReport } = this.props;
-        const { detailsModal, detailedReport } = this.state;
+        const { loading, reports, message, open, closeMessageModal } = this.props;
+        const { detailsModal, detailedReport, deleteModal, deleteReportId } = this.state;
 
         return (
             <main className="container">
@@ -61,7 +92,7 @@ class ReportsList extends React.Component {
                                     return <ReportDisplay
                                         key={report.id}
                                         report={report}
-                                        openDeleteModal={openDeleteModal}
+                                        openDeleteModal={this.openDeleteModal}
                                         openDetailsModal={this.openDetailsModal}
                                     />;
                                 }
@@ -78,9 +109,23 @@ class ReportsList extends React.Component {
                     <ReportDetails report={detailedReport} />
                 </Modal>
 
-                <Modal open={deleteModal} onClose={closeDeleteModal} little >
-                    <DeleteReport deleteReport={() => startDeleteReport()} close={closeDeleteModal} message={message} />
+                <Modal open={deleteModal} onClose={this.closeDeleteModal} little >
+                    <DeleteReport deleteReport={this.deleteReport} close={this.closeDeleteModal} message={message} />
                 </Modal>
+
+                <Modal open={open} onClose={this.closeMessageModal} little >
+                    <div className="col-12">
+                        <p className="mb-4">{message}</p>
+                        <div className="float-right">
+                            <button
+                                type="button"
+                                onClick={this.closeMessageModal}
+                                className="btn btn-close"
+                            >Close</button>
+                        </div>
+                    </div>
+                </Modal>
+
             </main>
         );
     }

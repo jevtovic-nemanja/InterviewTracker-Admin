@@ -26,6 +26,7 @@ export function message(state = "", action) {
     case actionTypes.CLOSE_DELETE_MODAL:
     case actionTypes.SUBMIT_REPORT_SUCCESS:
     case actionTypes.SUBMIT_REPORT_FAIL:
+    case actionTypes.CLOSE_MESSAGE_MODAL:
         return action.message;
     default:
         return state;
@@ -36,27 +37,6 @@ export function searchItem(state = "", action) {
     switch (action.type) {
     case actionTypes.RECEIVE_INPUT_CHANGE:
         return action.inputItem;
-    default:
-        return state;
-    }
-}
-
-export function deleteModal(state = false, action) {
-    switch (action.type) {
-    case actionTypes.OPEN_DELETE_MODAL:
-        return true;
-    case actionTypes.CLOSE_DELETE_MODAL:
-    case actionTypes.DELETE_REPORT_SUCCESS:
-        return false;
-    default:
-        return state;
-    }
-}
-
-export function deleteReportId(state = "", action) {
-    switch (action.type) {
-    case actionTypes.OPEN_DELETE_MODAL:
-        return action.deleteReportId;
     default:
         return state;
     }
@@ -170,11 +150,11 @@ export function newReportFormData(state = newReportFormDataInitState, action) {
     }
 }
 
-export function submitModal(state = false, action) {
+export function messageModal(state = false, action) {
     switch (action.type) {
-    case actionTypes.OPEN_SUBMIT_MODAL:
+    case actionTypes.OPEN_MESSAGE_MODAL:
         return true;
-    case actionTypes.CLOSE_SUBMIT_MODAL:
+    case actionTypes.CLOSE_MESSAGE_MODAL:
         return false;
     default:
         return state;

@@ -1,12 +1,12 @@
 import { BASE_URL } from "../constants";
 import { actionTypes } from "./actionTypes";
-import { startFetchData, fetchDataSuccess, fetchDataFail, deleteReportSuccess, deleteReportFail, submitReportSuccess, submitReportFail, openSubmitModal, goToReportsList } from "./actions";
+import { startFetchData, fetchDataSuccess, fetchDataFail, deleteReportSuccess, deleteReportFail, submitReportSuccess, submitReportFail, openMessageModal, goToReportsList } from "./actions";
 
 import { packer } from "../utils/packer";
 
 import { all, call, put, select, takeLatest } from "redux-saga/effects";
 
-import { getDeleteReportId, getDataForSubmission } from "./selectors";
+import { getDataForSubmission } from "./selectors";
 
 
 const watchFetchData = function* () {
@@ -42,7 +42,7 @@ const watchDeleteReport = function* () {
 };
 
 const onDeleteReport = function* (action) {
-    const id = yield select(getDeleteReportId);
+    const id = action.id;
     const url = `${BASE_URL}/reports/${id}`;
     const init = { method: "DELETE" };
 
@@ -52,6 +52,7 @@ const onDeleteReport = function* (action) {
         yield put(startFetchData());
     } catch (e) {
         yield put(deleteReportFail());
+        yield put(openMessageModal());
         return;
     }
 };
@@ -78,7 +79,7 @@ const onSubmitReport = function* (action) {
         yield put(startFetchData());
     } catch (e) {
         yield put(submitReportFail());
-        yield put(openSubmitModal());
+        yield put(openMessageModal());
         return;
     }
 };
