@@ -1,5 +1,3 @@
-import { combineReducers } from "redux";
-
 import { actionTypes } from "../actions/actionTypes";
 
 export const createReportPhase = (state = 1, action) => {
