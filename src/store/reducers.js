@@ -6,16 +6,16 @@ const dataInitState = {
     companies: []
 };
 
-export function data(state = dataInitState, action) {
+export const data = (state = dataInitState, action) => {
     switch (action.type) {
     case actionTypes.FETCH_DATA_SUCCESS:
         return action.data;
     default:
         return state;
     }
-}
+};
 
-export function message(state = "", action) {
+export const message = (state = "", action) => {
     switch (action.type) {
     case actionTypes.START_FETCH_DATA:
     case actionTypes.FETCH_DATA_SUCCESS:
@@ -23,7 +23,6 @@ export function message(state = "", action) {
     case actionTypes.START_DELETE_REPORT:
     case actionTypes.DELETE_REPORT_FAIL:
     case actionTypes.DELETE_REPORT_SUCCESS:
-    case actionTypes.CLOSE_DELETE_MODAL:
     case actionTypes.SUBMIT_REPORT_SUCCESS:
     case actionTypes.SUBMIT_REPORT_FAIL:
     case actionTypes.CLOSE_MESSAGE_MODAL:
@@ -31,18 +30,18 @@ export function message(state = "", action) {
     default:
         return state;
     }
-}
+};
 
-export function searchItem(state = "", action) {
+export const searchItem = (state = "", action) => {
     switch (action.type) {
     case actionTypes.RECEIVE_INPUT_CHANGE:
         return action.inputItem;
     default:
         return state;
     }
-}
+};
 
-export function createReportPhase(state = 1, action) {
+export const createReportPhase = (state = 1, action) => {
     switch (action.type) {
     case actionTypes.INCREMENT_PHASE:
         return state + 1;
@@ -55,14 +54,14 @@ export function createReportPhase(state = 1, action) {
     default:
         return state;
     }
-}
+};
 
 const newReportDataInitState = {
     candidateName: "",
     companyName: ""
 };
 
-export function newReportData(state = newReportDataInitState, action) {
+export const newReportData = (state = newReportDataInitState, action) => {
     switch (action.type) {
     case actionTypes.NEW_REPORT_CANDIDATE:
         return {
@@ -82,9 +81,9 @@ export function newReportData(state = newReportDataInitState, action) {
     default:
         return state;
     }
-}
+};
 
-export function selectedElementId(state = "", action) {
+export const selectedElementId = (state = "", action) => {
     switch (action.type) {
     case actionTypes.SELECT_ELEMENT:
     case actionTypes.GO_TO_REPORTS_LIST:
@@ -92,9 +91,9 @@ export function selectedElementId(state = "", action) {
     default:
         return state;
     }
-}
+};
 
-export function enableNextPhase(state = "disabled", action) {
+export const enableNextPhase = (state = "disabled", action) => {
     switch (action.type) {
     case actionTypes.ENABLE_NEXT_PHASE:
     case actionTypes.INCREMENT_PHASE:
@@ -104,9 +103,9 @@ export function enableNextPhase(state = "disabled", action) {
     default:
         return state;
     }
-}
+};
 
-export function messageModal(state = false, action) {
+export const messageModal = (state = false, action) => {
     switch (action.type) {
     case actionTypes.OPEN_MESSAGE_MODAL:
         return true;
@@ -115,4 +114,4 @@ export function messageModal(state = false, action) {
     default:
         return state;
     }
-}
+};
