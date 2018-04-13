@@ -1,4 +1,4 @@
-import { actionTypes } from "../actions/actionTypes";
+import { actionTypes } from "Store/actions/actionTypes";
 
 export const message = (state = "", action) => {
     switch (action.type) {

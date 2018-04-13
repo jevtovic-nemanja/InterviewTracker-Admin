@@ -2,10 +2,10 @@ import React from "react";
 
 import { Switch, Route } from "react-router-dom";
 
-import Aside from "../../containers/create-report/wizard/aside/aside";
-import Candidates from "../../containers/create-report/wizard/candidates/candidates";
-import Companies from "../../containers/create-report/wizard/companies/companies";
-import NewReport from "../../containers/create-report/wizard/newReport/newReport";
+import Aside from "Containers/create-report/wizard/aside/aside";
+import Candidates from "Containers/create-report/wizard/candidates/candidates";
+import Companies from "Containers/create-report/wizard/companies/companies";
+import NewReport from "Containers/create-report/wizard/newReport/newReport";
 
 export const CreateReportPage = () => {
     return (

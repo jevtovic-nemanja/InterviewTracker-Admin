@@ -6,7 +6,7 @@ import "react-datepicker/dist/react-datepicker.css";
 
 import moment from "moment";
 
-import { capitalizeString } from "../../../../utils/capitalizeString";
+import { capitalizeString } from "Utils/capitalizeString";
 
 class ReportForm extends React.Component {
     constructor(props) {

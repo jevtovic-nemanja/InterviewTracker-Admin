@@ -13,12 +13,12 @@ import { Provider } from "react-redux";
 import createSagaMiddleware from "redux-saga";
 import logger from "redux-logger";
 
-import App from "./app";
+import App from "Src/app";
 
 
-import { rootReducer } from "./store/reducers/index";
-import { rootSaga } from "./store/sagas/index";
-import { startFetchData } from "./store/actions/index";
+import { rootReducer } from "Store/reducers/index";
+import { rootSaga } from "Store/sagas/index";
+import { startFetchData } from "Store/actions/index";
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 

@@ -1,8 +1,8 @@
 import moment from "moment";
 
-import Report from "../entities/report";
-import Candidate from "../entities/candidate";
-import Company from "../entities/company";
+import Report from "Entities/report";
+import Candidate from "Entities/candidate";
+import Company from "Entities/company";
 
 export const packer = (type, data) => {
     switch (type) {

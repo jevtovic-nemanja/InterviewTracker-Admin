@@ -2,9 +2,9 @@ import React from "react";
 
 import { connect } from "react-redux";
 
-import { Input } from "../../components/common/input";
+import { Input } from "Components/common/input";
 
-import { receiveInputChange } from "../../store/actions/index";
+import { receiveInputChange } from "Store/actions/index";
 
 const handleInputChange = event => {
     const inputString = event.target.value;

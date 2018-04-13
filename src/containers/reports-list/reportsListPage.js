@@ -3,13 +3,13 @@ import React from "react";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 
-import ReportsList from "../../components/reports-list/reportsList";
+import ReportsList from "Components/reports-list/reportsList";
 
 import {
     startFetchData,
     startDeleteReport,
     closeMessageModal
-} from "../../store/actions/index";
+} from "Store/actions/index";
 
 
 const filterReports = (reports, searchItem) => {

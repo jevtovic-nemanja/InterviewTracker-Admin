@@ -1,4 +1,4 @@
-import { BASE_URL } from "../../constants";
+import { BASE_URL } from "Src/constants";
 
 import {
     call,
@@ -8,9 +8,9 @@ import {
 import {
     fetchDataSuccess,
     fetchDataFail,
-} from "../actions/index";
+} from "Store/actions/index";
 
-import { packer } from "../../utils/packer";
+import { packer } from "Utils/packer";
 
 export const fetchDataSaga = function* (action) {
     const urls = {

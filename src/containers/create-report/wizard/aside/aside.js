@@ -2,7 +2,7 @@ import React from "react";
 
 import { connect } from "react-redux";
 
-import { Sidebar } from "../../../../components/create-report/wizard/sidebar/sidebar";
+import { Sidebar } from "Components/create-report/wizard/sidebar/sidebar";
 
 const mapStateToProps = state => {
     return {

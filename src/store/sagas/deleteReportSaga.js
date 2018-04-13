@@ -1,4 +1,4 @@
-import { BASE_URL } from "../../constants";
+import { BASE_URL } from "Src/constants";
 
 import {
     call,
@@ -10,7 +10,7 @@ import {
     deleteReportSuccess,
     deleteReportFail,
     openMessageModal
-} from "../actions/index";
+} from "Store/actions/index";
 
 export const deleteReportSaga = function* (action) {
     const id = action.id;

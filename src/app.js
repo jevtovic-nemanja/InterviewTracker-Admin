@@ -2,9 +2,9 @@ import React from "react";
 
 import { Switch, Route } from "react-router-dom";
 
-import Header from "./containers/common/header";
-import ReportsListPage from "./containers/reports-list/reportsListPage";
-import { CreateReportPage } from "./components/create-report/createReport";
+import Header from "Containers/common/header";
+import ReportsListPage from "Containers/reports-list/reportsListPage";
+import { CreateReportPage } from "Components/create-report/createReport";
 
 class App extends React.Component {
     constructor(props) {

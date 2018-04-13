@@ -2,13 +2,13 @@ import React from "react";
 
 import { connect } from "react-redux";
 
-import ReportForm from "../../../../components/create-report/wizard/reportForm/reportForm";
+import ReportForm from "Components/create-report/wizard/reportForm/reportForm";
 
 import {
     startSubmitReport,
     decrementPhase,
     closeMessageModal
-} from "../../../../store/actions/index";
+} from "Store/actions/index";
 
 const getTrackedData = (reports, newReportData) => {
     const candidatesReportsWithCompany = reports.filter(report => report.candidateId === newReportData.candidateId && report.companyId === newReportData.companyId);

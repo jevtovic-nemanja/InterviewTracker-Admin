@@ -2,7 +2,7 @@ import React from "react";
 
 import { connect } from "react-redux";
 
-import { SelectCompany } from "../../../../components/create-report/wizard/selectCompany/selectCompany";
+import { SelectCompany } from "Components/create-report/wizard/selectCompany/selectCompany";
 
 import {
     selectElement,
@@ -10,7 +10,7 @@ import {
     incrementPhase,
     decrementPhase,
     newReportCompany
-} from "../../../../store/actions/index";
+} from "Store/actions/index";
 
 const filterCompanies = (companies, searchItem) => {
     if (companies.length) {

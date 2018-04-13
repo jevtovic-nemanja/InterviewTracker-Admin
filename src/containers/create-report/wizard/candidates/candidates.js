@@ -2,14 +2,14 @@ import React from "react";
 
 import { connect } from "react-redux";
 
-import { SelectCandidate } from "../../../../components/create-report/wizard/selectCandidate/selectCandidate";
+import { SelectCandidate } from "Components/create-report/wizard/selectCandidate/selectCandidate";
 
 import {
     selectElement,
     enableNextPhase,
     newReportCandidate,
     incrementPhase
-} from "../../../../store/actions/index";
+} from "Store/actions/index";
 
 const filterCandidates = (candidates, searchItem) => {
     if (candidates.length) {

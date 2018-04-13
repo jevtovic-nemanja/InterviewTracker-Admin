@@ -1,4 +1,4 @@
-import { actionTypes } from "../actions/actionTypes";
+import { actionTypes } from "Store/actions/actionTypes";
 
 import { fetchDataSaga } from "./fetchDataSaga";
 import { deleteReportSaga } from "./deleteReportSaga";
