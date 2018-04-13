@@ -32,6 +32,9 @@ export const searchItem = (state = "", action) => {
     switch (action.type) {
     case actionTypes.RECEIVE_INPUT_CHANGE:
         return action.inputItem;
+    case actionTypes.GO_TO_REPORTS_LIST:
+    case actionTypes.GO_TO_CREATE_REPORT:
+        return "";
     default:
         return state;
     }
