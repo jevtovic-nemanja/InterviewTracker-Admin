@@ -10,6 +10,6 @@ The Report List Page uses a list layout with basic report info shown. It also en
 
 The Submit Report Page features a three-step "wizard": firstly, a candidate is selected from a list, then the same is done with a company. Each list can be filtered by name. Finally, report details are filled and the report submitted.
 
-This branch of the project has been refactored to implement Redux. Async actions were handled by redux-saga.
+The project is written in React, using Redux for state management. Async actions were handled by redux-saga.
 
 Technologies used: HTML, CSS, Bootstrap, ES6, React, Redux, Webpack, Babel.
