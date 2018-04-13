@@ -1,7 +1,7 @@
 import React from "react";
 
-export const Aside = ({ phase, info }) => {
-    const { candidateName, companyName } = info;
+export const Sidebar = ({ phase, newReport }) => {
+    const { candidateName, companyName } = newReport;
 
     const marginBottom = phase === 1 ? "mb-3" : "";
 

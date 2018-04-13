@@ -1,13 +1,40 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import { HashRouter } from "react-router-dom";
 import "babel-polyfill";
+import React from "react";
+import { render } from "react-dom";
+import { HashRouter } from "react-router-dom";
 
-import App from "./components/app";
+import {
+    createStore,
+    applyMiddleware,
+    compose
+} from "redux";
 
-ReactDOM.render(
-    <HashRouter>
-        <App />
-    </HashRouter>,
+import { Provider } from "react-redux";
+import createSagaMiddleware from "redux-saga";
+import logger from "redux-logger";
+
+import App from "Src/app";
+
+
+import { rootReducer } from "Store/reducers/index";
+import { rootSaga } from "Store/sagas/index";
+import { startFetchData } from "Store/actions/index";
+
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
+const sagaMiddleware = createSagaMiddleware();
+
+const store = createStore(rootReducer, composeEnhancers(
+    applyMiddleware(sagaMiddleware, logger)
+));
+
+sagaMiddleware.run(rootSaga);
+
+render(
+    <Provider store={store}>
+        <HashRouter>
+            <App />
+        </HashRouter>
+    </Provider>,
     document.querySelector(".app")
-); 
+);

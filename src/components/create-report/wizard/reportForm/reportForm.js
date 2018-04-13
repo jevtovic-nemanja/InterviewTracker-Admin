@@ -1,29 +1,29 @@
 import React from "react";
 
-import moment from "moment";
+import Modal from "react-responsive-modal";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
-import { capitalizeString } from "../../../utils/capitalizeString";
+import moment from "moment";
 
-class FillReport extends React.Component {
+import { capitalizeString } from "Utils/capitalizeString";
+
+class ReportForm extends React.Component {
     constructor(props) {
         super(props);
         this.state = this.initState();
     }
 
-    initState = () => {
-        return {
-            interviewDate: null,
-            dateError: "d-none",
-            phase: "Select",
-            phaseError: "d-none",
-            status: "Select",
-            statusError: "d-none",
-            note: "",
-            noteError: "d-none"
-        };
-    }
+    initState = () => ({
+        interviewDate: null,
+        dateError: "d-none",
+        phase: "Select",
+        phaseError: "d-none",
+        status: "Select",
+        statusError: "d-none",
+        note: "",
+        noteError: "d-none"
+    })
 
     handleDateChange = date => {
         this.setState({
@@ -47,26 +47,6 @@ class FillReport extends React.Component {
             prevState.noteError = "d-none";
             return prevState;
         });
-    }
-
-    onSubmit = event => {
-        event.preventDefault();
-
-        const { interviewDate, phase, status, note } = this.state;
-        const date = "" + new Date(interviewDate);
-
-        const data = {
-            interviewDate: date,
-            phase: phase.toLowerCase(),
-            status: status.toLowerCase(),
-            note: note
-        };
-
-        const isValid = this.validateInput();
-
-        if (isValid) {
-            this.props.onSubmit(data);
-        }
     }
 
     validateInput = () => {
@@ -97,18 +77,52 @@ class FillReport extends React.Component {
         return isValid;
     }
 
-    render = () => {
-        const { interviewDate, dateError, phase, phaseError, status, statusError, note, noteError } = this.state;
+    onSubmit = event => {
+        event.preventDefault();
 
-        const { timeOfLastInterview, currentPhase, currentStatus, hiringStatus } = this.props.trackedData;
-        const today = moment();
-        const lastInterview = moment(timeOfLastInterview);
+        const isValid = this.validateInput();
+
+        if (isValid) {
+            const { interviewDate, phase, status, note } = this.state;
+            const { trackedData, startSubmitReport } = this.props;
+            const { candidateId, candidateName, companyId, companyName } = trackedData;
+
+            const date = "" + new Date(interviewDate);
+
+            const data = {
+                candidateId,
+                candidateName,
+                companyId,
+                companyName,
+                interviewDate: date,
+                phase: phase.toLowerCase(),
+                status: status.toLowerCase(),
+                note
+            };
+
+            startSubmitReport(data);
+        }
+    }
+
+    closeMessageModal = () => {
+        const { open, closeMessageModal } = this.props;
+
+        if (open) {
+            closeMessageModal();
+        }
+    }
+
+    render = () => {
+        const { trackedData, message, onBack, open } = this.props;
+
+        const { currentPhase, currentStatus, timeOfLastInterview, hiringStatus } = trackedData;
+        const { interviewDate, dateError, phase, phaseError, status, statusError, note, noteError } = this.state;
 
         const declined = (currentStatus === "declined" || hiringStatus === "Hired") ? "disabled" : "";
         const declinedDatePicker = declined ? true : false;
 
         const phases = ["none", "cv", "hr", "tech", "final", "hired"];
-        const nextPhase = capitalizeString(phases[phases.indexOf(currentPhase) + 1]);
+        const nextPhase = capitalizeString(phases[phases.indexOf(currentPhase.toLowerCase()) + 1]);
 
         return (
             <form className="row fill-report">
@@ -116,7 +130,7 @@ class FillReport extends React.Component {
                 <div className="col-12 offset-sm-1 col-sm-10 d-md-none">
                     <button
                         type="button"
-                        onClick={this.props.onBack}
+                        onClick={onBack}
                         className="btn btn-back w-100 mb-2"
                     >Back</button>
                 </div>
@@ -128,8 +142,8 @@ class FillReport extends React.Component {
                             dateFormat="DD.MM.YYYY"
                             placeholderText="Click to select a date"
                             selected={interviewDate}
-                            maxDate={today}
-                            minDate={lastInterview}
+                            maxDate={moment()}
+                            minDate={moment(timeOfLastInterview, "DD-MM-YYYY")}
                             onChange={this.handleDateChange}
                             className="pl-2 form-control"
                             disabled={declinedDatePicker}
@@ -204,7 +218,7 @@ class FillReport extends React.Component {
                 <div className="d-none d-md-block col-md-4 col-lg-3">
                     <button
                         type="button"
-                        onClick={this.props.onBack}
+                        onClick={onBack}
                         className="btn btn-back w-100 mb-2"
                     >Back</button>
                 </div>
@@ -217,10 +231,23 @@ class FillReport extends React.Component {
                         className={`btn btn-submit w-100 mt-1 ${declined}`}
                     >Submit</button>
                 </div>
-                
+
+                <Modal open={open} onClose={this.closeMessageModal} little >
+                    <div className="col-12">
+                        <p className="mb-4">{message}</p>
+                        <div className="float-right">
+                            <button
+                                type="button"
+                                onClick={this.closeMessageModal}
+                                className="btn btn-close"
+                            >Close</button>
+                        </div>
+                    </div>
+                </Modal>
+
             </form >
         );
     }
 }
 
-export default FillReport;
+export default ReportForm;

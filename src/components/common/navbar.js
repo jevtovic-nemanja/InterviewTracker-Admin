@@ -2,7 +2,7 @@ import React from "react";
 
 import { Link } from "react-router-dom";
 
-export const Header = props => {
+export const Navbar = ({ goToReportsList, goToCreateReport }) => {
     let report = "btn-nav";
     let create = "btn-nav";
 
@@ -22,14 +22,14 @@ export const Header = props => {
                 <div className="col-5 col-md-4">
                     <div className="btn-group float-right">
                         <Link to="/">
-                            <button className={`${report} btn rounded-0`}>Reports</button>
+                            <button className={`${report} btn rounded-0`} onClick={goToReportsList}>Reports</button>
                         </Link>
-                        <Link to="/create-report">
-                            <button className={`${create} btn rounded-0`}>Create Report</button>
+                        <Link to="/create-report/">
+                            <button className={`${create} btn rounded-0`} onClick={goToCreateReport}>Create Report</button>
                         </Link>
                     </div>
                 </div>
-                
+
             </div>
         </nav>
     );

@@ -9,13 +9,21 @@
   "author": "jevtovic-nemanja",
   "license": "ISC",
   "dependencies": {
+    "babel-plugin-syntax-class-properties": "^6.13.0",
+    "babel-plugin-syntax-object-rest-spread": "^6.13.0",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-plugin-transform-es2015-computed-properties": "^6.24.1",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-polyfill": "^6.26.0",
     "moment": "^2.20.1",
     "react": "^16.2.0",
     "react-datepicker": "^1.0.4",
     "react-dom": "^16.2.0",
+    "react-redux": "^5.0.7",
     "react-responsive-modal": "^2.0.0",
-    "react-router-dom": "^4.2.2"
+    "react-router-dom": "^4.2.2",
+    "redux": "^3.7.2",
+    "redux-saga": "^0.16.0"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
@@ -30,6 +38,7 @@
     "eslint-loader": "^1.9.0",
     "eslint-plugin-react": "^7.4.0",
     "path": "^0.12.7",
+    "redux-logger": "^3.0.6",
     "style-loader": "^0.19.1",
     "webpack": "^3.8.1",
     "webpack-dev-server": "^2.9.4"

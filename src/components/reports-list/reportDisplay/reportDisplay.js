@@ -1,7 +1,7 @@
 import React from "react";
 
-export const ReportDisplay = ({ report, deleteReport, openDetailsModal }) => {
-    const { id, candidate, company, date, status } = report;
+export const ReportDisplay = ({ report, openDeleteModal, openDetailsModal }) => {
+    const { id, candidateName, companyName, date, status } = report;
 
     return (
         <div className="offset-1 col-10 offset-sm-0 col-sm-12 offset-md-1 col-md-10">
@@ -10,12 +10,12 @@ export const ReportDisplay = ({ report, deleteReport, openDetailsModal }) => {
                 <div className="card-body pt-4">
                     <div className="row">
                         <div className="col-12 col-sm-6 col-lg-4 side-line-sm">
-                            <h5 className="mb-0 mt-2">{company}</h5>
+                            <h5 className="mb-0 mt-2">{companyName}</h5>
                             <small>Company</small>
                         </div>
 
                         <div className="col-12 col-sm-6 col-lg-3 side-line-lg">
-                            <h5 className="mb-0 mt-2">{candidate}</h5>
+                            <h5 className="mb-0 mt-2">{candidateName}</h5>
                             <small>Candidate</small>
                         </div>
 
@@ -34,7 +34,7 @@ export const ReportDisplay = ({ report, deleteReport, openDetailsModal }) => {
                 <div className="btn-group-report-card">
                     <button
                         type="button"
-                        onClick={() => openDetailsModal(id)}
+                        onClick={() => openDetailsModal(report)}
                         className="btn btn-report-card"
                     >
                         <i className="fa fa-eye fa-lg"></i>
@@ -42,7 +42,7 @@ export const ReportDisplay = ({ report, deleteReport, openDetailsModal }) => {
 
                     <button
                         type="button"
-                        onClick={() => deleteReport(id)}
+                        onClick={() => openDeleteModal(id)}
                         className="btn btn-report-card"
                     >
                         <i className="fa fa-times fa-lg"></i>

@@ -2,9 +2,9 @@ import React from "react";
 
 import { Switch, Route } from "react-router-dom";
 
-import { Header } from "./common/header";
-import ReportsListPage from "./reports-list/reportsListPage";
-import CreateReportPage from "./create-report/createReportPage";
+import Header from "Containers/common/header";
+import ReportsListPage from "Containers/reports-list/reportsListPage";
+import { CreateReportPage } from "Components/create-report/createReport";
 
 class App extends React.Component {
     constructor(props) {
@@ -17,7 +17,7 @@ class App extends React.Component {
                 <Header />
                 <Switch>
                     <Route exact path="/" component={ReportsListPage} />
-                    <Route path="/create-report" component={CreateReportPage} />
+                    <Route path="/create-report/" component={CreateReportPage} />
                 </Switch>
             </div>
         );
