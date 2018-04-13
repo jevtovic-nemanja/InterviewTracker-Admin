@@ -9,7 +9,7 @@ import {
     startFetchData,
     startDeleteReport,
     closeMessageModal
-} from "../../store/actions/actions";
+} from "../../store/actions/index";
 
 
 const filterReports = (reports, searchItem) => {

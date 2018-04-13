@@ -10,7 +10,7 @@ import {
     incrementPhase,
     decrementPhase,
     newReportCompany
-} from "../../../../store/actions/actions";
+} from "../../../../store/actions/index";
 
 const filterCompanies = (companies, searchItem) => {
     if (companies.length) {

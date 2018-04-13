@@ -9,7 +9,7 @@ import {
     enableNextPhase,
     newReportCandidate,
     incrementPhase
-} from "../../../../store/actions/actions";
+} from "../../../../store/actions/index";
 
 const filterCandidates = (candidates, searchItem) => {
     if (candidates.length) {

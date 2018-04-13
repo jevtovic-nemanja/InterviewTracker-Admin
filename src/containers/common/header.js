@@ -5,7 +5,10 @@ import { connect } from "react-redux";
 
 import { Navbar } from "../../components/common/navbar";
 
-import { goToReportsList, goToCreateReport } from "../../store/actions/actions";
+import {
+    goToReportsList,
+    goToCreateReport
+} from "../../store/actions/index";
 
 const mapDispatchToProps = dispatch => bindActionCreators({
     goToReportsList,

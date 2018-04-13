@@ -8,7 +8,7 @@ import {
     startSubmitReport,
     decrementPhase,
     closeMessageModal
-} from "../../../../store/actions/actions";
+} from "../../../../store/actions/index";
 
 const getTrackedData = (reports, newReportData) => {
     const candidatesReportsWithCompany = reports.filter(report => report.candidateId === newReportData.candidateId && report.companyId === newReportData.companyId);
