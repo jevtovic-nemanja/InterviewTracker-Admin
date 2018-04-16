@@ -6,6 +6,8 @@ import Header from "Containers/common/header";
 import ReportsListPage from "Containers/reports-list/reportsListPage";
 import { CreateReportPage } from "Components/create-report/createReport";
 
+import "./assets/css/main.css";
+
 class App extends React.Component {
     constructor(props) {
         super(props);
