@@ -2,6 +2,7 @@ const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
+    mode: "development",
     entry: __dirname + "/src/index",
     target: "web",
     resolve: {
@@ -23,21 +24,21 @@ module.exports = {
         contentBase: __dirname + "/src"
     },
     module: {
-        loaders: [
+        rules: [
             {
                 enforce: "pre",
                 test: /\.js$/,
                 exclude: /node_modules/,
-                loader: "eslint-loader",
+                use: "eslint-loader",
             },
             {
                 test: /\.js$/,
                 exclude: /node_modules/,
-                loaders: ["babel-loader"]
+                use: ["babel-loader"]
             },
             {
                 test: /(\.css)$/,
-                loaders: ["style-loader", "css-loader"]
+                use: ["style-loader", "css-loader"]
             }
         ]
     },
