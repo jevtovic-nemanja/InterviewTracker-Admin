@@ -4,7 +4,7 @@
   "description": "Admin panel app for managing interview reports",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "webpack-dev-server -d",
+    "start": "webpack-dev-server -d --config webpack.dev.js",
     "build": "rimraf dist && webpack --config webpack.prod.js --progress --profile --color"
   },
   "author": "jevtovic-nemanja",
