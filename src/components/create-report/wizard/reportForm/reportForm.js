@@ -9,12 +9,7 @@ import moment from "moment";
 import { capitalizeString } from "Utils/capitalizeString";
 
 class ReportForm extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = this.initState();
-    }
-
-    initState = () => ({
+    state = {
         interviewDate: null,
         dateError: "d-none",
         phase: "Select",
@@ -23,7 +18,7 @@ class ReportForm extends React.Component {
         statusError: "d-none",
         note: "",
         noteError: "d-none"
-    })
+    }
 
     handleDateChange = date => {
         this.setState({
@@ -49,7 +44,7 @@ class ReportForm extends React.Component {
         });
     }
 
-    validateInput = () => {
+    validateInput() {
         const { interviewDate, phase, status, note } = this.state;
 
         let isValid = true;
@@ -112,7 +107,7 @@ class ReportForm extends React.Component {
         }
     }
 
-    render = () => {
+    render() {
         const { trackedData, message, onBack, open } = this.props;
 
         const { currentPhase, currentStatus, timeOfLastInterview, hiringStatus } = trackedData;

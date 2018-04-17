@@ -4,23 +4,19 @@ import Modal from "react-responsive-modal";
 
 import Search from "../../containers/common/search";
 import { ReportDisplay } from "./reportDisplay/reportDisplay";
+import { DeleteReport } from "./deleteReport/deleteReport";
 
 import { asyncComponent } from "Hocs/asyncComponent";
 
 class ReportsList extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = this.initState();
-    }
-
-    initState = () => ({
+    state = {
         detailsModal: false,
         detailedReport: {},
         deleteModal: false,
         deleteReportId: ""
-    })
+    }
 
-    componentDidMount = () => {
+    componentDidMount() {
         this.props.startFetchData();
     }
 
@@ -67,16 +63,12 @@ class ReportsList extends React.Component {
         }
     }
 
-    render = () => {
+    render() {
         const { loading, reports, message, open } = this.props;
         const { detailsModal, detailedReport, deleteModal, deleteReportId } = this.state;
 
         const AsyncReportDetails = asyncComponent(() => {
             return import(/* webpackChunkName: "reportDetails" */ "./reportDetails/reportDetails");
-        });
-
-        const AsyncDeleteReport = asyncComponent(() => {
-            return import(/* webpackChunkName: "deleteReport" */ "./deleteReport/deleteReport");
         });
 
         return (
@@ -118,7 +110,7 @@ class ReportsList extends React.Component {
                 </Modal>
 
                 <Modal open={deleteModal} onClose={this.closeDeleteModal} little >
-                    <AsyncDeleteReport deleteReport={this.deleteReport} close={this.closeDeleteModal} message={message} />
+                    <DeleteReport deleteReport={this.deleteReport} close={this.closeDeleteModal} message={message} />
                 </Modal>
 
                 <Modal open={open} onClose={this.closeMessageModal} little >
