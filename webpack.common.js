@@ -10,14 +10,16 @@ module.exports = {
             Components: path.resolve(__dirname, "src/components"),
             Containers: path.resolve(__dirname, "src/containers"),
             Entities: path.resolve(__dirname, "src/entities"),
+            Hocs: path.resolve(__dirname, "src/hocs"),
             Store: path.resolve(__dirname, "src/store"),
             Utils: path.resolve(__dirname, "src/utils")
         }
     },
     output: {
         path: path.resolve(__dirname, "src/dist"),
-        filename: "bundle.js",
-        publicPath: ""
+        publicPath: "",
+        filename: "[name].[hash].js",
+        chunkFilename: "[name].[hash].js"
     },
     module: {
         rules: [
@@ -38,5 +40,16 @@ module.exports = {
             filename: "index.html",
             inject: "body"
         })
-    ]
+    ],
+    optimization: {
+        splitChunks: {
+            cacheGroups: {
+                commons: {
+                    test: /[\\/]node_modules[\\/]/,
+                    name: "vendors",
+                    chunks: "all"
+                }
+            }
+        }
+    }
 };
