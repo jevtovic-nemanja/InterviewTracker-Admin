@@ -4,8 +4,8 @@ import Modal from "react-responsive-modal";
 
 import Search from "../../containers/common/search";
 import { ReportDisplay } from "./reportDisplay/reportDisplay";
-import { ReportDetails } from "./reportDetails/reportDetails";
-import { DeleteReport } from "./deleteReport/deleteReport";
+
+import { asyncComponent } from "Hocs/asyncComponent";
 
 class ReportsList extends React.Component {
     constructor(props) {
@@ -61,7 +61,7 @@ class ReportsList extends React.Component {
 
     closeMessageModal = () => {
         const { open, closeMessageModal } = this.props;
-        
+
         if (open) {
             closeMessageModal();
         }
@@ -70,6 +70,14 @@ class ReportsList extends React.Component {
     render = () => {
         const { loading, reports, message, open } = this.props;
         const { detailsModal, detailedReport, deleteModal, deleteReportId } = this.state;
+
+        const AsyncReportDetails = asyncComponent(() => {
+            return import(/* webpackChunkName: "reportDetails" */ "./reportDetails/reportDetails");
+        });
+
+        const AsyncDeleteReport = asyncComponent(() => {
+            return import(/* webpackChunkName: "deleteReport" */ "./deleteReport/deleteReport");
+        });
 
         return (
             <main className="container">
@@ -106,11 +114,11 @@ class ReportsList extends React.Component {
                 </div>
 
                 <Modal open={detailsModal} onClose={this.closeDetailsModal} little >
-                    <ReportDetails report={detailedReport} />
+                    <AsyncReportDetails report={detailedReport} />
                 </Modal>
 
                 <Modal open={deleteModal} onClose={this.closeDeleteModal} little >
-                    <DeleteReport deleteReport={this.deleteReport} close={this.closeDeleteModal} message={message} />
+                    <AsyncDeleteReport deleteReport={this.deleteReport} close={this.closeDeleteModal} message={message} />
                 </Modal>
 
                 <Modal open={open} onClose={this.closeMessageModal} little >
