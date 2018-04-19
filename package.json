@@ -5,7 +5,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "webpack-dev-server -d --hot --config webpack.dev.js",
-    "build": "rimraf src/dist && webpack --config webpack.prod.js --progress --profile --color"
+    "build": "rimraf dist && webpack --config webpack.prod.js --progress --profile --color"
   },
   "author": "jevtovic-nemanja",
   "license": "ISC",
