@@ -18,19 +18,7 @@ module.exports = merge(common, {
     },
     plugins: [
         new MiniCssExtractPlugin({
-            filename: "[name].css"
+            filename: "css/[name].css"
         })
-    ],
-    optimization: {
-        splitChunks: {
-            cacheGroups: {
-                styles: {
-                    name: "styles",
-                    test: /(\.css)$/,
-                    chunks: "all",
-                    enforce: true
-                }
-            }
-        }
-    }
+    ]
 });
