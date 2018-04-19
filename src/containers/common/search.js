@@ -2,7 +2,7 @@ import React from "react";
 
 import { connect } from "react-redux";
 
-import { Input } from "Components/common/input";
+import { Input } from "Components/common/input/input";
 
 import { receiveInputChange } from "Store/actions/index";
 
