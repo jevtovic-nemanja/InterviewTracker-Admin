@@ -34,5 +34,5 @@ describe("<DeleteReport />", () => {
 
         expect(wrapper.find("p").text()).toEqual("Are you sure you wish to delete this report?");
         expect(wrapper.find("button")).toHaveLength(2);
-    })
+    });
 });
