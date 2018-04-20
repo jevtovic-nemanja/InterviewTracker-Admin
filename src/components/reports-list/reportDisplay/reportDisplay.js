@@ -35,7 +35,7 @@ export const ReportDisplay = ({ report, openDeleteModal, openDetailsModal }) => 
                     <button
                         type="button"
                         onClick={() => openDetailsModal(report)}
-                        className="btn btn-report-card"
+                        className="btn btn-report-card btn-details"
                     >
                         <i className="fa fa-eye fa-lg"></i>
                     </button>
@@ -43,7 +43,7 @@ export const ReportDisplay = ({ report, openDeleteModal, openDetailsModal }) => 
                     <button
                         type="button"
                         onClick={() => openDeleteModal(id)}
-                        className="btn btn-report-card"
+                        className="btn btn-report-card btn-delete-report"
                     >
                         <i className="fa fa-times fa-lg"></i>
                     </button>
