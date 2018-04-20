@@ -20,7 +20,7 @@ module.exports = {
         path: path.resolve(__dirname, "dist"),
         publicPath: "",
         filename: "[name].[hash].js",
-        chunkFilename: "[name].[hash].js"
+        chunkFilename: "js/[name].[hash].js"
     },
     module: {
         rules: [
@@ -40,16 +40,5 @@ module.exports = {
             filename: "index.html",
             inject: "body"
         })
-    ],
-    optimization: {
-        splitChunks: {
-            cacheGroups: {
-                commons: {
-                    test: /[\\/]node_modules[\\/]/,
-                    name: "vendors",
-                    chunks: "all"
-                }
-            }
-        }
-    }
+    ]
 };
