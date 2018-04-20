@@ -23,7 +23,7 @@ class App extends React.Component {
     render() {
         return (
             <div className="w-100">
-                <Header />
+                <Header hash={location.hash} />
                 <Switch>
                     <Route exact path="/" component={ReportsListPage} />
                     <Route path="/create-report/" component={asyncCreateReportPage} />

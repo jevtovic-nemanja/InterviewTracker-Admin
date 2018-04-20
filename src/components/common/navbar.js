@@ -2,11 +2,11 @@ import React from "react";
 
 import { Link } from "react-router-dom";
 
-export const Navbar = ({ goToReportsList, goToCreateReport }) => {
+export const Navbar = ({ hash, goToReportsList, goToCreateReport }) => {
     let report = "btn-nav";
     let create = "btn-nav";
 
-    location.hash === "#/"
+    hash === "#/"
         ? report = "btn-nav-active"
         : create = "btn-nav-active";
 

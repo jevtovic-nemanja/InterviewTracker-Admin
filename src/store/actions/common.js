@@ -23,7 +23,6 @@ export const closeMessageModal = () => {
 };
 
 export const goToReportsList = () => {
-    location.hash = "#";
     return {
         type: actionTypes.GO_TO_REPORTS_LIST,
         createReportPhase: 1,
@@ -33,7 +32,6 @@ export const goToReportsList = () => {
 };
 
 export const goToCreateReport = () => {
-    location.hash === "#/create-report";
     return {
         type: actionTypes.GO_TO_CREATE_REPORT
     };
