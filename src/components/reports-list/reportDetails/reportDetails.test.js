@@ -10,8 +10,6 @@ configure({
 import ReportDetails from "./reportDetails";
 
 describe("<ReportDetails />", () => {
-    let wrapper;
-
     const mockedReport = {
         candidateName: "John Doe",
         companyName: "Endava",
@@ -21,9 +19,7 @@ describe("<ReportDetails />", () => {
         note: "Note"
     };
 
-    beforeEach(() => {
-        wrapper = shallow(<ReportDetails report={mockedReport} />);
-    });
+    const wrapper = shallow(<ReportDetails report={mockedReport} />);
 
     it("should display all report info correctly", () => {
         const values = Object.values(mockedReport);
