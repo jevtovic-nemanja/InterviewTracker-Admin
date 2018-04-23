@@ -7,7 +7,7 @@ configure({
     adapter: new Adapter
 });
 
-import ReportDetails from "./reportDetails";
+import { ReportDetails } from "./reportDetails";
 
 describe("<ReportDetails />", () => {
     const mockedReport = {
