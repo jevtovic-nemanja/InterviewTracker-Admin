@@ -50,12 +50,12 @@ export const Sidebar = ({ phase, newReport }) => {
                 </div>
 
                 <div>
-                    <div className={`${candidate} pl-1`}>
+                    <div className={`${candidate} pl-1 candidate`}>
                         <p className="mt-3 mb-1">Candidate:</p>
                         <h4>{candidateName}</h4>
                     </div>
 
-                    <div className={`${company} pl-1`}>
+                    <div className={`${company} pl-1 company`}>
                         <p className="mb-1">Company:</p>
                         <h4>{companyName}</h4>
                     </div>
