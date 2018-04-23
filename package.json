@@ -27,6 +27,8 @@
     "babel-eslint": "^7.2.3",
     "babel-jest": "^22.4.3",
     "babel-loader": "^7.1.2",
+    "babel-plugin-dynamic-import-node": "^1.2.0",
+    "babel-plugin-module-resolver": "^3.1.1",
     "babel-plugin-syntax-class-properties": "^6.13.0",
     "babel-plugin-syntax-dynamic-import": "^6.18.0",
     "babel-plugin-syntax-object-rest-spread": "^6.13.0",
@@ -42,6 +44,7 @@
     "eslint-loader": "^2.0.0",
     "eslint-plugin-react": "^7.4.0",
     "html-webpack-plugin": "^3.2.0",
+    "identity-obj-proxy": "^3.0.0",
     "jest": "^22.4.3",
     "mini-css-extract-plugin": "^0.4.0",
     "path": "^0.12.7",
@@ -57,6 +60,11 @@
     "webpack-merge": "^4.1.2"
   },
   "main": "webpack.config.js",
+  "jest": {
+    "moduleNameMapper": {
+      "\\.(css|less)$": "identity-obj-proxy"
+    }
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/jevtovic-nemanja/InterviewTracker-Admin.git"
