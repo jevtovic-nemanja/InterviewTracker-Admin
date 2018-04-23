@@ -4,9 +4,8 @@ import Modal from "react-responsive-modal";
 
 import Search from "../../containers/common/search";
 import { ReportDisplay } from "./reportDisplay/reportDisplay";
+import { ReportDetails } from "./reportDetails/reportDetails";
 import { DeleteReport } from "./deleteReport/deleteReport";
-
-import { asyncComponent } from "Hocs/asyncComponent";
 
 class ReportsList extends React.Component {
     state = {
@@ -67,10 +66,6 @@ class ReportsList extends React.Component {
         const { loading, reports, message, open } = this.props;
         const { detailsModal, detailedReport, deleteModal, deleteReportId } = this.state;
 
-        const AsyncReportDetails = asyncComponent(() => {
-            return import(/* webpackChunkName: "reportDetails" */ "./reportDetails/reportDetails");
-        });
-
         return (
             <main className="container">
                 <div className="row mt-4">
@@ -106,7 +101,7 @@ class ReportsList extends React.Component {
                 </div>
 
                 <Modal open={detailsModal} onClose={this.closeDetailsModal} little >
-                    <AsyncReportDetails report={detailedReport} />
+                    <ReportDetails report={detailedReport} />
                 </Modal>
 
                 <Modal open={deleteModal} onClose={this.closeDeleteModal} little >
