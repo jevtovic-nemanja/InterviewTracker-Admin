@@ -38,9 +38,7 @@ describe("<ReportDisplay />", () => {
         const values = Object.values(mockedReport);
         const titles = wrapper.find("h5");
 
-        titles.forEach((node, index) => {
-            expect(node.text()).toEqual(values[index + 1]);
-        });
+        titles.forEach((node, index) => expect(node.text()).toEqual(values[index + 1]));
     });
 
     it("should pass the report on when details button is clicked", () => {

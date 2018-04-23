@@ -26,9 +26,7 @@ describe("<ReportDetails />", () => {
         const titles = wrapper.find("h5");
         const notes = wrapper.find(".notes");
 
-        titles.forEach((node, index) => {
-            expect(node.text()).toEqual(values[index]);
-        });
+        titles.forEach((node, index) => expect(node.text()).toEqual(values[index]));
 
         expect(notes.text()).toEqual(values[values.length - 1]);
     });
