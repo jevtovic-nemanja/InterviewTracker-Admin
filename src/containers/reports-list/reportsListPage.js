@@ -29,7 +29,6 @@ const filterReports = (reports, searchItem) => {
 };
 
 const mapStateToProps = state => ({
-    loading: state.loading,
     reports: filterReports(state.data.reports, state.searchItem),
     message: state.message,
     open: state.messageModal
