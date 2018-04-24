@@ -18,13 +18,16 @@ describe("<Sidebar />", () => {
         phase: phase
     });
 
-    const mockedReport = {
-        candidateName: "John Doe",
-        companyName: "Endava"
-    };
+    const mockedProps = {
+        phase: 1,
+        newReport: {
+            candidateName: "John Doe",
+            companyName: "Endava"
+        }
+    }
 
     beforeEach(() => {
-        wrapper = shallow(<Sidebar newReport={mockedReport} />);
+        wrapper = shallow(<Sidebar {...mockedProps} />);
     });
 
     it("should display the proper margin", () => {
@@ -81,7 +84,7 @@ describe("<Sidebar />", () => {
     });
 
     it("should correctly display candidate and company names passed as props", () => {
-        const values = Object.values(mockedReport);
+        const values = Object.values(mockedProps.newReport);
         const titles = wrapper.find("h4");
 
         titles.forEach((node, index) => {

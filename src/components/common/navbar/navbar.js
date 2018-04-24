@@ -22,10 +22,10 @@ export const Navbar = ({ hash, goToReportsList, goToCreateReport }) => {
                 <div className="col-5 col-md-4">
                     <div className="btn-group float-right">
                         <Link to="/">
-                            <button className={`${report} btn rounded-0`} onClick={goToReportsList}>Reports</button>
+                            <button className={`${report} btn rounded-0 reports`} onClick={goToReportsList}>Reports</button>
                         </Link>
                         <Link to="/create-report/">
-                            <button className={`${create} btn rounded-0`} onClick={goToCreateReport}>Create Report</button>
+                            <button className={`${create} btn rounded-0 create-report`} onClick={goToCreateReport}>Create Report</button>
                         </Link>
                     </div>
                 </div>

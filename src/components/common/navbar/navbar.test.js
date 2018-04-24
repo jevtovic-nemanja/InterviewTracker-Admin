@@ -12,8 +12,18 @@ import { Navbar } from "./navbar";
 describe("<Navbar />", () => {
     let wrapper;
 
+    const mockedEvent = {
+        target: {}
+    }
+
+    const mockedProps = {
+        hash: "#/",
+        goToReportsList: jest.fn(),
+        goToCreateReport: jest.fn()
+    };
+
     beforeEach(() => {
-        wrapper = shallow(<Navbar />);
+        wrapper = shallow(<Navbar {...mockedProps} />);
     });
 
     it("displays one active and one inactive link", () => {
@@ -22,10 +32,6 @@ describe("<Navbar />", () => {
     });
 
     it("displays the correct active link", () => {
-        wrapper.setProps({
-            hash: "#/"
-        });
-
         expect(wrapper.find(".btn-nav-active").text()).toEqual("Reports");
 
         wrapper.setProps({
@@ -33,6 +39,14 @@ describe("<Navbar />", () => {
         });
 
         expect(wrapper.find(".btn-nav-active").text()).toEqual("Create Report");
+    });
+
+    it("calls the navigation functions when clicked", () => {
+        wrapper.find(".reports").simulate("click", mockedEvent);
+        expect(mockedProps.goToReportsList).toHaveBeenCalledTimes(1);
+
+        wrapper.find(".create-report").simulate("click", mockedEvent);
+        expect(mockedProps.goToCreateReport).toHaveBeenCalledTimes(1);
     });
 
 });

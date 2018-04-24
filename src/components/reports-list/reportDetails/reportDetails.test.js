@@ -10,19 +10,21 @@ configure({
 import { ReportDetails } from "./reportDetails";
 
 describe("<ReportDetails />", () => {
-    const mockedReport = {
-        candidateName: "John Doe",
-        companyName: "Endava",
-        date: "20/04/2018",
-        phase: "Cv",
-        status: "Passed",
-        note: "Note"
+    const mockedProps = {
+        report: {
+            candidateName: "John Doe",
+            companyName: "Endava",
+            date: "20/04/2018",
+            phase: "Cv",
+            status: "Passed",
+            note: "Note"
+        }
     };
 
-    const wrapper = shallow(<ReportDetails report={mockedReport} />);
+    const wrapper = shallow(<ReportDetails {...mockedProps} />);
 
     it("should display all report info correctly", () => {
-        const values = Object.values(mockedReport);
+        const values = Object.values(mockedProps.report);
         const titles = wrapper.find("h5");
         const notes = wrapper.find(".notes");
 
