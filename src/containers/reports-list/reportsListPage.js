@@ -3,7 +3,7 @@ import React from "react";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 
-import ReportsList from "Components/reports-list/reportsList";
+import ReportsList from "Components/reports-list/reportsList/reportsList";
 
 import {
     startFetchData,

@@ -2,10 +2,10 @@ import React from "react";
 
 import Modal from "react-responsive-modal";
 
-import Search from "../../containers/common/search";
-import { ReportDisplay } from "./reportDisplay/reportDisplay";
-import { ReportDetails } from "./reportDetails/reportDetails";
-import { DeleteReport } from "./deleteReport/deleteReport";
+import Search from "Containers/common/search";
+import { ReportDisplay } from "../reportDisplay/reportDisplay";
+import { ReportDetails } from "../reportDetails/reportDetails";
+import { DeleteReport } from "../deleteReport/deleteReport";
 
 class ReportsList extends React.Component {
     state = {
