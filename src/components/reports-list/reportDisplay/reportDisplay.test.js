@@ -26,12 +26,18 @@ describe("<ReportDisplay />", () => {
 
     let data;
 
-    const receiveData = sentData => {
+    const receiveData = jest.fn(sentData => {
         data = { ...sentData }
+    });
+
+    const mockedProps = {
+        report: mockedReport,
+        openDetailsModal: receiveData,
+        openDeleteModal: receiveData
     };
 
     beforeEach(() => {
-        wrapper = shallow(<ReportDisplay report={mockedReport} openDetailsModal={receiveData} openDeleteModal={receiveData} />);
+        wrapper = shallow(<ReportDisplay {...mockedProps} />);
     });
 
     it("should display all report info correctly", () => {

@@ -23,7 +23,7 @@ describe("<Input />", () => {
             inputItem: text
         });
 
-        expect(wrapper.find("input").props().value).toEqual(text);
+        expect(wrapper.find("input").prop("value")).toEqual(text);
     });
 
     it("should display what the user types in", () => {
@@ -35,12 +35,12 @@ describe("<Input />", () => {
             }
         };
 
-        const receiveInputChange = event => {
+        const receiveInputChange = jest.fn(event => {
             wrapper.setProps({
                 inputItem: event.target.value
             });
-        };
-
+        });
+        
         wrapper.setProps({
             inputItem: text,
             receiveInputChange: receiveInputChange
@@ -48,6 +48,6 @@ describe("<Input />", () => {
 
         wrapper.find("input").simulate("change", mockedEvent);
 
-        expect(wrapper.find("input").props().value).toEqual(newText);
+        expect(wrapper.find("input").prop("value")).toEqual(newText);
     })
 });
