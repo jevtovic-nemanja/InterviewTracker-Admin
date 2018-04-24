@@ -19,8 +19,8 @@ module.exports = {
     output: {
         path: path.resolve(__dirname, "dist"),
         publicPath: "",
-        filename: "[name].[hash].js",
-        chunkFilename: "js/[name].[hash].js"
+        filename: "[name].js",
+        chunkFilename: "js/[name].js"
     },
     module: {
         rules: [
@@ -31,6 +31,16 @@ module.exports = {
                     "babel-loader",
                     "eslint-loader"
                 ]
+            },
+            {
+                test: /(\.png)$/,
+                exclude: /node_modules/,
+                use: {
+                    loader: "file-loader",
+                    options: {
+                        name: "images/[name].[ext]"
+                    }
+                }
             }
         ]
     },

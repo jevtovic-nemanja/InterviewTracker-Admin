@@ -8,9 +8,17 @@ module.exports = merge(common, {
         rules: [
             {
                 test: /(\.css)$/,
+                exclude: /node_modules/,
+                use: [
+                    MiniCssExtractPlugin.loader,
+                    "css-loader"
+                ]
+            },
+            {
+                test: /(\.css)$/,
+                include: /node_modules/,
                 use: [
                     "style-loader",
-                    MiniCssExtractPlugin.loader,
                     "css-loader"
                 ]
             }
@@ -20,5 +28,17 @@ module.exports = merge(common, {
         new MiniCssExtractPlugin({
             filename: "css/[name].css"
         })
-    ]
+    ],
+    optimization: {
+        splitChunks: {
+            cacheGroups: {
+                vendor: {
+                    name: "vendor",
+                    test: /[\\/]node_modules[\\/]/,
+                    chunks: "all",
+                    enforce: true
+                }
+            }
+        }
+    }
 });

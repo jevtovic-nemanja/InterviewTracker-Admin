@@ -2,6 +2,8 @@ import React from "react";
 
 import Search from "Containers/common/search";
 
+import defaultAvatar from "../../../../assets/images/avatar.png";
+
 export const SelectCandidate = ({ candidates, message, selectedElementId, next, onSelect, onNext }) => {
 
     return (
@@ -48,7 +50,7 @@ export const SelectCandidate = ({ candidates, message, selectedElementId, next, 
                                             <img
                                                 src={avatar
                                                     ? avatar
-                                                    : "../../../assets/images/avatar.png"
+                                                    : defaultAvatar
                                                 }
                                                 alt="Candidate picture"
                                                 className="rounded-circle candidate-img w-50"
