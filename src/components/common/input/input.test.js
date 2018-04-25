@@ -12,10 +12,6 @@ import { Input } from "./input";
 describe("<Input />", () => {
     let wrapper;
 
-    const mockedEvent = {
-        target: {}
-    }
-
     const mockedProps = {
         inputItem: "text",
         receiveInputChange: jest.fn()
@@ -30,7 +26,7 @@ describe("<Input />", () => {
     });
 
     it("calls the onChange handler", () => {
-        wrapper.find("input").simulate("change", mockedEvent);
+        wrapper.find("input").simulate("change");
         expect(mockedProps.receiveInputChange).toHaveBeenCalledTimes(1);
     })
 });

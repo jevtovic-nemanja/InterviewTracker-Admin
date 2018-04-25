@@ -12,10 +12,6 @@ import { Navbar } from "./navbar";
 describe("<Navbar />", () => {
     let wrapper;
 
-    const mockedEvent = {
-        target: {}
-    }
-
     const mockedProps = {
         hash: "#/",
         goToReportsList: jest.fn(),
@@ -42,11 +38,10 @@ describe("<Navbar />", () => {
     });
 
     it("calls the navigation functions when clicked", () => {
-        wrapper.find(".reports").simulate("click", mockedEvent);
+        wrapper.find(".reports").simulate("click");
         expect(mockedProps.goToReportsList).toHaveBeenCalledTimes(1);
 
-        wrapper.find(".create-report").simulate("click", mockedEvent);
+        wrapper.find(".create-report").simulate("click");
         expect(mockedProps.goToCreateReport).toHaveBeenCalledTimes(1);
     });
-
 });

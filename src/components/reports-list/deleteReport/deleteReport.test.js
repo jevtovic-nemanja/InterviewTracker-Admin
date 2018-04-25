@@ -14,10 +14,6 @@ describe("<DeleteReport />", () => {
 
     const mockedText = "text";
 
-    const mockedEvent = {
-        target: {}
-    }
-
     const mockedProps = {
         deleteReport: jest.fn(),
         message: "",
@@ -43,19 +39,19 @@ describe("<DeleteReport />", () => {
     });
 
     it("calls deleteReport function if delete button is clicked", () => {
-        wrapper.find(".btn-delete").simulate("click", mockedEvent);
+        wrapper.find(".btn-delete").simulate("click");
         expect(mockedProps.deleteReport).toHaveBeenCalledTimes(1);
     });
 
     it("calls close function if close button is clicked", () => {
-        wrapper.find(".btn-close").simulate("click", mockedEvent);
+        wrapper.find(".btn-close").simulate("click");
         expect(mockedProps.close).toHaveBeenCalledTimes(1);
 
         wrapper.setProps({
             message: mockedText
         });
 
-        wrapper.find(".btn-close").simulate("click", mockedEvent);
+        wrapper.find(".btn-close").simulate("click");
         expect(mockedProps.close).toHaveBeenCalledTimes(2);
     });
 });

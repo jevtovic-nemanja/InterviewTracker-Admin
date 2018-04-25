@@ -12,10 +12,6 @@ import { ReportDisplay } from "./reportDisplay";
 describe("<ReportDisplay />", () => {
     let wrapper;
 
-    const mockedEvent = {
-        target: {}
-    };
-
     const mockedProps = {
         report: {
             id: 258,
@@ -40,12 +36,12 @@ describe("<ReportDisplay />", () => {
     });
 
     it("should pass the report on when details button is clicked", () => {
-        wrapper.find(".btn-details").simulate("click", mockedEvent);
+        wrapper.find(".btn-details").simulate("click");
         expect(mockedProps.openDetailsModal).toBeCalledWith(mockedProps.report);
     });
 
     it("should pass the report ID on when delete report button is clicked", () => {
-        wrapper.find(".btn-delete-report").simulate("click", mockedEvent);
+        wrapper.find(".btn-delete-report").simulate("click");
         expect(mockedProps.openDeleteModal).toBeCalledWith(mockedProps.report.id);
     });
 });

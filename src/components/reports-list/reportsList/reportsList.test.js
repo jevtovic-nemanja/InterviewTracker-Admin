@@ -18,10 +18,6 @@ import { DeleteReport } from "../deleteReport/deleteReport";
 describe("<ReportsList />", () => {
     let wrapper;
 
-    const mockedEvent = {
-        target: {}
-    };
-
     const mockedErrorMessageReport = {
         id: "NO_RESULTS",
         message: "No candidates or companies match the search criteria."
@@ -147,7 +143,7 @@ describe("<ReportsList />", () => {
     });
 
     it("does not attempt to close the message modal if it is closed", () => {
-        wrapper.find("button").simulate("click", mockedEvent);
+        wrapper.find("button").simulate("click");
         expect(wrapper.instance().props.closeMessageModal).not.toBeCalled();
     });
 
@@ -156,7 +152,7 @@ describe("<ReportsList />", () => {
             open: true
         });
 
-        wrapper.find("button").simulate("click", mockedEvent);
+        wrapper.find("button").simulate("click");
         expect(wrapper.instance().props.closeMessageModal).toBeCalled();
     });
 });
