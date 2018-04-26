@@ -1,6 +1,6 @@
 import React from "react";
 
-import Search from "Containers/common/search";
+import Search from "Containers/common/search/search";
 
 import defaultAvatar from "../../../../assets/images/avatar.png";
 

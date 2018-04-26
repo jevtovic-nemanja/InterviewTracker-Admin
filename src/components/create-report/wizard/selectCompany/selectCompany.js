@@ -1,6 +1,6 @@
 import React from "react";
 
-import Search from "Containers/common/search";
+import Search from "Containers/common/search/search";
 
 export const SelectCompany = ({ companies, message, selectedElementId, next, onSelect, onNext, onBack }) => {
 
