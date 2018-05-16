@@ -1,5 +1,6 @@
 import React from "react";
 
+import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 
 import ReportForm from "Components/create-report/wizard/reportForm/reportForm";
@@ -49,13 +50,10 @@ const mapStateToProps = state => ({
     open: state.messageModal
 });
 
-const mapDispatchToProps = dispatch => ({
-    onBack: () => {
-        dispatch(decrementPhase());
-        location.hash = "#/create-report/2";
-    },
-    startSubmitReport: data => dispatch(startSubmitReport(data)),
-    closeMessageModal: () => dispatch(closeMessageModal())
-});
+const mapDispatchToProps = dispatch => bindActionCreators({
+    startSubmitReport,
+    decrementPhase,
+    closeMessageModal
+}, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(ReportForm);

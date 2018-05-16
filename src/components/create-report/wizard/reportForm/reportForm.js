@@ -108,7 +108,7 @@ class ReportForm extends React.Component {
     }
 
     render() {
-        const { trackedData, message, onBack, open } = this.props;
+        const { trackedData, message, decrementPhase, open } = this.props;
 
         const { currentPhase, currentStatus, timeOfLastInterview, hiringStatus } = trackedData;
         const { interviewDate, dateError, phase, phaseError, status, statusError, note, noteError } = this.state;
@@ -125,7 +125,10 @@ class ReportForm extends React.Component {
                 <div className="col-12 offset-sm-1 col-sm-10 d-md-none">
                     <button
                         type="button"
-                        onClick={onBack}
+                        onClick={() => {
+                            decrementPhase();
+                            location.hash = "#/create-report/2";
+                        }}
                         className="btn btn-back w-100 mb-2"
                     >Back</button>
                 </div>
@@ -213,7 +216,10 @@ class ReportForm extends React.Component {
                 <div className="d-none d-md-block col-md-4 col-lg-3">
                     <button
                         type="button"
-                        onClick={onBack}
+                        onClick={() => {
+                            decrementPhase();
+                            location.hash = "#/create-report/2";
+                        }}
                         className="btn btn-back w-100 mb-2"
                     >Back</button>
                 </div>

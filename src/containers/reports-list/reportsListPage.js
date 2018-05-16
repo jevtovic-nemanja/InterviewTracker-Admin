@@ -11,7 +11,6 @@ import {
     closeMessageModal
 } from "Store/actions/index";
 
-
 const filterReports = (reports, searchItem) => {
     if (reports.length) {
         const filteredReports = reports.filter(report => {
@@ -36,7 +35,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => bindActionCreators({
     startFetchData,
-    startDeleteReport: id => startDeleteReport(id),
+    startDeleteReport,
     closeMessageModal
 }, dispatch);
 

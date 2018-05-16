@@ -1,8 +1,9 @@
 import React from "react";
 
+import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 
-import { SelectCompany } from "Components/create-report/wizard/selectCompany/selectCompany";
+import SelectCompany from "Components/create-report/wizard/selectCompany/selectCompany";
 
 import {
     selectElement,
@@ -24,11 +25,6 @@ const filterCompanies = (companies, searchItem) => {
     } else return [];
 };
 
-const getSelectedCompany = (companies, selectedCompanyId) => {
-    const selectedCompany = companies.filter(company => company.companyId === selectedCompanyId).shift();
-    return selectedCompany;
-};
-
 const mapStateToProps = state => ({
     companies: filterCompanies(state.data.companies, state.searchItem),
     message: state.message,
@@ -36,20 +32,12 @@ const mapStateToProps = state => ({
     next: state.enableNextPhase
 });
 
-const mapDispatchToProps = dispatch => ({
-    onSelect: (companies, id) => {
-        dispatch(selectElement(id));
-        dispatch(newReportCompany(getSelectedCompany(companies, id)));
-        dispatch(enableNextPhase());
-    },
-    onBack: () => {
-        dispatch(decrementPhase());
-        location.hash = "#/create-report/";
-    },
-    onNext: () => {
-        dispatch(incrementPhase());
-        location.hash = "#/create-report/3";
-    }
-});
+const mapDispatchToProps = dispatch => bindActionCreators({
+    selectElement,
+    enableNextPhase,
+    incrementPhase,
+    decrementPhase,
+    newReportCompany
+}, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(SelectCompany);

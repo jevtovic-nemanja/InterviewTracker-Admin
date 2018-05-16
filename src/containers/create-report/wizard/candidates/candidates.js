@@ -1,8 +1,9 @@
 import React from "react";
 
+import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 
-import { SelectCandidate } from "Components/create-report/wizard/selectCandidate/selectCandidate";
+import SelectCandidate from "Components/create-report/wizard/selectCandidate/selectCandidate";
 
 import {
     selectElement,
@@ -23,11 +24,6 @@ const filterCandidates = (candidates, searchItem) => {
     } else return [];
 };
 
-const getSelectedCandidate = (candidates, selectedCandidateId) => {
-    const selectedCandidate = candidates.filter(candidate => candidate.candidateId === selectedCandidateId).shift();
-    return selectedCandidate;
-};
-
 const mapStateToProps = state => ({
     candidates: filterCandidates(state.data.candidates, state.searchItem),
     message: state.message,
@@ -35,16 +31,11 @@ const mapStateToProps = state => ({
     next: state.enableNextPhase
 });
 
-const mapDispatchToProps = dispatch => ({
-    onSelect: (candidates, id) => {
-        dispatch(selectElement(id));
-        dispatch(newReportCandidate(getSelectedCandidate(candidates, id)));
-        dispatch(enableNextPhase());
-    },
-    onNext: () => {
-        dispatch(incrementPhase());
-        location.hash = "#/create-report/2";
-    }
-});
+const mapDispatchToProps = dispatch => bindActionCreators({
+    selectElement,
+    enableNextPhase,
+    newReportCandidate,
+    incrementPhase
+}, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(SelectCandidate);

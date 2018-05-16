@@ -11,7 +11,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({
-    filter: searchItem => receiveInputChange(searchItem)
+    receiveInputChange
 }, dispatch);
 
 class Search extends React.Component {
@@ -20,7 +20,7 @@ class Search extends React.Component {
         const inputString = event.target.value;
         const searchString = inputString.toLowerCase();
 
-        this.props.filter(searchString);
+        this.props.receiveInputChange(searchString);
     }
 
     render() {
