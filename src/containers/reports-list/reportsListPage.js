@@ -11,7 +11,7 @@ import {
     closeMessageModal
 } from "Store/actions/index";
 
- const filterReports = (reports, searchItem) => {
+const filterReports = (reports, searchItem) => {
     if (reports.length) {
         const filteredReports = reports.filter(report => {
             const candidate = report.candidateName.toLowerCase();
