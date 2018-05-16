@@ -16,10 +16,6 @@ const asyncCreateReportPage = asyncComponent(() => {
 });
 
 class App extends React.Component {
-    constructor(props) {
-        super(props);
-    }
-
     render() {
         return (
             <div className="w-100">
