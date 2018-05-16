@@ -10,7 +10,7 @@ import {
     submitReportFail,
     openMessageModal,
     goToReportsList
-} from "Store/actions/index";
+} from "Store/actions";
 
 export const submitReportSaga = function* (action) {
     const data = action.formData;

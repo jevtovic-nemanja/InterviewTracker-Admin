@@ -11,7 +11,7 @@ import {
     incrementPhase,
     decrementPhase,
     newReportCompany
-} from "Store/actions/index";
+} from "Store/actions";
 
 const filterCompanies = (companies, searchItem) => {
     if (companies.length) {

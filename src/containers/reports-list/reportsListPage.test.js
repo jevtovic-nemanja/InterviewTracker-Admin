@@ -21,7 +21,7 @@ import {
     startFetchData,
     startDeleteReport,
     closeMessageModal
-} from "Store/actions/index";
+} from "Store/actions";
 
 describe("<ReportsListPage />", () => {
     let wrapper;

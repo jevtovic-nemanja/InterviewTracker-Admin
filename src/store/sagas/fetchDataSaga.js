@@ -8,7 +8,7 @@ import {
 import {
     fetchDataSuccess,
     fetchDataFail,
-} from "Store/actions/index";
+} from "Store/actions";
 
 import { packer } from "Utils/packer";
 

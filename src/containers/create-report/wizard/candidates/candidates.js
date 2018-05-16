@@ -10,7 +10,7 @@ import {
     enableNextPhase,
     newReportCandidate,
     incrementPhase
-} from "Store/actions/index";
+} from "Store/actions";
 
 const filterCandidates = (candidates, searchItem) => {
     if (candidates.length) {

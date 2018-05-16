@@ -10,7 +10,7 @@ configure({
 });
 
 import Header from "./header";
-import { goToReportsList, goToCreateReport } from "Store/actions/index";
+import { goToReportsList, goToCreateReport } from "Store/actions";
 
 describe("<Header />", () => {
     let wrapper;

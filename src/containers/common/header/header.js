@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 import {
     goToReportsList,
     goToCreateReport
-} from "Store/actions/index";
+} from "Store/actions";
 
 const mapDispatchToProps = dispatch => bindActionCreators({
     goToReportsList,

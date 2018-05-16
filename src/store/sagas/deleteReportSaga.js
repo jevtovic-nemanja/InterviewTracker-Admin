@@ -10,7 +10,7 @@ import {
     deleteReportSuccess,
     deleteReportFail,
     openMessageModal
-} from "Store/actions/index";
+} from "Store/actions";
 
 export const deleteReportSaga = function* (action) {
     const id = action.id;

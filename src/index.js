@@ -16,9 +16,9 @@ import logger from "redux-logger";
 import App from "Src/app";
 
 
-import { rootReducer } from "Store/reducers/index";
-import { rootSaga } from "Store/sagas/index";
-import { startFetchData } from "Store/actions/index";
+import { rootReducer } from "Store/reducers";
+import { rootSaga } from "Store/sagas";
+import { startFetchData } from "Store/actions";
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 

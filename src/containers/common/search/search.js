@@ -4,7 +4,7 @@ import { bindActionCreators } from "redux";
 
 import { connect } from "react-redux";
 
-import { receiveInputChange } from "Store/actions/index";
+import { receiveInputChange } from "Store/actions";
 
 const mapStateToProps = state => ({
     searchItem: state.searchItem

@@ -10,7 +10,7 @@ configure({
 });
 
 import Search from "./search";
-import { receiveInputChange } from "Store/actions/index";
+import { receiveInputChange } from "Store/actions";
 
 describe("<Search />", () => {
     let wrapper;
