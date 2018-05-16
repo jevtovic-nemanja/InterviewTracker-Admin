@@ -27,6 +27,7 @@ export const submitReportSaga = function* (action) {
         const response = yield call(fetch, url, init);
         yield put(submitReportSuccess());
         yield put(goToReportsList());
+        location.hash = "#/";
     } catch (e) {
         yield put(submitReportFail());
         yield put(openMessageModal());
