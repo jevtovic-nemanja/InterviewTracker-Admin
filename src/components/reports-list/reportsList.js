@@ -3,9 +3,9 @@ import React from "react";
 import Modal from "react-responsive-modal";
 
 import Search from "Containers/common/search/search";
-import { ReportDisplay } from "../reportDisplay/reportDisplay";
-import { ReportDetails } from "../reportDetails/reportDetails";
-import { DeleteReport } from "../deleteReport/deleteReport";
+import { ReportDisplay } from "./reportDisplay/reportDisplay";
+import { ReportDetails } from "./reportDetails/reportDetails";
+import { DeleteReport } from "./deleteReport/deleteReport";
 
 class ReportsList extends React.Component {
     state = {

@@ -14,17 +14,17 @@ import { receiveInputChange } from "Store/actions/index";
 
 describe("<Search />", () => {
     let wrapper;
-    let store;
 
     const mockedMiddleware = [];
     const mockedStore = configureStore(mockedMiddleware);
 
-    beforeEach(() => {
-        const mockedState = {
-            searchItem: "text",
-        };
+    const mockedState = {
+        searchItem: "text"
+    };
 
-        store = mockedStore(mockedState);
+    const store = mockedStore(mockedState);
+
+    beforeEach(() => {
         wrapper = shallow(<Search store={store} />).dive();
     });
 

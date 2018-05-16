@@ -3,20 +3,41 @@ import React from "react";
 import { configure, shallow } from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 
+import configureStore from "redux-mock-store";
+
 configure({
     adapter: new Adapter
 });
 
-import ReportList from "./reportsList";
+import ReportsListPage from "./reportsListPage";
 
 import Modal from "react-responsive-modal";
 import Search from "Containers/common/search/search";
-import { ReportDisplay } from "../reportDisplay/reportDisplay";
-import { ReportDetails } from "../reportDetails/reportDetails";
-import { DeleteReport } from "../deleteReport/deleteReport";
+import { ReportDisplay } from "Components/reports-list/reportDisplay/reportDisplay";
+import { ReportDetails } from "Components/reports-list/reportDetails/reportDetails";
+import { DeleteReport } from "Components/reports-list/deleteReport/deleteReport";
 
-describe("<ReportsList />", () => {
+import {
+    startFetchData,
+    startDeleteReport,
+    closeMessageModal
+} from "Store/actions/index";
+
+describe("<ReportsListPage />", () => {
     let wrapper;
+
+    const mockedMiddleware = [];
+    const mockedStore = configureStore(mockedMiddleware);
+
+    const mockedState = {
+        data: {
+            reports: []
+        },
+        message: "message",
+        messageModal: false
+    };
+
+    const store = mockedStore(mockedState);
 
     const mockedErrorMessageReport = {
         id: "NO_RESULTS",
@@ -45,16 +66,8 @@ describe("<ReportsList />", () => {
     });
 
     beforeEach(() => {
-        const mockedProps = {
-            reports: [],
-            message: "message",
-            open: false,
-            startFetchData: jest.fn(),
-            startDeleteReport: jest.fn(id => {}),
-            closeMessageModal: jest.fn()
-        };
-
-        wrapper = shallow(<ReportList {...mockedProps} />);
+        store.clearActions();
+        wrapper = shallow(<ReportsListPage store={store} />).dive();
     });
 
     it("renders the correct components", () => {
@@ -66,7 +79,7 @@ describe("<ReportsList />", () => {
     });
 
     it("fetches data when mounted", () => {
-        expect(wrapper.instance().props.startFetchData).toHaveBeenCalledTimes(1);
+        expect(store.getActions()).toEqual([startFetchData()]);
     });
 
     it("displays a message if fetching reports fails", () => {
@@ -133,7 +146,7 @@ describe("<ReportsList />", () => {
         wrapper.instance().openDeleteModal(mockedReports[0].id);
         wrapper.instance().deleteReport();
 
-        expect(wrapper.instance().props.startDeleteReport).toBeCalledWith(mockedReports[0].id);
+        expect(store.getActions()).toEqual([startFetchData(), startDeleteReport(mockedReports[0].id)]);
         expect(wrapper.state("deleteModal")).toEqual(false);
         expect(wrapper.state("deleteReportId")).toEqual("");
     });
@@ -144,15 +157,15 @@ describe("<ReportsList />", () => {
 
     it("does not attempt to close the message modal if it is closed", () => {
         wrapper.find("button").simulate("click");
-        expect(wrapper.instance().props.closeMessageModal).not.toBeCalled();
+        expect(store.getActions()).toEqual([startFetchData()]);
     });
 
     it("closes the message modal if it is open", () => {
         wrapper.setProps({
             open: true
         });
-
+        
         wrapper.find("button").simulate("click");
-        expect(wrapper.instance().props.closeMessageModal).toBeCalled();
+        expect(store.getActions()).toEqual([startFetchData(), closeMessageModal()]);
     });
 });

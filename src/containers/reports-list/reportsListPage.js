@@ -3,7 +3,7 @@ import React from "react";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 
-import ReportsList from "Components/reports-list/reportsList/reportsList";
+import ReportsList from "Components/reports-list/reportsList";
 
 import {
     startFetchData,
@@ -11,7 +11,7 @@ import {
     closeMessageModal
 } from "Store/actions/index";
 
-const filterReports = (reports, searchItem) => {
+ const filterReports = (reports, searchItem) => {
     if (reports.length) {
         const filteredReports = reports.filter(report => {
             const candidate = report.candidateName.toLowerCase();
