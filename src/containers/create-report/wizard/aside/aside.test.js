@@ -3,14 +3,29 @@ import React from "react";
 import { configure, shallow } from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 
+import configureStore from "redux-mock-store";
+
 configure({
     adapter: new Adapter
 });
 
-import { Sidebar } from "./sidebar";
+import Aside from "./aside";
 
-describe("<Sidebar />", () => {
+describe("<Aside />", () => {
     let wrapper;
+
+    const mockedMiddleware = [];
+    const mockedStore = configureStore(mockedMiddleware);
+
+    const mockedState = {
+        createReportPhase: 1,
+        newReportData: {
+            candidateName: "John Doe",
+            companyName: "Endava"
+        }
+    };
+
+    const store = mockedStore(mockedState);
 
     const phases = [1, 2, 3];
 
@@ -18,16 +33,8 @@ describe("<Sidebar />", () => {
         phase: phase
     });
 
-    const mockedProps = {
-        phase: 1,
-        newReport: {
-            candidateName: "John Doe",
-            companyName: "Endava"
-        }
-    }
-
     beforeEach(() => {
-        wrapper = shallow(<Sidebar {...mockedProps} />);
+        wrapper = shallow(<Aside store={store} />).dive();
     });
 
     it("should display the proper margin", () => {
@@ -84,7 +91,7 @@ describe("<Sidebar />", () => {
     });
 
     it("should correctly display candidate and company names passed as props", () => {
-        const values = Object.values(mockedProps.newReport);
+        const values = Object.values(store.getState().newReportData);
         const titles = wrapper.find("h4");
 
         titles.forEach((node, index) => {
