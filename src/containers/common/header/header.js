@@ -1,8 +1,21 @@
 import React from "react";
 
+import { bindActionCreators } from "redux";
+import { connect } from "react-redux";
+
 import { Link } from "react-router-dom";
 
-export const Navbar = ({ hash, goToReportsList, goToCreateReport }) => {
+import {
+    goToReportsList,
+    goToCreateReport
+} from "Store/actions/index";
+
+const mapDispatchToProps = dispatch => bindActionCreators({
+    goToReportsList,
+    goToCreateReport
+}, dispatch);
+
+const Navbar = ({ hash, goToReportsList, goToCreateReport }) => {
     let report = "btn-nav";
     let create = "btn-nav";
 
@@ -34,3 +47,5 @@ export const Navbar = ({ hash, goToReportsList, goToCreateReport }) => {
         </nav>
     );
 };
+
+export default connect(null, mapDispatchToProps)(Navbar);

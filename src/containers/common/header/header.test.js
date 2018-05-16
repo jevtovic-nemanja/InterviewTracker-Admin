@@ -3,23 +3,25 @@ import React from "react";
 import { configure, shallow } from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 
+import configureStore from "redux-mock-store";
+
 configure({
     adapter: new Adapter
 });
 
-import { Navbar } from "./navbar";
+import Header from "./header";
+import { goToReportsList, goToCreateReport } from "Store/actions/index";
 
-describe("<Navbar />", () => {
+describe("<Header />", () => {
     let wrapper;
+    let store;
 
-    const mockedProps = {
-        hash: "#/",
-        goToReportsList: jest.fn(),
-        goToCreateReport: jest.fn()
-    };
+    const mockedMiddleware = [];
+    const mockedStore = configureStore(mockedMiddleware);
 
     beforeEach(() => {
-        wrapper = shallow(<Navbar {...mockedProps} />);
+        store = mockedStore({});
+        wrapper = shallow(<Header store={store} hash="#/" />).dive();
     });
 
     it("displays one active and one inactive link", () => {
@@ -39,9 +41,11 @@ describe("<Navbar />", () => {
 
     it("calls the navigation functions when clicked", () => {
         wrapper.find(".reports").simulate("click");
-        expect(mockedProps.goToReportsList).toHaveBeenCalledTimes(1);
+        expect(store.getActions()).toEqual([goToReportsList()]);
+
+        store.clearActions();
 
         wrapper.find(".create-report").simulate("click");
-        expect(mockedProps.goToCreateReport).toHaveBeenCalledTimes(1);
+        expect(store.getActions()).toEqual([goToCreateReport()]);
     });
 });

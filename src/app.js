@@ -4,7 +4,7 @@ import { hot } from "react-hot-loader";
 
 import { Switch, Route } from "react-router-dom";
 
-import Header from "Containers/common/header";
+import Header from "Containers/common/header/header";
 import ReportsListPage from "Containers/reports-list/reportsListPage";
 
 import "./assets/css/main.css";
