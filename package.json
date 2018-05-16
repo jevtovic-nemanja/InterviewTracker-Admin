@@ -64,7 +64,8 @@
   "main": "webpack.config.js",
   "jest": {
     "moduleNameMapper": {
-      "\\.(css|less)$": "identity-obj-proxy"
+      "\\.(css|less)$": "identity-obj-proxy",
+      "\\.(png)$": "identity-obj-proxy"
     }
   },
   "repository": {

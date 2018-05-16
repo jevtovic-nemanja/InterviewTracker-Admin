@@ -12,7 +12,7 @@ import "./assets/css/main.css";
 import { asyncComponent } from "./hocs/asyncComponent";
 
 const asyncCreateReportPage = asyncComponent(() => {
-    return import(/* webpackChunkName: "createReport" */ "./components/create-report/createReport");
+    return import(/* webpackChunkName: "createReport" */ "./components/create-report/createReport/createReport");
 });
 
 class App extends React.Component {
