@@ -3,28 +3,29 @@ import React from "react";
 import { configure, shallow } from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 
+import configureStore from "redux-mock-store";
+
 configure({
     adapter: new Adapter
 });
 
-import { Search } from "./search";
+import Search from "./search";
+import { receiveInputChange } from "Store/actions/index";
 
 describe("<Search />", () => {
     let wrapper;
+    let store;
 
-    const mockedEvent = {
-        target: {
-            value: "Text"
-        }
-    };
+    const mockedMiddleware = [];
+    const mockedStore = configureStore(mockedMiddleware);
 
     beforeEach(() => {
-        const mockedProps = {
-            searchItem: "",
-            filter: jest.fn(searchItem => { })
+        const mockedState = {
+            searchItem: "text",
         };
 
-        wrapper = shallow(<Search {...mockedProps} />);
+        store = mockedStore(mockedState);
+        wrapper = shallow(<Search store={store} />).dive();
     });
 
     it("displays the passed value", () => {
@@ -32,7 +33,13 @@ describe("<Search />", () => {
     })
 
     it("calls the filter function with what the user types in", () => {
+        const mockedEvent = {
+            target: {
+                value: "Text"
+            }
+        };
+
         wrapper.find("input").simulate("change", mockedEvent);
-        expect(wrapper.instance().props.filter).toHaveBeenCalledWith(mockedEvent.target.value.toLowerCase());
+        expect(store.getActions()).toEqual([receiveInputChange(mockedEvent.target.value.toLowerCase())]);
     });
 });

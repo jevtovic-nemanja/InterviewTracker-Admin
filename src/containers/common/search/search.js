@@ -14,7 +14,7 @@ const mapDispatchToProps = dispatch => bindActionCreators({
     filter: searchItem => receiveInputChange(searchItem)
 }, dispatch);
 
-export class Search extends React.Component {
+class Search extends React.Component {
 
     handleInputChange = event => {
         const inputString = event.target.value;
