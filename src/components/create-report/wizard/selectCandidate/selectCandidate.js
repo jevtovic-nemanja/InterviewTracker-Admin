@@ -12,7 +12,8 @@ class SelectCandidate extends React.Component {
     };
 
     render() {
-        const { candidates, message, selectedElementId, next, selectElement, newReportCandidate, enableNextPhase, incrementPhase } = this.props;
+        const { candidates, message, selectedElementId, next } = this.props;
+        const { selectElement, newReportCandidate, enableNextPhase, incrementPhase } = this.props;
 
         return (
             <div className="row">

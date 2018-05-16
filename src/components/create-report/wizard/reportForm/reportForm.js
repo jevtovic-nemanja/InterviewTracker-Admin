@@ -108,7 +108,8 @@ class ReportForm extends React.Component {
     }
 
     render() {
-        const { trackedData, message, decrementPhase, open } = this.props;
+        const { trackedData, message, open } = this.props;
+        const { decrementPhase } = this.props;
 
         const { currentPhase, currentStatus, timeOfLastInterview, hiringStatus } = trackedData;
         const { interviewDate, dateError, phase, phaseError, status, statusError, note, noteError } = this.state;
