@@ -62,7 +62,7 @@ describe("<ReportsListPage />", () => {
                 createTestState()
             );
             wrapper = shallow(<ReportsListPage store={store} />).dive();
-        })
+        });
 
         it("fetches data when mounted", () => {
             expect(store.getActions()).toEqual([startFetchData()]);
@@ -97,7 +97,7 @@ describe("<ReportsListPage />", () => {
                 })
             );
             wrapper = shallow(<ReportsListPage store={store} />).dive();
-        })
+        });
 
         it("displays the correct message ", () => {
             expect(wrapper.find(ReportDisplay)).toHaveLength(0);
@@ -115,7 +115,7 @@ describe("<ReportsListPage />", () => {
                 createTestState({ searchItem: "wz" })
             );
             wrapper = shallow(<ReportsListPage store={store} />).dive();
-        })
+        });
 
         it("displays the correct message ", () => {
             expect(wrapper.find(ReportDisplay)).toHaveLength(0);
@@ -133,7 +133,7 @@ describe("<ReportsListPage />", () => {
                 createTestState({ searchItem: "endava" })
             );
             wrapper = shallow(<ReportsListPage store={store} />).dive();
-        })
+        });
 
         it("renders a <ReportDisplay /> component for each report", () => {
             expect(wrapper.find(ReportDisplay)).toHaveLength(wrapper.instance().props.reports.length);
@@ -193,7 +193,7 @@ describe("<ReportsListPage />", () => {
                 })
             );
             wrapper = shallow(<ReportsListPage store={store} />).dive();
-        })
+        });
 
         it("displays the passed message in the message modal", () => {
             expect(wrapper.find("p").text()).toEqual(store.getState().message);
