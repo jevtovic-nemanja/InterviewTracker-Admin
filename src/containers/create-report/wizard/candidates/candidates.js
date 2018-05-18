@@ -3,7 +3,10 @@ import React from "react";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 
-import SelectCandidate from "Components/create-report/wizard/selectCandidate/selectCandidate";
+import Search from "Containers/common/search/search";
+import { CandidateDisplay } from "Components/create-report/wizard/candidates/candidateDisplay";
+
+
 
 import {
     selectElement,
@@ -37,5 +40,70 @@ const mapDispatchToProps = dispatch => bindActionCreators({
     newReportCandidate,
     incrementPhase
 }, dispatch);
+
+class SelectCandidate extends React.Component {
+
+    getSelectedCandidate = (selectedCandidateId) => {
+        const selectedCandidate = this.props.candidates.filter(candidate => candidate.candidateId === selectedCandidateId).shift();
+        return selectedCandidate;
+    };
+
+    render() {
+        const { candidates, message, selectedElementId, next } = this.props;
+        const { selectElement, newReportCandidate, enableNextPhase, incrementPhase } = this.props;
+
+        return (
+            <div className="row">
+
+                <div className="col-8 offset-sm-1 col-sm-7 col-md-8 offset-xl-0 col-xl-9">
+                    <Search />
+                </div>
+
+                <div className="col-4 col-sm-3 mt-1">
+                    <button
+                        type="button"
+                        disabled={next}
+                        onClick={() => {
+                            incrementPhase();
+                            location.hash = "#/create-report/2";
+                        }}
+                        className={`${next} btn btn-next w-100`}
+                    >Next</button>
+                </div>
+
+                {
+                    candidates.length
+                        ? candidates.map(candidate => {
+
+                            if (candidate.message) {
+                                return (
+                                    <div className="col-12 mt-4" key={candidate.id}>
+                                        <h5 className="text-center">{candidate.message}</h5>
+                                    </div>
+                                );
+                            }
+
+                            return (
+                                <CandidateDisplay
+                                    key={candidate.candidateId}
+                                    candidate={candidate}
+                                    selectedElementId={selectedElementId}
+                                    selectElement={selectElement}
+                                    enableNextPhase={enableNextPhase}
+                                    newReportCandidate={newReportCandidate}
+                                    getSelectedCandidate={this.getSelectedCandidate}
+                                />
+                            );
+                        })
+
+                        : <div className="col-12 mt-4">
+                            <h5 className="text-center">{message}</h5>
+                        </div>
+                }
+
+            </div >
+        );
+    }
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(SelectCandidate);
