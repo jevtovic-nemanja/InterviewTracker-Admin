@@ -23,27 +23,46 @@ import {
     closeMessageModal
 } from "Store/actions";
 
+const mockedMiddleware = [];
+const mockedStore = configureStore(mockedMiddleware);
+
+const createTestState = props => ({
+    data: {
+        reports: [
+            {
+                id: 258,
+                companyName: "Endava",
+                candidateName: "John Doe",
+                date: "20/04/2018",
+                status: "Passed"
+            },
+            {
+                id: 278,
+                companyName: "PS Tech",
+                candidateName: "Jane Smith",
+                date: "24/04/2018",
+                status: "Declined"
+            }
+        ]
+    },
+    message: "",
+    messageModal: false,
+    searchItem: "",
+    ...props
+});
+
 describe("<ReportsListPage />", () => {
-    const mockedMiddleware = [];
-    const mockedStore = configureStore(mockedMiddleware);
 
     describe("always", () => {
-        const mockedState = {
-            data: {
-                reports: []
-            },
-            message: "message",
-            messageModal: false,
-            searchItem: ""
-        };
+        let store;
+        let wrapper;
 
-        const store = mockedStore(mockedState);
-
-        const wrapper = shallow(<ReportsListPage store={store} />).dive();
-
-        afterEach(() => {
-            store.clearActions();
-        });
+        beforeEach(() => {
+            store = mockedStore(
+                createTestState()
+            );
+            wrapper = shallow(<ReportsListPage store={store} />).dive();
+        })
 
         it("fetches data when mounted", () => {
             expect(store.getActions()).toEqual([startFetchData()]);
@@ -57,29 +76,27 @@ describe("<ReportsListPage />", () => {
             expect(wrapper.find(DeleteReport)).toHaveLength(1);
         });
 
-        it("displays the passed message in the message modal", () => {
-            expect(wrapper.find("p").text()).toEqual(store.getState().message);
-        });
-
         it("does not attempt to close the message modal if it is closed", () => {
             wrapper.find("button").simulate("click");
-            expect(store.getActions()).toEqual([]);
+            expect(store.getActions()).toEqual([startFetchData()]);
         });
     });
 
     describe("if fetching reports fails", () => {
-        const mockedState = {
-            data: {
-                reports: []
-            },
-            message: "message",
-            messageModal: false,
-            searchItem: ""
-        };
+        let store;
+        let wrapper;
 
-        const store = mockedStore(mockedState);
-
-        const wrapper = shallow(<ReportsListPage store={store} />).dive();
+        beforeEach(() => {
+            store = mockedStore(
+                createTestState({
+                    data: {
+                        reports: []
+                    },
+                    message: "message"
+                })
+            );
+            wrapper = shallow(<ReportsListPage store={store} />).dive();
+        })
 
         it("displays the correct message ", () => {
             expect(wrapper.find(ReportDisplay)).toHaveLength(0);
@@ -89,33 +106,15 @@ describe("<ReportsListPage />", () => {
     });
 
     describe("if no reports match the filter criteria", () => {
-        const mockedState = {
-            data: {
-                reports: [
-                    {
-                        id: 258,
-                        companyName: "Endava",
-                        candidateName: "John Doe",
-                        date: "20/04/2018",
-                        status: "Passed"
-                    },
-                    {
-                        id: 278,
-                        companyName: "PS Tech",
-                        candidateName: "Jane Smith",
-                        date: "24/04/2018",
-                        status: "Declined"
-                    }
-                ]
-            },
-            message: "",
-            messageModal: false,
-            searchItem: "wz"
-        };
+        let store;
+        let wrapper;
 
-        const store = mockedStore(mockedState);
-
-        const wrapper = shallow(<ReportsListPage store={store} />).dive();
+        beforeEach(() => {
+            store = mockedStore(
+                createTestState({ searchItem: "wz" })
+            );
+            wrapper = shallow(<ReportsListPage store={store} />).dive();
+        })
 
         it("displays the correct message ", () => {
             expect(wrapper.find(ReportDisplay)).toHaveLength(0);
@@ -125,37 +124,15 @@ describe("<ReportsListPage />", () => {
     });
 
     describe("if there are reports that match the filter criteria", () => {
-        const mockedState = {
-            data: {
-                reports: [
-                    {
-                        id: 258,
-                        companyName: "Endava",
-                        candidateName: "John Doe",
-                        date: "20/04/2018",
-                        status: "Passed"
-                    },
-                    {
-                        id: 278,
-                        companyName: "PS Tech",
-                        candidateName: "Jane Smith",
-                        date: "24/04/2018",
-                        status: "Declined"
-                    }
-                ]
-            },
-            message: "",
-            messageModal: false,
-            searchItem: "endava"
-        };
+        let store;
+        let wrapper;
 
-        const store = mockedStore(mockedState);
-
-        const wrapper = shallow(<ReportsListPage store={store} />).dive();
-
-        afterEach(() => {
-            store.clearActions();
-        });
+        beforeEach(() => {
+            store = mockedStore(
+                createTestState({ searchItem: "endava" })
+            );
+            wrapper = shallow(<ReportsListPage store={store} />).dive();
+        })
 
         it("renders a <ReportDisplay /> component for each report", () => {
             expect(wrapper.find(ReportDisplay)).toHaveLength(wrapper.instance().props.reports.length);
@@ -195,48 +172,33 @@ describe("<ReportsListPage />", () => {
             wrapper.instance().openDeleteModal(wrapper.instance().props.reports[0].id);
             wrapper.instance().deleteReport();
 
-            expect(store.getActions()).toEqual([startDeleteReport(wrapper.instance().props.reports[0].id)]);
+            expect(store.getActions()).toEqual([startFetchData(), startDeleteReport(wrapper.instance().props.reports[0].id)]);
             expect(wrapper.state("deleteModal")).toEqual(false);
             expect(wrapper.state("deleteReportId")).toEqual("");
         });
     });
 
     describe("if report deletion fails", () => {
-        const mockedState = {
-            data: {
-                reports: [
-                    {
-                        id: 258,
-                        companyName: "Endava",
-                        candidateName: "John Doe",
-                        date: "20/04/2018",
-                        status: "Passed"
-                    },
-                    {
-                        id: 278,
-                        companyName: "PS Tech",
-                        candidateName: "Jane Smith",
-                        date: "24/04/2018",
-                        status: "Declined"
-                    }
-                ]
-            },
-            message: "message",
-            messageModal: true,
-            searchItem: ""
-        };
-
-        const store = mockedStore(mockedState);
-
-        const wrapper = shallow(<ReportsListPage store={store} />).dive();
+        let store;
+        let wrapper;
 
         beforeEach(() => {
-            store.clearActions();
+            store = mockedStore(
+                createTestState({
+                    message: "message",
+                    messageModal: true
+                })
+            );
+            wrapper = shallow(<ReportsListPage store={store} />).dive();
         })
+
+        it("displays the passed message in the message modal", () => {
+            expect(wrapper.find("p").text()).toEqual(store.getState().message);
+        });
 
         it("closes the message modal if it is open", () => {
             wrapper.find("button").simulate("click");
-            expect(store.getActions()).toEqual([closeMessageModal()]);
+            expect(store.getActions()).toEqual([startFetchData(), closeMessageModal()]);
         });
     })
 });
