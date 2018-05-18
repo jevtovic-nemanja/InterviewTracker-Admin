@@ -24,148 +24,219 @@ import {
 } from "Store/actions";
 
 describe("<ReportsListPage />", () => {
-    let wrapper;
-
     const mockedMiddleware = [];
     const mockedStore = configureStore(mockedMiddleware);
 
-    const mockedState = {
-        data: {
-            reports: []
-        },
-        message: "message",
-        messageModal: false
-    };
+    describe("always", () => {
+        const mockedState = {
+            data: {
+                reports: []
+            },
+            message: "message",
+            messageModal: false,
+            searchItem: ""
+        };
 
-    const store = mockedStore(mockedState);
+        const store = mockedStore(mockedState);
 
-    const mockedErrorMessageReport = {
-        id: "NO_RESULTS",
-        message: "No candidates or companies match the search criteria."
-    };
+        const wrapper = shallow(<ReportsListPage store={store} />).dive();
 
-    const mockedReports = [
-        {
-            id: 258,
-            companyName: "Endava",
-            candidateName: "John Doe",
-            date: "20/04/2018",
-            status: "Passed"
-        },
-        {
-            id: 278,
-            companyName: "PS Tech",
-            candidateName: "Jane Smith",
-            date: "24/04/2018",
-            status: "Declined"
-        }
-    ];
-
-    const useMockedReports = () => wrapper.setProps({
-        reports: mockedReports
-    });
-
-    beforeEach(() => {
-        store.clearActions();
-        wrapper = shallow(<ReportsListPage store={store} />).dive();
-    });
-
-    it("renders the correct components", () => {
-        expect(wrapper.find("main")).toHaveLength(1);
-        expect(wrapper.find(Search)).toHaveLength(1);
-        expect(wrapper.find(Modal)).toHaveLength(3);
-        expect(wrapper.find(ReportDetails)).toHaveLength(1);
-        expect(wrapper.find(DeleteReport)).toHaveLength(1);
-    });
-
-    it("fetches data when mounted", () => {
-        expect(store.getActions()).toEqual([startFetchData()]);
-    });
-
-    it("displays a message if fetching reports fails", () => {
-        expect(wrapper.find(ReportDisplay)).toHaveLength(0);
-        expect(wrapper.find(".text-center")).toHaveLength(1);
-        expect(wrapper.find("h5").text()).toEqual(wrapper.instance().props.message);
-    });
-
-    it("displays a message if no reports match the filter criteria", () => {
-        wrapper.setProps({
-            reports: [{ ...mockedErrorMessageReport }]
+        afterEach(() => {
+            store.clearActions();
         });
 
-        expect(wrapper.find(ReportDisplay)).toHaveLength(0);
-        expect(wrapper.find(".text-center")).toHaveLength(1);
-        expect(wrapper.find("h5").text()).toEqual(wrapper.instance().props.reports[0].message);
-    });
-
-    it("renders a <ReportDisplay /> component for each report", () => {
-        useMockedReports();
-        expect(wrapper.find(ReportDisplay)).toHaveLength(mockedReports.length);
-    });
-
-    it("opens the details modal with correct report data", () => {
-        useMockedReports();
-        wrapper.instance().openDetailsModal(mockedReports[0]);
-
-        expect(wrapper.state("detailsModal")).toEqual(true);
-        expect(wrapper.state("detailedReport")).toEqual(mockedReports[0]);
-    });
-
-    it("closes the details modal", () => {
-        useMockedReports();
-
-        wrapper.instance().openDetailsModal(mockedReports[0]);
-        wrapper.instance().closeDetailsModal();
-
-        expect(wrapper.state("detailsModal")).toEqual(false);
-        expect(wrapper.state("detailedReport")).toEqual({});
-    });
-
-    it("opens the delete modal with the correct report id", () => {
-        useMockedReports();
-
-        wrapper.instance().openDeleteModal(mockedReports[0].id);
-
-        expect(wrapper.state("deleteModal")).toEqual(true);
-        expect(wrapper.state("deleteReportId")).toEqual(mockedReports[0].id);
-    });
-
-    it("closes the delete modal", () => {
-        useMockedReports();
-
-        wrapper.instance().openDeleteModal(mockedReports[0].id);
-        wrapper.instance().closeDeleteModal();
-
-        expect(wrapper.state("deleteModal")).toEqual(false);
-        expect(wrapper.state("deleteReportId")).toEqual("");
-    });
-
-    it("initiates the deletion of the correct report and then closes the delete modal", () => {
-        useMockedReports();
-
-        wrapper.instance().openDeleteModal(mockedReports[0].id);
-        wrapper.instance().deleteReport();
-
-        expect(store.getActions()).toEqual([startFetchData(), startDeleteReport(mockedReports[0].id)]);
-        expect(wrapper.state("deleteModal")).toEqual(false);
-        expect(wrapper.state("deleteReportId")).toEqual("");
-    });
-
-    it("displays the passed message in the message modal", () => {
-        expect(wrapper.find("p").text()).toEqual(wrapper.instance().props.message);
-    });
-
-    it("does not attempt to close the message modal if it is closed", () => {
-        wrapper.find("button").simulate("click");
-        expect(store.getActions()).toEqual([startFetchData()]);
-    });
-
-    it("closes the message modal if it is open", () => {
-        wrapper.setProps({
-            open: true
+        it("fetches data when mounted", () => {
+            expect(store.getActions()).toEqual([startFetchData()]);
         });
-        
-        wrapper.find("button").simulate("click");
-        expect(store.getActions()).toEqual([startFetchData(), closeMessageModal()]);
+
+        it("renders the correct components", () => {
+            expect(wrapper.find("main")).toHaveLength(1);
+            expect(wrapper.find(Search)).toHaveLength(1);
+            expect(wrapper.find(Modal)).toHaveLength(3);
+            expect(wrapper.find(ReportDetails)).toHaveLength(1);
+            expect(wrapper.find(DeleteReport)).toHaveLength(1);
+        });
+
+        it("displays the passed message in the message modal", () => {
+            expect(wrapper.find("p").text()).toEqual(store.getState().message);
+        });
+
+        it("does not attempt to close the message modal if it is closed", () => {
+            wrapper.find("button").simulate("click");
+            expect(store.getActions()).toEqual([]);
+        });
     });
+
+    describe("if fetching reports fails", () => {
+        const mockedState = {
+            data: {
+                reports: []
+            },
+            message: "message",
+            messageModal: false,
+            searchItem: ""
+        };
+
+        const store = mockedStore(mockedState);
+
+        const wrapper = shallow(<ReportsListPage store={store} />).dive();
+
+        it("displays the correct message ", () => {
+            expect(wrapper.find(ReportDisplay)).toHaveLength(0);
+            expect(wrapper.find(".text-center")).toHaveLength(1);
+            expect(wrapper.find("h5").text()).toEqual(store.getState().message);
+        });
+    });
+
+    describe("if no reports match the filter criteria", () => {
+        const mockedState = {
+            data: {
+                reports: [
+                    {
+                        id: 258,
+                        companyName: "Endava",
+                        candidateName: "John Doe",
+                        date: "20/04/2018",
+                        status: "Passed"
+                    },
+                    {
+                        id: 278,
+                        companyName: "PS Tech",
+                        candidateName: "Jane Smith",
+                        date: "24/04/2018",
+                        status: "Declined"
+                    }
+                ]
+            },
+            message: "",
+            messageModal: false,
+            searchItem: "wz"
+        };
+
+        const store = mockedStore(mockedState);
+
+        const wrapper = shallow(<ReportsListPage store={store} />).dive();
+
+        it("displays the correct message ", () => {
+            expect(wrapper.find(ReportDisplay)).toHaveLength(0);
+            expect(wrapper.find(".text-center")).toHaveLength(1);
+            expect(wrapper.find("h5").text()).toEqual(wrapper.instance().props.reports[0].message);
+        });
+    });
+
+    describe("if there are reports that match the filter criteria", () => {
+        const mockedState = {
+            data: {
+                reports: [
+                    {
+                        id: 258,
+                        companyName: "Endava",
+                        candidateName: "John Doe",
+                        date: "20/04/2018",
+                        status: "Passed"
+                    },
+                    {
+                        id: 278,
+                        companyName: "PS Tech",
+                        candidateName: "Jane Smith",
+                        date: "24/04/2018",
+                        status: "Declined"
+                    }
+                ]
+            },
+            message: "",
+            messageModal: false,
+            searchItem: "endava"
+        };
+
+        const store = mockedStore(mockedState);
+
+        const wrapper = shallow(<ReportsListPage store={store} />).dive();
+
+        afterEach(() => {
+            store.clearActions();
+        });
+
+        it("renders a <ReportDisplay /> component for each report", () => {
+            expect(wrapper.find(ReportDisplay)).toHaveLength(wrapper.instance().props.reports.length);
+        });
+
+        it("opens the details modal with correct report data", () => {
+            wrapper.instance().openDetailsModal(wrapper.instance().props.reports[0]);
+
+            expect(wrapper.state("detailsModal")).toEqual(true);
+            expect(wrapper.state("detailedReport")).toEqual(wrapper.instance().props.reports[0]);
+        });
+
+        it("closes the details modal", () => {
+            wrapper.instance().openDetailsModal(wrapper.instance().props.reports[0]);
+            wrapper.instance().closeDetailsModal();
+
+            expect(wrapper.state("detailsModal")).toEqual(false);
+            expect(wrapper.state("detailedReport")).toEqual({});
+        });
+
+        it("opens the delete modal with the correct report id", () => {
+            wrapper.instance().openDeleteModal(wrapper.instance().props.reports[0].id);
+
+            expect(wrapper.state("deleteModal")).toEqual(true);
+            expect(wrapper.state("deleteReportId")).toEqual(wrapper.instance().props.reports[0].id);
+        });
+
+        it("closes the delete modal", () => {
+            wrapper.instance().openDeleteModal(wrapper.instance().props.reports[0].id);
+            wrapper.instance().closeDeleteModal();
+
+            expect(wrapper.state("deleteModal")).toEqual(false);
+            expect(wrapper.state("deleteReportId")).toEqual("");
+        });
+
+        it("initiates the deletion of the correct report and then closes the delete modal", () => {
+            wrapper.instance().openDeleteModal(wrapper.instance().props.reports[0].id);
+            wrapper.instance().deleteReport();
+
+            expect(store.getActions()).toEqual([startDeleteReport(wrapper.instance().props.reports[0].id)]);
+            expect(wrapper.state("deleteModal")).toEqual(false);
+            expect(wrapper.state("deleteReportId")).toEqual("");
+        });
+    });
+
+    describe("if report deletion fails", () => {
+        const mockedState = {
+            data: {
+                reports: [
+                    {
+                        id: 258,
+                        companyName: "Endava",
+                        candidateName: "John Doe",
+                        date: "20/04/2018",
+                        status: "Passed"
+                    },
+                    {
+                        id: 278,
+                        companyName: "PS Tech",
+                        candidateName: "Jane Smith",
+                        date: "24/04/2018",
+                        status: "Declined"
+                    }
+                ]
+            },
+            message: "message",
+            messageModal: true,
+            searchItem: ""
+        };
+
+        const store = mockedStore(mockedState);
+
+        const wrapper = shallow(<ReportsListPage store={store} />).dive();
+
+        beforeEach(() => {
+            store.clearActions();
+        })
+
+        it("closes the message modal if it is open", () => {
+            wrapper.find("button").simulate("click");
+            expect(store.getActions()).toEqual([closeMessageModal()]);
+        });
+    })
 });
