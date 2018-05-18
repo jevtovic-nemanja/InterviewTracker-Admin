@@ -9,22 +9,24 @@ configure({
 
 import { ReportDetails } from "./reportDetails";
 
-describe("<ReportDetails />", () => {
-    const mockedProps = {
-        report: {
-            candidateName: "John Doe",
-            companyName: "Endava",
-            date: "20/04/2018",
-            phase: "Cv",
-            status: "Passed",
-            note: "Note"
-        }
-    };
+const createTestProps = props => ({
+    report: {
+        candidateName: "John Doe",
+        companyName: "Endava",
+        date: "20/04/2018",
+        phase: "Cv",
+        status: "Passed",
+        note: "Note"
+    },
+    ...props
+});
 
-    const wrapper = shallow(<ReportDetails {...mockedProps} />);
+describe("<ReportDetails />", () => {
+    const props = createTestProps();
+    const wrapper = shallow(<ReportDetails {...props} />);
 
     it("should display all report info correctly", () => {
-        const values = Object.values(mockedProps.report);
+        const values = Object.values(props.report);
         const titles = wrapper.find("h5");
         const notes = wrapper.find(".notes");
 

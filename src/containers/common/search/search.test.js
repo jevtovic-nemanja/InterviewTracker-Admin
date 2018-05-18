@@ -12,27 +12,30 @@ configure({
 import Search from "./search";
 import { receiveInputChange } from "Store/actions";
 
+const mockedMiddleware = [];
+const mockedStore = configureStore(mockedMiddleware);
+
+const createTestState = props => ({
+    searchItem: "text",
+    ...props
+});
+
 describe("<Search />", () => {
+    let store;
     let wrapper;
 
-    const mockedMiddleware = [];
-    const mockedStore = configureStore(mockedMiddleware);
-
-    const mockedState = {
-        searchItem: "text"
-    };
-
-    const store = mockedStore(mockedState);
-
     beforeEach(() => {
+        store = mockedStore(
+            createTestState()
+        );
         wrapper = shallow(<Search store={store} />).dive();
     });
 
     it("displays the passed value", () => {
-        expect(wrapper.find("input").props().value).toEqual(wrapper.instance().props.searchItem);
+        expect(wrapper.find("input").props().value).toEqual(store.getState().searchItem);
     })
 
-    it("calls the filter function with what the user types in", () => {
+    it("calls sends what the user types in to the store", () => {
         const mockedEvent = {
             target: {
                 value: "Text"

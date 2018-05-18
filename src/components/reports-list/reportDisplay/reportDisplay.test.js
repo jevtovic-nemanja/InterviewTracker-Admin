@@ -9,27 +9,30 @@ configure({
 
 import { ReportDisplay } from "./reportDisplay";
 
+const createTestProps = props => ({
+    report: {
+        id: 258,
+        companyName: "Endava",
+        candidateName: "John Doe",
+        date: "20/04/2018",
+        status: "Passed"
+    },
+    openDeleteModal: jest.fn(id => { }),
+    openDetailsModal: jest.fn(report => { }),
+    ...props
+});
+
 describe("<ReportDisplay />", () => {
+    let props;
     let wrapper;
 
-    const mockedProps = {
-        report: {
-            id: 258,
-            companyName: "Endava",
-            candidateName: "John Doe",
-            date: "20/04/2018",
-            status: "Passed"
-        },
-        openDeleteModal: jest.fn(id => { }),
-        openDetailsModal: jest.fn(report => { })
-    }
-
     beforeEach(() => {
-        wrapper = shallow(<ReportDisplay {...mockedProps} />);
+        props = createTestProps();
+        wrapper = shallow(<ReportDisplay {...props} />);
     });
 
     it("should display all report info correctly", () => {
-        const values = Object.values(mockedProps.report);
+        const values = Object.values(props.report);
         const titles = wrapper.find("h5");
 
         titles.forEach((node, index) => expect(node.text()).toEqual(values[index + 1]));
@@ -37,11 +40,11 @@ describe("<ReportDisplay />", () => {
 
     it("should pass the report on when details button is clicked", () => {
         wrapper.find(".btn-details").simulate("click");
-        expect(mockedProps.openDetailsModal).toBeCalledWith(mockedProps.report);
+        expect(props.openDetailsModal).toBeCalledWith(props.report);
     });
 
     it("should pass the report ID on when delete report button is clicked", () => {
         wrapper.find(".btn-delete-report").simulate("click");
-        expect(mockedProps.openDeleteModal).toBeCalledWith(mockedProps.report.id);
+        expect(props.openDeleteModal).toBeCalledWith(props.report.id);
     });
 });

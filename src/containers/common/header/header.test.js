@@ -12,15 +12,19 @@ configure({
 import Header from "./header";
 import { goToReportsList, goToCreateReport } from "Store/actions";
 
-describe("<Header />", () => {
-    let wrapper;
-    let store;
+const mockedMiddleware = [];
+const mockedStore = configureStore(mockedMiddleware);
 
-    const mockedMiddleware = [];
-    const mockedStore = configureStore(mockedMiddleware);
+const createTestState = props => ({ ...props });
+
+describe("<Header />", () => {
+    let store;
+    let wrapper;
 
     beforeEach(() => {
-        store = mockedStore({});
+        store = mockedStore(
+            createTestState()
+        );
         wrapper = shallow(<Header store={store} hash="#/" />).dive();
     });
 

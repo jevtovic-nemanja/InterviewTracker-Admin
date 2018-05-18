@@ -77,8 +77,9 @@ describe("<ReportsListPage />", () => {
         });
 
         it("does not attempt to close the message modal if it is closed", () => {
+            store.clearActions();
             wrapper.find("button").simulate("click");
-            expect(store.getActions()).toEqual([startFetchData()]);
+            expect(store.getActions()).toEqual([]);
         });
     });
 
@@ -169,10 +170,12 @@ describe("<ReportsListPage />", () => {
         });
 
         it("initiates the deletion of the correct report and then closes the delete modal", () => {
+            store.clearActions();
+
             wrapper.instance().openDeleteModal(wrapper.instance().props.reports[0].id);
             wrapper.instance().deleteReport();
 
-            expect(store.getActions()).toEqual([startFetchData(), startDeleteReport(wrapper.instance().props.reports[0].id)]);
+            expect(store.getActions()).toEqual([startDeleteReport(wrapper.instance().props.reports[0].id)]);
             expect(wrapper.state("deleteModal")).toEqual(false);
             expect(wrapper.state("deleteReportId")).toEqual("");
         });
@@ -197,8 +200,10 @@ describe("<ReportsListPage />", () => {
         });
 
         it("closes the message modal if it is open", () => {
+            store.clearActions();
+
             wrapper.find("button").simulate("click");
-            expect(store.getActions()).toEqual([startFetchData(), closeMessageModal()]);
+            expect(store.getActions()).toEqual([closeMessageModal()]);
         });
     })
 });

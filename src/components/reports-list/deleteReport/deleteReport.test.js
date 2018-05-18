@@ -9,49 +9,48 @@ configure({
 
 import { DeleteReport } from "./deleteReport";
 
+const createTestProps = props => ({
+    message: "",
+    close: jest.fn(),
+    deleteReport: jest.fn(),
+    ...props
+});
+
 describe("<DeleteReport />", () => {
-    let wrapper;
 
-    const mockedText = "text";
+    describe("if there is no error message", () => {
+        let props;
+        let wrapper;
 
-    const mockedProps = {
-        deleteReport: jest.fn(),
-        message: "",
-        close: jest.fn()
-    };
-
-    beforeEach(() => {
-        wrapper = shallow(<DeleteReport {...mockedProps} />);
-    });
-
-    it("displays error message if it exists", () => {
-        wrapper.setProps({
-            message: mockedText
+        beforeEach(() => {
+            props = createTestProps();
+            wrapper = shallow(<DeleteReport {...props} />);
         });
 
-        expect(wrapper.find("p").text()).toEqual(mockedText);
-        expect(wrapper.find("button")).toHaveLength(1);
+        it("displays default delete modal", () => {
+            expect(wrapper.find("p").text()).toEqual("Are you sure you wish to delete this report?");
+            expect(wrapper.find("button")).toHaveLength(2);
+            expect(wrapper.find(".btn-delete")).toHaveLength(1);
+        });
+    
+        it("calls deleteReport function if delete button is clicked", () => {
+            wrapper.find(".btn-delete").simulate("click");
+            expect(props.deleteReport).toHaveBeenCalledTimes(1);
+        });
     });
 
-    it("displays default delete modal if there is no error message", () => {
-        expect(wrapper.find("p").text()).toEqual("Are you sure you wish to delete this report?");
-        expect(wrapper.find("button")).toHaveLength(2);
-    });
+    describe("if there is an error message", () => {
+        let props;
+        let wrapper;
 
-    it("calls deleteReport function if delete button is clicked", () => {
-        wrapper.find(".btn-delete").simulate("click");
-        expect(mockedProps.deleteReport).toHaveBeenCalledTimes(1);
-    });
-
-    it("calls close function if close button is clicked", () => {
-        wrapper.find(".btn-close").simulate("click");
-        expect(mockedProps.close).toHaveBeenCalledTimes(1);
-
-        wrapper.setProps({
-            message: mockedText
+        beforeEach(() => {
+            props = createTestProps({ message: "message" });
+            wrapper = shallow(<DeleteReport {...props} />);
         });
 
-        wrapper.find(".btn-close").simulate("click");
-        expect(mockedProps.close).toHaveBeenCalledTimes(2);
+        it("displays error message", () => {
+            expect(wrapper.find("p").text()).toEqual(props.message);
+            expect(wrapper.find("button")).toHaveLength(1);
+        });
     });
 });

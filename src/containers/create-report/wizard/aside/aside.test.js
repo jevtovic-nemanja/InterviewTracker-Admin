@@ -11,29 +11,32 @@ configure({
 
 import Aside from "./aside";
 
+const mockedMiddleware = [];
+const mockedStore = configureStore(mockedMiddleware);
+
+const createTestState = props => ({
+    createReportPhase: 1,
+    newReportData: {
+        candidateName: "John Doe",
+        companyName: "Endava"
+    },
+    ...props
+});
+
+const phases = [1, 2, 3];
+
 describe("<Aside />", () => {
+    let store;
     let wrapper;
-
-    const mockedMiddleware = [];
-    const mockedStore = configureStore(mockedMiddleware);
-
-    const mockedState = {
-        createReportPhase: 1,
-        newReportData: {
-            candidateName: "John Doe",
-            companyName: "Endava"
-        }
-    };
-
-    const store = mockedStore(mockedState);
-
-    const phases = [1, 2, 3];
 
     const applyPhase = phase => wrapper.setProps({
         phase: phase
     });
 
     beforeEach(() => {
+        store = mockedStore(
+            createTestState()
+        );
         wrapper = shallow(<Aside store={store} />).dive();
     });
 
