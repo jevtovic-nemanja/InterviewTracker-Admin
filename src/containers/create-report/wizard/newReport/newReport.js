@@ -11,6 +11,7 @@ import { SubmitButton } from "Components/common/buttons/submit/submitButton";
 import { ValidationError } from "Components/create-report/wizard/newReport/validationError/validationError";
 import { CustomDatePicker } from "Components/create-report/wizard/newReport/datePicker/datePicker";
 import { Select } from "Components/create-report/wizard/newReport/select/select";
+import { Notes } from "Components/create-report/wizard/newReport/notes/notes";
 
 import { ValidationErrorMessages } from "Src/constants";
 import { capitalizeString } from "Utils/capitalizeString";
@@ -227,17 +228,12 @@ class ReportForm extends React.Component {
 
                 <div className="col-12 offset-sm-1 col-sm-10 offset-md-0 col-md-12">
                     <div className="form-group">
-                        <label>Notes:</label>
-                        <textarea
-                            name="note"
-                            rows="5"
-                            placeholder="Notes..."
+                        <Notes
+                            labelText="Notes:"
                             value={note}
                             onChange={this.handleInputChange}
-                            className="form-control"
-                            disabled={declined}
+                            declined={declined}
                         />
-
                         <ValidationError isValid={noteError} text={ValidationErrorMessages.NOTE_ERROR} />
                     </div>
                 </div>
