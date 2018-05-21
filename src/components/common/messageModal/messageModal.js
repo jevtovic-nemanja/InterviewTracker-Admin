@@ -1,6 +1,6 @@
 import React from "react";
 
-export const MessageModal = ({message, close }) => {
+export const MessageModal = ({ message, close }) => {
     return (
         <div className="col-12">
             <p className="mb-4">{message}</p>
