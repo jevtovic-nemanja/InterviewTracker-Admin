@@ -10,6 +10,7 @@ import { BackButton } from "Components/common/buttons/back/backButton";
 import { SubmitButton } from "Components/common/buttons/submit/submitButton";
 import { ValidationError } from "Components/create-report/wizard/newReport/validationError/validationError";
 import { CustomDatePicker } from "Components/create-report/wizard/newReport/datePicker/datePicker";
+import { Select } from "Components/create-report/wizard/newReport/select/select";
 
 import { ValidationErrorMessages } from "Src/constants";
 import { capitalizeString } from "Utils/capitalizeString";
@@ -198,37 +199,28 @@ class ReportForm extends React.Component {
 
                 <div className="col-12 offset-sm-1 col-sm-10 offset-md-0 col-md-6 col-lg-4">
                     <div className="form-group">
-                        <label>Phase:</label>
-                        <select
+                        <Select
+                            labelText="Phase:"
                             name="phase"
                             value={phase}
                             onChange={this.handleInputChange}
-                            className="form-control"
-                            disabled={declined}
-                        >
-                            <option hidden>Select</option>
-                            <option>{nextPhase}</option>
-                        </select>
-
+                            declined={declined}
+                            options={["Select", nextPhase]}
+                        />
                         <ValidationError isValid={phaseError} text={ValidationErrorMessages.PHASE_ERROR} />
                     </div>
                 </div>
 
                 <div className="col-12 offset-sm-1 col-sm-10 offset-md-0 col-md-6 col-lg-4">
                     <div className="form-group">
-                        <label>Status:</label>
-                        <select
+                        <Select
+                            labelText="Status:"
                             name="status"
                             value={status}
                             onChange={this.handleInputChange}
-                            className="form-control"
-                            disabled={declined}
-                        >
-                            <option hidden>{hiringStatus}</option>
-                            <option>Passed</option>
-                            <option>Declined</option>
-                        </select>
-
+                            declined={declined}
+                            options={[hiringStatus, "Passed", "Declined"]}
+                        />
                         <ValidationError isValid={statusError} text={ValidationErrorMessages.STATUS_ERROR} />
                     </div>
                 </div>
