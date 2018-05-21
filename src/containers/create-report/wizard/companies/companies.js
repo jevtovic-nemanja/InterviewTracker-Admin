@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 
 import { Message } from "Components/common/message/message";
 import { NextButton } from "Components/common/buttons/next/nextButton";
+import { BackButton } from "Components/common/buttons/back/backButton";
 import Search from "Containers/common/search/search";
 import { CompanyDisplay } from "Components/create-report/wizard/companies/companyDisplay";
 
@@ -68,14 +69,7 @@ class SelectCompany extends React.Component {
                     <div className="row">
 
                         <div className="col-5 col-md-4 col-lg-3">
-                            <button
-                                type="button"
-                                onClick={() => {
-                                    decrementPhase();
-                                    location.hash = "#/create-report/";
-                                }}
-                                className="btn btn-back w-100"
-                            >Back</button>
+                            <BackButton decrementPhase={decrementPhase} newLocation="#/create-report/" />
                         </div>
 
                         <div className="offset-2 col-5 offset-md-4 col-md-4 offset-lg-6 col-lg-3">

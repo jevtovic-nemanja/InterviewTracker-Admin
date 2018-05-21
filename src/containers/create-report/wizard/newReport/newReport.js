@@ -8,6 +8,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
 import { MessageModal } from "Components/common/messageModal/messageModal";
+import { BackButton } from "Components/common/buttons/back/backButton";
 
 import moment from "moment";
 
@@ -180,14 +181,7 @@ class ReportForm extends React.Component {
             <form className="row fill-report">
 
                 <div className="col-12 offset-sm-1 col-sm-10 d-md-none">
-                    <button
-                        type="button"
-                        onClick={() => {
-                            decrementPhase();
-                            location.hash = "#/create-report/2";
-                        }}
-                        className="btn btn-back w-100 mb-2"
-                    >Back</button>
+                    <BackButton decrementPhase={decrementPhase} newLocation="#/create-report/2" />
                 </div>
 
                 <div className="col-12 offset-sm-1 col-sm-10 offset-md-0 col-md-12 col-lg-4 mt-1">
@@ -271,14 +265,7 @@ class ReportForm extends React.Component {
                 </div>
 
                 <div className="d-none d-md-block col-md-4 col-lg-3">
-                    <button
-                        type="button"
-                        onClick={() => {
-                            decrementPhase();
-                            location.hash = "#/create-report/2";
-                        }}
-                        className="btn btn-back w-100 mb-2"
-                    >Back</button>
+                    <BackButton decrementPhase={decrementPhase} newLocation="#/create-report/2" />
                 </div>
 
                 <div className="col-12 offset-sm-1 col-sm-10 offset-md-4 col-md-4 offset-lg-6 col-lg-3">
