@@ -4,15 +4,12 @@ import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 
 import Modal from "react-responsive-modal";
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
 
 import { MessageModal } from "Components/common/messageModal/messageModal";
 import { BackButton } from "Components/common/buttons/back/backButton";
 import { SubmitButton } from "Components/common/buttons/submit/submitButton";
-import { ValidationError } from "Components/create-report/wizard/newReport/validationError";
-
-import moment from "moment";
+import { ValidationError } from "Components/create-report/wizard/newReport/validationError/validationError";
+import { CustomDatePicker } from "Components/create-report/wizard/newReport/datePicker/datePicker";
 
 import { ValidationErrorMessages } from "Src/constants";
 import { capitalizeString } from "Utils/capitalizeString";
@@ -189,18 +186,12 @@ class ReportForm extends React.Component {
 
                 <div className="col-12 offset-sm-1 col-sm-10 offset-md-0 col-md-12 col-lg-4 mt-1">
                     <div className="form-group">
-                        <label>Date:</label>
-                        <DatePicker
-                            dateFormat="DD.MM.YYYY"
-                            placeholderText="Click to select a date"
-                            selected={interviewDate}
-                            maxDate={moment()}
-                            minDate={moment(timeOfLastInterview, "DD-MM-YYYY")}
-                            onChange={this.handleDateChange}
-                            className="pl-2 form-control"
+                        <CustomDatePicker
+                            interviewDate={interviewDate}
+                            timeOfLastInterview={timeOfLastInterview}
+                            handleDateChange={this.handleDateChange}
                             disabled={declinedDatePicker}
                         />
-
                         <ValidationError isValid={dateError} text={ValidationErrorMessages.DATE_ERROR} />
                     </div>
                 </div>
