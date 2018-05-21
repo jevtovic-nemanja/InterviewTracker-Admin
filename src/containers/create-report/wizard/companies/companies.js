@@ -4,6 +4,7 @@ import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 
 import { Message } from "Components/common/message/message";
+import { NextButton } from "Components/common/buttons/next/nextButton";
 import Search from "Containers/common/search/search";
 import { CompanyDisplay } from "Components/create-report/wizard/companies/companyDisplay";
 
@@ -78,15 +79,7 @@ class SelectCompany extends React.Component {
                         </div>
 
                         <div className="offset-2 col-5 offset-md-4 col-md-4 offset-lg-6 col-lg-3">
-                            <button
-                                type="button"
-                                disabled={next}
-                                onClick={() => {
-                                    incrementPhase();
-                                    location.hash = "#/create-report/3";
-                                }}
-                                className={`${next} btn btn-next w-100`}
-                            >Next</button>
+                            <NextButton next={next} incrementPhase={incrementPhase} newLocation="#/create-report/3" />
                         </div>
 
                     </div>
