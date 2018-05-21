@@ -7,7 +7,6 @@ export const CompanyDisplay = ({ company, selectedElementId, selectElement, newR
     return (
         <tr
             key={companyId}
-            id={companyId}
             onClick={() => {
                 selectElement(companyId);
                 newReportCompany(getSelectedCompany(companyId));
