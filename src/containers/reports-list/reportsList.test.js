@@ -9,10 +9,12 @@ configure({
     adapter: new Adapter
 });
 
-import ReportsListPage from "./reportsListPage";
+import ReportsList from "./reportsList";
 
 import Modal from "react-responsive-modal";
 import Search from "Containers/common/search/search";
+import { Message } from "Components/common/message/message";
+import { MessageModal } from "Components/common/messageModal/messageModal";
 import { ReportDisplay } from "Components/reports-list/reportDisplay/reportDisplay";
 import { ReportDetails } from "Components/reports-list/reportDetails/reportDetails";
 import { DeleteReport } from "Components/reports-list/deleteReport/deleteReport";
@@ -51,7 +53,7 @@ const createTestState = props => ({
     ...props
 });
 
-describe("<ReportsListPage />", () => {
+describe("<ReportsList />", () => {
 
     describe("always", () => {
         let store;
@@ -61,7 +63,7 @@ describe("<ReportsListPage />", () => {
             store = mockedStore(
                 createTestState()
             );
-            wrapper = shallow(<ReportsListPage store={store} />).dive();
+            wrapper = shallow(<ReportsList store={store} />).dive();
         });
 
         it("fetches data when mounted", () => {
@@ -74,11 +76,13 @@ describe("<ReportsListPage />", () => {
             expect(wrapper.find(Modal)).toHaveLength(3);
             expect(wrapper.find(ReportDetails)).toHaveLength(1);
             expect(wrapper.find(DeleteReport)).toHaveLength(1);
+            expect(wrapper.find(Message)).toHaveLength(0);
+            expect(wrapper.find(MessageModal)).toHaveLength(1);
         });
 
         it("does not attempt to close the message modal if it is closed", () => {
             store.clearActions();
-            wrapper.find("button").simulate("click");
+            wrapper.find(MessageModal).props().close();
             expect(store.getActions()).toEqual([]);
         });
     });
@@ -96,13 +100,13 @@ describe("<ReportsListPage />", () => {
                     message: "message"
                 })
             );
-            wrapper = shallow(<ReportsListPage store={store} />).dive();
+            wrapper = shallow(<ReportsList store={store} />).dive();
         });
 
         it("displays the correct message ", () => {
             expect(wrapper.find(ReportDisplay)).toHaveLength(0);
-            expect(wrapper.find(".text-center")).toHaveLength(1);
-            expect(wrapper.find("h5").text()).toEqual(store.getState().message);
+            expect(wrapper.find(Message)).toHaveLength(1);
+            expect(wrapper.find(Message).props().message).toEqual(store.getState().message);
         });
     });
 
@@ -114,13 +118,13 @@ describe("<ReportsListPage />", () => {
             store = mockedStore(
                 createTestState({ searchItem: "wz" })
             );
-            wrapper = shallow(<ReportsListPage store={store} />).dive();
+            wrapper = shallow(<ReportsList store={store} />).dive();
         });
 
         it("displays the correct message ", () => {
             expect(wrapper.find(ReportDisplay)).toHaveLength(0);
-            expect(wrapper.find(".text-center")).toHaveLength(1);
-            expect(wrapper.find("h5").text()).toEqual(wrapper.instance().props.reports[0].message);
+            expect(wrapper.find(Message)).toHaveLength(1);
+            expect(wrapper.find(Message).props().message).toEqual(wrapper.instance().props.reports[0].message);
         });
     });
 
@@ -132,7 +136,7 @@ describe("<ReportsListPage />", () => {
             store = mockedStore(
                 createTestState({ searchItem: "endava" })
             );
-            wrapper = shallow(<ReportsListPage store={store} />).dive();
+            wrapper = shallow(<ReportsList store={store} />).dive();
         });
 
         it("renders a <ReportDisplay /> component for each report", () => {
@@ -192,17 +196,17 @@ describe("<ReportsListPage />", () => {
                     messageModal: true
                 })
             );
-            wrapper = shallow(<ReportsListPage store={store} />).dive();
+            wrapper = shallow(<ReportsList store={store} />).dive();
         });
 
         it("displays the passed message in the message modal", () => {
-            expect(wrapper.find("p").text()).toEqual(store.getState().message);
+            expect(wrapper.find(MessageModal).props().message).toEqual(store.getState().message);
         });
 
         it("closes the message modal if it is open", () => {
             store.clearActions();
 
-            wrapper.find("button").simulate("click");
+            wrapper.find(MessageModal).props().close();
             expect(store.getActions()).toEqual([closeMessageModal()]);
         });
     })
