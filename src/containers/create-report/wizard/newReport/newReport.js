@@ -7,6 +7,8 @@ import Modal from "react-responsive-modal";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
+import { MessageModal } from "Components/common/messageModal/messageModal";
+
 import moment from "moment";
 
 import { capitalizeString } from "Utils/capitalizeString";
@@ -289,16 +291,7 @@ class ReportForm extends React.Component {
                 </div>
 
                 <Modal open={open} onClose={this.closeMessageModal} little >
-                    <div className="col-12">
-                        <p className="mb-4">{message}</p>
-                        <div className="float-right">
-                            <button
-                                type="button"
-                                onClick={this.closeMessageModal}
-                                className="btn btn-close"
-                            >Close</button>
-                        </div>
-                    </div>
+                    <MessageModal message={message} close={this.closeMessageModal} />
                 </Modal>
 
             </form >

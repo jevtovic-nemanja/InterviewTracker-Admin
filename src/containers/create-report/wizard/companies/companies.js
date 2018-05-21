@@ -3,7 +3,7 @@ import React from "react";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 
-import { Message } from "Components/common/message";
+import { Message } from "Components/common/message/message";
 import Search from "Containers/common/search/search";
 import { CompanyDisplay } from "Components/create-report/wizard/companies/companyDisplay";
 

@@ -5,7 +5,8 @@ import { connect } from "react-redux";
 
 import Modal from "react-responsive-modal";
 
-import { Message } from "Components/common/message";
+import { Message } from "Components/common/message/message";
+import { MessageModal } from "Components/common/messageModal/messageModal";
 import Search from "Containers/common/search/search";
 import { ReportDisplay } from "Components/reports-list/reportDisplay/reportDisplay";
 import { ReportDetails } from "Components/reports-list/reportDetails/reportDetails";
@@ -143,18 +144,8 @@ class ReportsList extends React.Component {
                 </Modal>
 
                 <Modal open={open} onClose={this.closeMessageModal} little >
-                    <div className="col-12">
-                        <p className="mb-4">{message}</p>
-                        <div className="float-right">
-                            <button
-                                type="button"
-                                onClick={this.closeMessageModal}
-                                className="btn btn-close"
-                            >Close</button>
-                        </div>
-                    </div>
+                    <MessageModal message={message} close={this.closeMessageModal} />
                 </Modal>
-
             </main>
         );
     }
