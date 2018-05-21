@@ -10,9 +10,11 @@ import "react-datepicker/dist/react-datepicker.css";
 import { MessageModal } from "Components/common/messageModal/messageModal";
 import { BackButton } from "Components/common/buttons/back/backButton";
 import { SubmitButton } from "Components/common/buttons/submit/submitButton";
+import { ValidationError } from "Components/create-report/wizard/newReport/validationError";
 
 import moment from "moment";
 
+import { ValidationErrorMessages } from "Src/constants";
 import { capitalizeString } from "Utils/capitalizeString";
 
 import {
@@ -199,9 +201,7 @@ class ReportForm extends React.Component {
                             disabled={declinedDatePicker}
                         />
 
-                        <div className={`${dateError} float-right pr-2`}>
-                            <small className="red">Please select a date.</small>
-                        </div>
+                        <ValidationError isValid={dateError} text={ValidationErrorMessages.DATE_ERROR} />
                     </div>
                 </div>
 
@@ -219,9 +219,7 @@ class ReportForm extends React.Component {
                             <option>{nextPhase}</option>
                         </select>
 
-                        <div className={`${phaseError} float-right pr-2`}>
-                            <small className="red">Please select a phase.</small>
-                        </div>
+                        <ValidationError isValid={phaseError} text={ValidationErrorMessages.PHASE_ERROR} />
                     </div>
                 </div>
 
@@ -240,9 +238,7 @@ class ReportForm extends React.Component {
                             <option>Declined</option>
                         </select>
 
-                        <div className={`${statusError} float-right pr-2`}>
-                            <small className="red">Please select a status.</small>
-                        </div>
+                        <ValidationError isValid={statusError} text={ValidationErrorMessages.STATUS_ERROR} />
                     </div>
                 </div>
 
@@ -259,9 +255,7 @@ class ReportForm extends React.Component {
                             disabled={declined}
                         />
 
-                        <div className={`${noteError} float-right pr-2`}>
-                            <small className="red">Please enter notes.</small>
-                        </div>
+                        <ValidationError isValid={noteError} text={ValidationErrorMessages.NOTE_ERROR} />
                     </div>
                 </div>
 
