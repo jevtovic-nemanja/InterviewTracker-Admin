@@ -3,6 +3,7 @@ import React from "react";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 
+import { Message } from "Components/common/message";
 import Search from "Containers/common/search/search";
 import { CompanyDisplay } from "Components/create-report/wizard/companies/companyDisplay";
 
@@ -102,16 +103,12 @@ class SelectCompany extends React.Component {
 
                                 if (company.message) {
                                     return (
-                                        <div className="col-12 mt-4" key={company.id}>
-                                            <h5 className="text-center">{company.message}</h5>
-                                        </div>
+                                        <Message key={company.id} message={company.message} />
                                     );
                                 }
                             })
 
-                            : <div className="col-12 mt-4">
-                                <h5 className="text-center">{message}</h5>
-                            </div>
+                            : <Message message={message} />
                     }
 
                     <table className="table table-striped table-bordered table-hover">

@@ -3,6 +3,7 @@ import React from "react";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 
+import { Message } from "Components/common/message";
 import Search from "Containers/common/search/search";
 import { CandidateDisplay } from "Components/create-report/wizard/candidates/candidateDisplay";
 
@@ -82,9 +83,7 @@ class SelectCandidate extends React.Component {
 
                             if (candidate.message) {
                                 return (
-                                    <div className="col-12 mt-4" key={candidate.id}>
-                                        <h5 className="text-center">{candidate.message}</h5>
-                                    </div>
+                                    <Message key={candidate.id} message={candidate.message} />
                                 );
                             }
 
@@ -98,9 +97,7 @@ class SelectCandidate extends React.Component {
                             );
                         })
 
-                        : <div className="col-12 mt-4">
-                            <h5 className="text-center">{message}</h5>
-                        </div>
+                        : <Message message={message} />
                 }
 
             </div >

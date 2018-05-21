@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 
 import Modal from "react-responsive-modal";
 
+import { Message } from "Components/common/message";
 import Search from "Containers/common/search/search";
 import { ReportDisplay } from "Components/reports-list/reportDisplay/reportDisplay";
 import { ReportDetails } from "Components/reports-list/reportDetails/reportDetails";
@@ -116,9 +117,7 @@ class ReportsList extends React.Component {
                             ? reports.map(report => {
                                 if (report.message) {
                                     return (
-                                        <div className="col-12 mt-4" key={report.id}>
-                                            <h5 className="text-center">{report.message}</h5>
-                                        </div>
+                                        <Message key={report.id} message={report.message} />
                                     );
                                 } else {
                                     return <ReportDisplay
@@ -130,9 +129,7 @@ class ReportsList extends React.Component {
                                 }
                             })
 
-                            : <div className="col-12 mt-4">
-                                <h5 className="text-center">{message}</h5>
-                            </div>
+                            : <Message message={message} />
                     }
 
                 </div>
