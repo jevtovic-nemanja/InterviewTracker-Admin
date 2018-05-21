@@ -5,7 +5,7 @@ import { hot } from "react-hot-loader";
 import { Switch, Route } from "react-router-dom";
 
 import Header from "Containers/common/header/header";
-import ReportsListPage from "Containers/reports-list/reportsListPage";
+import ReportsList from "Containers/reports-list/reportsList";
 
 import "./assets/css/main.css";
 
@@ -21,7 +21,7 @@ class App extends React.Component {
             <div className="w-100">
                 <Header hash={location.hash} />
                 <Switch>
-                    <Route exact path="/" component={ReportsListPage} />
+                    <Route exact path="/" component={ReportsList} />
                     <Route path="/create-report/" component={asyncCreateReportPage} />
                 </Switch>
             </div>

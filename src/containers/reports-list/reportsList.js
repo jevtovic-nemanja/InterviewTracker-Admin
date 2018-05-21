@@ -1,11 +1,48 @@
 import React from "react";
 
+import { bindActionCreators } from "redux";
+import { connect } from "react-redux";
+
 import Modal from "react-responsive-modal";
 
 import Search from "Containers/common/search/search";
-import { ReportDisplay } from "./reportDisplay/reportDisplay";
-import { ReportDetails } from "./reportDetails/reportDetails";
-import { DeleteReport } from "./deleteReport/deleteReport";
+import { ReportDisplay } from "Components/reports-list/reportDisplay/reportDisplay";
+import { ReportDetails } from "Components/reports-list/reportDetails/reportDetails";
+import { DeleteReport } from "Components/reports-list/deleteReport/deleteReport";
+
+import {
+    startFetchData,
+    startDeleteReport,
+    closeMessageModal
+} from "Store/actions";
+
+const filterReports = (reports, searchItem) => {
+    if (reports.length) {
+        const filteredReports = reports.filter(report => {
+            const candidate = report.candidateName.toLowerCase();
+            const company = report.companyName.toLowerCase();
+            return candidate.includes(searchItem) || company.includes(searchItem);
+        });
+        return filteredReports.length
+            ? filteredReports
+            : [{
+                id: "NO_RESULTS",
+                message: "No candidates or companies match the search criteria."
+            }];
+    } else return [];
+};
+
+const mapStateToProps = state => ({
+    reports: filterReports(state.data.reports, state.searchItem),
+    message: state.message,
+    open: state.messageModal
+});
+
+const mapDispatchToProps = dispatch => bindActionCreators({
+    startFetchData,
+    startDeleteReport,
+    closeMessageModal
+}, dispatch);
 
 class ReportsList extends React.Component {
     state = {
@@ -126,4 +163,4 @@ class ReportsList extends React.Component {
     }
 }
 
-export default ReportsList;
+export default connect(mapStateToProps, mapDispatchToProps)(ReportsList);
