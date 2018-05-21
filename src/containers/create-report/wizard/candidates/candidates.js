@@ -6,8 +6,6 @@ import { connect } from "react-redux";
 import Search from "Containers/common/search/search";
 import { CandidateDisplay } from "Components/create-report/wizard/candidates/candidateDisplay";
 
-
-
 import {
     selectElement,
     enableNextPhase,
