@@ -9,6 +9,7 @@ import "react-datepicker/dist/react-datepicker.css";
 
 import { MessageModal } from "Components/common/messageModal/messageModal";
 import { BackButton } from "Components/common/buttons/back/backButton";
+import { SubmitButton } from "Components/common/buttons/submit/submitButton";
 
 import moment from "moment";
 
@@ -269,12 +270,7 @@ class ReportForm extends React.Component {
                 </div>
 
                 <div className="col-12 offset-sm-1 col-sm-10 offset-md-4 col-md-4 offset-lg-6 col-lg-3">
-                    <button
-                        type="button"
-                        disabled={declined}
-                        onClick={this.onSubmit}
-                        className={`btn btn-submit w-100 mt-1 ${declined}`}
-                    >Submit</button>
+                    <SubmitButton declined={declined} onSubmit={this.onSubmit} />
                 </div>
 
                 <Modal open={open} onClose={this.closeMessageModal} little >
