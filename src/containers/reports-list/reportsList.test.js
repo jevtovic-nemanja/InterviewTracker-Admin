@@ -88,20 +88,17 @@ describe("<ReportsList />", () => {
     });
 
     describe("if fetching reports fails", () => {
-        let store;
-        let wrapper;
 
-        beforeEach(() => {
-            store = mockedStore(
-                createTestState({
-                    data: {
-                        reports: []
-                    },
-                    message: "message"
-                })
-            );
-            wrapper = shallow(<ReportsList store={store} />).dive();
-        });
+        const store = mockedStore(
+            createTestState({
+                data: {
+                    reports: []
+                },
+                message: "message"
+            })
+        );
+
+        const wrapper = shallow(<ReportsList store={store} />).dive();
 
         it("displays the correct message ", () => {
             expect(wrapper.find(ReportDisplay)).toHaveLength(0);
@@ -111,15 +108,12 @@ describe("<ReportsList />", () => {
     });
 
     describe("if no reports match the filter criteria", () => {
-        let store;
-        let wrapper;
 
-        beforeEach(() => {
-            store = mockedStore(
-                createTestState({ searchItem: "wz" })
-            );
-            wrapper = shallow(<ReportsList store={store} />).dive();
-        });
+        const store = mockedStore(
+            createTestState({ searchItem: "wz" })
+        );
+        
+        const wrapper = shallow(<ReportsList store={store} />).dive();
 
         it("displays the correct message ", () => {
             expect(wrapper.find(ReportDisplay)).toHaveLength(0);
