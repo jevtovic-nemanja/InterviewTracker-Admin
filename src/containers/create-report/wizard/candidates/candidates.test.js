@@ -16,13 +16,6 @@ import { CandidateDisplay } from "Components/create-report/wizard/candidates/can
 import { Message } from "Components/common/message/message";
 import { NextButton } from "Components/common/buttons/next/nextButton";
 
-import {
-    selectElement,
-    enableNextPhase,
-    newReportCandidate,
-    incrementPhase
-} from "Store/actions";
-
 const mockedMiddleware = [];
 const mockedStore = configureStore(mockedMiddleware);
 
