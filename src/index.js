@@ -15,7 +15,6 @@ import logger from "redux-logger";
 
 import App from "Src/app";
 
-
 import { rootReducer } from "Store/reducers";
 import { rootSaga } from "Store/sagas";
 import { startFetchData } from "Store/actions";
