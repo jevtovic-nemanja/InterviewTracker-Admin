@@ -24,6 +24,5 @@ export const deleteReportSaga = function* (action) {
     } catch (e) {
         yield put(deleteReportFail());
         yield put(openMessageModal());
-        return;
     }
 };

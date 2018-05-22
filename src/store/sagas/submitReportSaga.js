@@ -31,6 +31,5 @@ export const submitReportSaga = function* (action) {
     } catch (e) {
         yield put(submitReportFail());
         yield put(openMessageModal());
-        return;
     }
 };
