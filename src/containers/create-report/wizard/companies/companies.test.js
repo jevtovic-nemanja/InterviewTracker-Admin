@@ -17,6 +17,14 @@ import { Message } from "Components/common/message/message";
 import { BackButton } from "Components/common/buttons/back/backButton";
 import { NextButton } from "Components/common/buttons/next/nextButton";
 
+import {
+    selectElement,
+    enableNextPhase,
+    incrementPhase,
+    decrementPhase,
+    newReportCompany
+} from "Store/actions";
+
 const mockedMiddleware = [];
 const mockedStore = configureStore(mockedMiddleware);
 
@@ -43,18 +51,31 @@ const createTestState = props => ({
 describe("<Companies />", () => {
 
     describe("always", () => {
+        let store;
+        let wrapper;
 
-        const store = mockedStore(
-            createTestState()
-        );
-
-        const wrapper = shallow(<Companies store={store} />).dive();
+        beforeEach(() => {
+            store = mockedStore(
+                createTestState()
+            );
+            wrapper = shallow(<Companies store={store} />).dive();
+        });
 
         it("renders the correct components", () => {
             expect(wrapper.find(Search)).toHaveLength(1);
             expect(wrapper.find(BackButton)).toHaveLength(1);
             expect(wrapper.find(NextButton)).toHaveLength(1);
             expect(wrapper.find("table")).toHaveLength(1);
+        });
+
+        it("calls the correct actions", () => {
+            wrapper.find(BackButton).props().decrementPhase();
+            wrapper.find(NextButton).props().incrementPhase();
+            wrapper.find(CompanyDisplay).at(0).props().selectElement();
+            wrapper.find(CompanyDisplay).at(0).props().newReportCompany();
+            wrapper.find(CompanyDisplay).at(0).props().enableNextPhase();
+
+            expect(store.getActions()).toEqual([decrementPhase(), incrementPhase(), selectElement(), newReportCompany(), enableNextPhase()]);
         });
     });
 

@@ -16,6 +16,13 @@ import { CandidateDisplay } from "Components/create-report/wizard/candidates/can
 import { Message } from "Components/common/message/message";
 import { NextButton } from "Components/common/buttons/next/nextButton";
 
+import {
+    selectElement,
+    enableNextPhase,
+    newReportCandidate,
+    incrementPhase
+} from "Store/actions";
+
 const mockedMiddleware = [];
 const mockedStore = configureStore(mockedMiddleware);
 
@@ -46,16 +53,28 @@ const createTestState = props => ({
 describe("<Candidates />", () => {
 
     describe("always", () => {
+        let store;
+        let wrapper;
 
-        const store = mockedStore(
-            createTestState()
-        );
-
-        const wrapper = shallow(<Candidates store={store} />).dive();
+        beforeEach(() => {
+            store = mockedStore(
+                createTestState()
+            );
+            wrapper = shallow(<Candidates store={store} />).dive();
+        });
 
         it("renders a Search component and a Next button", () => {
             expect(wrapper.find(Search)).toHaveLength(1);
             expect(wrapper.find(NextButton)).toHaveLength(1);
+        });
+
+        it("calls the correct actions", () => {
+            wrapper.find(NextButton).props().incrementPhase();
+            wrapper.find(CandidateDisplay).at(0).props().selectElement();
+            wrapper.find(CandidateDisplay).at(0).props().newReportCandidate();
+            wrapper.find(CandidateDisplay).at(0).props().enableNextPhase();
+
+            expect(store.getActions()).toEqual([incrementPhase(), selectElement(), newReportCandidate(), enableNextPhase()]);
         });
     });
 
