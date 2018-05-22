@@ -40,8 +40,7 @@ describe("<CompanyDisplay />", () => {
         it("calls the correct methods on click", () => {
             wrapper.simulate("click");
             expect(props.selectElement).toBeCalledWith(props.company.companyId);
-            expect(props.getSelectedCompany).toBeCalledWith(props.company.companyId);
-            expect(props.newReportCompany).toBeCalledWith(props.getSelectedCompany(props.company.companyId));
+            expect(props.newReportCompany).toBeCalledWith(props.company);
             expect(props.enableNextPhase).toBeCalled();
         });
     });

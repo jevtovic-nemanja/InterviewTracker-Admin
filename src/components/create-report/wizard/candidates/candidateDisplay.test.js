@@ -44,8 +44,7 @@ describe("<CandidateDisplay />", () => {
         it("calls the correct methods on click", () => {
             wrapper.simulate("click");
             expect(props.selectElement).toBeCalledWith(props.candidate.candidateId);
-            expect(props.getSelectedCandidate).toBeCalledWith(props.candidate.candidateId);
-            expect(props.newReportCandidate).toBeCalledWith(props.getSelectedCandidate(props.candidate.candidateId));
+            expect(props.newReportCandidate).toBeCalledWith(props.candidate);
             expect(props.enableNextPhase).toBeCalled();
         });
     });
