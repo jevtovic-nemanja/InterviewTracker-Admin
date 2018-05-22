@@ -46,11 +46,6 @@ const mapDispatchToProps = dispatch => bindActionCreators({
 
 class SelectCompany extends React.Component {
 
-    getSelectedCompany = (selectedCompanyId) => {
-        const selectedCompany = this.props.companies.filter(company => company.companyId === selectedCompanyId).shift();
-        return selectedCompany;
-    };
-
     render() {
         const { companies, message, selectedElementId, next } = this.props;
         const { selectElement, newReportCompany, enableNextPhase, decrementPhase, incrementPhase } = this.props;
@@ -108,7 +103,6 @@ class SelectCompany extends React.Component {
                                             <CompanyDisplay
                                                 key={company.companyId}
                                                 company={company}
-                                                getSelectedCompany={this.getSelectedCompany}
                                                 {...props}
                                             />
                                         );

@@ -4,7 +4,7 @@ import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 
 import { Message } from "Components/common/message/message";
-import { NextButton } from "Components/common/buttons/next/NextButton";
+import { NextButton } from "Components/common/buttons/next/nextButton";
 import Search from "Containers/common/search/search";
 import { CandidateDisplay } from "Components/create-report/wizard/candidates/candidateDisplay";
 
@@ -43,11 +43,6 @@ const mapDispatchToProps = dispatch => bindActionCreators({
 
 class SelectCandidate extends React.Component {
 
-    getSelectedCandidate = (selectedCandidateId) => {
-        const selectedCandidate = this.props.candidates.filter(candidate => candidate.candidateId === selectedCandidateId).shift();
-        return selectedCandidate;
-    };
-
     render() {
         const { candidates, message, selectedElementId, next } = this.props;
         const { selectElement, newReportCandidate, enableNextPhase, incrementPhase } = this.props;
@@ -84,7 +79,6 @@ class SelectCandidate extends React.Component {
                                 <CandidateDisplay
                                     key={candidate.candidateId}
                                     candidate={candidate}
-                                    getSelectedCandidate={this.getSelectedCandidate}
                                     {...props}
                                 />
                             );

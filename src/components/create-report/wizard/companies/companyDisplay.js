@@ -1,6 +1,6 @@
 import React from "react";
 
-export const CompanyDisplay = ({ company, selectedElementId, selectElement, newReportCompany, getSelectedCompany, enableNextPhase }) => {
+export const CompanyDisplay = ({ company, selectedElementId, selectElement, newReportCompany, enableNextPhase }) => {
     const { companyId, name } = company;
     const selected = selectedElementId === companyId ? "selected" : "";
 
@@ -9,7 +9,7 @@ export const CompanyDisplay = ({ company, selectedElementId, selectElement, newR
             key={companyId}
             onClick={() => {
                 selectElement(companyId);
-                newReportCompany(getSelectedCompany(companyId));
+                newReportCompany(company);
                 enableNextPhase();
             }}
         >

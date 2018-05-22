@@ -2,7 +2,7 @@ import React from "react";
 
 import defaultAvatar from "../../../../assets/images/avatar.png";
 
-export const CandidateDisplay = ({ candidate, selectedElementId, selectElement, enableNextPhase, newReportCandidate, getSelectedCandidate }) => {
+export const CandidateDisplay = ({ candidate, selectedElementId, selectElement, enableNextPhase, newReportCandidate }) => {
     const { candidateId, name, email, avatar } = candidate;
     const selected = selectedElementId === candidateId ? "selected" : "";
 
@@ -10,7 +10,7 @@ export const CandidateDisplay = ({ candidate, selectedElementId, selectElement, 
         <div
             onClick={() => {
                 selectElement(candidateId);
-                newReportCandidate(getSelectedCandidate(candidateId));
+                newReportCandidate(candidate);
                 enableNextPhase();
             }}
             className="col-12 offset-sm-1 col-sm-10 offset-md-1 col-md-11 offset-xl-0 col-xl-6 candidate-div"
