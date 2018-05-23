@@ -11,7 +11,6 @@ import {
 
 import { Provider } from "react-redux";
 import createSagaMiddleware from "redux-saga";
-import logger from "redux-logger";
 
 import App from "Src/app";
 
@@ -19,21 +18,33 @@ import { rootReducer } from "Store/reducers";
 import { rootSaga } from "Store/sagas";
 import { startFetchData } from "Store/actions";
 
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const setupStoreAndRenderApp = async () => {
 
-const sagaMiddleware = createSagaMiddleware();
+    const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
-const store = createStore(rootReducer, composeEnhancers(
-    applyMiddleware(sagaMiddleware, logger)
-));
+    const sagaMiddleware = createSagaMiddleware();
 
-sagaMiddleware.run(rootSaga);
+    const middleware = [sagaMiddleware];
 
-render(
-    <Provider store={store}>
-        <HashRouter>
-            <App />
-        </HashRouter>
-    </Provider>,
-    document.querySelector(".app")
-);
+    if (process.env.NODE_ENV === "development") {
+        const logger = await import(/* webpackChunkName: "redux-logger" */ "redux-logger");
+        middleware.push(logger.default);
+    }
+
+    const store = createStore(rootReducer, composeEnhancers(
+        applyMiddleware(...middleware)
+    ));
+
+    sagaMiddleware.run(rootSaga);
+
+    render(
+        <Provider store={store}>
+            <HashRouter>
+                <App />
+            </HashRouter>
+        </Provider>,
+        document.querySelector(".app")
+    );
+};
+
+setupStoreAndRenderApp();

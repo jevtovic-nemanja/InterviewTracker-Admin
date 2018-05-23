@@ -2,6 +2,7 @@ const webpack = require("webpack");
 const common = require("./webpack.common");
 const merge = require("webpack-merge");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 module.exports = merge(common, {
     mode: "production",
@@ -29,7 +30,9 @@ module.exports = merge(common, {
         new MiniCssExtractPlugin({
             filename: "css/[name].css"
         }),
-        new webpack.HashedModuleIdsPlugin()
+        new webpack.HashedModuleIdsPlugin(),
+        new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
+        new BundleAnalyzerPlugin()
     ],
     output: {
         filename: "[name].[chunkhash].js"
