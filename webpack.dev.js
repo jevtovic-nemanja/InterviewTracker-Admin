@@ -14,6 +14,9 @@ module.exports = merge(common, {
             }
         ]
     },
+    output: {
+        filename: "[name].[hash].js"
+    },
     devServer: {
         contentBase: __dirname + "/src"
     }

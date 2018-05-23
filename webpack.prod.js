@@ -1,3 +1,4 @@
+const webpack = require("webpack");
 const common = require("./webpack.common");
 const merge = require("webpack-merge");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
@@ -27,18 +28,16 @@ module.exports = merge(common, {
     plugins: [
         new MiniCssExtractPlugin({
             filename: "css/[name].css"
-        })
+        }),
+        new webpack.HashedModuleIdsPlugin()
     ],
+    output: {
+        filename: "[name].[chunkhash].js"
+    },
     optimization: {
         splitChunks: {
-            cacheGroups: {
-                vendor: {
-                    name: "vendor",
-                    test: /[\\/]node_modules[\\/]/,
-                    chunks: "all",
-                    enforce: true
-                }
-            }
-        }
+            chunks: "all"
+        },
+        runtimeChunk: true
     }
 });

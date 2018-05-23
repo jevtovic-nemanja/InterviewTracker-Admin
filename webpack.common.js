@@ -1,5 +1,6 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const InlineSourcePlugin = require("html-webpack-inline-source-plugin");
 
 module.exports = {
     context: path.resolve(__dirname, "src"),
@@ -18,9 +19,7 @@ module.exports = {
     },
     output: {
         path: path.resolve(__dirname, "dist"),
-        publicPath: "",
-        filename: "[name].js",
-        chunkFilename: "js/[name].js"
+        publicPath: ""
     },
     module: {
         rules: [
@@ -38,7 +37,7 @@ module.exports = {
                 use: {
                     loader: "file-loader",
                     options: {
-                        name: "images/[name].[ext]"
+                        name: "[name].[hash].[ext]"
                     }
                 }
             }
@@ -48,7 +47,9 @@ module.exports = {
         new HtmlWebpackPlugin({
             template: __dirname + "/src/index.html",
             filename: "index.html",
-            inject: "body"
-        })
+            inject: "body",
+            inlineSource: "runtime~.+\\.js"
+        }),
+        new InlineSourcePlugin()
     ]
 };
