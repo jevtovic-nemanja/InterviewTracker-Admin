@@ -1,7 +1,5 @@
 import React from "react";
 
-import { hot } from "react-hot-loader";
-
 import { Switch, Route } from "react-router-dom";
 
 import Header from "Containers/common/header/header";
@@ -29,4 +27,4 @@ class App extends React.Component {
     }
 }
 
-export default hot(module)(App);
+export default App;

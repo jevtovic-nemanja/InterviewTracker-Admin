@@ -16,13 +16,9 @@
         "react"
     ],
     "plugins": [
-        "react-hot-loader/babel",
-        "syntax-class-properties",
         "syntax-dynamic-import",
-        "syntax-object-rest-spread",
         "transform-class-properties",
         "transform-object-rest-spread",
-        "transform-es2015-computed-properties",
         [
             "module-resolver",
             {
