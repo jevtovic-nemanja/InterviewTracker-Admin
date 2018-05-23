@@ -1,6 +1,18 @@
 {
     "presets": [
-        "env",
+        [
+            "env",
+            {
+                "useBuiltIns": true,
+                "targets": {
+                    "browsers": [
+                        "last 2 versions",
+                        "safari > 8",
+                        "not ie < 11"
+                    ]
+                }
+            }
+        ],
         "react"
     ],
     "plugins": [
@@ -11,21 +23,26 @@
         "transform-class-properties",
         "transform-object-rest-spread",
         "transform-es2015-computed-properties",
-        ["module-resolver", {
-            "alias": {
-                "Src": "./src",
-                "Components": "./src/components",
-                "Containers": "./src/containers",
-                "Entities": "./src/entities",
-                "Hocs": "./src/hocs",
-                "Store": "./src/store",
-                "Utils": "./src/utils"
+        [
+            "module-resolver",
+            {
+                "alias": {
+                    "Src": "./src",
+                    "Components": "./src/components",
+                    "Containers": "./src/containers",
+                    "Entities": "./src/entities",
+                    "Hocs": "./src/hocs",
+                    "Store": "./src/store",
+                    "Utils": "./src/utils"
+                }
             }
-        }]
+        ]
     ],
     "env": {
         "test": {
-            "plugins": ["dynamic-import-node"]
+            "plugins": [
+                "dynamic-import-node"
+            ]
         }
     }
 }
