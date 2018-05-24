@@ -25,7 +25,7 @@ module.exports = {
         rules: [
             {
                 test: /\.js$/,
-                exclude: /node_modules/,
+                include: path.resolve(__dirname, "src"),
                 use: [
                     "babel-loader",
                     "eslint-loader"
@@ -33,7 +33,7 @@ module.exports = {
             },
             {
                 test: /(\.png)$/,
-                exclude: /node_modules/,
+                include: path.resolve(__dirname, "src"),
                 use: {
                     loader: "file-loader",
                     options: {

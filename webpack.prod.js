@@ -10,7 +10,6 @@ module.exports = merge(common, {
         rules: [
             {
                 test: /(\.css)$/,
-                exclude: /node_modules/,
                 use: [
                     MiniCssExtractPlugin.loader,
                     {
@@ -19,14 +18,6 @@ module.exports = merge(common, {
                             minimize: true
                         }
                     }
-                ]
-            },
-            {
-                test: /(\.css)$/,
-                include: /node_modules/,
-                use: [
-                    "style-loader",
-                    "css-loader"
                 ]
             }
         ]
