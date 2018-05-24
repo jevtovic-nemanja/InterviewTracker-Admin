@@ -23,6 +23,7 @@
     "redux-saga": "^0.16.0"
   },
   "devDependencies": {
+    "autoprefixer": "^8.5.0",
     "babel-cli": "^6.26.0",
     "babel-eslint": "^7.2.3",
     "babel-jest": "^22.4.3",
@@ -47,6 +48,7 @@
     "jest": "^22.4.3",
     "mini-css-extract-plugin": "^0.4.0",
     "path": "^0.12.7",
+    "postcss-loader": "^2.1.5",
     "react-test-renderer": "^16.3.2",
     "redux-logger": "^3.0.6",
     "redux-mock-store": "^1.5.1",
