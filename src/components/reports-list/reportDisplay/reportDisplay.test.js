@@ -17,8 +17,8 @@ const createTestProps = props => ({
         date: "20/04/2018",
         status: "Passed"
     },
-    openDeleteModal: jest.fn(id => { }),
-    openDetailsModal: jest.fn(report => { }),
+    openDeleteModal: jest.fn(),
+    openDetailsModal: jest.fn(),
     ...props
 });
 
@@ -38,13 +38,13 @@ describe("<ReportDisplay />", () => {
         titles.forEach((node, index) => expect(node.text()).toEqual(values[index + 1]));
     });
 
-    it("should pass the report on when details button is clicked", () => {
+    it("should call openDetailsModal when details button is clicked", () => {
         wrapper.find(".btn-details").simulate("click");
-        expect(props.openDetailsModal).toBeCalledWith(props.report);
+        expect(props.openDetailsModal).toBeCalled();
     });
 
-    it("should pass the report ID on when delete report button is clicked", () => {
+    it("should call openDeleteModal when delete report button is clicked", () => {
         wrapper.find(".btn-delete-report").simulate("click");
-        expect(props.openDeleteModal).toBeCalledWith(props.report.id);
+        expect(props.openDeleteModal).toBeCalled();
     });
 });

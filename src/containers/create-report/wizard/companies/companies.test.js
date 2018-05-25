@@ -69,13 +69,13 @@ describe("<Companies />", () => {
         });
 
         it("calls the correct actions", () => {
+            const company = wrapper.instance().props.companies[0];
+
             wrapper.find(BackButton).props().decrementPhase();
             wrapper.find(NextButton).props().incrementPhase();
-            wrapper.find(CompanyDisplay).at(0).props().selectElement();
-            wrapper.find(CompanyDisplay).at(0).props().newReportCompany();
-            wrapper.find(CompanyDisplay).at(0).props().enableNextPhase();
+            wrapper.find(CompanyDisplay).at(0).props().handleClick();
 
-            expect(store.getActions()).toEqual([decrementPhase(), incrementPhase(), selectElement(), newReportCompany(), enableNextPhase()]);
+            expect(store.getActions()).toEqual([decrementPhase(), incrementPhase(), selectElement(company.companyId), newReportCompany(company), enableNextPhase()]);
         });
     });
 
