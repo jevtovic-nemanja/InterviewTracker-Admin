@@ -1,19 +1,15 @@
 import React from "react";
 
-export const CompanyDisplay = ({ company, selectedElementId, selectElement, newReportCompany, enableNextPhase }) => {
+export const CompanyDisplay = ({ company, selected, handleClick }) => {
     const { companyId, name } = company;
-    const selected = selectedElementId === companyId ? "selected" : "";
+    const isSelected = selected === companyId ? "selected" : "";
 
     return (
         <tr
             key={companyId}
-            onClick={() => {
-                selectElement(companyId);
-                newReportCompany(company);
-                enableNextPhase();
-            }}
+            onClick={handleClick}
         >
-            <td className={`${selected}`}>{name}</td>
+            <td className={`${isSelected}`}>{name}</td>
         </tr>
     );
 };

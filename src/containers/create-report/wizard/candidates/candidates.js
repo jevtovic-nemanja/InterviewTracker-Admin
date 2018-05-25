@@ -47,13 +47,6 @@ class SelectCandidate extends React.Component {
         const { candidates, message, selectedElementId, next } = this.props;
         const { selectElement, newReportCandidate, enableNextPhase, incrementPhase } = this.props;
 
-        const props = {
-            selectedElementId,
-            selectElement,
-            newReportCandidate,
-            enableNextPhase
-        };
-
         return (
             <div className="row">
 
@@ -79,7 +72,12 @@ class SelectCandidate extends React.Component {
                                 <CandidateDisplay
                                     key={candidate.candidateId}
                                     candidate={candidate}
-                                    {...props}
+                                    selected={selectedElementId}
+                                    handleClick={() => {
+                                        selectElement(candidate.candidateId);
+                                        newReportCandidate(candidate);
+                                        enableNextPhase();
+                                    }}
                                 />
                             );
                         })
