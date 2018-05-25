@@ -140,7 +140,7 @@ describe("<ReportsList />", () => {
         it("opens the details modal with correct report data", () => {
             wrapper.find(ReportDisplay).at(0).props().openDetailsModal();
 
-            expect(wrapper.state("detailsModal")).toEqual(true)
+            expect(wrapper.state("detailsModal")).toEqual(true);
             expect(wrapper.state("detailedReport")).toEqual(wrapper.instance().props.reports[0]);
         });
 
