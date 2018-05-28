@@ -1,0 +1,23 @@
+@media screen and (min-width: 768px) {
+    .wizardAside {
+        border-right: 2px solid #6d7993;
+    }
+
+    .wizardAside h5 {
+        font-size: 1.2em;
+    }
+}
+
+.wizardAside h5,
+.wizardAside p {
+    color: #6d7993;
+}
+
+.moveDown {
+    position: relative;
+    top: 2px;
+}
+
+.bottomLineAside {
+    border-bottom: 2px solid #6d7993;
+}

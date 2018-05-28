@@ -5,7 +5,7 @@ import { Switch, Route } from "react-router-dom";
 import Header from "Containers/common/header/header";
 import ReportsList from "Containers/reports-list/reportsList";
 
-import "./assets/css/main.css";
+import "./globals.css";
 
 import { asyncComponent } from "./hocs/asyncComponent";
 

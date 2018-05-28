@@ -22,6 +22,8 @@ import {
     closeMessageModal
 } from "Store/actions";
 
+import styles from "./newReport.css";
+
 const getTrackedData = (reports, newReportData) => {
     const candidatesReportsWithCompany = reports.filter(report => report.candidateId === newReportData.candidateId && report.companyId === newReportData.companyId);
 
@@ -180,7 +182,7 @@ class ReportForm extends React.Component {
         const nextPhase = capitalizeString(phases[phases.indexOf(currentPhase.toLowerCase()) + 1]);
 
         return (
-            <form className="row fill-report">
+            <form className={`row ${styles.fillReport}`}>
 
                 <div className="col-12 offset-sm-1 col-sm-10 d-md-none">
                     <BackButton decrementPhase={decrementPhase} newLocation="#/create-report/2" />

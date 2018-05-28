@@ -16,7 +16,9 @@ module.exports = merge(common, {
                         loader: 'css-loader',
                         options: {
                             minimize: true,
-                            importLoaders: 1
+                            importLoaders: 1,
+                            modules: true,
+                            localIdentName: "[name]__[local]--[hash:base64:5]"
                         }
                     },
                     "postcss-loader"
@@ -33,7 +35,7 @@ module.exports = merge(common, {
         new BundleAnalyzerPlugin()
     ],
     output: {
-        filename: "[name].[chunkhash].js"
+        filename: "js/[name].[chunkhash].js"
     },
     optimization: {
         splitChunks: {

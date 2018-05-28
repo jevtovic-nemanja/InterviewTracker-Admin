@@ -1,8 +1,10 @@
 import React from "react";
 
+import styles from "./companyDisplay.css";
+
 export const CompanyDisplay = ({ company, selectedElementId, selectElement, newReportCompany, enableNextPhase }) => {
     const { companyId, name } = company;
-    const selected = selectedElementId === companyId ? "selected" : "";
+    const selected = selectedElementId === companyId ? styles.selected : "";
 
     return (
         <tr
@@ -12,8 +14,9 @@ export const CompanyDisplay = ({ company, selectedElementId, selectElement, newR
                 newReportCompany(company);
                 enableNextPhase();
             }}
+            className={`${selected}`}
         >
-            <td className={`${selected}`}>{name}</td>
+            <td>{name}</td>
         </tr>
     );
 };

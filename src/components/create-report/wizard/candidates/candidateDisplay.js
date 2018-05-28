@@ -2,9 +2,11 @@ import React from "react";
 
 import defaultAvatar from "../../../../assets/images/avatar.png";
 
+import styles from "./candidateDisplay.css";
+
 export const CandidateDisplay = ({ candidate, selectedElementId, selectElement, enableNextPhase, newReportCandidate }) => {
     const { candidateId, name, email, avatar } = candidate;
-    const selected = selectedElementId === candidateId ? "selected" : "";
+    const selected = selectedElementId === candidateId ? styles.selected : "";
 
     return (
         <div
@@ -15,7 +17,7 @@ export const CandidateDisplay = ({ candidate, selectedElementId, selectElement, 
             }}
             className="col-12 offset-sm-1 col-sm-10 offset-md-1 col-md-11 offset-xl-0 col-xl-6 candidate-div"
         >
-            <div className={`card candidate-card mx-auto my-2 p-2 ${selected}`}>
+            <div className={`card ${styles.candidateCard} mx-auto my-2 p-2 ${selected}`}>
                 <div className="row">
                     <div className="col-3 text-center">
                         <img
@@ -25,7 +27,7 @@ export const CandidateDisplay = ({ candidate, selectedElementId, selectElement, 
                                     : defaultAvatar
                             }
                             alt="Candidate picture"
-                            className="rounded-circle candidate-img w-50"
+                            className={`rounded-circle ${styles.candidateImg} w-50`}
                         />
                     </div>
                     <div className="col-9 d-flex flex-column justify-content-center">

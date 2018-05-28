@@ -1,5 +1,7 @@
 import React from "react";
 
+import styles from "./nextButton.css";
+
 export const NextButton = ({ next, incrementPhase, newLocation }) => {
     return (
         <button
@@ -9,7 +11,7 @@ export const NextButton = ({ next, incrementPhase, newLocation }) => {
                 incrementPhase();
                 location.hash = newLocation;
             }}
-            className={`${next} btn btn-next w-100`}
+            className={`${next} btn ${styles.btnNext} w-100`}
         >Next</button>
     );
 };

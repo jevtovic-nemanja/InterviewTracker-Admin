@@ -1,0 +1,24 @@
+.nav {
+    background-color: #6d7993;
+    color: #d5d5d5;
+}
+
+.btnNav {
+    background-color: #9099a2;
+    color: whitesmoke;
+}
+
+.btnNav:hover {
+    background-color: whitesmoke;
+    color: #9099a2;
+}
+
+.btnNavActive {
+    background-color: #d5d5d5;
+    color: white;
+}
+
+.btnNavActive:hover {
+    background-color: white;
+    color: #d5d5d5;
+}

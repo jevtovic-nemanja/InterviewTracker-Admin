@@ -1,25 +1,27 @@
 import React from "react";
 
+import styles from "./reportDisplay.css";
+
 export const ReportDisplay = ({ report, openDeleteModal, openDetailsModal }) => {
     const { id, candidateName, companyName, date, status } = report;
 
     return (
         <div className="offset-1 col-10 offset-sm-0 col-sm-12 offset-md-1 col-md-10">
-            <div className="card report-card position-relative mb-3">
+            <div className={`card ${styles.reportCard} position-relative mb-3`}>
 
                 <div className="card-body pt-4">
                     <div className="row">
-                        <div className="col-12 col-sm-6 col-lg-4 side-line-sm">
+                        <div className={`col-12 col-sm-6 col-lg-4 ${styles.sideLineSmall}`}>
                             <h5 className="mb-0 mt-2">{companyName}</h5>
                             <small>Company</small>
                         </div>
 
-                        <div className="col-12 col-sm-6 col-lg-3 side-line-lg">
+                        <div className={`col-12 col-sm-6 col-lg-3 ${styles.sideLineLarge}`}>
                             <h5 className="mb-0 mt-2">{candidateName}</h5>
                             <small>Candidate</small>
                         </div>
 
-                        <div className="col-12 col-sm-6 col-lg-2 side-line-sm">
+                        <div className={`col-12 col-sm-6 col-lg-2 ${styles.sideLineSmall}`}>
                             <h5 className="mb-0 mt-2">{date}</h5>
                             <small>Interview Date</small>
                         </div>
@@ -31,11 +33,11 @@ export const ReportDisplay = ({ report, openDeleteModal, openDetailsModal }) => 
                     </div>
                 </div>
 
-                <div className="btn-group-report-card">
+                <div className={styles.btnGroupReportCard}>
                     <button
                         type="button"
                         onClick={() => openDetailsModal(report)}
-                        className="btn btn-report-card btn-details"
+                        className={`btn ${styles.btnReportCard} btn-details`}
                     >
                         <i className="fa fa-eye fa-lg"></i>
                     </button>
@@ -43,7 +45,7 @@ export const ReportDisplay = ({ report, openDeleteModal, openDetailsModal }) => 
                     <button
                         type="button"
                         onClick={() => openDeleteModal(id)}
-                        className="btn btn-report-card btn-delete-report"
+                        className={`btn ${styles.btnReportCard} btn-delete-report`}
                     >
                         <i className="fa fa-times fa-lg"></i>
                     </button>

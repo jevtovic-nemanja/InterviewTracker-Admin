@@ -3,7 +3,8 @@ import React from "react";
 import moment from "moment";
 
 import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
+
+import "react-datepicker/dist/react-datepicker-cssmodules.min.css";
 
 export const CustomDatePicker = ({ interviewDate, timeOfLastInterview, handleDateChange, disabled }) => {
     return (

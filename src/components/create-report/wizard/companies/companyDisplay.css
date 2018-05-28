@@ -1,0 +1,5 @@
+.selected td {
+    background-color: #6d7993;
+    color: whitesmoke;
+    transform:scale(1.01);
+}

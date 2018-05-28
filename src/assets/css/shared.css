@@ -1,0 +1,10 @@
+.btnClose {
+    background-color: #9099a2;
+    color: whitesmoke;
+}
+
+.btnClose:hover {
+    background-color: whitesmoke;
+    color: #9099a2;
+    border: 1px solid #9099a2;
+}

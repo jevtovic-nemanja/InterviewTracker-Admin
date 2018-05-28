@@ -2,6 +2,8 @@ import React from "react";
 
 import { connect } from "react-redux";
 
+import styles from "./aside.css";
+
 const mapStateToProps = state => {
     return {
         phase: state.createReportPhase,
@@ -22,16 +24,16 @@ const Sidebar = ({ phase, newReport }) => {
     const fillReport = phase === 3 ? "font-weight-bold" : "text-muted d-none d-md-inline-block";
 
     return (
-        <div className={`row wizard-aside h-100 ${marginBottom}`}>
+        <div className={`row ${styles.wizardAside} h-100 ${marginBottom}`}>
             <div className="col-12">
-                <div className="bottom-line-aside">
+                <div className={styles.bottomLineAside}>
 
                     <h5 className={`${selectCandidate} mt-2`}>
                         <small className={`${selectCandidate} fa-stack`}>
                             <span className="fa fa-circle-thin fa-stack-2x"></span>
                             <strong className="fa-stack-1x">1</strong>
                         </small>
-                        <span className="pl-2 move-down">
+                        <span className={`pl-2 ${styles.moveDown}`}>
                             Select Candidate
                         </span>
                     </h5>
@@ -41,7 +43,7 @@ const Sidebar = ({ phase, newReport }) => {
                             <span className="fa fa-circle-thin fa-stack-2x"></span>
                             <strong className="fa-stack-1x">2</strong>
                         </small>
-                        <span className="pl-2 move-down">
+                        <span className={`pl-2 ${styles.moveDown}`}>
                             Select Company
                         </span>
                     </h5>
@@ -51,7 +53,7 @@ const Sidebar = ({ phase, newReport }) => {
                             <span className="fa fa-circle-thin fa-stack-2x"></span>
                             <strong className="fa-stack-1x">3</strong>
                         </small>
-                        <span className="pl-2 move-down">
+                        <span className={`pl-2 ${styles.moveDown}`}>
                             Fill Report Detail
                         </span>
                     </h5>

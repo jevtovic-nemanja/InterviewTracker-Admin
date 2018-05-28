@@ -1,0 +1,8 @@
+.btnBack {
+    background-color: #96858f;
+    color: whitesmoke;
+}
+
+.btnBack:hover {
+    transform:scale(1.03);
+}

@@ -1,0 +1,59 @@
+.reportCard:hover {
+    transform:scale(1.03);
+}
+
+@media screen and (min-width: 576px) {
+    .reportCard .card-body {
+        padding-left: 4em;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .reportCard .card-body {
+        padding-left: 5em;
+    }
+}
+
+@media screen and (min-width: 992px) {
+    .reportCard .card-body {
+        padding-left: 1em;
+        padding-right: 0;
+    }
+}
+
+@media screen and (min-width: 1200px) {
+    .reportCard .card-body {
+        padding-left: 3em;
+    }
+}
+
+.reportCard small {
+    color: #6d7993;
+}
+
+.btnReportCard {
+    background-color: rgba(0, 0, 0, 0);
+    color: #6d7993;
+}
+
+.btnReportCard:hover {
+    transform:scale(1.4);
+}
+
+.btnGroupReportCard {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+@media screen and (min-width: 576px) {
+    .sideLineSmall {
+        border-right: 1px solid #d5d5d5;
+    }
+}
+
+@media screen and (min-width: 992px) {
+    .sideLineLarge {
+        border-right: 1px solid #d5d5d5;
+    }
+}

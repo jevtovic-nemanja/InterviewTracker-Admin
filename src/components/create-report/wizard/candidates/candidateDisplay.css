@@ -1,0 +1,28 @@
+.candidateCard {
+    background-color: white;
+    color: #6d7993;
+}
+
+@media screen and (min-width: 992px) {
+    .candidateCard {
+        padding: 1em !important;
+    }
+}
+
+.candidateCard:hover {
+    transform:scale(1.03);
+}
+
+.candidateCard small {
+    color: #6d7993;
+}
+
+.candidateImg {
+    min-width: 2.9em;
+}
+
+.selected {
+    background-color: #6d7993;
+    color: whitesmoke;
+    transform:scale(1.03);
+}

@@ -1,14 +1,16 @@
 import React from "react";
 
+import styles from "./reportDetails.css";
+
 export const ReportDetails = ({ report }) => {
 
     const { candidateName, companyName, date, phase, status, note } = report;
 
     return (
         <div>
-            <h5 className="pb-3 bottom-line modal-title">{candidateName}</h5>
+            <h5 className={`pb-3 ${styles.bottomLine} ${styles.modalTitle}`}>{candidateName}</h5>
 
-            <div className="row modal-dialog">
+            <div className={`row ${styles.modalDialog}`}>
                 <div className="col-12 col-md-4">
                     <p className="mb-0">Company</p>
                     <h5>{companyName}</h5>

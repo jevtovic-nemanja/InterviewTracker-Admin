@@ -1,0 +1,8 @@
+.bottomLine {
+    border-bottom: 1px solid #d5d5d5;
+}
+
+.modalDialog p,
+.modalTitle {
+    color: #6d7993;
+}

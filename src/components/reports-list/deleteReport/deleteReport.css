@@ -1,0 +1,14 @@
+.btnDelete {
+    background-color: #96858f;
+    color: whitesmoke;
+}
+
+.btnDelete:hover {
+    background-color: whitesmoke;
+    color: #96858f;
+    border: 1px solid #96858f;
+}
+
+.btnClose {
+    composes: btnClose from "../../../assets/css/shared.css";
+}

@@ -10,21 +10,25 @@ import {
     goToCreateReport
 } from "Store/actions";
 
+import styles from "./header.css";
+
 const mapDispatchToProps = dispatch => bindActionCreators({
     goToReportsList,
     goToCreateReport
 }, dispatch);
 
 const Navbar = ({ hash, goToReportsList, goToCreateReport }) => {
-    let report = "btn-nav";
-    let create = "btn-nav";
+    let report;
+    let create;
 
     hash === "#/"
-        ? report = "btn-nav-active"
-        : create = "btn-nav-active";
+        ? (report = styles.btnNavActive,
+        create = styles.btnNav)
+        : (create = styles.btnNavActive,
+        report = styles.btnNav);
 
     return (
-        <nav className="container-fluid">
+        <nav className={`container-fluid ${styles.nav}`}>
             <div className="row p-3">
 
                 <div className="col-7 offset-md-1 col-md-6">

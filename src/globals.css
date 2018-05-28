@@ -1,0 +1,41 @@
+/* Body sizing */
+
+body {
+    width: 100%;
+    box-sizing: border-box;
+    background-color: #d5d5d5;
+}
+
+/* Overriding Bootstrap */
+
+:global .btn.focus,
+:global .btn:focus {
+    box-shadow: none;
+}
+
+:global .form-control:focus {
+    box-shadow: none;
+    border-color: #6d7993;
+}
+
+:global .card {
+    background-color: whitesmoke;
+    box-shadow: #9099a2 0 0 10px;
+}
+
+/* Overriding modal styles */
+
+@media screen and (min-width: 768px) {
+    :global .Modal-modal-0-1-3 {
+        min-width: 35em;
+    }
+}
+
+:global .btn.disabled:hover {
+    transform: none;
+}
+
+:global .react-datepicker-wrapper,
+:global .react-datepicker__input-container {
+    width: 100%;
+}

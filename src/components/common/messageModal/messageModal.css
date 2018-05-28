@@ -1,0 +1,3 @@
+.btnClose {
+    composes: btnClose from "../../../assets/css/shared.css";
+}
