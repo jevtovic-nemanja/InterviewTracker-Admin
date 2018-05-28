@@ -69,12 +69,12 @@ describe("<Candidates />", () => {
         });
 
         it("calls the correct actions", () => {
-            wrapper.find(NextButton).props().incrementPhase();
-            wrapper.find(CandidateDisplay).at(0).props().selectElement();
-            wrapper.find(CandidateDisplay).at(0).props().newReportCandidate();
-            wrapper.find(CandidateDisplay).at(0).props().enableNextPhase();
+            const candidate = wrapper.instance().props.candidates[0];
 
-            expect(store.getActions()).toEqual([incrementPhase(), selectElement(), newReportCandidate(), enableNextPhase()]);
+            wrapper.find(NextButton).props().incrementPhase();
+            wrapper.find(CandidateDisplay).at(0).props().handleClick();
+
+            expect(store.getActions()).toEqual([incrementPhase(), selectElement(candidate.candidateId), newReportCandidate(candidate), enableNextPhase()]);
         });
     });
 

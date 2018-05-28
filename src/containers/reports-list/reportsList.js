@@ -124,8 +124,8 @@ class ReportsList extends React.Component {
                                     return <ReportDisplay
                                         key={report.id}
                                         report={report}
-                                        openDeleteModal={this.openDeleteModal}
-                                        openDetailsModal={this.openDetailsModal}
+                                        openDeleteModal={() => this.openDeleteModal(report.id)}
+                                        openDetailsModal={() => this.openDetailsModal(report)}
                                     />;
                                 }
                             })

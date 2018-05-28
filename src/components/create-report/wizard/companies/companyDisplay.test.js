@@ -14,11 +14,8 @@ const createTestProps = props => ({
         companyId: 101,
         name: "Endava"
     },
-    selectedElementId: "",
-    selectElement: jest.fn(),
-    enableNextPhase: jest.fn(),
-    newReportCompany: jest.fn(),
-    getSelectedCompany: jest.fn(),
+    selected: "",
+    handleClick: jest.fn(),
     ...props
 });
 
@@ -37,17 +34,15 @@ describe("<CompanyDisplay />", () => {
             expect(wrapper.find("td").text()).toEqual(props.company.name);
         });
 
-        it("calls the correct methods on click", () => {
+        it("calls the correct method on click", () => {
             wrapper.simulate("click");
-            expect(props.selectElement).toBeCalledWith(props.company.companyId);
-            expect(props.newReportCompany).toBeCalledWith(props.company);
-            expect(props.enableNextPhase).toBeCalled();
+            expect(props.handleClick).toBeCalled();
         });
     });
 
     describe("when selected", () => {
         const props = createTestProps({
-            selectedElementId: 101
+            selected: 101
         });
 
         const wrapper = shallow(<CompanyDisplay {...props} />);

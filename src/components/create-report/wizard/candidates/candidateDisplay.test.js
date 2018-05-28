@@ -16,11 +16,8 @@ const createTestProps = props => ({
         email: "john.doe@email.com",
         avatar: "url"
     },
-    selectedElementId: "",
-    selectElement: jest.fn(),
-    enableNextPhase: jest.fn(),
-    newReportCandidate: jest.fn(),
-    getSelectedCandidate: jest.fn(),
+    selected: "",
+    handleClick: jest.fn(),
     ...props
 });
 
@@ -41,17 +38,15 @@ describe("<CandidateDisplay />", () => {
             expect(wrapper.find("img").props().src).toEqual(props.candidate.avatar);
         });
 
-        it("calls the correct methods on click", () => {
+        it("calls the correct method on click", () => {
             wrapper.simulate("click");
-            expect(props.selectElement).toBeCalledWith(props.candidate.candidateId);
-            expect(props.newReportCandidate).toBeCalledWith(props.candidate);
-            expect(props.enableNextPhase).toBeCalled();
+            expect(props.handleClick).toBeCalled();
         });
     });
 
     describe("when selected", () => {
         const props = createTestProps({
-            selectedElementId: 27
+            selected: 27
         });
 
         const wrapper = shallow(<CandidateDisplay {...props} />);

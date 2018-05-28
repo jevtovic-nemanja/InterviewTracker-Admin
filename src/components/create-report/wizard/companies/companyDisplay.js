@@ -2,19 +2,15 @@ import React from "react";
 
 import styles from "./companyDisplay.css";
 
-export const CompanyDisplay = ({ company, selectedElementId, selectElement, newReportCompany, enableNextPhase }) => {
+export const CompanyDisplay = ({ company, selected, handleClick }) => {
     const { companyId, name } = company;
-    const selected = selectedElementId === companyId ? styles.selected : "";
+    const isSelected = selected === companyId ? styles.selected : "";
 
     return (
         <tr
             key={companyId}
-            onClick={() => {
-                selectElement(companyId);
-                newReportCompany(company);
-                enableNextPhase();
-            }}
-            className={`${selected}`}
+            onClick={handleClick}
+            className={`${isSelected}`}
         >
             <td>{name}</td>
         </tr>

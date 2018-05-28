@@ -36,7 +36,7 @@ export const ReportDisplay = ({ report, openDeleteModal, openDetailsModal }) => 
                 <div className={styles.btnGroupReportCard}>
                     <button
                         type="button"
-                        onClick={() => openDetailsModal(report)}
+                        onClick={openDetailsModal}
                         className={`btn ${styles.btnReportCard} btn-details`}
                     >
                         <i className="fa fa-eye fa-lg"></i>
@@ -44,7 +44,7 @@ export const ReportDisplay = ({ report, openDeleteModal, openDetailsModal }) => 
 
                     <button
                         type="button"
-                        onClick={() => openDeleteModal(id)}
+                        onClick={openDeleteModal}
                         className={`btn ${styles.btnReportCard} btn-delete-report`}
                     >
                         <i className="fa fa-times fa-lg"></i>

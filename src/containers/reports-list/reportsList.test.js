@@ -138,7 +138,7 @@ describe("<ReportsList />", () => {
         });
 
         it("opens the details modal with correct report data", () => {
-            wrapper.instance().openDetailsModal(wrapper.instance().props.reports[0]);
+            wrapper.find(ReportDisplay).at(0).props().openDetailsModal();
 
             expect(wrapper.state("detailsModal")).toEqual(true);
             expect(wrapper.state("detailedReport")).toEqual(wrapper.instance().props.reports[0]);
@@ -153,7 +153,7 @@ describe("<ReportsList />", () => {
         });
 
         it("opens the delete modal with the correct report id", () => {
-            wrapper.instance().openDeleteModal(wrapper.instance().props.reports[0].id);
+            wrapper.find(ReportDisplay).at(0).props().openDeleteModal();
 
             expect(wrapper.state("deleteModal")).toEqual(true);
             expect(wrapper.state("deleteReportId")).toEqual(wrapper.instance().props.reports[0].id);

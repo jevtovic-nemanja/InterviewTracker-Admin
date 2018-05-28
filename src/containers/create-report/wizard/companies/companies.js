@@ -50,13 +50,6 @@ class SelectCompany extends React.Component {
         const { companies, message, selectedElementId, next } = this.props;
         const { selectElement, newReportCompany, enableNextPhase, decrementPhase, incrementPhase } = this.props;
 
-        const props = {
-            selectedElementId,
-            selectElement,
-            newReportCompany,
-            enableNextPhase
-        };
-
         return (
             <div className="row mt-2">
 
@@ -103,7 +96,12 @@ class SelectCompany extends React.Component {
                                             <CompanyDisplay
                                                 key={company.companyId}
                                                 company={company}
-                                                {...props}
+                                                selected={selectedElementId}
+                                                handleClick={() => {
+                                                    selectElement(company.companyId);
+                                                    newReportCompany(company);
+                                                    enableNextPhase();
+                                                }}
                                             />
                                         );
                                     }
