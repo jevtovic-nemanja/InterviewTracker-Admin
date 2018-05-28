@@ -10,6 +10,8 @@ configure({
 });
 
 import Header from "./header";
+import styles from "./header.css";
+
 import { goToReportsList, goToCreateReport } from "Store/actions";
 
 const mockedMiddleware = [];
@@ -29,18 +31,18 @@ describe("<Header />", () => {
     });
 
     it("displays one active and one inactive link", () => {
-        expect(wrapper.find(".btn-nav")).toHaveLength(1);
-        expect(wrapper.find(".btn-nav-active")).toHaveLength(1);
+        expect(wrapper.find(`.${styles.btnNav}`)).toHaveLength(1);
+        expect(wrapper.find(`.${styles.btnNavActive}`)).toHaveLength(1);
     });
 
     it("displays the correct active link", () => {
-        expect(wrapper.find(".btn-nav-active").text()).toEqual("Reports");
+        expect(wrapper.find(`.${styles.btnNavActive}`).text()).toEqual("Reports");
 
         wrapper.setProps({
             hash: "#/create-report"
         });
 
-        expect(wrapper.find(".btn-nav-active").text()).toEqual("Create Report");
+        expect(wrapper.find(`.${styles.btnNavActive}`).text()).toEqual("Create Report");
     });
 
     it("calls the navigation functions when clicked", () => {

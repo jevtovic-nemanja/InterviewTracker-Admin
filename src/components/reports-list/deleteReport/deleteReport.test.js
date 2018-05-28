@@ -8,6 +8,7 @@ configure({
 })
 
 import { DeleteReport } from "./deleteReport";
+import styles from "./deleteReport.css";
 
 const createTestProps = props => ({
     message: "",
@@ -30,11 +31,11 @@ describe("<DeleteReport />", () => {
         it("displays default delete modal", () => {
             expect(wrapper.find("p").text()).toEqual("Are you sure you wish to delete this report?");
             expect(wrapper.find("button")).toHaveLength(2);
-            expect(wrapper.find(".btn-delete")).toHaveLength(1);
+            expect(wrapper.find(`.${styles.btnDelete}`)).toHaveLength(1);
         });
     
         it("calls deleteReport function if delete button is clicked", () => {
-            wrapper.find(".btn-delete").simulate("click");
+            wrapper.find(`.${styles.btnDelete}`).simulate("click");
             expect(props.deleteReport).toHaveBeenCalledTimes(1);
         });
     });
