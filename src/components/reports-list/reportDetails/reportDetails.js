@@ -7,7 +7,7 @@ export const ReportDetails = ({ report }) => {
     const { candidateName, companyName, date, phase, status, note } = report;
 
     return (
-        <div>
+        <>
             <h5 className={`pb-3 ${styles.bottomLine} ${styles.modalTitle}`}>{candidateName}</h5>
 
             <div className={`row ${styles.modalDialog}`}>
@@ -27,6 +27,6 @@ export const ReportDetails = ({ report }) => {
                     <p className="text-justify notes" style={{ color: "black" }} >{note}</p>
                 </div>
             </div>
-        </div>
+        </>
     );
 };

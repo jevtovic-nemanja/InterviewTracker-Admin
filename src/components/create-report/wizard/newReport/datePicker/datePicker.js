@@ -8,7 +8,7 @@ import "react-datepicker/dist/react-datepicker-cssmodules.min.css";
 
 export const CustomDatePicker = ({ interviewDate, timeOfLastInterview, handleDateChange, disabled }) => {
     return (
-        <div>
+        <>
             <label>Date:</label>
             <DatePicker
                 dateFormat="DD.MM.YYYY"
@@ -20,6 +20,6 @@ export const CustomDatePicker = ({ interviewDate, timeOfLastInterview, handleDat
                 className="pl-2 form-control"
                 disabled={disabled}
             />
-        </div>
+        </>
     );
 };

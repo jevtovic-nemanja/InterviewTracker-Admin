@@ -15,14 +15,15 @@
         "sourceType": "module"
     },
     "plugins": [
-        "react"
+        "react",
+        "babel"
     ],
     "rules": {
         "indent": [
             "error",
             4
         ],
-        "quotes": [
+        "babel/quotes": [
             "error",
             "double"
         ],

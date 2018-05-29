@@ -41,6 +41,7 @@
     "enzyme-adapter-react-16": "^1.1.1",
     "eslint": "^4.19.1",
     "eslint-loader": "^2.0.0",
+    "eslint-plugin-babel": "^5.1.0",
     "eslint-plugin-react": "^7.4.0",
     "file-loader": "^1.1.11",
     "html-webpack-inline-source-plugin": "0.0.10",

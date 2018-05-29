@@ -2,7 +2,7 @@ import React from "react";
 
 export const Select = ({ labelText, name, value, onChange, declined, options }) => {
     return (
-        <div>
+        <>
             <label>{labelText}</label>
             <select
                 name={name}
@@ -18,6 +18,6 @@ export const Select = ({ labelText, name, value, onChange, declined, options }) 
                         : <option key={index}>{option}</option>
                 )}
             </select>
-        </div>
+        </>
     );
 };

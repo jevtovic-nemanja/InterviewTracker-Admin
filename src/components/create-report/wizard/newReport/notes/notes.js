@@ -2,7 +2,7 @@ import React from "react";
 
 export const Notes = ({ labelText, value, onChange, declined }) => {
     return (
-        <div>
+        <>
             <label>{labelText}</label>
             <textarea
                 name="note"
@@ -13,6 +13,6 @@ export const Notes = ({ labelText, value, onChange, declined }) => {
                 className="form-control"
                 disabled={declined}
             />
-        </div>
+        </>
     );
 };
