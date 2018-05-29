@@ -1,9 +1,8 @@
 {
     "presets": [
         [
-            "env",
+            "@babel/env",
             {
-                "useBuiltIns": true,
                 "targets": {
                     "browsers": [
                         "last 2 versions",
@@ -13,12 +12,11 @@
                 }
             }
         ],
-        "react"
+        "@babel/react"
     ],
     "plugins": [
-        "syntax-dynamic-import",
-        "transform-class-properties",
-        "transform-object-rest-spread",
+        "@babel/plugin-proposal-class-properties",
+        "@babel/plugin-syntax-dynamic-import",
         [
             "module-resolver",
             {
