@@ -13,6 +13,10 @@ body {
     box-shadow: none;
 }
 
+:global .btn.disabled:hover {
+    transform: none;
+}
+
 :global .form-control:focus {
     box-shadow: none;
     border-color: #6d7993;
@@ -31,9 +35,7 @@ body {
     }
 }
 
-:global .btn.disabled:hover {
-    transform: none;
-}
+/* Overriding react-datepicker styles */
 
 :global .react-datepicker-wrapper,
 :global .react-datepicker__input-container {
