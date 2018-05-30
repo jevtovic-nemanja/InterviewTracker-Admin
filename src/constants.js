@@ -25,6 +25,8 @@ export const Messages = {
     NO_REPORTS: "No candidates or companies match the search criteria.",
     NO_CANDIDATES: "No candidates match the search criteria.",
     NO_COMPANIES: "No companies match the search criteria.",
+    ERROR: "Looks like there was some kind of error. Don't worry, we're looking into it!",
+    LOADING: "Loading...",
     validationErrorMessages: {
         DATE_ERROR: "Please select a date.",
         PHASE_ERROR: "Please select a phase.",

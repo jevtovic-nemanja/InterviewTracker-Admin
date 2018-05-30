@@ -1,9 +1,11 @@
 import { actionTypes } from "./actionTypes";
 
+import { Messages } from "Src/constants";
+
 export const startFetchData = () => {
     return {
         type: actionTypes.START_FETCH_DATA,
-        message: "Loading..."
+        message: Messages.LOADING
     };
 };
 
@@ -18,14 +20,14 @@ export const fetchDataSuccess = data => {
 export const fetchDataFail = () => {
     return {
         type: actionTypes.FETCH_DATA_FAIL,
-        message: "Looks like there was some kind of error. Don't worry, we're looking into it!"
+        message: Messages.ERROR
     };
 };
 
 export const startDeleteReport = id => {
     return {
         type: actionTypes.START_DELETE_REPORT,
-        message: "Loading...",
+        message: Messages.LOADING,
         id
     };
 };
@@ -40,6 +42,6 @@ export const deleteReportSuccess = () => {
 export const deleteReportFail = () => {
     return {
         type: actionTypes.DELETE_REPORT_FAIL,
-        message: "Looks like there was some kind of error. Don't worry, we're looking into it!"
+        message: Messages.ERROR
     };
 };

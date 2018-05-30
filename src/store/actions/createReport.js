@@ -1,5 +1,7 @@
 import { actionTypes } from "./actionTypes";
 
+import { Messages } from "Src/constants";
+
 export const selectElement = selectedElementId => {
     return {
         type: actionTypes.SELECT_ELEMENT,
@@ -59,6 +61,6 @@ export const submitReportSuccess = () => {
 export const submitReportFail = () => {
     return {
         type: actionTypes.SUBMIT_REPORT_FAIL,
-        message: "Looks like there was some kind of error. Don't worry, we're looking into it!"
+        message: Messages.ERROR
     };
 };
