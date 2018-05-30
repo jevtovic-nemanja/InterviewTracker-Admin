@@ -5,6 +5,8 @@ import { Switch, Route } from "react-router-dom";
 import Aside from "Containers/create-report/wizard/aside/aside";
 import Candidates from "Containers/create-report/wizard/candidates/candidates";
 
+import { Routes } from "Src/constants";
+
 import { asyncComponent } from "Hocs/asyncComponent";
 
 const asyncCompanies = asyncComponent(() => {
@@ -29,9 +31,9 @@ class CreateReportPage extends React.Component {
 
                             <main className="col-12 col-md-8 col-xl-9">
                                 <Switch>
-                                    <Route exact path="/create-report/" component={Candidates} />
-                                    <Route path="/create-report/2" component={asyncCompanies} />
-                                    <Route path="/create-report/3" component={asyncNewReport} />
+                                    <Route exact path={Routes.CREATE_REPORT_CANDIDATES} component={Candidates} />
+                                    <Route path={Routes.CREATE_REPORT_COMPANIES} component={asyncCompanies} />
+                                    <Route path={Routes.CREATE_REPORT_FORM} component={asyncNewReport} />
                                 </Switch>
                             </main>
 

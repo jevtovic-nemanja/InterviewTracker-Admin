@@ -8,7 +8,9 @@ export const API_URLS = {
 
 export const Routes = {
     REPORTS_LIST: "/",
-    CREATE_REPORT: "/create-report/"
+    CREATE_REPORT_CANDIDATES: "/create-report/",
+    CREATE_REPORT_COMPANIES: "/create-report/2",
+    CREATE_REPORT_FORM: "/create-report/3"
 };
 
 export const ValidationErrorMessages = {

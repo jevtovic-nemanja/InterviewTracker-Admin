@@ -22,7 +22,7 @@ class App extends React.Component {
                 <Header hash={location.hash} />
                 <Switch>
                     <Route exact path={Routes.REPORTS_LIST} component={ReportsList} />
-                    <Route path={Routes.CREATE_REPORT} component={asyncCreateReportPage} />
+                    <Route path={Routes.CREATE_REPORT_CANDIDATES} component={asyncCreateReportPage} />
                 </Switch>
             </div>
         );
