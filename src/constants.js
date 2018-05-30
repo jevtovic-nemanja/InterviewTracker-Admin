@@ -1,6 +1,6 @@
 const BASE_URL = "http://localhost:3333/api";
 
-export const API_URLS = {
+export const ApiUrls = {
     REPORTS: `${BASE_URL}/reports`,
     CANDIDATES: `${BASE_URL}/candidates`,
     COMPANIES: `${BASE_URL}/companies`

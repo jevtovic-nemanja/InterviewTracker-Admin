@@ -1,4 +1,4 @@
-import { API_URLS } from "Src/constants";
+import { ApiUrls, Routes } from "Src/constants";
 
 import {
     call,
@@ -14,7 +14,7 @@ import {
 
 export const submitReportSaga = function* (action) {
     const data = action.formData;
-    const url = API_URLS.REPORTS;
+    const url = ApiUrls.REPORTS;
     const init = {
         method: "POST",
         body: JSON.stringify(data),
@@ -27,7 +27,7 @@ export const submitReportSaga = function* (action) {
         const response = yield call(fetch, url, init);
         yield put(submitReportSuccess());
         yield put(goToReportsList());
-        location.hash = "#/";
+        location.hash = `#${Routes.REPORTS_LIST}`;
     } catch (e) {
         yield put(submitReportFail());
         yield put(openMessageModal());
