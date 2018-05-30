@@ -13,7 +13,7 @@ import { CustomDatePicker } from "Components/create-report/wizard/newReport/date
 import { Select } from "Components/create-report/wizard/newReport/select/select";
 import { Notes } from "Components/create-report/wizard/newReport/notes/notes";
 
-import { ValidationErrorMessages } from "Src/constants";
+import { Messages } from "Src/constants";
 import { capitalizeString } from "Utils/capitalizeString";
 
 import {
@@ -196,7 +196,7 @@ class ReportForm extends React.Component {
                             handleDateChange={this.handleDateChange}
                             disabled={declinedDatePicker}
                         />
-                        <ValidationError isValid={dateError} text={ValidationErrorMessages.DATE_ERROR} />
+                        <ValidationError isValid={dateError} text={Messages.validationErrorMessages.DATE_ERROR} />
                     </div>
                 </div>
 
@@ -210,7 +210,7 @@ class ReportForm extends React.Component {
                             declined={declined}
                             options={["Select", nextPhase]}
                         />
-                        <ValidationError isValid={phaseError} text={ValidationErrorMessages.PHASE_ERROR} />
+                        <ValidationError isValid={phaseError} text={Messages.validationErrorMessages.PHASE_ERROR} />
                     </div>
                 </div>
 
@@ -224,7 +224,7 @@ class ReportForm extends React.Component {
                             declined={declined}
                             options={[hiringStatus, "Passed", "Declined"]}
                         />
-                        <ValidationError isValid={statusError} text={ValidationErrorMessages.STATUS_ERROR} />
+                        <ValidationError isValid={statusError} text={Messages.validationErrorMessages.STATUS_ERROR} />
                     </div>
                 </div>
 
@@ -236,7 +236,7 @@ class ReportForm extends React.Component {
                             onChange={this.handleInputChange}
                             declined={declined}
                         />
-                        <ValidationError isValid={noteError} text={ValidationErrorMessages.NOTE_ERROR} />
+                        <ValidationError isValid={noteError} text={Messages.validationErrorMessages.NOTE_ERROR} />
                     </div>
                 </div>
 

@@ -2,6 +2,8 @@ import React from "react";
 
 import styles from "./deleteReport.css";
 
+import { Messages } from "Src/constants";
+
 export const DeleteReport = ({ deleteReport, message, close }) => {
     return (
         <div className="row mt-4 pt-1">
@@ -19,7 +21,7 @@ export const DeleteReport = ({ deleteReport, message, close }) => {
                     </div>
 
                     : <div className="col-12">
-                        <p className="mb-4">Are you sure you wish to delete this report?</p>
+                        <p className="mb-4">{Messages.DELETE_REPORT}</p>
                         <div className="float-right">
                             <button
                                 type="button"

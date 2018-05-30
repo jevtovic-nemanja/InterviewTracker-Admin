@@ -19,9 +19,12 @@ export const Placeholders = {
     SEARCH: "Search..."
 };
 
-export const ValidationErrorMessages = {
-    DATE_ERROR: "Please select a date.",
-    PHASE_ERROR: "Please select a phase.",
-    STATUS_ERROR: "Please select a status.",
-    NOTE_ERROR: "Please enter notes."
+export const Messages = {
+    DELETE_REPORT: "Are you sure you wish to delete this report?",
+    validationErrorMessages: {
+        DATE_ERROR: "Please select a date.",
+        PHASE_ERROR: "Please select a phase.",
+        STATUS_ERROR: "Please select a status.",
+        NOTE_ERROR: "Please enter notes."
+    }
 };
