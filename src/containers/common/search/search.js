@@ -6,6 +6,8 @@ import { connect } from "react-redux";
 
 import { receiveInputChange } from "Store/actions";
 
+import { Placeholders } from "Src/constants";
+
 const mapStateToProps = state => ({
     searchItem: state.searchItem
 });
@@ -42,7 +44,7 @@ class Search extends React.Component {
                     type="text"
                     value={this.props.searchItem}
                     onChange={this.handleInputChange}
-                    placeholder="Search..."
+                    placeholder={Placeholders.SEARCH}
                     className="form-control"
                 />
 

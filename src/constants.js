@@ -13,6 +13,11 @@ export const Routes = {
     CREATE_REPORT_FORM: "/create-report/3"
 };
 
+export const Placeholders = {
+    DATE_PICKER: "Click to select a date",
+    SEARCH: "Search..."
+};
+
 export const ValidationErrorMessages = {
     DATE_ERROR: "Please select a date.",
     PHASE_ERROR: "Please select a phase.",
