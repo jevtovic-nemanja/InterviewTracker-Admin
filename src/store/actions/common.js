@@ -1,5 +1,7 @@
 import { actionTypes } from "./actionTypes";
 
+import { DISABLED } from "Src/constants";
+
 export const receiveInputChange = inputItem => {
     return {
         type: actionTypes.RECEIVE_INPUT_CHANGE,
@@ -26,7 +28,7 @@ export const goToReportsList = () => {
     return {
         type: actionTypes.GO_TO_REPORTS_LIST,
         createReportPhase: 1,
-        next: "disabled",
+        next: DISABLED,
         selectedElementId: ""
     };
 };

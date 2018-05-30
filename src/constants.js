@@ -1,5 +1,7 @@
 const BASE_URL = "http://localhost:3333/api";
 
+export const DISABLED = "disabled";
+
 export const ApiUrls = {
     REPORTS: `${BASE_URL}/reports`,
     CANDIDATES: `${BASE_URL}/candidates`,

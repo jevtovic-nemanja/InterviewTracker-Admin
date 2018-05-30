@@ -1,6 +1,6 @@
 import { actionTypes } from "./actionTypes";
 
-import { Messages } from "Src/constants";
+import { Messages, DISABLED } from "Src/constants";
 
 export const selectElement = selectedElementId => {
     return {
@@ -19,7 +19,7 @@ export const enableNextPhase = () => {
 export const incrementPhase = () => {
     return {
         type: actionTypes.INCREMENT_PHASE,
-        next: "disabled"
+        next: DISABLED
     };
 };
 

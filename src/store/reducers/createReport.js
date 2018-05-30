@@ -1,5 +1,7 @@
 import { actionTypes } from "Store/actions/actionTypes";
 
+import { DISABLED } from "Src/constants";
+
 export const createReportPhase = (state = 1, action) => {
     switch (action.type) {
     case actionTypes.INCREMENT_PHASE:
@@ -25,7 +27,7 @@ export const selectedElementId = (state = "", action) => {
     }
 };
 
-export const enableNextPhase = (state = "disabled", action) => {
+export const enableNextPhase = (state = DISABLED, action) => {
     switch (action.type) {
     case actionTypes.ENABLE_NEXT_PHASE:
     case actionTypes.INCREMENT_PHASE:

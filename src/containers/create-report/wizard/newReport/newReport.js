@@ -13,7 +13,7 @@ import { CustomDatePicker } from "Components/create-report/wizard/newReport/date
 import { Select } from "Components/create-report/wizard/newReport/select/select";
 import { Notes } from "Components/create-report/wizard/newReport/notes/notes";
 
-import { Messages, Routes, ReportData } from "Src/constants";
+import { Messages, Routes, ReportData, DISABLED } from "Src/constants";
 import { capitalizeString } from "Utils/capitalizeString";
 
 import {
@@ -175,7 +175,7 @@ class ReportForm extends React.Component {
         const { currentPhase, currentStatus, timeOfLastInterview, hiringStatus } = trackedData;
         const { interviewDate, dateError, phase, phaseError, status, statusError, note, noteError } = this.state;
 
-        const declined = (currentStatus === ReportData.statuses.DECLINED || hiringStatus === ReportData.hiringStatuses.HIRED) ? "disabled" : "";
+        const declined = (currentStatus === ReportData.statuses.DECLINED || hiringStatus === ReportData.hiringStatuses.HIRED) ? DISABLED : "";
         const declinedDatePicker = declined ? true : false;
 
         const phases = Object.values(ReportData.phases);
