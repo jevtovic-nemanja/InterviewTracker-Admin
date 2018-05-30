@@ -9,8 +9,10 @@ configure({
 
 import { Select } from "./select";
 
+import { ReportData, DISABLED } from "Src/constants";
+
 const createTestProps = props => ({
-    labelText: "Select",
+    labelText: ReportData.hiringStatuses.SELECT,
     name: "select",
     value: "select",
     onChange: jest.fn(),
@@ -65,7 +67,7 @@ describe("<Select />", () => {
 
     describe("if disabled", () => {
         const props = createTestProps({
-            declined: "disabled"
+            declined: DISABLED
         });
 
         const wrapper = shallow(<Select {...props} />);

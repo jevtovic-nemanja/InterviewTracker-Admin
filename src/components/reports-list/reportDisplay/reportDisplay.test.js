@@ -9,13 +9,15 @@ configure({
 
 import { ReportDisplay } from "./reportDisplay";
 
+import { ReportData } from "Src/constants";
+
 const createTestProps = props => ({
     report: {
         id: 258,
         companyName: "Endava",
         candidateName: "John Doe",
         date: "20/04/2018",
-        status: "Passed"
+        status: ReportData.statuses.PASSED
     },
     openDeleteModal: jest.fn(),
     openDetailsModal: jest.fn(),

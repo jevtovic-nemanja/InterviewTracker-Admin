@@ -8,7 +8,10 @@ configure({
 })
 
 import { DeleteReport } from "./deleteReport";
+
 import styles from "./deleteReport.css";
+
+import { Messages } from "Src/constants";
 
 const createTestProps = props => ({
     message: "",
@@ -29,7 +32,7 @@ describe("<DeleteReport />", () => {
         });
 
         it("displays default delete modal", () => {
-            expect(wrapper.find("p").text()).toEqual("Are you sure you wish to delete this report?");
+            expect(wrapper.find("p").text()).toEqual(Messages.DELETE_REPORT);
             expect(wrapper.find("button")).toHaveLength(2);
             expect(wrapper.find(`.${styles.btnDelete}`)).toHaveLength(1);
         });

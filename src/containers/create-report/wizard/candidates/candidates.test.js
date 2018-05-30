@@ -23,6 +23,8 @@ import {
     incrementPhase
 } from "Store/actions";
 
+import { DISABLED } from "Src/constants";
+
 const mockedMiddleware = [];
 const mockedStore = configureStore(mockedMiddleware);
 
@@ -43,7 +45,7 @@ const createTestState = props => ({
             }
         ]
     },
-    enableNextPhase: "disabled",
+    enableNextPhase: DISABLED,
     message: "",
     searchItem: "",
     selectedElementId: "",

@@ -9,6 +9,8 @@ configure({
 
 import { Notes } from "./notes";
 
+import { DISABLED } from "Src/constants";
+
 const createTestProps = props => ({
     labelText: "Notes",
     value: "note",
@@ -46,7 +48,7 @@ describe("<Notes />", () => {
 
     describe("if disabled", () => {
         const props = createTestProps({
-            declined: "disabled"
+            declined: DISABLED
         });
 
         const wrapper = shallow(<Notes {...props} />);

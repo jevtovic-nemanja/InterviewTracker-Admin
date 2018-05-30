@@ -10,9 +10,12 @@ configure({
 });
 
 import Header from "./header";
+
 import styles from "./header.css";
 
 import { goToReportsList, goToCreateReport } from "Store/actions";
+
+import { Routes } from "Src/constants";
 
 const mockedMiddleware = [];
 const mockedStore = configureStore(mockedMiddleware);
@@ -27,7 +30,7 @@ describe("<Header />", () => {
         store = mockedStore(
             createTestState()
         );
-        wrapper = shallow(<Header store={store} hash="#/" />).dive();
+        wrapper = shallow(<Header store={store} hash={`#${Routes.REPORTS_LIST}`} />).dive();
     });
 
     it("displays one active and one inactive link", () => {
@@ -39,7 +42,7 @@ describe("<Header />", () => {
         expect(wrapper.find(`.${styles.btnNavActive}`).text()).toEqual("Reports");
 
         wrapper.setProps({
-            hash: "#/create-report"
+            hash: `"#${Routes.CREATE_REPORT_CANDIDATES}"`
         });
 
         expect(wrapper.find(`.${styles.btnNavActive}`).text()).toEqual("Create Report");

@@ -25,6 +25,8 @@ import {
     closeMessageModal
 } from "Store/actions";
 
+import { ReportData } from "Src/constants";
+
 const mockedMiddleware = [];
 const mockedStore = configureStore(mockedMiddleware);
 
@@ -36,14 +38,14 @@ const createTestState = props => ({
                 companyName: "Endava",
                 candidateName: "John Doe",
                 date: "20/04/2018",
-                status: "Passed"
+                status: ReportData.statuses.PASSED
             },
             {
                 id: 278,
                 companyName: "PS Tech",
                 candidateName: "Jane Smith",
                 date: "24/04/2018",
-                status: "Declined"
+                status: ReportData.statuses.DECLINED
             }
         ]
     },
@@ -112,7 +114,7 @@ describe("<ReportsList />", () => {
         const store = mockedStore(
             createTestState({ searchItem: "wz" })
         );
-        
+
         const wrapper = shallow(<ReportsList store={store} />).dive();
 
         it("displays the correct message ", () => {

@@ -9,6 +9,8 @@ configure({
 
 import { NextButton } from "./nextButton";
 
+import { DISABLED } from "Src/constants";
+
 const createTestProps = props => ({
     next: "",
     incrementPhase: jest.fn(),
@@ -47,7 +49,7 @@ describe("<NextButton />", () => {
 
         beforeEach(() => {
             props = createTestProps({
-                next: "disabled",
+                next: DISABLED,
                 newLocation: "#/not-called"
             });
             wrapper = mount(<NextButton {...props} />);

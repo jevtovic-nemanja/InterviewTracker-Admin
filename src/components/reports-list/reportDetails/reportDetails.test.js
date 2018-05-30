@@ -9,13 +9,15 @@ configure({
 
 import { ReportDetails } from "./reportDetails";
 
+import { ReportData } from "Src/constants";
+
 const createTestProps = props => ({
     report: {
         candidateName: "John Doe",
         companyName: "Endava",
         date: "20/04/2018",
-        phase: "Cv",
-        status: "Passed",
+        phase: ReportData.phases.CV,
+        status: ReportData.statuses.PASSED,
         note: "Note"
     },
     ...props

@@ -9,6 +9,8 @@ configure({
 
 import { SubmitButton } from "./submitButton";
 
+import { DISABLED } from "Src/constants";
+
 const createTestProps = props => ({
     declined: "",
     onSubmit: jest.fn(),
@@ -45,7 +47,7 @@ describe("<SubmitButton />", () => {
 
         beforeEach(() => {
             props = createTestProps({
-                declined: "disabled",
+                declined: DISABLED,
             });
             wrapper = mount(<SubmitButton {...props} />);
         });

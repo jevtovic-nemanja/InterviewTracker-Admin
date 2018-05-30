@@ -29,6 +29,8 @@ import {
     closeMessageModal
 } from "Store/actions";
 
+import { ReportData } from "Src/constants";
+
 const mockedMiddleware = [];
 const mockedStore = configureStore(mockedMiddleware);
 
@@ -40,14 +42,14 @@ const createTestState = props => ({
                 companyName: "Endava",
                 candidateName: "John Doe",
                 date: "20/04/2018",
-                status: "Passed"
+                status: ReportData.statuses.PASSED
             },
             {
                 id: 278,
                 companyName: "PS Tech",
                 candidateName: "Jane Smith",
                 date: "24/04/2018",
-                status: "Declined"
+                status: ReportData.statuses.DECLINED
             }
         ]
     },
@@ -106,14 +108,14 @@ describe("<NewReport />", () => {
             const phaseEvent = {
                 target: {
                     name: "phase",
-                    value: "Cv"
+                    value: ReportData.phases.CV
                 }
             };
 
             const statusEvent = {
                 target: {
                     name: "status",
-                    value: "passed"
+                    value: ReportData.statuses.PASSED
                 }
             };
 
@@ -157,10 +159,8 @@ describe("<NewReport />", () => {
         });
 
         it("validates data correctly - invalid data", () => {
-            const spy = jest.spyOn(wrapper.instance(), "validateInput");
             const isValid = wrapper.instance().validateInput();
 
-            expect(spy).toBeCalled();
             expect(isValid).toEqual(false);
 
             expect(wrapper.state("dateError")).toEqual("");
@@ -172,15 +172,13 @@ describe("<NewReport />", () => {
         it("validates data correctly - valid data", () => {
             wrapper.instance().setState({
                 interviewDate: moment("Wed May 02 2018 00:00:00 GMT+0200 (Central Europe Daylight Time)"),
-                phase: "Cv",
-                status: "passed",
+                phase: ReportData.phases.CV,
+                status: ReportData.statuses.PASSED,
                 note: "note"
             });
 
-            const spy = jest.spyOn(wrapper.instance(), "validateInput");
             const isValid = wrapper.instance().validateInput();
 
-            expect(spy).toBeCalled();
             expect(isValid).toEqual(true);
 
             expect(wrapper.state("dateError")).toEqual("d-none");
@@ -194,8 +192,11 @@ describe("<NewReport />", () => {
                 preventDefault: jest.fn()
             };
 
+            const spy = jest.spyOn(wrapper.instance(), "validateInput");
+            
             wrapper.find(SubmitButton).props().onSubmit(mockedEvent);
-
+            
+            expect(spy).toBeCalled();
             expect(store.getActions()).toEqual([]);
         });
 
@@ -206,8 +207,8 @@ describe("<NewReport />", () => {
 
             wrapper.instance().setState({
                 interviewDate: moment("Wed May 02 2018 00:00:00 GMT+0200 (Central Europe Daylight Time)"),
-                phase: "Cv",
-                status: "passed",
+                phase: ReportData.phases.CV,
+                status: ReportData.statuses.PASSED,
                 note: "note"
             });
 
@@ -226,8 +227,11 @@ describe("<NewReport />", () => {
                 note
             };
 
+            const spy = jest.spyOn(wrapper.instance(), "validateInput");
+
             wrapper.find(SubmitButton).props().onSubmit(mockedEvent);
 
+            expect(spy).toBeCalled();
             expect(store.getActions()).toEqual([startSubmitReport(data)]);
         });
     });
