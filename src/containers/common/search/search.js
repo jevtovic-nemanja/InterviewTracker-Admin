@@ -15,6 +15,11 @@ const mapDispatchToProps = dispatch => bindActionCreators({
 }, dispatch);
 
 class Search extends React.Component {
+    inputRef = React.createRef();
+
+    focus() {
+        this.inputRef.current.focus();
+    }
 
     handleInputChange = event => {
         const inputString = event.target.value;
@@ -33,6 +38,7 @@ class Search extends React.Component {
                 </div>
 
                 <input
+                    ref={this.inputRef}
                     type="text"
                     value={this.props.searchItem}
                     onChange={this.handleInputChange}
@@ -45,4 +51,4 @@ class Search extends React.Component {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Search);
+export default connect(mapStateToProps, mapDispatchToProps, null, { withRef: true })(Search);

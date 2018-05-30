@@ -45,6 +45,11 @@ const mapDispatchToProps = dispatch => bindActionCreators({
 }, dispatch);
 
 class SelectCompany extends React.Component {
+    searchRef = React.createRef();
+
+    componentDidMount() {
+        this.searchRef.current.getWrappedInstance().focus();
+    }
 
     render() {
         const { companies, message, selectedElementId, next } = this.props;
@@ -68,7 +73,7 @@ class SelectCompany extends React.Component {
                 </div>
 
                 <div className="col-12 offset-sm-1 col-sm-10 offset-md-0 col-md-12">
-                    <Search />
+                    <Search ref={this.searchRef} />
                 </div>
 
                 <div className="col-12 offset-sm-1 col-sm-10 offset-md-0 col-md-12 mt-2">
