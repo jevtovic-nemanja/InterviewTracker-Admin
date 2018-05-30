@@ -1,4 +1,4 @@
-import { BASE_URL } from "Src/constants";
+import { API_URLS } from "Src/constants";
 
 import {
     call,
@@ -14,7 +14,7 @@ import {
 
 export const submitReportSaga = function* (action) {
     const data = action.formData;
-    const url = `${BASE_URL}/reports`;
+    const url = API_URLS.REPORTS;
     const init = {
         method: "POST",
         body: JSON.stringify(data),

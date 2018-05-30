@@ -1,4 +1,4 @@
-import { BASE_URL } from "Src/constants";
+import { API_URLS } from "Src/constants";
 
 import {
     call,
@@ -14,9 +14,9 @@ import { packer } from "Utils/packer";
 
 export const fetchDataSaga = function* (action) {
     const urls = {
-        reports: `${BASE_URL}/reports`,
-        candidates: `${BASE_URL}/candidates`,
-        companies: `${BASE_URL}/companies`
+        reports: API_URLS.REPORTS,
+        candidates: API_URLS.CANDIDATES,
+        companies: API_URLS.COMPANIES
     };
 
     const allData = {};

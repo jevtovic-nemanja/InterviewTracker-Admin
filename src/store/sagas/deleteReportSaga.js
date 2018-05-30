@@ -1,4 +1,4 @@
-import { BASE_URL } from "Src/constants";
+import { API_URLS } from "Src/constants";
 
 import {
     call,
@@ -14,7 +14,7 @@ import {
 
 export const deleteReportSaga = function* (action) {
     const id = action.id;
-    const url = `${BASE_URL}/reports/${id}`;
+    const url = `${API_URLS.REPORTS}/${id}`;
     const init = { method: "DELETE" };
 
     try {
