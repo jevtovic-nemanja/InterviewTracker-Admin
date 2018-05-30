@@ -13,7 +13,7 @@ import { CustomDatePicker } from "Components/create-report/wizard/newReport/date
 import { Select } from "Components/create-report/wizard/newReport/select/select";
 import { Notes } from "Components/create-report/wizard/newReport/notes/notes";
 
-import { Messages, Routes } from "Src/constants";
+import { Messages, Routes, Phases } from "Src/constants";
 import { capitalizeString } from "Utils/capitalizeString";
 
 import {
@@ -35,7 +35,7 @@ const getTrackedData = (reports, newReportData) => {
 
         status === "declined"
             ? hiringStatus = "Declined"
-            : phase === "final" && status === "passed"
+            : phase === Phases.FINAL && status === "passed"
                 ? hiringStatus = "Hired"
                 : hiringStatus = "Select";
 
@@ -49,7 +49,7 @@ const getTrackedData = (reports, newReportData) => {
     } else {
         return {
             ...newReportData,
-            currentPhase: "none",
+            currentPhase: Phases.NONE,
             currentStatus: "",
             timeOfLastInterview: null,
             hiringStatus: "Select"
@@ -178,8 +178,8 @@ class ReportForm extends React.Component {
         const declined = (currentStatus === "declined" || hiringStatus === "Hired") ? "disabled" : "";
         const declinedDatePicker = declined ? true : false;
 
-        const phases = ["none", "cv", "hr", "tech", "final", "hired"];
-        const nextPhase = capitalizeString(phases[phases.indexOf(currentPhase.toLowerCase()) + 1]);
+        const phases = Object.values(Phases);
+        const nextPhase = capitalizeString(phases[phases.indexOf(currentPhase) + 1]);
 
         return (
             <form className={`row ${styles.fillReport}`}>
