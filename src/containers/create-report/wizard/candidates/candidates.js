@@ -23,8 +23,8 @@ const filterCandidates = (candidates, searchItem) => {
         return filteredCandidates.length
             ? filteredCandidates
             : [{
-                id: "NO_RESULTS",
-                message: "No candidates match the search criteria."
+                id: Messages.NO_RESULTS,
+                message: Messages.NO_CANDIDATES
             }];
     } else return [];
 };

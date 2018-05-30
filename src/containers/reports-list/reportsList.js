@@ -18,6 +18,8 @@ import {
     closeMessageModal
 } from "Store/actions";
 
+import { Messages } from "Src/constants";
+
 const filterReports = (reports, searchItem) => {
     if (reports.length) {
         const filteredReports = reports.filter(report => {
@@ -28,8 +30,8 @@ const filterReports = (reports, searchItem) => {
         return filteredReports.length
             ? filteredReports
             : [{
-                id: "NO_RESULTS",
-                message: "No candidates or companies match the search criteria."
+                id: Messages.NO_RESULTS,
+                message: Messages.NO_REPORTS
             }];
     } else return [];
 };

@@ -21,6 +21,10 @@ export const Placeholders = {
 
 export const Messages = {
     DELETE_REPORT: "Are you sure you wish to delete this report?",
+    NO_RESULTS: "NO_RESULTS",
+    NO_REPORTS: "No candidates or companies match the search criteria.",
+    NO_CANDIDATES: "No candidates match the search criteria.",
+    NO_COMPANIES: "No companies match the search criteria.",
     validationErrorMessages: {
         DATE_ERROR: "Please select a date.",
         PHASE_ERROR: "Please select a phase.",

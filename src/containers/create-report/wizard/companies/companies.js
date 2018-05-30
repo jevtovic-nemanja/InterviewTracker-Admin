@@ -25,8 +25,8 @@ const filterCompanies = (companies, searchItem) => {
         return filteredCompanies.length
             ? filteredCompanies
             : [{
-                id: "NO_RESULTS",
-                message: "No companies match the search criteria."
+                id: Messages.NO_RESULTS,
+                message: Messages.NO_COMPANIES
             }];
     } else return [];
 };
