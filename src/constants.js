@@ -35,11 +35,22 @@ export const Messages = {
     }
 };
 
-export const Phases = {
-    NONE: "none",
-    CV: "cv",
-    HR: "hr",
-    TECH: "tech",
-    FINAL: "final",
-    HIRED: "hired"
+export const ReportData = {
+    phases: {
+        NONE: "none",
+        CV: "cv",
+        HR: "hr",
+        TECH: "tech",
+        FINAL: "final",
+        HIRED: "hired"
+    },
+    statuses: {
+        PASSED: "passed",
+        DECLINED: "declined"
+    },
+    hiringStatuses: {
+        HIRED: "Hired",
+        DECLINED: "Declined",
+        SELECT: "Select"
+    }
 };

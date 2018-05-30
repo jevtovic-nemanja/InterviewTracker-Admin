@@ -13,7 +13,7 @@ import { CustomDatePicker } from "Components/create-report/wizard/newReport/date
 import { Select } from "Components/create-report/wizard/newReport/select/select";
 import { Notes } from "Components/create-report/wizard/newReport/notes/notes";
 
-import { Messages, Routes, Phases } from "Src/constants";
+import { Messages, Routes, ReportData } from "Src/constants";
 import { capitalizeString } from "Utils/capitalizeString";
 
 import {
@@ -33,11 +33,11 @@ const getTrackedData = (reports, newReportData) => {
 
         let hiringStatus;
 
-        status === "declined"
-            ? hiringStatus = "Declined"
-            : phase === Phases.FINAL && status === "passed"
-                ? hiringStatus = "Hired"
-                : hiringStatus = "Select";
+        status === ReportData.statuses.DECLINED
+            ? hiringStatus = ReportData.hiringStatuses.DECLINED
+            : phase === ReportData.phases.FINAL && status === ReportData.statuses.PASSED
+                ? hiringStatus = ReportData.hiringStatuses.HIRED
+                : hiringStatus = ReportData.hiringStatuses.SELECT;
 
         return {
             ...newReportData,
@@ -49,10 +49,10 @@ const getTrackedData = (reports, newReportData) => {
     } else {
         return {
             ...newReportData,
-            currentPhase: Phases.NONE,
+            currentPhase: ReportData.phases.NONE,
             currentStatus: "",
             timeOfLastInterview: null,
-            hiringStatus: "Select"
+            hiringStatus: ReportData.hiringStatuses.SELECT
         };
     }
 };
@@ -73,9 +73,9 @@ class ReportForm extends React.Component {
     state = {
         interviewDate: null,
         dateError: "d-none",
-        phase: "Select",
+        phase: ReportData.hiringStatuses.SELECT,
         phaseError: "d-none",
-        status: "Select",
+        status: ReportData.hiringStatuses.SELECT,
         statusError: "d-none",
         note: "",
         noteError: "d-none"
@@ -115,12 +115,12 @@ class ReportForm extends React.Component {
             isValid = false;
         }
 
-        if (phase === "Select") {
+        if (phase === ReportData.hiringStatuses.SELECT) {
             this.setState({ phaseError: "" });
             isValid = false;
         }
 
-        if (status === "Select") {
+        if (status === ReportData.hiringStatuses.SELECT) {
             this.setState({ statusError: "" });
             isValid = false;
         }
@@ -175,10 +175,10 @@ class ReportForm extends React.Component {
         const { currentPhase, currentStatus, timeOfLastInterview, hiringStatus } = trackedData;
         const { interviewDate, dateError, phase, phaseError, status, statusError, note, noteError } = this.state;
 
-        const declined = (currentStatus === "declined" || hiringStatus === "Hired") ? "disabled" : "";
+        const declined = (currentStatus === ReportData.statuses.DECLINED || hiringStatus === ReportData.hiringStatuses.HIRED) ? "disabled" : "";
         const declinedDatePicker = declined ? true : false;
 
-        const phases = Object.values(Phases);
+        const phases = Object.values(ReportData.phases);
         const nextPhase = capitalizeString(phases[phases.indexOf(currentPhase) + 1]);
 
         return (
@@ -208,7 +208,7 @@ class ReportForm extends React.Component {
                             value={phase}
                             onChange={this.handleInputChange}
                             declined={declined}
-                            options={["Select", nextPhase]}
+                            options={[ReportData.hiringStatuses.SELECT, nextPhase]}
                         />
                         <ValidationError isValid={phaseError} text={Messages.validationErrorMessages.PHASE_ERROR} />
                     </div>
@@ -222,7 +222,7 @@ class ReportForm extends React.Component {
                             value={status}
                             onChange={this.handleInputChange}
                             declined={declined}
-                            options={[hiringStatus, "Passed", "Declined"]}
+                            options={[hiringStatus, capitalizeString(ReportData.statuses.PASSED), capitalizeString(ReportData.statuses.DECLINED)]}
                         />
                         <ValidationError isValid={statusError} text={Messages.validationErrorMessages.STATUS_ERROR} />
                     </div>
