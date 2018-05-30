@@ -13,7 +13,7 @@ import { CustomDatePicker } from "Components/create-report/wizard/newReport/date
 import { Select } from "Components/create-report/wizard/newReport/select/select";
 import { Notes } from "Components/create-report/wizard/newReport/notes/notes";
 
-import { Messages } from "Src/constants";
+import { Messages, Routes } from "Src/constants";
 import { capitalizeString } from "Utils/capitalizeString";
 
 import {
@@ -185,7 +185,7 @@ class ReportForm extends React.Component {
             <form className={`row ${styles.fillReport}`}>
 
                 <div className="col-12 offset-sm-1 col-sm-10 d-md-none">
-                    <BackButton decrementPhase={decrementPhase} newLocation="#/create-report/2" />
+                    <BackButton decrementPhase={decrementPhase} newLocation={Routes.CREATE_REPORT_COMPANIES} />
                 </div>
 
                 <div className="col-12 offset-sm-1 col-sm-10 offset-md-0 col-md-12 col-lg-4 mt-1">
@@ -241,7 +241,7 @@ class ReportForm extends React.Component {
                 </div>
 
                 <div className="d-none d-md-block col-md-4 col-lg-3">
-                    <BackButton decrementPhase={decrementPhase} newLocation="#/create-report/2" />
+                    <BackButton decrementPhase={decrementPhase} newLocation={Routes.CREATE_REPORT_COMPANIES} />
                 </div>
 
                 <div className="col-12 offset-sm-1 col-sm-10 offset-md-4 col-md-4 offset-lg-6 col-lg-3">

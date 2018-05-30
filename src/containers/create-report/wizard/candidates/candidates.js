@@ -15,6 +15,8 @@ import {
     incrementPhase
 } from "Store/actions";
 
+import { Messages, Routes } from "Src/constants";
+
 const filterCandidates = (candidates, searchItem) => {
     if (candidates.length) {
         const filteredCandidates = candidates.filter(candidate => candidate.name.toLowerCase().includes(searchItem));
@@ -60,7 +62,7 @@ class SelectCandidate extends React.Component {
                 </div>
 
                 <div className="col-4 col-sm-3 mt-1">
-                    <NextButton next={next} incrementPhase={incrementPhase} newLocation="#/create-report/2" />
+                    <NextButton next={next} incrementPhase={incrementPhase} newLocation={Routes.CREATE_REPORT_COMPANIES} />
                 </div>
 
                 {

@@ -17,6 +17,8 @@ import {
     newReportCompany
 } from "Store/actions";
 
+import { Messages, Routes } from "Src/constants";
+
 const filterCompanies = (companies, searchItem) => {
     if (companies.length) {
         const filteredCompanies = companies.filter(company => company.name.toLowerCase().includes(searchItem));
@@ -62,11 +64,11 @@ class SelectCompany extends React.Component {
                     <div className="row">
 
                         <div className="col-5 col-md-4 col-lg-3">
-                            <BackButton decrementPhase={decrementPhase} newLocation="#/create-report/" />
+                            <BackButton decrementPhase={decrementPhase} newLocation={Routes.CREATE_REPORT_CANDIDATES} />
                         </div>
 
                         <div className="offset-2 col-5 offset-md-4 col-md-4 offset-lg-6 col-lg-3">
-                            <NextButton next={next} incrementPhase={incrementPhase} newLocation="#/create-report/3" />
+                            <NextButton next={next} incrementPhase={incrementPhase} newLocation={Routes.CREATE_REPORT_FORM} />
                         </div>
 
                     </div>

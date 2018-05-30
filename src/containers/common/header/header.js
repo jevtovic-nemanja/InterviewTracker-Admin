@@ -12,6 +12,8 @@ import {
 
 import styles from "./header.css";
 
+import { Routes } from "Src/constants";
+
 const mapDispatchToProps = dispatch => bindActionCreators({
     goToReportsList,
     goToCreateReport
@@ -21,7 +23,7 @@ const Navbar = ({ hash, goToReportsList, goToCreateReport }) => {
     let report;
     let create;
 
-    hash === "#/"
+    hash === `#${Routes.REPORTS_LIST}`
         ? (report = styles.btnNavActive,
         create = styles.btnNav)
         : (create = styles.btnNavActive,
