@@ -6,6 +6,11 @@ export const API_URLS = {
     COMPANIES: `${BASE_URL}/companies`
 };
 
+export const Routes = {
+    REPORTS_LIST: "/",
+    CREATE_REPORT: "/create-report/"
+};
+
 export const ValidationErrorMessages = {
     DATE_ERROR: "Please select a date.",
     PHASE_ERROR: "Please select a phase.",

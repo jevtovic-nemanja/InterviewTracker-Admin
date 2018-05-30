@@ -5,6 +5,8 @@ import { Switch, Route } from "react-router-dom";
 import Header from "Containers/common/header/header";
 import ReportsList from "Containers/reports-list/reportsList";
 
+import { Routes } from "./constants";
+
 import "./globals.css";
 
 import { asyncComponent } from "./hocs/asyncComponent";
@@ -19,8 +21,8 @@ class App extends React.Component {
             <div className="w-100">
                 <Header hash={location.hash} />
                 <Switch>
-                    <Route exact path="/" component={ReportsList} />
-                    <Route path="/create-report/" component={asyncCreateReportPage} />
+                    <Route exact path={Routes.REPORTS_LIST} component={ReportsList} />
+                    <Route path={Routes.CREATE_REPORT} component={asyncCreateReportPage} />
                 </Switch>
             </div>
         );
