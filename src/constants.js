@@ -15,6 +15,7 @@ export const Routes = {
 
 export const Placeholders = {
     DATE_PICKER: "Click to select a date",
+    NOTES: "Notes...",
     SEARCH: "Search..."
 };
 
