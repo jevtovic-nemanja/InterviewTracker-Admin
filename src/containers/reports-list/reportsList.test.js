@@ -25,7 +25,7 @@ import {
     closeMessageModal
 } from "Store/actions";
 
-import { ReportData } from "Src/constants";
+import { ReportData, Messages } from "Src/constants";
 
 const mockedMiddleware = [];
 const mockedStore = configureStore(mockedMiddleware);
@@ -120,7 +120,7 @@ describe("<ReportsList />", () => {
         it("displays the correct message ", () => {
             expect(wrapper.find(ReportDisplay)).toHaveLength(0);
             expect(wrapper.find(Message)).toHaveLength(1);
-            expect(wrapper.find(Message).props().message).toEqual(wrapper.instance().props.reports[0].message);
+            expect(wrapper.find(Message).props().message).toEqual(Messages.NO_REPORTS);
         });
     });
 
@@ -136,18 +136,26 @@ describe("<ReportsList />", () => {
         });
 
         it("renders a <ReportDisplay /> component for each report", () => {
-            expect(wrapper.find(ReportDisplay)).toHaveLength(wrapper.instance().props.reports.length);
+            const state = store.getState();
+            const reports = state.data.reports;
+            const searchItem = state.searchItem;
+
+            expect(wrapper.find(ReportDisplay)).toHaveLength(reports.filter(report => {
+                const candidate = report.candidateName.toLowerCase();
+                const company = report.companyName.toLowerCase();
+                return candidate.includes(searchItem) || company.includes(searchItem)
+            }).length);
         });
 
         it("opens the details modal with correct report data", () => {
-            wrapper.find(ReportDisplay).at(0).props().openDetailsModal();
+            wrapper.find(ReportDisplay).first().props().openDetailsModal();
 
             expect(wrapper.state("detailsModal")).toEqual(true);
-            expect(wrapper.state("detailedReport")).toEqual(wrapper.instance().props.reports[0]);
+            expect(wrapper.state("detailedReport")).toEqual(store.getState().data.reports[0]);
         });
 
         it("closes the details modal", () => {
-            wrapper.instance().openDetailsModal(wrapper.instance().props.reports[0]);
+            wrapper.instance().openDetailsModal(store.getState().data.reports[0]);
             wrapper.instance().closeDetailsModal();
 
             expect(wrapper.state("detailsModal")).toEqual(false);
@@ -155,14 +163,14 @@ describe("<ReportsList />", () => {
         });
 
         it("opens the delete modal with the correct report id", () => {
-            wrapper.find(ReportDisplay).at(0).props().openDeleteModal();
+            wrapper.find(ReportDisplay).first().props().openDeleteModal();
 
             expect(wrapper.state("deleteModal")).toEqual(true);
-            expect(wrapper.state("deleteReportId")).toEqual(wrapper.instance().props.reports[0].id);
+            expect(wrapper.state("deleteReportId")).toEqual(store.getState().data.reports[0].id);
         });
 
         it("closes the delete modal", () => {
-            wrapper.instance().openDeleteModal(wrapper.instance().props.reports[0].id);
+            wrapper.instance().openDeleteModal(store.getState().data.reports[0].id);
             wrapper.instance().closeDeleteModal();
 
             expect(wrapper.state("deleteModal")).toEqual(false);
@@ -172,10 +180,10 @@ describe("<ReportsList />", () => {
         it("initiates the deletion of the correct report and then closes the delete modal", () => {
             store.clearActions();
 
-            wrapper.instance().openDeleteModal(wrapper.instance().props.reports[0].id);
+            wrapper.instance().openDeleteModal(store.getState().data.reports[0].id);
             wrapper.instance().deleteReport();
 
-            expect(store.getActions()).toEqual([startDeleteReport(wrapper.instance().props.reports[0].id)]);
+            expect(store.getActions()).toEqual([startDeleteReport(store.getState().data.reports[0].id)]);
             expect(wrapper.state("deleteModal")).toEqual(false);
             expect(wrapper.state("deleteReportId")).toEqual("");
         });

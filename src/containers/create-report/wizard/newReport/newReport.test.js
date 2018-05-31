@@ -89,7 +89,7 @@ describe("<NewReport />", () => {
         });
 
         it("calls the correct action when back button is clicked", () => {
-            wrapper.find(BackButton).at(0).props().decrementPhase();
+            wrapper.find(BackButton).first().props().decrementPhase();
             expect(store.getActions()).toEqual([decrementPhase()]);
         })
 
@@ -128,7 +128,7 @@ describe("<NewReport />", () => {
 
             const selects = wrapper.find(Select);
 
-            selects.at(0).props().onChange(phaseEvent);
+            selects.first().props().onChange(phaseEvent);
 
             expect(wrapper.state("phase")).toEqual(phaseEvent.target.value);
             expect(wrapper.state("dateError")).toEqual("d-none");

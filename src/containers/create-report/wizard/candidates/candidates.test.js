@@ -80,7 +80,7 @@ describe("<Candidates />", () => {
             const candidate = store.getState().data.candidates[0];
 
             wrapper.find(NextButton).props().incrementPhase();
-            wrapper.find(CandidateDisplay).at(0).props().handleClick();
+            wrapper.find(CandidateDisplay).first().props().handleClick();
 
             expect(store.getActions()).toEqual([incrementPhase(), selectElement(candidate.candidateId), newReportCandidate(candidate), enableNextPhase()]);
         });

@@ -80,7 +80,7 @@ describe("<Companies />", () => {
 
             wrapper.find(BackButton).props().decrementPhase();
             wrapper.find(NextButton).props().incrementPhase();
-            wrapper.find(CompanyDisplay).at(0).props().handleClick();
+            wrapper.find(CompanyDisplay).first().props().handleClick();
 
             expect(store.getActions()).toEqual([decrementPhase(), incrementPhase(), selectElement(company.companyId), newReportCompany(company), enableNextPhase()]);
         });
