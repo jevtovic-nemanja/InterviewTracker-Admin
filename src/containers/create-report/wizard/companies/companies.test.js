@@ -1,8 +1,9 @@
 import React from "react";
 
-import { configure, shallow } from "enzyme";
+import { configure, mount } from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 
+import { Provider } from "react-redux";
 import configureStore from "redux-mock-store";
 
 configure({
@@ -25,7 +26,7 @@ import {
     newReportCompany
 } from "Store/actions";
 
-import { DISABLED } from "Src/constants";
+import { DISABLED, Messages } from "Src/constants";
 
 const mockedMiddleware = [];
 const mockedStore = configureStore(mockedMiddleware);
@@ -60,7 +61,11 @@ describe("<Companies />", () => {
             store = mockedStore(
                 createTestState()
             );
-            wrapper = shallow(<Companies store={store} />).dive();
+            wrapper = mount(
+                <Provider store={store}>
+                    <Companies />
+                </Provider>
+            );;
         });
 
         it("renders the correct components", () => {
@@ -71,7 +76,7 @@ describe("<Companies />", () => {
         });
 
         it("calls the correct actions", () => {
-            const company = wrapper.instance().props.companies[0];
+            const company = store.getState().data.companies[0];
 
             wrapper.find(BackButton).props().decrementPhase();
             wrapper.find(NextButton).props().incrementPhase();
@@ -92,7 +97,11 @@ describe("<Companies />", () => {
             })
         );
 
-        const wrapper = shallow(<Companies store={store} />).dive();
+        const wrapper = mount(
+                <Provider store={store}>
+                    <Companies />
+                </Provider>
+            );;
 
         it("displays the correct message", () => {
             expect(wrapper.find(CompanyDisplay)).toHaveLength(0);
@@ -107,12 +116,16 @@ describe("<Companies />", () => {
             createTestState({ searchItem: "wz" })
         );
 
-        const wrapper = shallow(<Companies store={store} />).dive();
+        const wrapper = mount(
+                <Provider store={store}>
+                    <Companies />
+                </Provider>
+            );;
 
         it("displays the correct message ", () => {
             expect(wrapper.find(CompanyDisplay)).toHaveLength(0);
             expect(wrapper.find(Message)).toHaveLength(1);
-            expect(wrapper.find(Message).props().message).toEqual(wrapper.instance().props.companies[0].message);
+            expect(wrapper.find(Message).props().message).toEqual(Messages.NO_COMPANIES);
         });
     });
 
@@ -122,10 +135,18 @@ describe("<Companies />", () => {
             createTestState({ searchItem: "end" })
         );
 
-        const wrapper = shallow(<Companies store={store} />).dive();
+        const wrapper = mount(
+            <Provider store={store}>
+                <Companies />
+            </Provider>
+        );;
 
         it("renders a <CompanyDisplay /> component for each company", () => {
-            expect(wrapper.find(CompanyDisplay)).toHaveLength(wrapper.instance().props.companies.length);
+            const state = store.getState();
+            const companies = state.data.companies;
+            const searchItem = state.searchItem;
+
+            expect(wrapper.find(CompanyDisplay)).toHaveLength(companies.filter(company => company.name.toLowerCase().includes(searchItem)).length);
         });
     });
 });

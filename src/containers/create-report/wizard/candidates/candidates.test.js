@@ -1,8 +1,9 @@
 import React from "react";
 
-import { configure, shallow } from "enzyme";
+import { configure, mount } from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 
+import { Provider } from "react-redux";
 import configureStore from "redux-mock-store";
 
 configure({
@@ -23,7 +24,7 @@ import {
     incrementPhase
 } from "Store/actions";
 
-import { DISABLED } from "Src/constants";
+import { DISABLED, Messages } from "Src/constants";
 
 const mockedMiddleware = [];
 const mockedStore = configureStore(mockedMiddleware);
@@ -62,7 +63,12 @@ describe("<Candidates />", () => {
             store = mockedStore(
                 createTestState()
             );
-            wrapper = shallow(<Candidates store={store} />).dive();
+
+            wrapper = mount(
+                <Provider store={store}>
+                    <Candidates />
+                </Provider>
+            );
         });
 
         it("renders a Search component and a Next button", () => {
@@ -71,7 +77,7 @@ describe("<Candidates />", () => {
         });
 
         it("calls the correct actions", () => {
-            const candidate = wrapper.instance().props.candidates[0];
+            const candidate = store.getState().data.candidates[0];
 
             wrapper.find(NextButton).props().incrementPhase();
             wrapper.find(CandidateDisplay).at(0).props().handleClick();
@@ -91,7 +97,11 @@ describe("<Candidates />", () => {
             })
         );
 
-        const wrapper = shallow(<Candidates store={store} />).dive();
+        const wrapper = mount(
+            <Provider store={store}>
+                <Candidates />
+            </Provider>
+        );
 
         it("displays the correct message", () => {
             expect(wrapper.find(CandidateDisplay)).toHaveLength(0);
@@ -106,25 +116,37 @@ describe("<Candidates />", () => {
             createTestState({ searchItem: "wz" })
         );
 
-        const wrapper = shallow(<Candidates store={store} />).dive();
+        const wrapper = mount(
+            <Provider store={store}>
+                <Candidates />
+            </Provider>
+        );
 
         it("displays the correct message ", () => {
             expect(wrapper.find(CandidateDisplay)).toHaveLength(0);
             expect(wrapper.find(Message)).toHaveLength(1);
-            expect(wrapper.find(Message).props().message).toEqual(wrapper.instance().props.candidates[0].message);
+            expect(wrapper.find(Message).props().message).toEqual(Messages.NO_CANDIDATES);
         });
     });
 
     describe("if there are candidates that match the filter criteria", () => {
 
         const store = mockedStore(
-            createTestState({ searchItem: "j" })
+            createTestState({ searchItem: "doe" })
         );
 
-        const wrapper = shallow(<Candidates store={store} />).dive();
+        const wrapper = mount(
+            <Provider store={store}>
+                <Candidates />
+            </Provider>
+        );
 
         it("renders a <CandidateDisplay /> component for each candidate", () => {
-            expect(wrapper.find(CandidateDisplay)).toHaveLength(wrapper.instance().props.candidates.length);
+            const state = store.getState();
+            const candidates = state.data.candidates;
+            const searchItem = state.searchItem;
+
+            expect(wrapper.find(CandidateDisplay)).toHaveLength(candidates.filter(candidate => candidate.name.toLowerCase().includes(searchItem)).length);
         });
     });
 });
