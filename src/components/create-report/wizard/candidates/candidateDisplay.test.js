@@ -69,7 +69,7 @@ describe("<CandidateDisplay />", () => {
         const wrapper = shallow(<CandidateDisplay {...props} />);
 
         it("displays the default avatar", () => {
-            expect(wrapper.find("img").props().src).toEqual({});
+            expect(wrapper.find("img").props().src).toEqual("");
         });
     });
 });

@@ -68,7 +68,7 @@
   "jest": {
     "moduleNameMapper": {
       "\\.(css|less)$": "identity-obj-proxy",
-      "\\.(png)$": "identity-obj-proxy"
+      "\\.(png)$": "<rootDir>/__mocks__/fileMock.js"
     }
   },
   "repository": {
