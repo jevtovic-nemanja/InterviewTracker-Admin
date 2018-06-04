@@ -3,6 +3,12 @@
     color: whitesmoke;
 }
 
-.btnBack:hover {
+.btnNext,
+.btnSubmit {
+    background-color: #6d7993;
+    color: whitesmoke;
+}
+
+.button:hover {
     transform:scale(1.03);
 }

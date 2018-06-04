@@ -4,7 +4,7 @@ import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 
 import { Message } from "Components/common/message/message";
-import { NextButton } from "Components/common/buttons/next/nextButton";
+import { Button } from "Components/common/button/button";
 import Search from "Containers/common/search/search";
 import { CandidateDisplay } from "Components/create-report/wizard/candidates/candidateDisplay";
 
@@ -62,7 +62,7 @@ class SelectCandidate extends React.Component {
                 </div>
 
                 <div className="col-4 col-sm-3 mt-1">
-                    <NextButton next={next} incrementPhase={incrementPhase} newLocation={Routes.CREATE_REPORT_COMPANIES} />
+                    <Button type="btnNext" isDisabled={next} action={incrementPhase} newLocation={Routes.CREATE_REPORT_COMPANIES} />
                 </div>
 
                 {

@@ -6,8 +6,7 @@ import { connect } from "react-redux";
 import Modal from "react-responsive-modal";
 
 import { MessageModal } from "Components/common/messageModal/messageModal";
-import { BackButton } from "Components/common/buttons/back/backButton";
-import { SubmitButton } from "Components/common/buttons/submit/submitButton";
+import { Button } from "Components/common/button/button";
 import { ValidationError } from "Components/create-report/wizard/newReport/validationError/validationError";
 import { CustomDatePicker } from "Components/create-report/wizard/newReport/datePicker/datePicker";
 import { Select } from "Components/create-report/wizard/newReport/select/select";
@@ -185,7 +184,7 @@ class ReportForm extends React.Component {
             <form className={`row ${styles.fillReport}`}>
 
                 <div className="col-12 offset-sm-1 col-sm-10 d-md-none">
-                    <BackButton decrementPhase={decrementPhase} newLocation={Routes.CREATE_REPORT_COMPANIES} />
+                    <Button type="btnBack" action={decrementPhase} newLocation={Routes.CREATE_REPORT_COMPANIES} />
                 </div>
 
                 <div className="col-12 offset-sm-1 col-sm-10 offset-md-0 col-md-12 col-lg-4 mt-1">
@@ -241,11 +240,11 @@ class ReportForm extends React.Component {
                 </div>
 
                 <div className="d-none d-md-block col-md-4 col-lg-3">
-                    <BackButton decrementPhase={decrementPhase} newLocation={Routes.CREATE_REPORT_COMPANIES} />
+                    <Button type="btnBack" action={decrementPhase} newLocation={Routes.CREATE_REPORT_COMPANIES} />
                 </div>
 
                 <div className="col-12 offset-sm-1 col-sm-10 offset-md-4 col-md-4 offset-lg-6 col-lg-3">
-                    <SubmitButton declined={declined} onSubmit={this.onSubmit} />
+                    <Button type="btnSubmit" isDisabled={declined} action={this.onSubmit} />
                 </div>
 
                 <Modal open={open} onClose={this.closeMessageModal} little >
