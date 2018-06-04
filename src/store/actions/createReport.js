@@ -16,14 +16,14 @@ export const enableNextPhase = () => {
     };
 };
 
-export const incrementPhase = () => {
+export const incrementPhase = event => {
     return {
         type: actionTypes.INCREMENT_PHASE,
         next: DISABLED
     };
 };
 
-export const decrementPhase = () => {
+export const decrementPhase = event => {
     return {
         type: actionTypes.DECREMENT_PHASE,
         next: ""

@@ -15,14 +15,11 @@ import Companies from "./companies";
 import Search from "Containers/common/search/search";
 import { CompanyDisplay } from "Components/create-report/wizard/companies/companyDisplay";
 import { Message } from "Components/common/message/message";
-import { BackButton } from "Components/common/buttons/back/backButton";
-import { NextButton } from "Components/common/buttons/next/nextButton";
+import { Button } from "Components/common/button/button";
 
 import {
     selectElement,
     enableNextPhase,
-    incrementPhase,
-    decrementPhase,
     newReportCompany
 } from "Store/actions";
 
@@ -54,35 +51,23 @@ const createTestState = props => ({
 describe("<Companies />", () => {
 
     describe("always", () => {
-        let store;
-        let wrapper;
 
-        beforeEach(() => {
-            store = mockedStore(
-                createTestState()
-            );
-            wrapper = mount(
-                <Provider store={store}>
-                    <Companies />
-                </Provider>
-            );;
-        });
+        const store = mockedStore(
+            createTestState()
+        );
+
+        const wrapper = mount(
+            <Provider store={store}>
+                <Companies />
+            </Provider>
+        );
 
         it("renders the correct components", () => {
             expect(wrapper.find(Search)).toHaveLength(1);
-            expect(wrapper.find(BackButton)).toHaveLength(1);
-            expect(wrapper.find(NextButton)).toHaveLength(1);
+            expect(wrapper.find(Button)).toHaveLength(2);
+            expect(wrapper.find(Button).first().text()).toEqual("Back");
+            expect(wrapper.find(Button).last().text()).toEqual("Next");
             expect(wrapper.find("table")).toHaveLength(1);
-        });
-
-        it("calls the correct actions", () => {
-            const company = store.getState().data.companies[0];
-
-            wrapper.find(BackButton).props().decrementPhase();
-            wrapper.find(NextButton).props().incrementPhase();
-            wrapper.find(CompanyDisplay).first().props().handleClick();
-
-            expect(store.getActions()).toEqual([decrementPhase(), incrementPhase(), selectElement(company.companyId), newReportCompany(company), enableNextPhase()]);
         });
     });
 
@@ -130,23 +115,34 @@ describe("<Companies />", () => {
     });
 
     describe("if there are companies that match the filter criteria", () => {
+        let store;
+        let wrapper;
 
-        const store = mockedStore(
-            createTestState({ searchItem: "end" })
-        );
-
-        const wrapper = mount(
-            <Provider store={store}>
-                <Companies />
-            </Provider>
-        );;
-
+        beforeEach(() => {
+            store = mockedStore(
+                createTestState({ searchItem: "end" })
+            );
+            wrapper = mount(
+                <Provider store={store}>
+                    <Companies />
+                </Provider>
+            );;
+        });
+        
         it("renders a <CompanyDisplay /> component for each company", () => {
             const state = store.getState();
             const companies = state.data.companies;
             const searchItem = state.searchItem;
 
             expect(wrapper.find(CompanyDisplay)).toHaveLength(companies.filter(company => company.name.toLowerCase().includes(searchItem)).length);
+        });
+
+        it("calls the correct actions", () => {
+            const company = store.getState().data.companies[0];
+
+            wrapper.find(CompanyDisplay).first().props().handleClick();
+
+            expect(store.getActions()).toEqual([selectElement(company.companyId), newReportCompany(company), enableNextPhase()]);
         });
     });
 });

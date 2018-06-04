@@ -16,8 +16,7 @@ import moment from "moment";
 import Modal from "react-responsive-modal";
 
 import { MessageModal } from "Components/common/messageModal/messageModal";
-import { BackButton } from "Components/common/buttons/back/backButton";
-import { SubmitButton } from "Components/common/buttons/submit/submitButton";
+import { Button } from "Components/common/button/button";
 import { ValidationError } from "Components/create-report/wizard/newReport/validationError/validationError";
 import { CustomDatePicker } from "Components/create-report/wizard/newReport/datePicker/datePicker";
 import { Select } from "Components/create-report/wizard/newReport/select/select";
@@ -78,8 +77,10 @@ describe("<NewReport />", () => {
         });
 
         it("renders the correct components", () => {
-            expect(wrapper.find(BackButton)).toHaveLength(2);
-            expect(wrapper.find(SubmitButton)).toHaveLength(1);
+            expect(wrapper.find(Button)).toHaveLength(3);
+            expect(wrapper.find(Button).first().props().type).toEqual("btnBack");
+            expect(wrapper.find(Button).at(1).props().type).toEqual("btnBack");
+            expect(wrapper.find(Button).last().props().type).toEqual("btnSubmit");
             expect(wrapper.find(CustomDatePicker)).toHaveLength(1);
             expect(wrapper.find(Select)).toHaveLength(2);
             expect(wrapper.find(Notes)).toHaveLength(1);
@@ -89,7 +90,7 @@ describe("<NewReport />", () => {
         });
 
         it("calls the correct action when back button is clicked", () => {
-            wrapper.find(BackButton).first().props().decrementPhase();
+            wrapper.find(Button).first().props().action();
             expect(store.getActions()).toEqual([decrementPhase()]);
         })
 
@@ -194,7 +195,7 @@ describe("<NewReport />", () => {
 
             const spy = jest.spyOn(wrapper.instance(), "validateInput");
             
-            wrapper.find(SubmitButton).props().onSubmit(mockedEvent);
+            wrapper.find(Button).last().props().action(mockedEvent);
             
             expect(spy).toBeCalled();
             expect(store.getActions()).toEqual([]);
@@ -229,7 +230,7 @@ describe("<NewReport />", () => {
 
             const spy = jest.spyOn(wrapper.instance(), "validateInput");
 
-            wrapper.find(SubmitButton).props().onSubmit(mockedEvent);
+            wrapper.find(Button).last().props().action(mockedEvent);
 
             expect(spy).toBeCalled();
             expect(store.getActions()).toEqual([startSubmitReport(data)]);

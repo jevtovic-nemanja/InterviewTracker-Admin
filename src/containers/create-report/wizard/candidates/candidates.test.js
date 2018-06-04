@@ -15,13 +15,12 @@ import Candidates from "./candidates";
 import Search from "Containers/common/search/search";
 import { CandidateDisplay } from "Components/create-report/wizard/candidates/candidateDisplay";
 import { Message } from "Components/common/message/message";
-import { NextButton } from "Components/common/buttons/next/nextButton";
+import { Button } from "Components/common/button/button";
 
 import {
     selectElement,
     enableNextPhase,
-    newReportCandidate,
-    incrementPhase
+    newReportCandidate
 } from "Store/actions";
 
 import { DISABLED, Messages } from "Src/constants";
@@ -56,33 +55,20 @@ const createTestState = props => ({
 describe("<Candidates />", () => {
 
     describe("always", () => {
-        let store;
-        let wrapper;
+        const store = mockedStore(
+            createTestState()
+        );
 
-        beforeEach(() => {
-            store = mockedStore(
-                createTestState()
-            );
-
-            wrapper = mount(
-                <Provider store={store}>
-                    <Candidates />
-                </Provider>
-            );
-        });
+        const wrapper = mount(
+            <Provider store={store}>
+                <Candidates />
+            </Provider>
+        );
 
         it("renders a Search component and a Next button", () => {
             expect(wrapper.find(Search)).toHaveLength(1);
-            expect(wrapper.find(NextButton)).toHaveLength(1);
-        });
-
-        it("calls the correct actions", () => {
-            const candidate = store.getState().data.candidates[0];
-
-            wrapper.find(NextButton).props().incrementPhase();
-            wrapper.find(CandidateDisplay).first().props().handleClick();
-
-            expect(store.getActions()).toEqual([incrementPhase(), selectElement(candidate.candidateId), newReportCandidate(candidate), enableNextPhase()]);
+            expect(wrapper.find(Button)).toHaveLength(1);
+            expect(wrapper.find(Button).text()).toEqual("Next");
         });
     });
 
@@ -130,16 +116,20 @@ describe("<Candidates />", () => {
     });
 
     describe("if there are candidates that match the filter criteria", () => {
+        let store;
+        let wrapper;
 
-        const store = mockedStore(
-            createTestState({ searchItem: "doe" })
-        );
+        beforeEach(() => {
+            store = mockedStore(
+                createTestState({ searchItem: "doe" })
+            );
 
-        const wrapper = mount(
-            <Provider store={store}>
-                <Candidates />
-            </Provider>
-        );
+            wrapper = mount(
+                <Provider store={store}>
+                    <Candidates />
+                </Provider>
+            );
+        });
 
         it("renders a <CandidateDisplay /> component for each candidate", () => {
             const state = store.getState();
@@ -147,6 +137,14 @@ describe("<Candidates />", () => {
             const searchItem = state.searchItem;
 
             expect(wrapper.find(CandidateDisplay)).toHaveLength(candidates.filter(candidate => candidate.name.toLowerCase().includes(searchItem)).length);
+        });
+
+        it("calls the correct actions", () => {
+            const candidate = store.getState().data.candidates[0];
+
+            wrapper.find(CandidateDisplay).first().props().handleClick();
+
+            expect(store.getActions()).toEqual([selectElement(candidate.candidateId), newReportCandidate(candidate), enableNextPhase()]);
         });
     });
 });
