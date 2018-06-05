@@ -18,13 +18,13 @@ const asyncCreateReportPage = asyncComponent(() => {
 class App extends React.Component {
     render() {
         return (
-            <div className="w-100">
+            <>
                 <Header hash={location.hash} />
                 <Switch>
                     <Route exact path={Routes.REPORTS_LIST} component={ReportsList} />
                     <Route path={Routes.CREATE_REPORT_CANDIDATES} component={asyncCreateReportPage} />
                 </Switch>
-            </div>
+            </>
         );
     }
 }
