@@ -9,7 +9,7 @@ import { Routes } from "./constants";
 
 import "./globals.css";
 
-import { asyncComponent } from "./hocs/asyncComponent";
+import { asyncComponent } from "./hocs/asyncComponent/asyncComponent";
 
 const asyncCreateReportPage = asyncComponent(() => {
     return import(/* webpackChunkName: "createReport" */ "./components/create-report/createReport/createReport");

@@ -7,7 +7,7 @@ import Candidates from "Containers/create-report/wizard/candidates/candidates";
 
 import { Routes } from "Src/constants";
 
-import { asyncComponent } from "Hocs/asyncComponent";
+import { asyncComponent } from "Hocs/asyncComponent/asyncComponent";
 
 const asyncCompanies = asyncComponent(() => {
     return import(/* webpackChunkName: "companies" */ "Containers/create-report/wizard/companies/companies");

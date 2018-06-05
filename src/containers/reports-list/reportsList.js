@@ -10,7 +10,7 @@ import Search from "Containers/common/search/search";
 import { ReportDisplay } from "Components/reports-list/reportDisplay/reportDisplay";
 import { ReportDetails } from "Components/reports-list/reportDetails/reportDetails";
 import { DeleteReport } from "Components/reports-list/deleteReport/deleteReport";
-import { withErrorModal } from "Hocs/withErrorModal";
+import { withErrorModal } from "Hocs/withErrorModal/withErrorModal";
 
 import {
     startFetchData,

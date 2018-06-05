@@ -8,7 +8,7 @@ import { ValidationError } from "Components/create-report/wizard/newReport/valid
 import { CustomDatePicker } from "Components/create-report/wizard/newReport/datePicker/datePicker";
 import { Select } from "Components/create-report/wizard/newReport/select/select";
 import { Notes } from "Components/create-report/wizard/newReport/notes/notes";
-import { withErrorModal } from "Hocs/withErrorModal";
+import { withErrorModal } from "Hocs/withErrorModal/withErrorModal";
 
 import { Messages, Routes, ReportData, DISABLED } from "Src/constants";
 import { capitalizeString } from "Utils/capitalizeString";
