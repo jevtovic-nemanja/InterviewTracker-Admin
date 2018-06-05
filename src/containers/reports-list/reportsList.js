@@ -6,11 +6,11 @@ import { connect } from "react-redux";
 import Modal from "react-responsive-modal";
 
 import { Message } from "Components/common/message/message";
-import { MessageModal } from "Components/common/messageModal/messageModal";
 import Search from "Containers/common/search/search";
 import { ReportDisplay } from "Components/reports-list/reportDisplay/reportDisplay";
 import { ReportDetails } from "Components/reports-list/reportDetails/reportDetails";
 import { DeleteReport } from "Components/reports-list/deleteReport/deleteReport";
+import { withErrorModal } from "Hocs/withErrorModal";
 
 import {
     startFetchData,
@@ -95,14 +95,6 @@ class ReportsList extends React.Component {
         this.closeDeleteModal();
     }
 
-    closeMessageModal = () => {
-        const { open, closeMessageModal } = this.props;
-
-        if (open) {
-            closeMessageModal();
-        }
-    }
-
     render() {
         const { reports, message, open } = this.props;
         const { detailsModal, detailedReport, deleteModal, deleteReportId } = this.state;
@@ -144,13 +136,9 @@ class ReportsList extends React.Component {
                 <Modal open={deleteModal} onClose={this.closeDeleteModal} little >
                     <DeleteReport deleteReport={this.deleteReport} close={this.closeDeleteModal} message={message} />
                 </Modal>
-
-                <Modal open={open} onClose={this.closeMessageModal} little >
-                    <MessageModal message={message} close={this.closeMessageModal} />
-                </Modal>
             </main>
         );
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ReportsList);
+export default connect(mapStateToProps, mapDispatchToProps)(withErrorModal(ReportsList));

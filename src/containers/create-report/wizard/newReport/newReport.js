@@ -3,14 +3,12 @@ import React from "react";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 
-import Modal from "react-responsive-modal";
-
-import { MessageModal } from "Components/common/messageModal/messageModal";
 import { Button } from "Components/common/button/button";
 import { ValidationError } from "Components/create-report/wizard/newReport/validationError/validationError";
 import { CustomDatePicker } from "Components/create-report/wizard/newReport/datePicker/datePicker";
 import { Select } from "Components/create-report/wizard/newReport/select/select";
 import { Notes } from "Components/create-report/wizard/newReport/notes/notes";
+import { withErrorModal } from "Hocs/withErrorModal";
 
 import { Messages, Routes, ReportData, DISABLED } from "Src/constants";
 import { capitalizeString } from "Utils/capitalizeString";
@@ -159,14 +157,6 @@ class ReportForm extends React.Component {
         }
     }
 
-    closeMessageModal = () => {
-        const { open, closeMessageModal } = this.props;
-
-        if (open) {
-            closeMessageModal();
-        }
-    }
-
     render() {
         const { trackedData, message, open } = this.props;
         const { decrementPhase } = this.props;
@@ -247,13 +237,9 @@ class ReportForm extends React.Component {
                     <Button type="btnSubmit" isDisabled={declined} action={this.onSubmit} />
                 </div>
 
-                <Modal open={open} onClose={this.closeMessageModal} little >
-                    <MessageModal message={message} close={this.closeMessageModal} />
-                </Modal>
-
             </form >
         );
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ReportForm);
+export default connect(mapStateToProps, mapDispatchToProps)(withErrorModal(ReportForm));
