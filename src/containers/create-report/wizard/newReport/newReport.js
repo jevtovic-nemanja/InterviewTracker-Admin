@@ -15,8 +15,7 @@ import { capitalizeString } from "Utils/capitalizeString";
 
 import {
     startSubmitReport,
-    decrementPhase,
-    closeMessageModal
+    decrementPhase
 } from "Store/actions";
 
 import styles from "./newReport.css";
@@ -62,8 +61,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => bindActionCreators({
     startSubmitReport,
-    decrementPhase,
-    closeMessageModal
+    decrementPhase
 }, dispatch);
 
 class ReportForm extends React.Component {

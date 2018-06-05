@@ -14,8 +14,7 @@ import { withErrorModal } from "Hocs/withErrorModal";
 
 import {
     startFetchData,
-    startDeleteReport,
-    closeMessageModal
+    startDeleteReport
 } from "Store/actions";
 
 import { Messages } from "Src/constants";
@@ -44,8 +43,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => bindActionCreators({
     startFetchData,
-    startDeleteReport,
-    closeMessageModal
+    startDeleteReport
 }, dispatch);
 
 class ReportsList extends React.Component {

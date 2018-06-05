@@ -21,8 +21,7 @@ import { DeleteReport } from "Components/reports-list/deleteReport/deleteReport"
 
 import {
     startFetchData,
-    startDeleteReport,
-    closeMessageModal
+    startDeleteReport
 } from "Store/actions";
 
 import { ReportData, Messages } from "Src/constants";
@@ -65,7 +64,7 @@ describe("<ReportsList />", () => {
             store = mockedStore(
                 createTestState()
             );
-            wrapper = shallow(<ReportsList store={store} />).dive();
+            wrapper = shallow(<ReportsList store={store} />).dive().children().last().shallow();
         });
 
         it("fetches data when mounted", () => {
@@ -75,17 +74,10 @@ describe("<ReportsList />", () => {
         it("renders the correct components", () => {
             expect(wrapper.find("main")).toHaveLength(1);
             expect(wrapper.find(Search)).toHaveLength(1);
-            expect(wrapper.find(Modal)).toHaveLength(3);
+            expect(wrapper.find(Modal)).toHaveLength(2);
             expect(wrapper.find(ReportDetails)).toHaveLength(1);
             expect(wrapper.find(DeleteReport)).toHaveLength(1);
             expect(wrapper.find(Message)).toHaveLength(0);
-            expect(wrapper.find(MessageModal)).toHaveLength(1);
-        });
-
-        it("does not attempt to close the message modal if it is closed", () => {
-            store.clearActions();
-            wrapper.find(MessageModal).props().close();
-            expect(store.getActions()).toEqual([]);
         });
     });
 
@@ -100,7 +92,7 @@ describe("<ReportsList />", () => {
             })
         );
 
-        const wrapper = shallow(<ReportsList store={store} />).dive();
+        const wrapper = shallow(<ReportsList store={store} />).dive().children().last().shallow();
 
         it("displays the correct message ", () => {
             expect(wrapper.find(ReportDisplay)).toHaveLength(0);
@@ -115,7 +107,7 @@ describe("<ReportsList />", () => {
             createTestState({ searchItem: "wz" })
         );
 
-        const wrapper = shallow(<ReportsList store={store} />).dive();
+        const wrapper = shallow(<ReportsList store={store} />).dive().children().last().shallow();
 
         it("displays the correct message ", () => {
             expect(wrapper.find(ReportDisplay)).toHaveLength(0);
@@ -132,7 +124,7 @@ describe("<ReportsList />", () => {
             store = mockedStore(
                 createTestState({ searchItem: "endava" })
             );
-            wrapper = shallow(<ReportsList store={store} />).dive();
+            wrapper = shallow(<ReportsList store={store} />).dive().children().last().shallow();
         });
 
         it("renders a <ReportDisplay /> component for each report", () => {
@@ -188,30 +180,4 @@ describe("<ReportsList />", () => {
             expect(wrapper.state("deleteReportId")).toEqual("");
         });
     });
-
-    describe("if report deletion fails", () => {
-        let store;
-        let wrapper;
-
-        beforeEach(() => {
-            store = mockedStore(
-                createTestState({
-                    message: "message",
-                    messageModal: true
-                })
-            );
-            wrapper = shallow(<ReportsList store={store} />).dive();
-        });
-
-        it("displays the passed message in the message modal", () => {
-            expect(wrapper.find(MessageModal).props().message).toEqual(store.getState().message);
-        });
-
-        it("closes the message modal if it is open", () => {
-            store.clearActions();
-
-            wrapper.find(MessageModal).props().close();
-            expect(store.getActions()).toEqual([closeMessageModal()]);
-        });
-    })
 });
