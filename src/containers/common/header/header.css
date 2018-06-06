@@ -3,22 +3,22 @@
     color: #d5d5d5;
 }
 
-.btnNav {
+.navLink button {
     background-color: #9099a2;
     color: whitesmoke;
 }
 
-.btnNav:hover {
+.navLink button:hover {
     background-color: whitesmoke;
     color: #9099a2;
 }
 
-.btnNavActive {
+.navLinkActive button {
     background-color: #d5d5d5;
     color: white;
 }
 
-.btnNavActive:hover {
+.navLinkActive button:hover {
     background-color: white;
     color: #d5d5d5;
 }
