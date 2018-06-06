@@ -1,16 +1,18 @@
 import React from "react";
 
-import { configure, shallow } from "enzyme";
+import { configure, mount } from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 
+import { Provider } from "react-redux";
 import configureStore from "redux-mock-store";
 
 configure({
     adapter: new Adapter
 });
 
-import Header from "Containers/common/header/header";
+import { HashRouter, NavLink } from "react-router-dom";
 
+import Header from "Containers/common/header/header";
 import styles from "./header.css";
 
 import { goToReportsList, goToCreateReport } from "Store/actions";
@@ -30,22 +32,25 @@ describe("<Header />", () => {
         store = mockedStore(
             createTestState()
         );
-        wrapper = shallow(<Header store={store} hash={`#${Routes.REPORTS_LIST}`} />).dive();
+        wrapper = mount(
+            <HashRouter>
+                <Provider store={store}>
+                    <Header />
+                </Provider>
+            </HashRouter>
+        );
+    });
+
+    it("renders the correct elements", () => {
+        expect(wrapper.find("nav")).toHaveLength(1);
+        expect(wrapper.find("h4")).toHaveLength(2);
+        expect(wrapper.find(NavLink)).toHaveLength(2);
+        expect(wrapper.find("button")).toHaveLength(2);
     });
 
     it("displays one active and one inactive link", () => {
-        expect(wrapper.find(`.${styles.btnNav}`)).toHaveLength(1);
-        expect(wrapper.find(`.${styles.btnNavActive}`)).toHaveLength(1);
-    });
-
-    it("displays the correct active link", () => {
-        expect(wrapper.find(`.${styles.btnNavActive}`).text()).toEqual("Reports");
-
-        wrapper.setProps({
-            hash: `"#${Routes.CREATE_REPORT_CANDIDATES}"`
-        });
-
-        expect(wrapper.find(`.${styles.btnNavActive}`).text()).toEqual("Create Report");
+        expect(wrapper.find(`a.${styles.navLink}`)).toHaveLength(2);
+        expect(wrapper.find(`a.${styles.navLinkActive}`)).toHaveLength(1);
     });
 
     it("calls the navigation functions when clicked", () => {
