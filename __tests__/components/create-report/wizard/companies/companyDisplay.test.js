@@ -7,7 +7,7 @@ configure({
     adapter: new Adapter
 })
 
-import { CompanyDisplay } from "./companyDisplay";
+import { CompanyDisplay } from "Components/create-report/wizard/companies/companyDisplay";
 
 const createTestProps = props => ({
     company: {

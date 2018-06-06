@@ -7,7 +7,7 @@ configure({
     adapter: new Adapter
 })
 
-import { Notes } from "./notes";
+import { Notes } from "Components/create-report/wizard/newReport/notes/notes";
 
 import { DISABLED } from "Src/constants";
 

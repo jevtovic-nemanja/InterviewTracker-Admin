@@ -7,7 +7,7 @@ configure({
     adapter: new Adapter
 });
 
-import App from "./app";
+import App from "Src/app";
 
 import Header from "Containers/common/header/header";
 import { Switch, Route } from "react-router-dom";

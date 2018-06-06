@@ -7,7 +7,7 @@ configure({
     adapter: new Adapter
 })
 
-import { MessageModal } from "./messageModal";
+import { MessageModal } from "Components/common/messageModal/messageModal";
 
 const createTestProps = props => ({
     message: "message",

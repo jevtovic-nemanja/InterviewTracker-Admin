@@ -7,7 +7,7 @@ configure({
     adapter: new Adapter
 })
 
-import { ValidationError } from "./validationError";
+import { ValidationError } from "Components/create-report/wizard/newReport/validationError/validationError";
 
 const createTestProps = props => ({
     isValid: "",

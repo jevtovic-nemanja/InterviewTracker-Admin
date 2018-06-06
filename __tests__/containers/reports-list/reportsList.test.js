@@ -9,7 +9,7 @@ configure({
     adapter: new Adapter
 });
 
-import ReportsList from "./reportsList";
+import ReportsList from "Containers/reports-list/reportsList";
 
 import Modal from "react-responsive-modal";
 import Search from "Containers/common/search/search";

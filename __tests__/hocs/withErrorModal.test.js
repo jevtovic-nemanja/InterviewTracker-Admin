@@ -11,8 +11,8 @@ configure({
 
 import Modal from "react-responsive-modal";
 
-import Component from "../__test__/testableComponent";
-import { withErrorModal } from "./withErrorModal";
+import Component from "./testableComponent";
+import { withErrorModal } from "Hocs/withErrorModal/withErrorModal";
 import { MessageModal } from "Components/common/messageModal/messageModal";
 
 const ComponentWithErrorModal = withErrorModal(Component);

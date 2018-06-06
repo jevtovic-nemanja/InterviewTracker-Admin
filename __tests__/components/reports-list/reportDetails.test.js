@@ -7,7 +7,7 @@ configure({
     adapter: new Adapter
 });
 
-import { ReportDetails } from "./reportDetails";
+import { ReportDetails } from "Components/reports-list/reportDetails/reportDetails";
 
 import { ReportData } from "Src/constants";
 

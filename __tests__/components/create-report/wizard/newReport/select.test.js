@@ -7,7 +7,7 @@ configure({
     adapter: new Adapter
 })
 
-import { Select } from "./select";
+import { Select } from "Components/create-report/wizard/newReport/select/select";
 
 import { ReportData, DISABLED } from "Src/constants";
 

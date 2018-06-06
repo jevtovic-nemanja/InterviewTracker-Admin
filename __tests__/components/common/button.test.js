@@ -7,7 +7,7 @@ configure({
     adapter: new Adapter
 })
 
-import { Button } from "./Button";
+import { Button } from "Components/common/button/button";
 
 import { DISABLED } from "Src/constants";
 

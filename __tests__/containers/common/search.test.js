@@ -9,7 +9,7 @@ configure({
     adapter: new Adapter
 });
 
-import Search from "./search";
+import Search from "Containers/common/search/search";
 import { receiveInputChange } from "Store/actions";
 
 const mockedMiddleware = [];

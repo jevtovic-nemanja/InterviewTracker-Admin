@@ -9,7 +9,7 @@ configure({
     adapter: new Adapter
 });
 
-import NewReport from "./newReport";
+import NewReport from "Containers/create-report/wizard/newReport/newReport";
 
 import moment from "moment";
 

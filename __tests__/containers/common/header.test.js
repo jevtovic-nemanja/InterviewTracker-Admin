@@ -9,7 +9,7 @@ configure({
     adapter: new Adapter
 });
 
-import Header from "./header";
+import Header from "Containers/common/header/header";
 
 import styles from "./header.css";
 

@@ -7,9 +7,9 @@ configure({
     adapter: new Adapter
 })
 
-import { DeleteReport } from "./deleteReport";
+import { DeleteReport } from "Components/reports-list/deleteReport/deleteReport";
 
-import styles from "./deleteReport.css";
+import styles from "Components/reports-list/deleteReport/deleteReport.css";
 
 import { Messages } from "Src/constants";
 

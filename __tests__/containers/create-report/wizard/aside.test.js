@@ -9,7 +9,7 @@ configure({
     adapter: new Adapter
 });
 
-import Aside from "./aside";
+import Aside from "Containers/create-report/wizard/aside/aside";
 
 const mockedMiddleware = [];
 const mockedStore = configureStore(mockedMiddleware);

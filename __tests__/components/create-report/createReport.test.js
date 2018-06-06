@@ -9,7 +9,7 @@ configure({
     adapter: new Adapter
 });
 
-import CreateReportPage from "./createReport";
+import CreateReportPage from "Components/create-report/createReport/createReport";
 
 import Aside from "Containers/create-report/wizard/aside/aside";
 import { Switch, Route } from "react-router-dom";

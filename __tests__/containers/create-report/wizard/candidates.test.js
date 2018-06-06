@@ -10,7 +10,7 @@ configure({
     adapter: new Adapter
 });
 
-import Candidates from "./candidates";
+import Candidates from "Containers/create-report/wizard/candidates/candidates";
 
 import Search from "Containers/common/search/search";
 import { CandidateDisplay } from "Components/create-report/wizard/candidates/candidateDisplay";

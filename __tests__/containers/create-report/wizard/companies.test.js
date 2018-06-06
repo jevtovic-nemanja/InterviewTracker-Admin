@@ -10,7 +10,7 @@ configure({
     adapter: new Adapter
 });
 
-import Companies from "./companies";
+import Companies from "Containers/create-report/wizard/companies/companies";
 
 import Search from "Containers/common/search/search";
 import { CompanyDisplay } from "Components/create-report/wizard/companies/companyDisplay";

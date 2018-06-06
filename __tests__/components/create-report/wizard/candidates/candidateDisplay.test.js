@@ -7,7 +7,7 @@ configure({
     adapter: new Adapter
 })
 
-import { CandidateDisplay } from "./candidateDisplay";
+import { CandidateDisplay } from "Components/create-report/wizard/candidates/candidateDisplay";
 
 const createTestProps = props => ({
     candidate: {

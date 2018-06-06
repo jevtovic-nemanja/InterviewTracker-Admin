@@ -7,11 +7,10 @@ configure({
     adapter: new Adapter
 });
 
-import Component from "../__test__/testableComponent";
-import { asyncComponent } from "./asyncComponent";
+import { asyncComponent } from "Hocs/asyncComponent/asyncComponent";
 
 const ComponentAsync = asyncComponent(() => {
-    return import("../__test__/testableComponent");
+    return import("./testableComponent");
 });
 
 describe("asyncComponent()", () => {

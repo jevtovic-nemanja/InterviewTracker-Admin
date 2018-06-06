@@ -7,7 +7,7 @@ configure({
     adapter: new Adapter
 })
 
-import { CustomDatePicker } from "./datePicker";
+import { CustomDatePicker } from "Components/create-report/wizard/newReport/datePicker/datePicker";
 import DatePicker from "react-datepicker";
 
 const createTestProps = props => ({
