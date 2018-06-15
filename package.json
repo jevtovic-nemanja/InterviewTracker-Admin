@@ -70,7 +70,9 @@
       "\\.(css|less)$": "identity-obj-proxy",
       "\\.(png)$": "<rootDir>/__mocks__/fileMock.js"
     },
-    "testPathIgnorePatterns": ["<rootDir>/__tests__/hocs/testableComponent.js"]
+    "testPathIgnorePatterns": [
+      "<rootDir>/__tests__/hocs/testableComponent.js"
+    ]
   },
   "repository": {
     "type": "git",
