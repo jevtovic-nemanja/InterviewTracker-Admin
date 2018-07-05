@@ -167,10 +167,6 @@ class ReportForm extends React.Component {
 
         const phases = Object.values(ReportData.phases);
         const nextPhase = capitalizeString(phases[phases.indexOf(currentPhase.toLowerCase()) + 1]);
-        console.log(phases);
-        console.log(currentPhase);
-        console.log(nextPhase);
-
 
         return (
             <form className={`row ${styles.fillReport}`}>
