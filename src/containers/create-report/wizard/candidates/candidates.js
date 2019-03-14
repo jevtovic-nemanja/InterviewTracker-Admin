@@ -17,7 +17,7 @@ import {
 
 import { Messages, Routes } from "Src/constants";
 
-const filterCandidates = (candidates, searchItem) => {
+export const filterCandidates = (candidates, searchItem) => {
     if (candidates.length) {
         const filteredCandidates = candidates.filter(candidate => candidate.name.toLowerCase().includes(searchItem));
         return filteredCandidates.length

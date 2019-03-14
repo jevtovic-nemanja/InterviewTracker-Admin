@@ -10,42 +10,43 @@ import { MessageModal } from "Components/common/messageModal/messageModal";
 
 const ComponentWithErrorModal = withErrorModal(Component);
 
-const createTestProps = props => ({
-    message: "",
-    open: false,
-    closeMessageModal: jest.fn(),
-    ...props
-});
-
 describe("withErrorModal()", () => {
+    let wrapper;
+    let props;
 
-    describe("always", () => {
-        const props = createTestProps();
-        const wrapper = shallow(<ComponentWithErrorModal {...props} />);
+    const setUpTest = newProps => {
+        props = {
+            message: "",
+            open: false,
+            closeMessageModal: jest.fn(),
+            ...newProps
+        };
 
-        it("should render the correct components", () => {
-            expect(wrapper.find(Modal)).toHaveLength(1);
-            expect(wrapper.find(MessageModal)).toHaveLength(1);
-            expect(wrapper.find(Component)).toHaveLength(1);
-        });
+        wrapper = shallow(<ComponentWithErrorModal {...props} />);
+    };
+
+    beforeEach(() => {
+        setUpTest();
     });
 
-    describe("if the message modal is closed", () => {
-        const props = createTestProps();
-        const wrapper = shallow(<ComponentWithErrorModal {...props} />);
+    it("always renders the correct components", () => {
+        expect(wrapper.find(Modal)).toHaveLength(1);
+        expect(wrapper.find(MessageModal)).toHaveLength(1);
+        expect(wrapper.find(Component)).toHaveLength(1);
+    });
 
-        it("doesn't attempt to close it", () => {
-            wrapper.find(MessageModal).props().close();
-            expect(props.closeMessageModal).not.toBeCalled();
-        });
+    it("doesn't attempt to close the message modal if it is closed", () => {
+        wrapper.find(MessageModal).props().close();
+        expect(props.closeMessageModal).not.toBeCalled();
     });
 
     describe("if the message modal is open", () => {
-        const props = createTestProps({
-            open: true,
-            message: "message"
+        beforeEach(() => {
+            setUpTest({
+                open: true,
+                message: "message"
+            });
         });
-        const wrapper = shallow(<ComponentWithErrorModal {...props} />);
 
         it("closes it", () => {
             wrapper.find(MessageModal).props().close();

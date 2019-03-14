@@ -6,25 +6,27 @@ import { Select } from "Components/create-report/wizard/newReport/select/select"
 
 import { ReportData, DISABLED } from "Src/constants";
 
-const createTestProps = props => ({
-    labelText: ReportData.hiringStatuses.SELECT,
-    name: "select",
-    value: "select",
-    onChange: jest.fn(),
-    declined: "",
-    options: ["1", "2", "3"],
-    ...props
-});
-
 describe("<Select />", () => {
+    let wrapper;
+    let props;
+
+    const setUpTest = newProps => {
+        props = {
+            labelText: ReportData.hiringStatuses.SELECT,
+            name: "select",
+            value: "select",
+            onChange: jest.fn(),
+            declined: "",
+            options: ["1", "2", "3"],
+            ...newProps
+        };
+
+        wrapper = shallow(<Select {...props} />);
+    };
 
     describe("if enabled", () => {
-        let props;
-        let wrapper;
-
         beforeEach(() => {
-            props = createTestProps();
-            wrapper = shallow(<Select {...props} />);
+            setUpTest();
         });
 
         it("displays the correct elements", () => {
@@ -60,18 +62,14 @@ describe("<Select />", () => {
         });
     });
 
-    describe("if disabled", () => {
-        const props = createTestProps({
+    it("displays the correct elements if disabled", () => {
+        setUpTest({
             declined: DISABLED
         });
 
-        const wrapper = shallow(<Select {...props} />);
-
-        it("displays the correct elements", () => {
-            expect(wrapper.find("label")).toHaveLength(1);
-            expect(wrapper.find("select")).toHaveLength(1);
-            expect(wrapper.find("select").props().disabled).toBeTruthy();
-            expect(wrapper.find("option")).toHaveLength(props.options.length);
-        });
+        expect(wrapper.find("label")).toHaveLength(1);
+        expect(wrapper.find("select")).toHaveLength(1);
+        expect(wrapper.find("select").props().disabled).toBeTruthy();
+        expect(wrapper.find("option")).toHaveLength(props.options.length);
     });
 });

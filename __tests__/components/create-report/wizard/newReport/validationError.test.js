@@ -4,21 +4,23 @@ import { shallow } from "enzyme";
 
 import { ValidationError } from "Components/create-report/wizard/newReport/validationError/validationError";
 
-const createTestProps = props => ({
-    isValid: "",
-    text: "message",
-    ...props
-});
-
 describe("<ValidationError />", () => {
+    let wrapper;
+    let props;
+
+    const setUpTest = newProps => {
+        props = {
+            isValid: "",
+            text: "message",
+            ...newProps
+        };
+
+        wrapper = shallow(<ValidationError {...props} />);
+    };
 
     describe("if valid", () => {
-        let props;
-        let wrapper;
-
         beforeEach(() => {
-            props = createTestProps();
-            wrapper = shallow(<ValidationError {...props} />);
+            setUpTest();
         });
 
         it("displays the correct elements", () => {
@@ -33,15 +35,11 @@ describe("<ValidationError />", () => {
         });
     });
 
-    describe("if invalid", () => {
-        const props = createTestProps({
+    it("is hidden if invalid", () => {
+        setUpTest({
             isValid: "d-none"
         });
 
-        const wrapper = shallow(<ValidationError {...props} />);
-
-        it("is hidden", () => {
-            expect(wrapper.find("div").hasClass("d-none")).toEqual(true);
-        });
+        expect(wrapper.find("div").hasClass("d-none")).toEqual(true);
     });
 });

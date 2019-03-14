@@ -9,15 +9,6 @@ import Aside from "Containers/create-report/wizard/aside/aside";
 const mockedMiddleware = [];
 const mockedStore = configureStore(mockedMiddleware);
 
-const createTestState = props => ({
-    createReportPhase: 1,
-    newReportData: {
-        candidateName: "John Doe",
-        companyName: "Endava"
-    },
-    ...props
-});
-
 const phases = [1, 2, 3];
 
 describe("<Aside />", () => {
@@ -29,9 +20,14 @@ describe("<Aside />", () => {
     });
 
     beforeEach(() => {
-        store = mockedStore(
-            createTestState()
-        );
+        store = mockedStore({
+            createReportPhase: 1,
+            newReportData: {
+                candidateName: "John Doe",
+                companyName: "Endava"
+            }
+        });
+
         wrapper = shallow(<Aside store={store} />).dive();
     });
 

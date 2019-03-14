@@ -4,18 +4,15 @@ import { shallow } from "enzyme";
 
 import { MessageModal } from "Components/common/messageModal/messageModal";
 
-const createTestProps = props => ({
-    message: "message",
-    close: jest.fn(),
-    ...props
-});
-
 describe("<MessageModal />", () => {
     let props;
     let wrapper;
 
     beforeEach(() => {
-        props = createTestProps();
+        props = {
+            message: "message",
+            close: jest.fn()
+        };
         wrapper = shallow(<MessageModal {...props} />);
     });
 

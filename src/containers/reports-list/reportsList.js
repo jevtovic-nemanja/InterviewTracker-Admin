@@ -19,7 +19,7 @@ import {
 
 import { Messages } from "Src/constants";
 
-const filterReports = (reports, searchItem) => {
+export const filterReports = (reports, searchItem) => {
     if (reports.length) {
         const filteredReports = reports.filter(report => {
             const candidate = report.candidateName.toLowerCase();

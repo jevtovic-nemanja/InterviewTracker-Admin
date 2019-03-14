@@ -10,19 +10,15 @@ import { receiveInputChange } from "Store/actions";
 const mockedMiddleware = [];
 const mockedStore = configureStore(mockedMiddleware);
 
-const createTestState = props => ({
-    searchItem: "text",
-    ...props
-});
-
 describe("<Search />", () => {
     let store;
     let wrapper;
 
     beforeEach(() => {
-        store = mockedStore(
-            createTestState()
-        );
+        store = mockedStore({
+            searchItem: "text"
+        });
+
         wrapper = shallow(<Search store={store} />).dive();
     });
 

@@ -10,18 +10,16 @@ const ComponentAsync = asyncComponent(() => {
 
 describe("asyncComponent()", () => {
 
-    describe("when the wrapped component is not mounted", () => {
+    it("should not render anything when the wrapped component is not mounted", () => {
         const wrapper = shallow(<ComponentAsync />);
 
-        it("should not render anything", () => {
-            expect(wrapper.html()).toBeNull();
-        });
+        expect(wrapper.html()).toBeNull();
     });
 
     describe("when the wrapped component is mounted", () => {
         const wrapper = mount(<ComponentAsync />);
 
-        it("should render the wrapped component", () => {
+        it("should asynchronously render the wrapped component", () => {
             expect(wrapper.html()).not.toBeNull();
         });
     });

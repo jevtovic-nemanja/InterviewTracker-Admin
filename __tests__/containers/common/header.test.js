@@ -15,16 +15,13 @@ import { goToReportsList, goToCreateReport } from "Store/actions";
 const mockedMiddleware = [];
 const mockedStore = configureStore(mockedMiddleware);
 
-const createTestState = props => ({ ...props });
-
 describe("<Header />", () => {
     let store;
     let wrapper;
 
     beforeEach(() => {
-        store = mockedStore(
-            createTestState()
-        );
+        store = mockedStore();
+
         wrapper = mount(
             <HashRouter>
                 <Provider store={store}>

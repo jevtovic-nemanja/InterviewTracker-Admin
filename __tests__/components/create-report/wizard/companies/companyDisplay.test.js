@@ -4,25 +4,27 @@ import { shallow } from "enzyme";
 
 import { CompanyDisplay } from "Components/create-report/wizard/companies/companyDisplay";
 
-const createTestProps = props => ({
-    company: {
-        companyId: 101,
-        name: "Endava"
-    },
-    selected: "",
-    handleClick: jest.fn(),
-    ...props
-});
-
 describe("<CompanyDisplay />", () => {
+    let wrapper;
+    let props;
+
+    const setUpTest = newProps => {
+        props = {
+            company: {
+                companyId: 101,
+                name: "Endava"
+            },
+            selected: "",
+            handleClick: jest.fn(),
+            ...newProps
+        };
+
+        wrapper = shallow(<CompanyDisplay {...props} />);
+    };
 
     describe("always", () => {
-        let props;
-        let wrapper;
-
         beforeEach(() => {
-            props = createTestProps();
-            wrapper = shallow(<CompanyDisplay {...props} />);
+            setUpTest();
         });
 
         it("displays the correct data", () => {
@@ -35,15 +37,11 @@ describe("<CompanyDisplay />", () => {
         });
     });
 
-    describe("when selected", () => {
-        const props = createTestProps({
+    it("applies selected styles when selected", () => {
+        setUpTest({
             selected: 101
         });
 
-        const wrapper = shallow(<CompanyDisplay {...props} />);
-
-        it("applies selected styles", () => {
-            expect(wrapper.find(".selected")).toHaveLength(1);
-        });
+        expect(wrapper.find(".selected")).toHaveLength(1);
     });
 });

@@ -24,45 +24,40 @@ import { ReportData } from "Src/constants";
 const mockedMiddleware = [];
 const mockedStore = configureStore(mockedMiddleware);
 
-const createTestState = props => ({
-    data: {
-        reports: [
-            {
-                id: 258,
-                companyName: "Endava",
-                candidateName: "John Doe",
-                date: "20/04/2018",
-                status: ReportData.statuses.PASSED
-            },
-            {
-                id: 278,
-                companyName: "PS Tech",
-                candidateName: "Jane Smith",
-                date: "24/04/2018",
-                status: ReportData.statuses.DECLINED
-            }
-        ]
-    },
-    newReportData: {
-        candidateId: 27,
-        candidateName: "John Doe",
-        companyId: 258,
-        companyName: "Endava"
-    },
-    message: "",
-    messageModal: false,
-    ...props
-});
-
 describe("<NewReport />", () => {
-
     let store;
     let wrapper;
 
     beforeEach(() => {
-        store = mockedStore(
-            createTestState()
-        );
+        store = mockedStore({
+            data: {
+                reports: [
+                    {
+                        id: 258,
+                        companyName: "Endava",
+                        candidateName: "John Doe",
+                        date: "20/04/2018",
+                        status: ReportData.statuses.PASSED
+                    },
+                    {
+                        id: 278,
+                        companyName: "PS Tech",
+                        candidateName: "Jane Smith",
+                        date: "24/04/2018",
+                        status: ReportData.statuses.DECLINED
+                    }
+                ]
+            },
+            newReportData: {
+                candidateId: 27,
+                candidateName: "John Doe",
+                companyId: 258,
+                companyName: "Endava"
+            },
+            message: "",
+            messageModal: false,
+        });
+
         wrapper = shallow(<NewReport store={store} />).dive().children().last().shallow();
     });
 

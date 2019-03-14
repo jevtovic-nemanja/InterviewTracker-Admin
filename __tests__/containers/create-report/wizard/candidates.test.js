@@ -5,7 +5,7 @@ import { mount } from "enzyme";
 import { Provider } from "react-redux";
 import configureStore from "redux-mock-store";
 
-import Candidates from "Containers/create-report/wizard/candidates/candidates";
+import Candidates, { filterCandidates } from "Containers/create-report/wizard/candidates/candidates";
 
 import Search from "Containers/common/search/search";
 import { CandidateDisplay } from "Components/create-report/wizard/candidates/candidateDisplay";
@@ -23,115 +23,82 @@ import { DISABLED, Messages } from "Src/constants";
 const mockedMiddleware = [];
 const mockedStore = configureStore(mockedMiddleware);
 
-const createTestState = props => ({
-    data: {
-        candidates: [
-            {
-                candidateId: 27,
-                name: "John Doe",
-                email: "john.doe@email.com",
-                avatar: "url"
-            },
-            {
-                candidateId: 101,
-                name: "Jane Smith",
-                email: "jane.smith@email.com",
-                avatar: ""
-            }
-        ]
-    },
-    enableNextPhase: DISABLED,
-    message: "",
-    searchItem: "",
-    selectedElementId: "",
-    ...props
-});
-
 describe("<Candidates />", () => {
+    let wrapper;
+    let store;
 
-    describe("always", () => {
-        const store = mockedStore(
-            createTestState()
-        );
-
-        const wrapper = mount(
-            <Provider store={store}>
-                <Candidates />
-            </Provider>
-        );
-
-        it("renders a Search component and a Next button", () => {
-            expect(wrapper.find(Search)).toHaveLength(1);
-            expect(wrapper.find(Button)).toHaveLength(1);
-            expect(wrapper.find(Button).text()).toEqual("Next");
-        });
-    });
-
-    describe("if fetching candidates fails", () => {
-
-        const store = mockedStore(
-            createTestState({
+    const setUpTest = newProps => {
+        store = mockedStore(
+            {
                 data: {
-                    candidates: []
+                    candidates: [
+                        {
+                            candidateId: 27,
+                            name: "John Doe",
+                            email: "john.doe@email.com",
+                            avatar: "url"
+                        },
+                        {
+                            candidateId: 101,
+                            name: "Jane Smith",
+                            email: "jane.smith@email.com",
+                            avatar: ""
+                        }
+                    ]
                 },
-                message: "message"
-            })
+                enableNextPhase: DISABLED,
+                message: "",
+                searchItem: "",
+                selectedElementId: "",
+                ...newProps
+            }
         );
 
-        const wrapper = mount(
+        wrapper = mount(
             <Provider store={store}>
                 <Candidates />
             </Provider>
         );
+    };
 
-        it("displays the correct message", () => {
-            expect(wrapper.find(CandidateDisplay)).toHaveLength(0);
-            expect(wrapper.find(Message)).toHaveLength(1);
-            expect(wrapper.find(Message).props().message).toEqual(store.getState().message);
-        });
+    it("renders a Search component and a Next button", () => {
+        setUpTest();
+
+        expect(wrapper.find(Search)).toHaveLength(1);
+        expect(wrapper.find(Button)).toHaveLength(1);
+        expect(wrapper.find(Button).text()).toEqual("Next");
     });
 
-    describe("if no candidates match the filter criteria", () => {
-
-        const store = mockedStore(
-            createTestState({ searchItem: "wz" })
-        );
-
-        const wrapper = mount(
-            <Provider store={store}>
-                <Candidates />
-            </Provider>
-        );
-
-        it("displays the correct message ", () => {
-            expect(wrapper.find(CandidateDisplay)).toHaveLength(0);
-            expect(wrapper.find(Message)).toHaveLength(1);
-            expect(wrapper.find(Message).props().message).toEqual(Messages.NO_CANDIDATES);
+    it("displays the correct message if fetching candidates fails", () => {
+        setUpTest({
+            data: {
+                candidates: []
+            },
+            message: "message"
         });
+
+        expect(wrapper.find(CandidateDisplay)).toHaveLength(0);
+        expect(wrapper.find(Message)).toHaveLength(1);
+        expect(wrapper.find(Message).props().message).toEqual(store.getState().message);
+    });
+
+    it("displays the correct message if no candidates match the filter criteria", () => {
+        setUpTest({ searchItem: "wz" });
+
+        expect(wrapper.find(CandidateDisplay)).toHaveLength(0);
+        expect(wrapper.find(Message)).toHaveLength(1);
+        expect(wrapper.find(Message).props().message).toEqual(Messages.NO_CANDIDATES);
     });
 
     describe("if there are candidates that match the filter criteria", () => {
-        let store;
-        let wrapper;
-
         beforeEach(() => {
-            store = mockedStore(
-                createTestState({ searchItem: "doe" })
-            );
-
-            wrapper = mount(
-                <Provider store={store}>
-                    <Candidates />
-                </Provider>
-            );
+            setUpTest({ searchItem: "doe" });
         });
 
         it("renders a <CandidateDisplay /> component for each candidate", () => {
             const state = store.getState();
-            const candidates = state.data.candidates;
-            const searchItem = state.searchItem;
 
-            expect(wrapper.find(CandidateDisplay)).toHaveLength(candidates.filter(candidate => candidate.name.toLowerCase().includes(searchItem)).length);
+            expect(wrapper.find(CandidateDisplay)).toHaveLength(filterCandidates(state.data.candidates, state.searchItem).length);
         });
 
         it("calls the correct actions", () => {

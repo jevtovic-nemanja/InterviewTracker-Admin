@@ -8,22 +8,24 @@ import styles from "Components/reports-list/deleteReport/deleteReport.css";
 
 import { Messages } from "Src/constants";
 
-const createTestProps = props => ({
-    message: "",
-    close: jest.fn(),
-    deleteReport: jest.fn(),
-    ...props
-});
-
 describe("<DeleteReport />", () => {
+    let wrapper;
+    let props;
+
+    const setUpTest = newProps => {
+        props = {
+            message: "",
+            close: jest.fn(),
+            deleteReport: jest.fn(),
+            ...newProps
+        };
+
+        wrapper = shallow(<DeleteReport {...props} />);
+    };
 
     describe("if there is no error message", () => {
-        let props;
-        let wrapper;
-
         beforeEach(() => {
-            props = createTestProps();
-            wrapper = shallow(<DeleteReport {...props} />);
+            setUpTest();
         });
 
         it("displays default delete modal", () => {
@@ -31,25 +33,17 @@ describe("<DeleteReport />", () => {
             expect(wrapper.find("button")).toHaveLength(2);
             expect(wrapper.find(`.${styles.btnDelete}`)).toHaveLength(1);
         });
-    
+
         it("calls deleteReport function if delete button is clicked", () => {
             wrapper.find(`.${styles.btnDelete}`).simulate("click");
             expect(props.deleteReport).toHaveBeenCalledTimes(1);
         });
     });
 
-    describe("if there is an error message", () => {
-        let props;
-        let wrapper;
+    it("displays error message if there is one", () => {
+        setUpTest({ message: "message" });
 
-        beforeEach(() => {
-            props = createTestProps({ message: "message" });
-            wrapper = shallow(<DeleteReport {...props} />);
-        });
-
-        it("displays error message", () => {
-            expect(wrapper.find("p").text()).toEqual(props.message);
-            expect(wrapper.find("button")).toHaveLength(1);
-        });
+        expect(wrapper.find("p").text()).toEqual(props.message);
+        expect(wrapper.find("button")).toHaveLength(1);
     });
 });

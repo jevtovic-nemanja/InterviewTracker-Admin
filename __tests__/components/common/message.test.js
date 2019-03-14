@@ -4,13 +4,8 @@ import { shallow } from "enzyme";
 
 import { Message } from "Components/common/message/message";
 
-const createTestProps = props => ({
-    message: "message",
-    ...props
-});
-
 describe("<Message />", () => {
-    const props = createTestProps();
+    const props = {message: "message"};
     const wrapper = shallow(<Message {...props} />);
 
     it("displays the passed message", () => {

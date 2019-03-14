@@ -4,27 +4,29 @@ import { shallow } from "enzyme";
 
 import { CandidateDisplay } from "Components/create-report/wizard/candidates/candidateDisplay";
 
-const createTestProps = props => ({
-    candidate: {
-        candidateId: 27,
-        name: "John Doe",
-        email: "john.doe@email.com",
-        avatar: "url"
-    },
-    selected: "",
-    handleClick: jest.fn(),
-    ...props
-});
-
 describe("<CandidateDisplay />", () => {
+    let wrapper;
+    let props;
+
+    const setUpTest = newProps => {
+        props = {
+            candidate: {
+                candidateId: 27,
+                name: "John Doe",
+                email: "john.doe@email.com",
+                avatar: "url"
+            },
+            selected: "",
+            handleClick: jest.fn(),
+            ...newProps
+        };
+
+        wrapper = shallow(<CandidateDisplay {...props} />);
+    };
 
     describe("always", () => {
-        let props;
-        let wrapper;
-
         beforeEach(() => {
-            props = createTestProps();
-            wrapper = shallow(<CandidateDisplay {...props} />);
+            setUpTest();
         });
 
         it("displays the correct data", () => {
@@ -39,20 +41,16 @@ describe("<CandidateDisplay />", () => {
         });
     });
 
-    describe("when selected", () => {
-        const props = createTestProps({
+    it("applies selected styles when selected", () => {
+        setUpTest({
             selected: 27
         });
 
-        const wrapper = shallow(<CandidateDisplay {...props} />);
-
-        it("applies selected styles", () => {
-            expect(wrapper.find(".selected")).toHaveLength(1);
-        });
+        expect(wrapper.find(".selected")).toHaveLength(1);
     });
 
-    describe("when no avatar is provided", () => {
-        const props = createTestProps({
+    it("displays the default avatar when no avatar is provided", () => {
+        setUpTest({
             candidate: {
                 candidateId: 27,
                 name: "John Doe",
@@ -61,10 +59,6 @@ describe("<CandidateDisplay />", () => {
             }
         });
 
-        const wrapper = shallow(<CandidateDisplay {...props} />);
-
-        it("displays the default avatar", () => {
-            expect(wrapper.find("img").props().src).toEqual("");
-        });
+        expect(wrapper.find("img").props().src).toEqual("");
     });
 });

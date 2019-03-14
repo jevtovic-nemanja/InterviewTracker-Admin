@@ -6,23 +6,25 @@ import { Notes } from "Components/create-report/wizard/newReport/notes/notes";
 
 import { DISABLED } from "Src/constants";
 
-const createTestProps = props => ({
-    labelText: "Notes",
-    value: "note",
-    onChange: jest.fn(),
-    declined: "",
-    ...props
-});
-
 describe("<Notes />", () => {
+    let wrapper;
+    let props;
+
+    const setUpTest = newProps => {
+        props = {
+            labelText: "Notes",
+            value: "note",
+            onChange: jest.fn(),
+            declined: "",
+            ...newProps
+        };
+
+        wrapper = shallow(<Notes {...props} />);
+    };
 
     describe("if enabled", () => {
-        let props;
-        let wrapper;
-
         beforeEach(() => {
-            props = createTestProps();
-            wrapper = shallow(<Notes {...props} />);
+            setUpTest();
         });
 
         it("displays the correct elements", () => {
@@ -31,7 +33,7 @@ describe("<Notes />", () => {
             expect(wrapper.find("textarea").props().disabled).toBeFalsy();
         });
 
-        it("displays the passed value",() => {
+        it("displays the passed value", () => {
             expect(wrapper.find("textarea").props().value).toEqual(props.value);
         });
 
@@ -41,17 +43,13 @@ describe("<Notes />", () => {
         });
     });
 
-    describe("if disabled", () => {
-        const props = createTestProps({
+    it("displays the correct components if disabled", () => {
+        setUpTest({
             declined: DISABLED
         });
 
-        const wrapper = shallow(<Notes {...props} />);
-
-        it("displays the correct components", () => {
-            expect(wrapper.find("label")).toHaveLength(1);
-            expect(wrapper.find("textarea")).toHaveLength(1);
-            expect(wrapper.find("textarea").props().disabled).toBeTruthy();
-        });
+        expect(wrapper.find("label")).toHaveLength(1);
+        expect(wrapper.find("textarea")).toHaveLength(1);
+        expect(wrapper.find("textarea").props().disabled).toBeTruthy();
     });
 });
