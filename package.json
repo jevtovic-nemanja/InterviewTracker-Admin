@@ -65,15 +65,6 @@
     "webpack-merge": "^4.1.2"
   },
   "main": "webpack.config.js",
-  "jest": {
-    "moduleNameMapper": {
-      "\\.(css|less)$": "identity-obj-proxy",
-      "\\.(png)$": "<rootDir>/__mocks__/fileMock.js"
-    },
-    "testPathIgnorePatterns": [
-      "<rootDir>/__tests__/hocs/testableComponent.js"
-    ]
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/jevtovic-nemanja/InterviewTracker-Admin.git"

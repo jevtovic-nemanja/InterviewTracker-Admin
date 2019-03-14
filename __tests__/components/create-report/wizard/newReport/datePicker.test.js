@@ -1,11 +1,6 @@
 import React from "react";
 
-import { configure, shallow, mount } from "enzyme";
-import Adapter from "enzyme-adapter-react-16";
-
-configure({
-    adapter: new Adapter
-})
+import { shallow } from "enzyme";
 
 import { CustomDatePicker } from "Components/create-report/wizard/newReport/datePicker/datePicker";
 import DatePicker from "react-datepicker";

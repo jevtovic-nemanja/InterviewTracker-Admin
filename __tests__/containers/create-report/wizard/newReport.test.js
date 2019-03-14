@@ -1,13 +1,8 @@
 import React from "react";
 
-import { configure, shallow } from "enzyme";
-import Adapter from "enzyme-adapter-react-16";
+import { shallow } from "enzyme";
 
 import configureStore from "redux-mock-store";
-
-configure({
-    adapter: new Adapter
-});
 
 import NewReport from "Containers/create-report/wizard/newReport/newReport";
 
@@ -85,7 +80,7 @@ describe("<NewReport />", () => {
     it("calls the correct action when back button is clicked", () => {
         wrapper.find(Button).first().props().action();
         expect(store.getActions()).toEqual([decrementPhase()]);
-    })
+    });
 
     it("handles date input correctly", () => {
         const date = new Date("22.05.2018");
@@ -96,7 +91,7 @@ describe("<NewReport />", () => {
         expect(wrapper.state("phaseError")).toEqual("d-none");
         expect(wrapper.state("statusError")).toEqual("d-none");
         expect(wrapper.state("noteError")).toEqual("d-none");
-    })
+    });
 
     it("handles select and notes inputs correctly", () => {
         const phaseEvent = {

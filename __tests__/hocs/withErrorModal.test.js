@@ -1,13 +1,6 @@
 import React from "react";
 
-import { configure, shallow } from "enzyme";
-import Adapter from "enzyme-adapter-react-16";
-
-import configureStore from "redux-mock-store";
-
-configure({
-    adapter: new Adapter
-});
+import { shallow } from "enzyme";
 
 import Modal from "react-responsive-modal";
 
@@ -16,9 +9,6 @@ import { withErrorModal } from "Hocs/withErrorModal/withErrorModal";
 import { MessageModal } from "Components/common/messageModal/messageModal";
 
 const ComponentWithErrorModal = withErrorModal(Component);
-
-const mockedMiddleware = [];
-const mockedStore = configureStore(mockedMiddleware);
 
 const createTestProps = props => ({
     message: "",
@@ -46,9 +36,9 @@ describe("withErrorModal()", () => {
 
         it("doesn't attempt to close it", () => {
             wrapper.find(MessageModal).props().close();
-            expect(props.closeMessageModal).not.toBeCalled()
+            expect(props.closeMessageModal).not.toBeCalled();
         });
-    })
+    });
 
     describe("if the message modal is open", () => {
         const props = createTestProps({
@@ -59,11 +49,11 @@ describe("withErrorModal()", () => {
 
         it("closes it", () => {
             wrapper.find(MessageModal).props().close();
-            expect(props.closeMessageModal).toBeCalled()
+            expect(props.closeMessageModal).toBeCalled();
         });
 
         it("displays the correct message", () => {
             expect(wrapper.find(MessageModal).props().message).toEqual(props.message);
         });
-    })
+    });
 });

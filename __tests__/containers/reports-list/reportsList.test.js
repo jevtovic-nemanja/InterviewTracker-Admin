@@ -1,20 +1,14 @@
 import React from "react";
 
-import { configure, shallow } from "enzyme";
-import Adapter from "enzyme-adapter-react-16";
+import { shallow } from "enzyme";
 
 import configureStore from "redux-mock-store";
-
-configure({
-    adapter: new Adapter
-});
 
 import ReportsList from "Containers/reports-list/reportsList";
 
 import Modal from "react-responsive-modal";
 import Search from "Containers/common/search/search";
 import { Message } from "Components/common/message/message";
-import { MessageModal } from "Components/common/messageModal/messageModal";
 import { ReportDisplay } from "Components/reports-list/reportDisplay/reportDisplay";
 import { ReportDetails } from "Components/reports-list/reportDetails/reportDetails";
 import { DeleteReport } from "Components/reports-list/deleteReport/deleteReport";
@@ -135,7 +129,7 @@ describe("<ReportsList />", () => {
             expect(wrapper.find(ReportDisplay)).toHaveLength(reports.filter(report => {
                 const candidate = report.candidateName.toLowerCase();
                 const company = report.companyName.toLowerCase();
-                return candidate.includes(searchItem) || company.includes(searchItem)
+                return candidate.includes(searchItem) || company.includes(searchItem);
             }).length);
         });
 

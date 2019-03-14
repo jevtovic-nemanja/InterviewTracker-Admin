@@ -1,14 +1,9 @@
 import React from "react";
 
-import { configure, mount } from "enzyme";
-import Adapter from "enzyme-adapter-react-16";
+import { mount } from "enzyme";
 
 import { Provider } from "react-redux";
 import configureStore from "redux-mock-store";
-
-configure({
-    adapter: new Adapter
-});
 
 import Companies from "Containers/create-report/wizard/companies/companies";
 
@@ -83,10 +78,10 @@ describe("<Companies />", () => {
         );
 
         const wrapper = mount(
-                <Provider store={store}>
-                    <Companies />
-                </Provider>
-            );;
+            <Provider store={store}>
+                <Companies />
+            </Provider>
+        );;
 
         it("displays the correct message", () => {
             expect(wrapper.find(CompanyDisplay)).toHaveLength(0);
@@ -102,10 +97,10 @@ describe("<Companies />", () => {
         );
 
         const wrapper = mount(
-                <Provider store={store}>
-                    <Companies />
-                </Provider>
-            );;
+            <Provider store={store}>
+                <Companies />
+            </Provider>
+        );;
 
         it("displays the correct message ", () => {
             expect(wrapper.find(CompanyDisplay)).toHaveLength(0);
@@ -128,7 +123,7 @@ describe("<Companies />", () => {
                 </Provider>
             );;
         });
-        
+
         it("renders a <CompanyDisplay /> component for each company", () => {
             const state = store.getState();
             const companies = state.data.companies;

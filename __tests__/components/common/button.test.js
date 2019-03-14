@@ -1,11 +1,6 @@
 import React from "react";
 
-import { configure, shallow, mount } from "enzyme";
-import Adapter from "enzyme-adapter-react-16";
-
-configure({
-    adapter: new Adapter
-})
+import { shallow, mount } from "enzyme";
 
 import { Button } from "Components/common/button/button";
 
@@ -84,7 +79,7 @@ describe("<Button />", () => {
             expect(props.action).not.toBeCalled();
             expect(location.hash).not.toEqual(props.newLocation);
         });
-    })
+    });
 
     describe("if no new location is passed", () => {
         const props = createTestProps({

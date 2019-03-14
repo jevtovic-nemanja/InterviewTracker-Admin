@@ -1,13 +1,8 @@
 import React from "react";
 
-import { configure, shallow } from "enzyme";
-import Adapter from "enzyme-adapter-react-16";
+import { shallow } from "enzyme";
 
 import configureStore from "redux-mock-store";
-
-configure({
-    adapter: new Adapter
-});
 
 import Aside from "Containers/create-report/wizard/aside/aside";
 
@@ -60,7 +55,7 @@ describe("<Aside />", () => {
                 const expectedBoolean = (index + 1) === phase ? true : false;
                 expect(node.hasClass("font-weight-bold")).toEqual(expectedBoolean);
                 expect(node.hasClass("text-muted d-none d-md-inline-block")).toEqual(!expectedBoolean);
-            })
+            });
         };
 
         phases.forEach(phase => {
@@ -73,7 +68,7 @@ describe("<Aside />", () => {
         const testDisplay = phase => {
             const expectedBoolean = phase === 1 ? true : false;
             expect(wrapper.find(".candidate").hasClass("d-none")).toEqual(expectedBoolean);
-        }
+        };
 
         phases.forEach(phase => {
             applyPhase(phase);
@@ -85,7 +80,7 @@ describe("<Aside />", () => {
         const testDisplay = phase => {
             const expectedBoolean = phase === 3 ? false : true;
             expect(wrapper.find(".company").hasClass("d-none")).toEqual(expectedBoolean);
-        }
+        };
 
         phases.forEach(phase => {
             applyPhase(phase);
