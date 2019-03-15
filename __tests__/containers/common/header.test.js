@@ -31,6 +31,10 @@ describe("<Header />", () => {
         );
     });
 
+    afterEach(() => {
+        wrapper.unmount();
+    });
+
     it("renders the correct elements", () => {
         expect(wrapper.find("nav")).toHaveLength(1);
         expect(wrapper.find("h4")).toHaveLength(2);

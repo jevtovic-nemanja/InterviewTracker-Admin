@@ -57,6 +57,11 @@ describe("<Companies />", () => {
         );
     };
 
+    afterEach(() => {
+        wrapper.unmount();
+    });
+
+
     it("renders the correct components", () => {
         setUpTest();
 
@@ -80,7 +85,7 @@ describe("<Companies />", () => {
         expect(wrapper.find(Message).props().message).toEqual(store.getState().message);
     });
 
-    describe("displays the correct message if no companies match the filter criteria", () => {
+    it("displays the correct message if no companies match the filter criteria", () => {
         setUpTest({ searchItem: "wz" });
 
         expect(wrapper.find(CompanyDisplay)).toHaveLength(0);

@@ -61,6 +61,10 @@ describe("<Candidates />", () => {
         );
     };
 
+    afterEach(() => {
+        wrapper.unmount();
+    });
+
     it("renders a Search component and a Next button", () => {
         setUpTest();
 
