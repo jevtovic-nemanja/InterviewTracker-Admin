@@ -100,7 +100,7 @@ class ReportForm extends React.Component {
         });
     }
 
-    validateInput() {
+    validateInput = () => {
         const { interviewDate, phase, status, note } = this.state;
 
         let isValid = true;
